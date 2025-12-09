@@ -1,0 +1,30 @@
+.wp-block-gutenlayouts-icon {
+    display: flex;
+
+    &.justify-center {
+        justify-content: center;
+    }
+    &.justify-right {
+        justify-content: flex-end;
+    }
+    &.justify-left {
+        justify-content: flex-start;
+    }
+
+    .icon-container {
+        line-height: 0;
+    }
+
+    svg {
+        height: 100%;
+        width: 100%;
+    }
+
+    &.is-fill svg {
+        fill: currentColor;
+    }
+
+    &.is-line svg path {
+        stroke: currentColor;
+    }
+}
