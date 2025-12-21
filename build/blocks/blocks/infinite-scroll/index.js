@@ -23,7 +23,7 @@ function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else i
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"blocklayouts/infinite-scroll","version":"0.1.0","title":"Infinite Scroll","category":"blocklayouts","ancestor":["core/query"],"icon":"update","description":"Automatically load more posts as you scroll.","supports":{"html":false,"align":["wide","full"],"color":{"enableContrastChecker":false,"text":true,"__experimentalDefaultControls":{"text":true}},"spacing":{"margin":true,"padding":true,"units":["px","em","rem","vh","vw"],"__experimentalDefaultControls":{"margin":false,"padding":true}},"interactivity":true},"attributes":{"loadingText":{"type":"string","default":"Loading more posts..."},"noMoreText":{"type":"string","default":"No more posts to load"},"triggerDistance":{"type":"number","default":200},"justifyContent":{"type":"string","default":"center"}},"textdomain":"blocklayouts","usesContext":["queryId","query"],"editorScript":"file:./index.js","render":"file:./render.php","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScriptModule":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenlayouts/infinite-scroll","version":"0.1.0","title":"Infinite Scroll","category":"gutenlayouts","ancestor":["core/query"],"icon":"update","description":"Automatically load more posts as you scroll.","supports":{"html":false,"align":["wide","full"],"color":{"enableContrastChecker":false,"text":true,"__experimentalDefaultControls":{"text":true}},"spacing":{"margin":true,"padding":true,"units":["px","em","rem","vh","vw"],"__experimentalDefaultControls":{"margin":false,"padding":true}},"interactivity":true},"attributes":{"loadingText":{"type":"string","default":"Loading more posts..."},"noMoreText":{"type":"string","default":"No more posts to load"},"triggerDistance":{"type":"number","default":200},"justifyContent":{"type":"string","default":"center"}},"textdomain":"gutenlayouts","usesContext":["queryId","query"],"editorScript":"file:./index.js","render":"file:./render.php","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScriptModule":"file:./view.js"}');
 
 /***/ }),
 
@@ -84,7 +84,7 @@ function Edit({
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
       group: "block",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.JustifyToolbar, {
-        allowedControls: ["left", "center", "right"],
+        allowedControls: ['left', 'center', 'right'],
         value: justifyContent,
         onChange: value => setAttributes({
           justifyContent: value
@@ -92,27 +92,27 @@ function Edit({
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Settings", "blocklayouts"),
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'gutenlayouts'),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Loading Text", "blocklayouts"),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Loading Text', 'gutenlayouts'),
           value: loadingText,
           onChange: loadingText => setAttributes({
             loadingText
           }),
-          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text displayed while loading more content", "blocklayouts"),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Text displayed while loading more content', 'gutenlayouts'),
           __next40pxDefaultSize: true,
           __nextHasNoMarginBottom: true
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No More Content Text", "blocklayouts"),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('No More Content Text', 'gutenlayouts'),
           value: noMoreText,
           onChange: noMoreText => setAttributes({
             noMoreText
           }),
-          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text displayed when no more content is available", "blocklayouts"),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Text displayed when no more content is available', 'gutenlayouts'),
           __next40pxDefaultSize: true,
           __nextHasNoMarginBottom: true
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Trigger Distance", "blocklayouts"),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Trigger Distance', 'gutenlayouts'),
           value: triggerDistance,
           onChange: triggerDistance => setAttributes({
             triggerDistance
@@ -120,21 +120,21 @@ function Edit({
           min: 50,
           max: 500,
           step: 25,
-          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Distance from the bottom to start loading (px)", "blocklayouts"),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Distance from the bottom to start loading (px)', 'gutenlayouts'),
           __next40pxDefaultSize: true,
           __nextHasNoMarginBottom: true
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-      className: "blocklayouts-infinite-scroll__preview",
+      className: "gutenlayouts-infinite-scroll__preview",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         ...blockProps,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: "wp-block-blocklayouts-infinite-scroll__loading is-visible",
+          className: "wp-block-gutenlayouts-infinite-scroll__loading is-visible",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-            className: "wp-block-blocklayouts-infinite-scroll__loading-spinner"
+            className: "wp-block-gutenlayouts-infinite-scroll__loading-spinner"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-            children: loadingText || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Loading more posts...", "blocklayouts")
+            children: loadingText || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Loading more posts...', 'gutenlayouts')
           })]
         })
       })

@@ -1,0 +1,75 @@
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/components/editor.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+.native-pro-notice {
+  display: flex;
+  flex-direction: column;
+  padding: 51px 16px;
+  gap: 8px;
+  background: #f8f8f8;
+  border-top: 1px solid #e0e0e0;
+}
+
+.native-control-wrapper {
+  margin-bottom: 16px !important;
+}
+
+.native-control-wrapper.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.native-control-wrapper .components-input-control__container {
+  max-width: var(--max-width, 100%);
+}
+
+.native-control-wrapper .components-input-control__input {
+  min-height: 40px !important;
+}
+
+.native-tools-panel-item {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.native-tools-panel-item .components-dropdown {
+  width: 100% !important;
+}
+
+.native-tools-panel-item + .native-tools-panel-item {
+  border-top: none !important;
+}
+
+.native-tools-panel-item:first-child {
+  border-radius: 3px 3px 0 0 !important;
+}
+
+.native-tools-panel-item:last-child {
+  border-radius: 0 0 3px 3px !important;
+}
+
+.native-color-btn {
+  width: 100% !important;
+  min-height: 38px !important;
+}
+
+.native-panel-color-control .components-heading {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin: 0 0 8px !important;
+  width: 100%;
+}
+
+.native-panel-color-control .components-tools-panel {
+  padding: 0;
+  border-top: none;
+}
+
+.native-panel-color-control .components-dropdown-menu__toggle {
+  display: none !important;
+}
+
+.native-panel-color-control .block-editor-tools-panel-color-gradient-settings__item:nth-child(1 of .block-editor-tools-panel-color-gradient-settings__item) {
+  margin-top: 0;
+}
