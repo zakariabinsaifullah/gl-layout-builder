@@ -1,0 +1,47 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/rating/style.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+.wp-block-gutenlayouts-rating {
+  text-align: var(--rating-align);
+}
+.wp-block-gutenlayouts-rating .gutenlayout-star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.wp-block-gutenlayouts-rating .gutenlayout-star-rating svg {
+  fill: var(--rating-color, #ffa500);
+  width: var(--rating-size, 16px);
+  transition: fill 0.2s ease;
+}
+.wp-block-gutenlayouts-rating .rating-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.wp-block-gutenlayouts-rating .rating-container.nr_left {
+  flex-direction: row-reverse;
+}
+.wp-block-gutenlayouts-rating .rating-container.nr_right {
+  flex-direction: row;
+}
+.wp-block-gutenlayouts-rating .rating-container.nr_top {
+  flex-direction: column-reverse;
+  align-items: center;
+}
+.wp-block-gutenlayouts-rating .rating-container.nr_bottom {
+  flex-direction: column;
+  align-items: center;
+}
+.wp-block-gutenlayouts-rating .rating-container .numeric-rating {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: var(--value-size, 15px);
+  line-height: 1;
+  color: var(--numberic-color, #291f0e);
+}
+.wp-block-gutenlayouts-rating .rating-container .numeric-rating .rating-bar {
+  margin: 0 2px;
+}
+
+/*# sourceMappingURL=style-index.css.map*/

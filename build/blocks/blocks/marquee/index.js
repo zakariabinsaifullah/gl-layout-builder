@@ -56,7 +56,7 @@ var arrow_right_default = /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTED
   \**********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"blocklayouts/marquee","version":"0.1.0","title":"Marquee","category":"blocklayouts","icon":"slides","description":"Display content in a horizontal scrolling marquee.","supports":{"html":false,"align":["wide","full"],"color":{"enableContrastChecker":false,"background":true,"gradients":true,"text":true,"__experimentalDefaultControls":{"text":true,"background":true}},"spacing":{"blockGap":["horizontal","vertical"],"margin":true,"padding":true,"units":["px","em","rem","vh","vw"],"__experimentalDefaultControls":{"blockGap":true,"margin":false,"padding":true}},"__experimentalBorder":{"radius":true,"color":true,"width":true,"style":true,"__experimentalDefaultControls":{"radius":true,"color":true,"width":true,"style":true}}},"attributes":{"speed":{"type":"number","default":30},"direction":{"type":"string","default":"left"},"pauseOnHover":{"type":"boolean","default":false},"gap":{"type":"number","default":40},"backgroundColor":{"type":"string"},"textColor":{"type":"string"}},"styles":[{"name":"horizontal-fade","label":"Horizontal fade"}],"example":{},"textdomain":"blocklayouts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenlayouts/marquee","version":"0.1.0","title":"Marquee","category":"gutenlayouts","icon":"slides","description":"Display content in a horizontal scrolling marquee.","supports":{"html":false,"align":["wide","full"],"color":{"enableContrastChecker":false,"background":true,"gradients":true,"text":true,"__experimentalDefaultControls":{"text":true,"background":true}},"spacing":{"blockGap":["horizontal","vertical"],"margin":true,"padding":true,"units":["px","em","rem","vh","vw"],"__experimentalDefaultControls":{"blockGap":true,"margin":false,"padding":true}},"__experimentalBorder":{"radius":true,"color":true,"width":true,"style":true,"__experimentalDefaultControls":{"radius":true,"color":true,"width":true,"style":true}}},"attributes":{"speed":{"type":"number","default":30},"direction":{"type":"string","default":"left"},"pauseOnHover":{"type":"boolean","default":false},"gap":{"type":"number","default":40},"backgroundColor":{"type":"string"},"textColor":{"type":"string"}},"styles":[{"name":"horizontal-fade","label":"Horizontal fade"}],"example":{},"textdomain":"gutenlayouts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php"}');
 
 /***/ }),
 
@@ -98,35 +98,35 @@ function Edit({
     gap
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)({
-    className: "marquee-container"
+    className: 'marquee-container'
   });
-  const ALLOWED_BLOCKS = ["core/image", "core/paragraph", "core/heading", "core/columns", "core/column", "core/group", "core/social-links", "core/buttons"];
-  const TEMPLATE = [["core/heading", {
+  const ALLOWED_BLOCKS = ['core/image', 'core/paragraph', 'core/heading', 'core/columns', 'core/column', 'core/group', 'core/social-links', 'core/buttons'];
+  const TEMPLATE = [['core/heading', {
     level: 3,
-    textAlign: "center",
+    textAlign: 'center',
     style: {
       color: {
-        background: "#f2f2fa"
+        background: '#f2f2fa'
       }
     },
-    content: "This is a Marquee block. Add your scrolling content here!"
+    content: 'This is a Marquee block. Add your scrolling content here!'
   }]];
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useInnerBlocksProps)({
-    className: "blocklayouts-marquee-items",
+    className: 'gutenlayouts-marquee-items',
     style: {
       gap: `${gap}px`
     }
   }, {
     // allowedBlocks: ALLOWED_BLOCKS, Allow all blocks
     template: TEMPLATE,
-    orientation: "horizontal"
+    orientation: 'horizontal'
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InspectorControls, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.PanelBody, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Marquee Settings", "blocklayouts"),
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Marquee Settings', 'gutenlayouts'),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Direction", "blocklayouts"),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Direction', 'gutenlayouts'),
           value: direction,
           isBlock: true,
           onChange: newDirection => setAttributes({
@@ -137,27 +137,27 @@ function Edit({
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOptionIcon, {
             icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_3__["default"],
             value: "left",
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Right to Left", "blocklayouts")
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Right to Left', 'gutenlayouts')
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOptionIcon, {
             icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"],
             value: "right",
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Left to Right", "blocklayouts")
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Left to Right', 'gutenlayouts')
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
           __next40pxDefaultSize: true,
           __nextHasNoMarginBottom: true,
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Speed", "blocklayouts"),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Speed', 'gutenlayouts'),
           value: speed,
           onChange: newSpeed => setAttributes({
             speed: newSpeed
           }),
           min: 5,
           max: 200,
-          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Higher values = Slower scrolling", "blocklayouts")
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Higher values = Slower scrolling', 'gutenlayouts')
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
           __next40pxDefaultSize: true,
           __nextHasNoMarginBottom: true,
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Gap between items (px)", "blocklayouts"),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Gap between items (px)', 'gutenlayouts'),
           value: gap,
           onChange: newGap => setAttributes({
             gap: newGap
@@ -166,18 +166,18 @@ function Edit({
           max: 100,
           initialPosition: 40
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-          className: "blocklayouts-marquee-controls__pause-on-hover",
+          className: "gutenlayouts-marquee-controls__pause-on-hover",
           style: {
-            display: "flex",
-            gap: "12px",
-            alignItems: "center"
+            display: 'flex',
+            gap: '12px',
+            alignItems: 'center'
           },
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
             style: {
               flex: 1,
               margin: 0
             },
-            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Pause on Hover", "blocklayouts")
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Pause on Hover', 'gutenlayouts')
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
             __next40pxDefaultSize: true,
             __nextHasNoMarginBottom: true,

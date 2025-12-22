@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "blocklayouts/marquee",
+  "name": "gutenlayouts/marquee",
   "version": "0.1.0",
   "title": "Marquee",
-  "category": "blocklayouts",
+  "category": "gutenlayouts",
   "icon": "slides",
   "description": "Display content in a horizontal scrolling marquee.",
   "supports": {
@@ -87,7 +87,7 @@
     }
   ],
   "example": {},
-  "textdomain": "blocklayouts",
+  "textdomain": "gutenlayouts",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",

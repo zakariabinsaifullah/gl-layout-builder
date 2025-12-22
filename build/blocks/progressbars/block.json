@@ -1,0 +1,55 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "gutenlayouts/progressbars",
+  "version": "0.1.0",
+  "title": "Progressbars",
+  "category": "gutenlayouts",
+  "description": "Add a customizable svg icon to your content.",
+  "supports": {
+    "anchor": true,
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "attributes": {
+    "blockStyle": {
+      "type": "object"
+    },
+    "rating": {
+      "type": "number",
+      "default": 4.5
+    },
+    "label": {
+      "type": "string",
+      "default": "Progress Bar"
+    },
+    "progress": {
+      "type": "number",
+      "default": 50
+    },
+    "thickNess": {
+      "type": "number"
+    },
+    "layout": {
+      "type": "string",
+      "default": "line"
+    },
+    "strokeWidth": {
+      "type": "number"
+    }
+  },
+  "providesContext": {
+    "gutenlayouts/layout": "layout"
+  },
+  "textdomain": "gutenlayouts",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -95,13 +95,253 @@ return array(
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css'
 	),
+	'marque' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'gutenlayouts/marque',
+		'version' => '0.1.0',
+		'title' => 'marque',
+		'category' => 'gutenlayouts',
+		'description' => 'Add a customizable svg icon to your content.',
+		'supports' => array(
+			'anchor' => true,
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true
+			)
+		),
+		'attributes' => array(
+			'speed' => array(
+				'type' => 'number',
+				'default' => 30
+			),
+			'direction' => array(
+				'type' => 'string',
+				'default' => 'left'
+			),
+			'pauseOnHover' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'gap' => array(
+				'type' => 'number',
+				'default' => 40
+			),
+			'backgroundColor' => array(
+				'type' => 'string'
+			),
+			'textColor' => array(
+				'type' => 'string'
+			),
+			'orientation' => array(
+				'type' => 'string',
+				'default' => 'horizontal'
+			),
+			'height' => array(
+				'type' => 'number'
+			)
+		),
+		'textdomain' => 'gutenlayouts',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
+	),
+	'progressbar' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'gutenlayouts/progressbar',
+		'version' => '0.1.0',
+		'title' => 'Progressbar',
+		'category' => 'gutenlayouts',
+		'description' => 'Add a customizable svg icon to your content.',
+		'parent' => array(
+			'gutenlayouts/progressbars'
+		),
+		'supports' => array(
+			'anchor' => true,
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true
+			)
+		),
+		'attributes' => array(
+			'blockStyle' => array(
+				'type' => 'object'
+			),
+			'progress' => array(
+				'type' => 'number',
+				'default' => 50
+			),
+			'label' => array(
+				'type' => 'string',
+				'default' => 'Progress Bar'
+			),
+			'layout' => array(
+				'type' => 'string',
+				'default' => 'line'
+			),
+			'paColor' => array(
+				'type' => 'string'
+			),
+			'pinColor' => array(
+				'type' => 'string'
+			),
+			'labelSize' => array(
+				'type' => 'number'
+			),
+			'labelColor' => array(
+				'type' => 'number'
+			),
+			'perceColor' => array(
+				'type' => 'string'
+			),
+			'perceSize' => array(
+				'type' => 'number'
+			)
+		),
+		'usesContext' => array(
+			'gutenlayouts/layout'
+		),
+		'textdomain' => 'gutenlayouts',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
+	'progressbars' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'gutenlayouts/progressbars',
+		'version' => '0.1.0',
+		'title' => 'Progressbars',
+		'category' => 'gutenlayouts',
+		'description' => 'Add a customizable svg icon to your content.',
+		'supports' => array(
+			'anchor' => true,
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true
+			)
+		),
+		'attributes' => array(
+			'blockStyle' => array(
+				'type' => 'object'
+			),
+			'rating' => array(
+				'type' => 'number',
+				'default' => 4.5
+			),
+			'label' => array(
+				'type' => 'string',
+				'default' => 'Progress Bar'
+			),
+			'progress' => array(
+				'type' => 'number',
+				'default' => 50
+			),
+			'thickNess' => array(
+				'type' => 'number'
+			),
+			'layout' => array(
+				'type' => 'string',
+				'default' => 'line'
+			),
+			'strokeWidth' => array(
+				'type' => 'number'
+			)
+		),
+		'providesContext' => array(
+			'gutenlayouts/layout' => 'layout'
+		),
+		'textdomain' => 'gutenlayouts',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
+	'rating' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'gutenlayouts/rating',
+		'version' => '0.1.0',
+		'title' => 'Rating',
+		'category' => 'gutenlayouts',
+		'description' => 'Add a customizable svg icon to your content.',
+		'supports' => array(
+			'anchor' => true,
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true
+			)
+		),
+		'attributes' => array(
+			'blockStyle' => array(
+				'type' => 'object'
+			),
+			'rating' => array(
+				'type' => 'number',
+				'default' => 4.5
+			),
+			'totalRating' => array(
+				'type' => 'number',
+				'default' => 5
+			),
+			'enableRating' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'nrPos' => array(
+				'type' => 'string',
+				'default' => 'nr_right'
+			),
+			'ratingSize' => array(
+				'type' => 'number'
+			),
+			'ratingNsize' => array(
+				'type' => 'number'
+			),
+			'ratingColor' => array(
+				'type' => 'string'
+			),
+			'nuRatColor' => array(
+				'type' => 'string'
+			),
+			'alignment' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
+		'textdomain' => 'gutenlayouts',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
 	'infinite-scroll' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'blocklayouts/infinite-scroll',
+		'name' => 'gutenlayouts/infinite-scroll',
 		'version' => '0.1.0',
 		'title' => 'Infinite Scroll',
-		'category' => 'blocklayouts',
+		'category' => 'gutenlayouts',
 		'ancestor' => array(
 			'core/query'
 		),
@@ -155,7 +395,7 @@ return array(
 				'default' => 'center'
 			)
 		),
-		'textdomain' => 'blocklayouts',
+		'textdomain' => 'gutenlayouts',
 		'usesContext' => array(
 			'queryId',
 			'query'
@@ -169,10 +409,10 @@ return array(
 	'marquee' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'blocklayouts/marquee',
+		'name' => 'gutenlayouts/marquee',
 		'version' => '0.1.0',
 		'title' => 'Marquee',
-		'category' => 'blocklayouts',
+		'category' => 'gutenlayouts',
 		'icon' => 'slides',
 		'description' => 'Display content in a horizontal scrolling marquee.',
 		'supports' => array(
@@ -257,7 +497,7 @@ return array(
 		'example' => array(
 			
 		),
-		'textdomain' => 'blocklayouts',
+		'textdomain' => 'gutenlayouts',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
