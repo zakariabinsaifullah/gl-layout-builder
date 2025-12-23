@@ -1,9 +1,9 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "gutenlayouts/progressbars",
+  "name": "gutenlayouts/gmap",
   "version": "0.1.0",
-  "title": "Progressbars",
+  "title": "Google Map",
   "category": "gutenlayouts",
   "description": "Add a customizable svg icon to your content.",
   "supports": {
@@ -22,28 +22,29 @@
     "blockStyle": {
       "type": "object"
     },
-    "rating": {
-      "type": "number",
-      "default": 4.5
-    },
-    "label": {
+    "address": {
       "type": "string",
-      "default": "Progress Bar"
+      "default": "New York"
     },
-    "progress": {
+    "zoom": {
       "type": "number",
-      "default": 50
+      "default": "10"
     },
-    "thickNess": {
+    "height": {
       "type": "number"
     },
-    "layout": {
-      "type": "string",
-      "default": "line"
+    "mapBorder": {
+      "type": "object",
+      "default": {
+        "top": "",
+        "right": "",
+        "bottom": "",
+        "left": ""
+      }
+    },
+    "mapRadius": {
+      "type": "number"
     }
-  },
-  "providesContext": {
-    "gutenlayouts/layout": "layout"
   },
   "textdomain": "gutenlayouts",
   "editorScript": "file:./index.js",

@@ -10,7 +10,7 @@ const CustomiconModal = ({ customiconPanel, setCustomiconPanel, onInsert, value 
 
     const handleInsert = () => {
         if (code.trim() === '') {
-            wp.data.dispatch('core/notices').createNotice('error', __('Please enter SVG code', 'native-table'), {
+            wp.data.dispatch('core/notices').createNotice('error', __('Please enter SVG code', 'gutenlayouts'), {
                 isDismissible: true
             });
             return;
@@ -21,20 +21,20 @@ const CustomiconModal = ({ customiconPanel, setCustomiconPanel, onInsert, value 
     return (
         <Modal
             className="svgib__modal custom-svg"
-            title={__('Custom SVG', 'native-table')}
+            title={__('Custom SVG', 'gutenlayouts')}
             onRequestClose={() => setCustomiconPanel(false)}
         >
             <div className="svg-controls">
-                <RangeControl label={__('SVG Preview Size', 'native-table')} value={size} onChange={v => setSize(v)} min={20} max={150} />
+                <RangeControl label={__('SVG Preview Size', 'gutenlayouts')} value={size} onChange={v => setSize(v)} min={20} max={150} />
             </div>
             <div className="svgib-modal__wrapper">
                 <div className="svg-code">
                     <TextareaControl
-                        label={__('SVG Code', 'native-table')}
-                        help={__('Paste your SVG code here.', 'native-table')}
+                        label={__('SVG Code', 'gutenlayouts')}
+                        help={__('Paste your SVG code here.', 'gutenlayouts')}
                         value={code}
                         onChange={v => setCode(v)}
-                        placeholder={__('<svg>...</svg>', 'native-table')}
+                        placeholder={__('<svg>...</svg>', 'gutenlayouts')}
                         rows={10}
                     />
                 </div>
@@ -42,13 +42,13 @@ const CustomiconModal = ({ customiconPanel, setCustomiconPanel, onInsert, value 
                     {code ? (
                         <div dangerouslySetInnerHTML={{ __html: code }} />
                     ) : (
-                        <div className="preview-text">{__('SVG Preview', 'native-table')}</div>
+                        <div className="preview-text">{__('SVG Preview', 'gutenlayouts')}</div>
                     )}
                 </div>
             </div>
             <div className="insert-svg">
                 <Button variant="primary" onClick={handleInsert}>
-                    {__('Insert SVG', 'native-table')}
+                    {__('Insert SVG', 'gutenlayouts')}
                 </Button>
             </div>
         </Modal>

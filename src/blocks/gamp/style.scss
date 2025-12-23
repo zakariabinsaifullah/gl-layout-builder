@@ -1,0 +1,23 @@
+.wp-block-gutenlayouts-gmap {
+    iframe {
+        width: 100%;
+        height: var(--map-height, 400px);
+        box-sizing: border-box;
+        border-width: var(--map-width, 1px);
+        border-style: var(--mapborder-style, solid);
+        border-color: var(--mapborder-color);
+        border-radius: var(--radius);
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+        iframe {
+            height: 300px;
+        }
+    }
+
+    // mobile view
+    @media (max-width: 767px) {
+        iframe {
+            height: 200px;
+        }
+    }
+}

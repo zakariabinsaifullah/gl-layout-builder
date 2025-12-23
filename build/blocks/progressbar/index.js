@@ -95,7 +95,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenlayouts/progressbar","version":"0.1.0","title":"Progressbar","category":"gutenlayouts","description":"Add a customizable svg icon to your content.","parent":["gutenlayouts/progressbars"],"supports":{"anchor":true,"html":false,"align":["wide","full"],"spacing":{"margin":true,"padding":true}},"attributes":{"blockStyle":{"type":"object"},"progress":{"type":"number","default":50},"label":{"type":"string","default":"Progress Bar"},"layout":{"type":"string","default":"line"},"paColor":{"type":"string"},"pinColor":{"type":"string"},"labelSize":{"type":"number"},"labelColor":{"type":"number"},"perceColor":{"type":"string"},"perceSize":{"type":"number"}},"usesContext":["gutenlayouts/layout"],"textdomain":"gutenlayouts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenlayouts/progressbar","version":"0.1.0","title":"Progressbar","category":"gutenlayouts","description":"Add a customizable svg icon to your content.","parent":["gutenlayouts/progressbars"],"supports":{"anchor":true,"html":false,"align":["wide","full"],"spacing":{"margin":true,"padding":true}},"attributes":{"blockStyle":{"type":"object"},"progress":{"type":"number","default":50},"label":{"type":"string","default":"Progress Bar"},"layout":{"type":"string","default":"line"},"paColor":{"type":"string"},"pinColor":{"type":"string"},"labelSize":{"type":"number"},"labelColor":{"type":"number"},"perceColor":{"type":"string"},"perceSize":{"type":"number"},"thickNess":{"type":"number"},"progressSize":{"type":"number"}},"usesContext":["gutenlayouts/layout"],"textdomain":"gutenlayouts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ }),
 
@@ -146,7 +146,9 @@ const Edit = props => {
     pinColor,
     paColor,
     perceColor,
-    perceSize
+    perceSize,
+    thickNess,
+    progressSize
   } = attributes;
   const layout = context['gutenlayouts/layout'] || 'line';
   const cssCustomProperties = {
@@ -167,8 +169,19 @@ const Edit = props => {
     }),
     ...(perceColor && {
       '--percentange-color': perceColor
+    }),
+    ...(thickNess && {
+      '--thickness': thickNess
+    }),
+    ...(progressSize && {
+      '--bar-width': `${progressSize}px`
     })
   };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+    setAttributes({
+      blockStyle: cssCustomProperties
+    });
+  }, [label, progress, labelSize, labelColor, pinColor, paColor, perceColor, perceSize, thickNess, progressSize]);
   /**
    * Block Props
    */
@@ -183,7 +196,8 @@ const Edit = props => {
     style: cssCustomProperties,
     className: `wp-block-gutenlayouts-progressbar layout-${layout}`
   });
-  const radius = 45;
+  const actualThickness = thickNess || 8;
+  const radius = 45 - actualThickness / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - progress / 100 * circumference;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
@@ -200,7 +214,8 @@ const Edit = props => {
             value: label,
             onChange: value => setAttributes({
               label: value
-            })
+            }),
+            placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter label...', 'gutenlayouts')
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "gutenlayout-bar-percent",
             children: [progress, "%"]
@@ -219,23 +234,21 @@ const Edit = props => {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "circle-svg-wrapper",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("svg", {
-            width: "120",
-            height: "120",
             viewBox: "0 0 100 100",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("circle", {
               className: "circle-bg",
               cx: "50",
               cy: "50",
               r: radius,
-              strokeWidth: "8",
-              fill: "transparent"
+              fill: "transparent",
+              strokeWidth: actualThickness
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("circle", {
               className: "circle-fill",
               cx: "50",
               cy: "50",
               r: radius,
-              strokeWidth: "8",
               fill: "transparent",
+              strokeWidth: actualThickness,
               strokeDasharray: circumference,
               strokeDashoffset: offset,
               strokeLinecap: "round",
@@ -253,7 +266,7 @@ const Edit = props => {
               onChange: value => setAttributes({
                 label: value
               }),
-              placeholder: "Label..."
+              placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter label...', 'gutenlayouts')
             })]
           })]
         })
@@ -366,29 +379,21 @@ const Inspector = props => {
     clientId
   } = props;
   const {
-    enableRating,
-    totalRating,
-    rating,
-    nrPos,
-    ratingSize,
-    ratingNsize,
-    ratingColor,
-    nuRatColor,
-    alignment,
     progress,
-    layout,
+    thickNess,
     paColor,
     labelSize,
     pinColor,
     labelColor,
     perceColor,
     perceSize,
-    strokeWidth
+    progressSize,
+    layout
   } = attributes;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       group: "settings",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'gutenlayouts'),
         initialOpen: true,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeRangeControl, {
@@ -400,7 +405,32 @@ const Inspector = props => {
           min: 0,
           max: 100
         })
-      })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Thickness', 'gutenlayouts'),
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeRangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Thickness', 'gutenlayouts'),
+          value: thickNess,
+          onChange: value => setAttributes({
+            thickNess: value
+          }),
+          min: 1,
+          max: 100,
+          step: 1
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Width', 'gutenlayouts'),
+        initialOpen: false,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeRangeControl, {
+          value: progressSize,
+          onChange: value => setAttributes({
+            progressSize: value
+          }),
+          min: 1,
+          max: 2000,
+          step: 1
+        })
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       group: "styles",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanel, {
@@ -500,7 +530,7 @@ const Inspector = props => {
           paColor: undefined
         }),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanelItem, {
-          hasValue: () => !!nuRatColor,
+          hasValue: () => !!paColor,
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Active Color', 'gutenlayouts'),
           onDeselect: () => {
             setAttributes({
@@ -519,7 +549,7 @@ const Inspector = props => {
             }]
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanelItem, {
-          hasValue: () => !!nuRatColor,
+          hasValue: () => !!pinColor,
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('In active Color', 'gutenlayouts'),
           onDeselect: () => {
             setAttributes({
@@ -566,10 +596,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-const Save = props => {
-  const {
-    attributes
-  } = props;
+const Save = ({
+  attributes
+}) => {
   const {
     label,
     progress,
@@ -579,37 +608,17 @@ const Save = props => {
     paColor,
     perceColor,
     perceSize,
-    layout = 'line'
+    thickNess,
+    progressSize,
+    layout,
+    blockStyle
   } = attributes;
-  const cssCustomProperties = {
-    ...(labelSize && {
-      '--title-size': `${labelSize}px`
-    }),
-    ...(labelColor && {
-      '--title-color': labelColor
-    }),
-    ...(pinColor && {
-      '--inactive-color': pinColor
-    }),
-    ...(paColor && {
-      '--active-color': paColor
-    }),
-    ...(perceSize && {
-      '--percentange-size': `${perceSize}px`
-    }),
-    ...(perceColor && {
-      '--percentange-color': perceColor
-    })
-  };
-
-  /**
-   * Block Props
-   */
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
-    style: cssCustomProperties,
-    className: `wp-block-gutenlayouts-progressbar layout-${layout}`
+    style: blockStyle,
+    className: `wp-block-gutenlayouts-progressbar layout-${layout || 'line'}`
   });
-  const radius = 45;
+  const actualThickness = thickNess || 8;
+  const radius = 45 - actualThickness / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - progress / 100 * circumference;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -639,23 +648,21 @@ const Save = props => {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "circle-svg-wrapper",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("svg", {
-          width: "120",
-          height: "120",
           viewBox: "0 0 100 100",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("circle", {
             className: "circle-bg",
             cx: "50",
             cy: "50",
             r: radius,
-            strokeWidth: "8",
-            fill: "transparent"
+            fill: "transparent",
+            strokeWidth: actualThickness
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("circle", {
             className: "circle-fill",
             cx: "50",
             cy: "50",
             r: radius,
-            strokeWidth: "8",
             fill: "transparent",
+            strokeWidth: actualThickness,
             strokeDasharray: circumference,
             strokeDashoffset: offset,
             strokeLinecap: "round",
@@ -920,13 +927,13 @@ function ColorControlDropdown({
     renderContent: () => hasHover || hasActive ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
       tabs: [{
         name: 'default',
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default', 'native-table')
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default', 'gutenlayouts')
       }, {
         name: 'hover',
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hover', 'native-table')
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hover', 'gutenlayouts')
       }, {
         name: 'active',
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Active', 'native-table')
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Active', 'gutenlayouts')
       }],
       children: tab => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
         __experimentalIsRenderedInSidebar: true,
@@ -957,12 +964,12 @@ function ColorControlDropdown({
 //     {
 //         key: 'tableColor',
 //         state: tableColor,
-//         label: __('Table Color', 'native-table')
+//         label: __('Table Color', 'gutenlayouts')
 //     },
 //     {
 //         key: 'tableBg',
 //         state: tableBg,
-//         label: __('Table Background', 'native-table')
+//         label: __('Table Background', 'gutenlayouts')
 //     }
 // ];
 
@@ -1268,19 +1275,19 @@ const NativeProNotice = () => {
       size: "15rem",
       lineHeight: "1.6",
       weight: "500",
-      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Native Table Resources', 'native-table')
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Native Table Resources', 'gutenlayouts')
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ExternalLink, {
       href: "https://wpnativeblocks.com/table-builder/pricing",
-      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Get Native Table Pro', 'native-table')
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Get Native Table Pro', 'gutenlayouts')
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ExternalLink, {
       href: "https://wpnativeblocks.com/table-builder/demos",
-      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Explore Demos', 'native-table')
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Explore Demos', 'gutenlayouts')
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ExternalLink, {
       href: "https://wpnativeblocks.com/table-builder/vidoes",
-      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Tutorial Videos', 'native-table')
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Tutorial Videos', 'gutenlayouts')
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ExternalLink, {
       href: "https://wpnativeblocks.com/table-builder/blog",
-      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Blog Posts', 'native-table')
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Blog Posts', 'gutenlayouts')
     })]
   });
 };
@@ -1560,7 +1567,7 @@ const CustomiconModal = ({
   if (!customiconPanel) return null;
   const handleInsert = () => {
     if (code.trim() === '') {
-      wp.data.dispatch('core/notices').createNotice('error', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please enter SVG code', 'native-table'), {
+      wp.data.dispatch('core/notices').createNotice('error', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please enter SVG code', 'gutenlayouts'), {
         isDismissible: true
       });
       return;
@@ -1569,12 +1576,12 @@ const CustomiconModal = ({
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Modal, {
     className: "svgib__modal custom-svg",
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom SVG', 'native-table'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom SVG', 'gutenlayouts'),
     onRequestClose: () => setCustomiconPanel(false),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "svg-controls",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Preview Size', 'native-table'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Preview Size', 'gutenlayouts'),
         value: size,
         onChange: v => setSize(v),
         min: 20,
@@ -1585,11 +1592,11 @@ const CustomiconModal = ({
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "svg-code",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Code', 'native-table'),
-          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Paste your SVG code here.', 'native-table'),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Code', 'gutenlayouts'),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Paste your SVG code here.', 'gutenlayouts'),
           value: code,
           onChange: v => setCode(v),
-          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('<svg>...</svg>', 'native-table'),
+          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('<svg>...</svg>', 'gutenlayouts'),
           rows: 10
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -1604,7 +1611,7 @@ const CustomiconModal = ({
           }
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "preview-text",
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Preview', 'native-table')
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Preview', 'gutenlayouts')
         })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -1612,7 +1619,7 @@ const CustomiconModal = ({
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
         variant: "primary",
         onClick: handleInsert,
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Insert SVG', 'native-table')
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Insert SVG', 'gutenlayouts')
       })
     })]
   });

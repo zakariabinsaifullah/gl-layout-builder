@@ -136,15 +136,15 @@ function ColorControlDropdown({ label, colorValue = {}, onChangeColor, hasHover 
                         tabs={[
                             {
                                 name: 'default',
-                                title: __('Default', 'native-table')
+                                title: __('Default', 'gutenlayouts')
                             },
                             {
                                 name: 'hover',
-                                title: __('Hover', 'native-table')
+                                title: __('Hover', 'gutenlayouts')
                             },
                             {
                                 name: 'active',
-                                title: __('Active', 'native-table')
+                                title: __('Active', 'gutenlayouts')
                             }
                         ]}
                     >
@@ -182,12 +182,12 @@ export default ColorControlDropdown;
 //     {
 //         key: 'tableColor',
 //         state: tableColor,
-//         label: __('Table Color', 'native-table')
+//         label: __('Table Color', 'gutenlayouts')
 //     },
 //     {
 //         key: 'tableBg',
 //         state: tableBg,
-//         label: __('Table Background', 'native-table')
+//         label: __('Table Background', 'gutenlayouts')
 //     }
 // ];
 
