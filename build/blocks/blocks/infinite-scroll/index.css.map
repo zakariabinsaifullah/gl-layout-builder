@@ -1,1 +1,0 @@
-{"version":3,"file":"blocks/blocks/infinite-scroll/index.css","mappings":";;;AAAA;EACI;AACJ,C","sources":["webpack://gutenlayouts/./src/blocks/blocks/infinite-scroll/editor.scss"],"sourcesContent":[".gutenlayouts-infinite-scroll__preview {\r\n    border: 2px dashed #ddd;\r\n}\r\n"],"names":[],"ignoreList":[],"sourceRoot":""}
