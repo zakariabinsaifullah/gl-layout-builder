@@ -6,6 +6,59 @@ return array(
 		'apiVersion' => 3,
 		'editorScript' => 'file:./index.js'
 	),
+	'gamp' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'gutenlayouts/gmap',
+		'version' => '0.1.0',
+		'title' => 'Google Map',
+		'category' => 'gutenlayouts',
+		'description' => 'Add a customizable svg icon to your content.',
+		'supports' => array(
+			'anchor' => true,
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true
+			)
+		),
+		'attributes' => array(
+			'blockStyle' => array(
+				'type' => 'object'
+			),
+			'address' => array(
+				'type' => 'string',
+				'default' => 'New York'
+			),
+			'zoom' => array(
+				'type' => 'number',
+				'default' => '10'
+			),
+			'height' => array(
+				'type' => 'number'
+			),
+			'mapBorder' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '',
+					'right' => '',
+					'bottom' => '',
+					'left' => ''
+				)
+			),
+			'mapRadius' => array(
+				'type' => 'number'
+			)
+		),
+		'textdomain' => 'gutenlayouts',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
 	'icon' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -208,6 +261,12 @@ return array(
 			),
 			'perceSize' => array(
 				'type' => 'number'
+			),
+			'thickNess' => array(
+				'type' => 'number'
+			),
+			'progressSize' => array(
+				'type' => 'number'
 			)
 		),
 		'usesContext' => array(
@@ -260,9 +319,6 @@ return array(
 			'layout' => array(
 				'type' => 'string',
 				'default' => 'line'
-			),
-			'strokeWidth' => array(
-				'type' => 'number'
 			)
 		),
 		'providesContext' => array(

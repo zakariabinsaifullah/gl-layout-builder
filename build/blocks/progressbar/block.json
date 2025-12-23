@@ -54,6 +54,12 @@
     },
     "perceSize": {
       "type": "number"
+    },
+    "thickNess": {
+      "type": "number"
+    },
+    "progressSize": {
+      "type": "number"
     }
   },
   "usesContext": [

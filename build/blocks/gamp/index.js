@@ -88,21 +88,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
-/***/ "./src/blocks/progressbars/block.json":
-/*!********************************************!*\
-  !*** ./src/blocks/progressbars/block.json ***!
-  \********************************************/
+/***/ "./src/blocks/gamp/block.json":
+/*!************************************!*\
+  !*** ./src/blocks/gamp/block.json ***!
+  \************************************/
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenlayouts/progressbars","version":"0.1.0","title":"Progressbars","category":"gutenlayouts","description":"Add a customizable svg icon to your content.","supports":{"anchor":true,"html":false,"align":["wide","full"],"spacing":{"margin":true,"padding":true}},"attributes":{"blockStyle":{"type":"object"},"rating":{"type":"number","default":4.5},"label":{"type":"string","default":"Progress Bar"},"progress":{"type":"number","default":50},"thickNess":{"type":"number"},"layout":{"type":"string","default":"line"}},"providesContext":{"gutenlayouts/layout":"layout"},"textdomain":"gutenlayouts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenlayouts/gmap","version":"0.1.0","title":"Google Map","category":"gutenlayouts","description":"Add a customizable svg icon to your content.","supports":{"anchor":true,"html":false,"align":["wide","full"],"spacing":{"margin":true,"padding":true}},"attributes":{"blockStyle":{"type":"object"},"address":{"type":"string","default":"New York"},"zoom":{"type":"number","default":"10"},"height":{"type":"number"},"mapBorder":{"type":"object","default":{"top":"","right":"","bottom":"","left":""}},"mapRadius":{"type":"number"}},"textdomain":"gutenlayouts","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ }),
 
-/***/ "./src/blocks/progressbars/edit.js":
-/*!*****************************************!*\
-  !*** ./src/blocks/progressbars/edit.js ***!
-  \*****************************************/
+/***/ "./src/blocks/gamp/edit.js":
+/*!*********************************!*\
+  !*** ./src/blocks/gamp/edit.js ***!
+  \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -114,13 +114,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./inspector */ "./src/blocks/progressbars/inspector.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./inspector */ "./src/blocks/gamp/inspector.js");
+/* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../styles */ "./src/styles/index.js");
+/* harmony import */ var _map__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./map */ "./src/blocks/gamp/map.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
 /**
@@ -131,11 +129,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * External Dependencies
+ */
 
 /**
  * Internal Dependencies
  */
-
 
 // block edit function
 
@@ -147,63 +147,55 @@ const Edit = props => {
     isSelected
   } = props;
   const {
-    thickNess
+    address,
+    zoom,
+    type,
+    height,
+    mapBorder,
+    mapRadius
   } = attributes;
+  const borderWidth = mapBorder ? (0,_styles__WEBPACK_IMPORTED_MODULE_4__.generateBorderWidth)(mapBorder) : null;
+  const borderStyle = mapBorder ? (0,_styles__WEBPACK_IMPORTED_MODULE_4__.generateBorderStyle)(mapBorder) : null;
+  const borderColor = mapBorder ? (0,_styles__WEBPACK_IMPORTED_MODULE_4__.generateBorderColor)(mapBorder) : null;
   const cssCustomProperties = {
-    ...(thickNess && {
-      '--thickness': `${thickNess}px`
+    ...(height && {
+      '--map-height': `${height}px`
+    }),
+    ...(borderWidth && {
+      '--map-width': borderWidth
+    }),
+    ...(borderStyle && {
+      '--mapborder-style': borderStyle
+    }),
+    ...(borderColor && {
+      '--mapborder-color': borderColor
+    }),
+    ...(mapRadius && {
+      '--radius': `${mapRadius}px`
     })
   };
-  /**
-   * Block Props
-   */
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
     style: cssCustomProperties
   });
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
+    setAttributes({
+      blockStyle: cssCustomProperties
+    });
+  }, [height, mapBorder, mapRadius]);
+  /**
+   * Block Props
+   */
 
-  // Inner blocks
-  const innerBlockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useInnerBlocksProps)({
-    className: 'progressbar-inner-blocks'
-  }, {
-    allowedBlocks: ['gutenlayouts/progressbar'],
-    template: [['gutenlayouts/progressbar', {
-      progress: 50,
-      label: 'Durability Score'
-    }]],
-    renderAppender: false,
-    templateLock: false
-  });
-
-  // Get child blocks using useSelect
-  const childBlocks = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
-    return select('core/block-editor').getBlocks(clientId);
-  }, [clientId]);
-
-  // Get dispatch function
-  const {
-    insertBlock
-  } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useDispatch)('core/block-editor');
-
-  // Append Button handler
-  const appendBtn = () => {
-    const newBlock = (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_4__.createBlock)('gutenlayouts/progressbar', {});
-    insertBlock(newBlock, childBlocks.length, clientId);
-  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-    children: [isSelected && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_inspector__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    children: [isSelected && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], {
       ...props
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
-          icon: "insert",
-          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Add Progress Bar', 'gutenlayout-blocks'),
-          onClick: appendBtn
-        })
-      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       ...blockProps,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        ...innerBlockProps
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_map__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        location: address,
+        zoom: zoom,
+        type: type,
+        className: "embd-map"
       })
     })]
   });
@@ -212,10 +204,84 @@ const Edit = props => {
 
 /***/ }),
 
-/***/ "./src/blocks/progressbars/inspector.js":
-/*!**********************************************!*\
-  !*** ./src/blocks/progressbars/inspector.js ***!
-  \**********************************************/
+/***/ "./src/blocks/gamp/index.js":
+/*!**********************************!*\
+  !*** ./src/blocks/gamp/index.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/blocks/gamp/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/blocks/gamp/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/blocks/gamp/save.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/blocks/gamp/block.json");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
+/**
+ * Registers a new block provided a unique name and an object defining its behavior.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ */
+
+
+/**
+ * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
+ * All files containing `style` keyword are bundled together. The code used
+ * gets applied both to the front of your site and to the editor.
+ *
+ * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+const inlineIcon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("svg", {
+  fill: "#000000",
+  height: "800px",
+  width: "800px",
+  version: "1.1",
+  id: "Layer_1",
+  xmlns: "http://www.w3.org/2000/svg",
+  xmlnsXlink: "http://www.w3.org/1999/xlink",
+  viewBox: "0 0 512 512",
+  enableBackground: "new 0 0 512 512",
+  xmlSpace: "preserve",
+  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("path", {
+    d: "M256,0C149.3,0,64,85.3,64,192c0,36.9,11,65.4,30.1,94.3l141.7,215v0c4.3,6.5,11.7,10.7,20.2,10.7c8.5,0,16-4.3,20.2-10.7\r l141.7-215C437,257.4,448,228.9,448,192C448,85.3,362.7,0,256,0z M256,298.6c-58.9,0-106.7-47.8-106.7-106.8\r c0-59,47.8-106.8,106.7-106.8c58.9,0,106.7,47.8,106.7,106.8C362.7,250.8,314.9,298.6,256,298.6z"
+  })
+});
+
+/**
+ * Every block starts by registering a new block type definition.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ */
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
+  icon: inlineIcon,
+  /**
+   * @see ./edit.js
+   */
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  /**
+   * @see ./save.js
+   */
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ }),
+
+/***/ "./src/blocks/gamp/inspector.js":
+/*!**************************************!*\
+  !*** ./src/blocks/gamp/inspector.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -244,32 +310,137 @@ const Inspector = props => {
     clientId
   } = props;
   const {
-    thickNess,
-    layout
+    address,
+    type,
+    zoom,
+    height,
+    mapBorder,
+    mapRadius
   } = attributes;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       group: "settings",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'gutenlayouts'),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Gamap', 'gutenlayouts'),
         initialOpen: true,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeSelectControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Layout', 'text-domain'),
-          value: layout,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeTextControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter a Location', 'embed-blocks'),
+          value: address,
+          onChange: v => setAttributes({
+            address: v
+          }),
+          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enter a Location', 'embed-blocks')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Map Type', 'embed-blocks'),
+          value: type,
           options: [{
-            label: 'Line',
-            value: 'line'
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Roadmap', 'embed-blocks'),
+            value: 'roadmap'
           }, {
-            label: 'Circle',
-            value: 'circle'
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Satellite', 'embed-blocks'),
+            value: 'satellite'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Terrain', 'embed-blocks'),
+            value: 'terrain'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hybrid', 'embed-blocks'),
+            value: 'hybrid'
           }],
+          onChange: type => {
+            setAttributes({
+              type
+            });
+          },
+          __next40pxDefaultSize: true,
+          labelPosition: "side"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeRangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Zoom', 'gutenlayouts'),
+          value: zoom,
           onChange: value => setAttributes({
-            layout: value
+            zoom: value
+          }),
+          min: 1,
+          max: 20,
+          step: 1
+        })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      group: "styles",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanel, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Height', 'gutenlayouts'),
+        resetAll: () => setAttributes({
+          height: undefined
+        }),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanelItem, {
+          hasValue: () => !!height,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Size', 'gutenlayouts'),
+          onDeselect: () => {
+            setAttributes({
+              height: undefined
+            });
+          },
+          onSelect: () => {},
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeRangeControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Size', 'gutenlayouts'),
+            value: height,
+            onChange: value => setAttributes({
+              height: value
+            }),
+            min: 0,
+            max: 1000,
+            step: 1
           })
         })
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
-      group: "styles"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanel, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'gutenlayouts'),
+        resetAll: () => setAttributes({
+          mapBorder: undefined,
+          mapRadius: undefined
+        }),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanelItem, {
+          hasValue: () => !!mapBorder,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'gutenlayouts'),
+          onDeselect: () => {
+            setAttributes({
+              mapBorder: undefined
+            });
+          },
+          onSelect: () => {},
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeBorderBoxControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Border', 'gutenlayouts'),
+            value: mapBorder,
+            onChange: border => {
+              setAttributes({
+                mapBorder: border
+              });
+            }
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanel, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Radius', 'gutenlayouts'),
+        resetAll: () => setAttributes({
+          mapRadius: undefined
+        }),
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanelItem, {
+          hasValue: () => !!mapRadius,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Radius', 'gutenlayouts'),
+          onDeselect: () => {
+            setAttributes({
+              mapRadius: undefined
+            });
+          },
+          onSelect: () => {},
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeRangeControl, {
+            value: mapRadius,
+            onChange: value => setAttributes({
+              mapRadius: value
+            }),
+            min: 0,
+            max: 1000,
+            step: 1
+          })
+        })
+      })]
     })]
   });
 };
@@ -277,10 +448,71 @@ const Inspector = props => {
 
 /***/ }),
 
-/***/ "./src/blocks/progressbars/save.js":
-/*!*****************************************!*\
-  !*** ./src/blocks/progressbars/save.js ***!
-  \*****************************************/
+/***/ "./src/blocks/gamp/map.js":
+/*!********************************!*\
+  !*** ./src/blocks/gamp/map.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const gmapMap = props => {
+  const {
+    location,
+    zoom,
+    type,
+    className
+  } = props;
+  const gmapurl = 'https://maps.google.com/maps';
+
+  // Check if type is provided and valid, otherwise default to 'roadmap'
+  const mapType = type && ['roadmap', 'satellite', 'terrain', 'hybrid'].includes(type) ? type : 'roadmap';
+
+  // Map the type to the correct Google Maps parameter value
+  const getMapTypeParam = type => {
+    switch (type) {
+      case 'satellite':
+        return 'k';
+      // satellite view
+      case 'terrain':
+        return 'p';
+      // terrain view
+      case 'hybrid':
+        return 'h';
+      // hybrid view
+      case 'roadmap':
+      default:
+        return 'roadmap';
+      // roadmap/standard view
+    }
+  };
+  const params = new URLSearchParams({
+    q: location,
+    z: zoom || 1,
+    t: getMapTypeParam(mapType),
+    output: 'embed'
+  });
+  const src = gmapurl + '?' + params.toString();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("iframe", {
+    src: src,
+    className: className,
+    title: location
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (gmapMap);
+
+/***/ }),
+
+/***/ "./src/blocks/gamp/save.js":
+/*!*********************************!*\
+  !*** ./src/blocks/gamp/save.js ***!
+  \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -290,45 +522,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _map__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./map */ "./src/blocks/gamp/map.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * WordPress Dependencies
  */
 
+
+/**
+ * Internal Dependencies
+ */
+
+// block save function
 
 const Save = props => {
   const {
     attributes
   } = props;
   const {
-    thickNess
+    uniqueId,
+    address,
+    zoom,
+    type,
+    blockStyle
   } = attributes;
-  const cssCustomProperties = {
-    ...(thickNess && {
-      '--thickness': `${thickNess}px`
-    })
-  };
-
-  /**
-   * Block Props
-   */
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
-    style: cssCustomProperties
+    className: ('wp-block-gutenlayouts-gmap', uniqueId),
+    style: blockStyle
   });
-
-  // Inner blocks props for save
-  const innerBlockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useInnerBlocksProps.save({
-    className: 'progressbar-inner-blocks'
-  });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     ...blockProps,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      ...innerBlockProps
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_map__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      location: address,
+      zoom: zoom,
+      type: type,
+      className: "embd-map"
     })
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Save);
+
+/***/ }),
+
+/***/ "./src/blocks/gamp/style.scss":
+/*!************************************!*\
+  !*** ./src/blocks/gamp/style.scss ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -1434,6 +1680,129 @@ const NativeUnitControl = ({
 
 /***/ }),
 
+/***/ "./src/styles/border/index.js":
+/*!************************************!*\
+  !*** ./src/styles/border/index.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   generateBorderColor: () => (/* binding */ generateBorderColor),
+/* harmony export */   generateBorderStyle: () => (/* binding */ generateBorderStyle),
+/* harmony export */   generateBorderWidth: () => (/* binding */ generateBorderWidth)
+/* harmony export */ });
+// generate border-width value
+const generateBorderWidth = borderData => {
+  if (borderData.top && borderData.right && borderData.bottom && borderData.left) {
+    const topWidth = borderData.top.width || '0';
+    const rightWidth = borderData.right.width || '0';
+    const bottomWidth = borderData.bottom.width || '0';
+    const leftWidth = borderData.left.width || '0';
+
+    // If all 4 sides have the same width, return single value
+    if (topWidth === rightWidth && rightWidth === bottomWidth && bottomWidth === leftWidth) {
+      return topWidth?.toString();
+    }
+
+    // Otherwise return 4 values
+    return `${topWidth} ${rightWidth} ${bottomWidth} ${leftWidth}`;
+  }
+  return borderData.width;
+};
+
+// generate border-style value
+const generateBorderStyle = borderData => {
+  if (borderData.top && borderData.right && borderData.bottom && borderData.left) {
+    const topStyle = borderData.top.style || 'solid';
+    const rightStyle = borderData.right.style || 'solid';
+    const bottomStyle = borderData.bottom.style || 'solid';
+    const leftStyle = borderData.left.style || 'solid';
+
+    // If all 4 sides have the same style, return single value
+    if (topStyle === rightStyle && rightStyle === bottomStyle && bottomStyle === leftStyle) {
+      return topStyle?.toString();
+    }
+
+    // Otherwise return 4 values
+    return `${topStyle} ${rightStyle} ${bottomStyle} ${leftStyle}`;
+  }
+  return borderData.style;
+};
+
+// generate border-color value
+const generateBorderColor = borderData => {
+  if (borderData.top && borderData.right && borderData.bottom && borderData.left) {
+    const topColor = borderData.top.color || 'transparent';
+    const rightColor = borderData.right.color || 'transparent';
+    const bottomColor = borderData.bottom.color || 'transparent';
+    const leftColor = borderData.left.color || 'transparent';
+
+    // If all 4 sides have the same color, return single value
+    if (topColor === rightColor && rightColor === bottomColor && bottomColor === leftColor) {
+      return topColor?.toString();
+    }
+
+    // Otherwise return 4 values
+    return `${topColor} ${rightColor} ${bottomColor} ${leftColor}`;
+  }
+  return borderData.color;
+};
+
+/***/ }),
+
+/***/ "./src/styles/box/index.js":
+/*!*********************************!*\
+  !*** ./src/styles/box/index.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const generateBoxStyles = value => {
+  if (!value) {
+    return;
+  }
+  const top = value?.top || 0;
+  const right = value?.right || 0;
+  const bottom = value?.bottom || 0;
+  const left = value?.left || 0;
+  if (top === right && right === bottom && bottom === left) {
+    return `${top}`;
+  }
+  return `${top} ${right} ${bottom} ${left}`;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateBoxStyles);
+
+/***/ }),
+
+/***/ "./src/styles/index.js":
+/*!*****************************!*\
+  !*** ./src/styles/index.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   generateBorderColor: () => (/* reexport safe */ _border__WEBPACK_IMPORTED_MODULE_0__.generateBorderColor),
+/* harmony export */   generateBorderStyle: () => (/* reexport safe */ _border__WEBPACK_IMPORTED_MODULE_0__.generateBorderStyle),
+/* harmony export */   generateBorderWidth: () => (/* reexport safe */ _border__WEBPACK_IMPORTED_MODULE_0__.generateBorderWidth),
+/* harmony export */   generateBoxStyles: () => (/* reexport safe */ _box__WEBPACK_IMPORTED_MODULE_1__["default"])
+/* harmony export */ });
+/* harmony import */ var _border__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./border */ "./src/styles/border/index.js");
+/* harmony import */ var _box__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./box */ "./src/styles/box/index.js");
+// export { default as generateBorderStyle } from './border';
+
+
+
+
+/***/ }),
+
 /***/ "@wordpress/block-editor":
 /*!*************************************!*\
   !*** external ["wp","blockEditor"] ***!
@@ -1537,7 +1906,42 @@ module.exports = window["ReactJSXRuntime"];
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -1578,73 +1982,68 @@ module.exports = window["ReactJSXRuntime"];
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"blocks/gamp/index": 0,
+/******/ 			"blocks/gamp/style-index": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkgutenlayouts"] = globalThis["webpackChunkgutenlayouts"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
-(() => {
-"use strict";
-/*!******************************************!*\
-  !*** ./src/blocks/progressbars/index.js ***!
-  \******************************************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit */ "./src/blocks/progressbars/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./save */ "./src/blocks/progressbars/save.js");
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./src/blocks/progressbars/block.json");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-
-/**
- * Internal dependencies
- */
-
-
-
-
-const inlineIcon = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  height: "24px",
-  viewBox: "0 -960 960 960",
-  width: "24px",
-  fill: "currentColor",
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("path", {
-    d: "M480.07-100q-78.84 0-148.21-29.92t-120.68-81.21q-51.31-51.29-81.25-120.63Q100-401.1 100-479.93q0-78.84 29.92-148.21t81.21-120.68q51.29-51.31 120.63-81.25Q401.1-860 479.93-860q78.84 0 148.21 29.92t120.68 81.21q51.31 51.29 81.25 120.63Q860-558.9 860-480.07q0 78.84-29.92 148.21t-81.21 120.68q-51.29 51.31-120.63 81.25Q558.9-100 480.07-100Zm-.07-60q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Zm-14 50v146.23q0 13.31 12.5 16.04 12.5 2.73 18.19-8.96l99.46-226.62q3.85-9.23-1.45-17.96T579.69-530H500v-149.38q0-13.31-12.5-16.35-12.5-3.04-18.19 8.65L365.23-456.69q-3.84 9.84 1.08 18.27 4.92 8.42 14.77 8.42H466Z"
-  })
-});
-
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_3__.name, {
-  icon: inlineIcon,
-  /**
-   * @see ./edit.js
-   */
-  edit: _edit__WEBPACK_IMPORTED_MODULE_1__["default"],
-  /**
-   * @see ./save.js
-   */
-  save: _save__WEBPACK_IMPORTED_MODULE_2__["default"]
-});
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["blocks/gamp/style-index"], () => (__webpack_require__("./src/blocks/gamp/index.js")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=index.js.map

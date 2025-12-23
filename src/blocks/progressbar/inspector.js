@@ -20,24 +20,17 @@ import {
 const Inspector = props => {
     const { attributes, setAttributes, clientId } = props;
     const {
-        enableRating,
-        totalRating,
-        rating,
-        nrPos,
-        ratingSize,
-        ratingNsize,
-        ratingColor,
-        nuRatColor,
-        alignment,
         progress,
-        layout,
+        thickNess,
+
         paColor,
         labelSize,
         pinColor,
         labelColor,
         perceColor,
         perceSize,
-        strokeWidth
+        progressSize,
+        layout
     } = attributes;
 
     return (
@@ -54,6 +47,25 @@ const Inspector = props => {
                         }
                         min={0}
                         max={100}
+                    />
+                </PanelBody>
+                <PanelBody title={__('Thickness', 'gutenlayouts')} initialOpen={false}>
+                    <NativeRangeControl
+                        label={__('Thickness', 'gutenlayouts')}
+                        value={thickNess}
+                        onChange={value => setAttributes({ thickNess: value })}
+                        min={1}
+                        max={100}
+                        step={1}
+                    />
+                </PanelBody>
+                <PanelBody title={__('Width', 'gutenlayouts')} initialOpen={false}>
+                    <NativeRangeControl
+                        value={progressSize}
+                        onChange={value => setAttributes({ progressSize: value })}
+                        min={1}
+                        max={2000}
+                        step={1}
                     />
                 </PanelBody>
             </InspectorControls>
@@ -170,7 +182,7 @@ const Inspector = props => {
                     }
                 >
                     <ToolsPanelItem
-                        hasValue={() => !!nuRatColor}
+                        hasValue={() => !!paColor}
                         label={__('Active Color', 'gutenlayouts')}
                         onDeselect={() => {
                             setAttributes({
@@ -191,7 +203,7 @@ const Inspector = props => {
                         />
                     </ToolsPanelItem>
                     <ToolsPanelItem
-                        hasValue={() => !!nuRatColor}
+                        hasValue={() => !!pinColor}
                         label={__('In active Color', 'gutenlayouts')}
                         onDeselect={() => {
                             setAttributes({

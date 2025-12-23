@@ -624,13 +624,13 @@ function ColorControlDropdown({
     renderContent: () => hasHover || hasActive ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
       tabs: [{
         name: 'default',
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default', 'native-table')
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default', 'gutenlayouts')
       }, {
         name: 'hover',
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hover', 'native-table')
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hover', 'gutenlayouts')
       }, {
         name: 'active',
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Active', 'native-table')
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Active', 'gutenlayouts')
       }],
       children: tab => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
         __experimentalIsRenderedInSidebar: true,
@@ -661,12 +661,12 @@ function ColorControlDropdown({
 //     {
 //         key: 'tableColor',
 //         state: tableColor,
-//         label: __('Table Color', 'native-table')
+//         label: __('Table Color', 'gutenlayouts')
 //     },
 //     {
 //         key: 'tableBg',
 //         state: tableBg,
-//         label: __('Table Background', 'native-table')
+//         label: __('Table Background', 'gutenlayouts')
 //     }
 // ];
 
@@ -972,19 +972,19 @@ const NativeProNotice = () => {
       size: "15rem",
       lineHeight: "1.6",
       weight: "500",
-      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Native Table Resources', 'native-table')
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Native Table Resources', 'gutenlayouts')
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ExternalLink, {
       href: "https://wpnativeblocks.com/table-builder/pricing",
-      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Get Native Table Pro', 'native-table')
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Get Native Table Pro', 'gutenlayouts')
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ExternalLink, {
       href: "https://wpnativeblocks.com/table-builder/demos",
-      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Explore Demos', 'native-table')
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Explore Demos', 'gutenlayouts')
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ExternalLink, {
       href: "https://wpnativeblocks.com/table-builder/vidoes",
-      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Tutorial Videos', 'native-table')
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Tutorial Videos', 'gutenlayouts')
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ExternalLink, {
       href: "https://wpnativeblocks.com/table-builder/blog",
-      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Blog Posts', 'native-table')
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Blog Posts', 'gutenlayouts')
     })]
   });
 };
@@ -1264,7 +1264,7 @@ const CustomiconModal = ({
   if (!customiconPanel) return null;
   const handleInsert = () => {
     if (code.trim() === '') {
-      wp.data.dispatch('core/notices').createNotice('error', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please enter SVG code', 'native-table'), {
+      wp.data.dispatch('core/notices').createNotice('error', (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please enter SVG code', 'gutenlayouts'), {
         isDismissible: true
       });
       return;
@@ -1273,12 +1273,12 @@ const CustomiconModal = ({
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Modal, {
     className: "svgib__modal custom-svg",
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom SVG', 'native-table'),
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Custom SVG', 'gutenlayouts'),
     onRequestClose: () => setCustomiconPanel(false),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "svg-controls",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.RangeControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Preview Size', 'native-table'),
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Preview Size', 'gutenlayouts'),
         value: size,
         onChange: v => setSize(v),
         min: 20,
@@ -1289,11 +1289,11 @@ const CustomiconModal = ({
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "svg-code",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextareaControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Code', 'native-table'),
-          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Paste your SVG code here.', 'native-table'),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Code', 'gutenlayouts'),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Paste your SVG code here.', 'gutenlayouts'),
           value: code,
           onChange: v => setCode(v),
-          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('<svg>...</svg>', 'native-table'),
+          placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('<svg>...</svg>', 'gutenlayouts'),
           rows: 10
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -1308,7 +1308,7 @@ const CustomiconModal = ({
           }
         }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "preview-text",
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Preview', 'native-table')
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('SVG Preview', 'gutenlayouts')
         })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -1316,7 +1316,7 @@ const CustomiconModal = ({
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
         variant: "primary",
         onClick: handleInsert,
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Insert SVG', 'native-table')
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Insert SVG', 'gutenlayouts')
       })
     })]
   });

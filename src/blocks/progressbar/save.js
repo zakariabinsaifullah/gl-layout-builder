@@ -3,28 +3,29 @@
  */
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 
-const Save = props => {
-    const { attributes } = props;
-    const { label, progress, labelSize, labelColor, pinColor, paColor, perceColor, perceSize, layout = 'line' } = attributes;
+const Save = ({ attributes }) => {
+    const {
+        label,
+        progress,
+        labelSize,
+        labelColor,
+        pinColor,
+        paColor,
+        perceColor,
+        perceSize,
+        thickNess,
+        progressSize,
+        layout,
+        blockStyle
+    } = attributes;
 
-    const cssCustomProperties = {
-        ...(labelSize && { '--title-size': `${labelSize}px` }),
-        ...(labelColor && { '--title-color': labelColor }),
-        ...(pinColor && { '--inactive-color': pinColor }),
-        ...(paColor && { '--active-color': paColor }),
-        ...(perceSize && { '--percentange-size': `${perceSize}px` }),
-        ...(perceColor && { '--percentange-color': perceColor })
-    };
-
-    /**
-     * Block Props
-     */
     const blockProps = useBlockProps.save({
-        style: cssCustomProperties,
-        className: `wp-block-gutenlayouts-progressbar layout-${layout}`
+        style: blockStyle,
+        className: `wp-block-gutenlayouts-progressbar layout-${layout || 'line'}`
     });
 
-    const radius = 45;
+    const actualThickness = thickNess || 8;
+    const radius = 45 - actualThickness / 2;
     const circumference = 2 * Math.PI * radius;
     const offset = circumference - (progress / 100) * circumference;
 
@@ -44,15 +45,15 @@ const Save = props => {
             ) : (
                 <div className="gutenlayout-circle-container">
                     <div className="circle-svg-wrapper">
-                        <svg width="120" height="120" viewBox="0 0 100 100">
-                            <circle className="circle-bg" cx="50" cy="50" r={radius} strokeWidth="8" fill="transparent" />
+                        <svg viewBox="0 0 100 100">
+                            <circle className="circle-bg" cx="50" cy="50" r={radius} fill="transparent" strokeWidth={actualThickness} />
                             <circle
                                 className="circle-fill"
                                 cx="50"
                                 cy="50"
                                 r={radius}
-                                strokeWidth="8"
                                 fill="transparent"
+                                strokeWidth={actualThickness}
                                 strokeDasharray={circumference}
                                 strokeDashoffset={offset}
                                 strokeLinecap="round"
