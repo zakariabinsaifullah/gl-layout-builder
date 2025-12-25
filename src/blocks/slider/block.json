@@ -1,0 +1,87 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "gutenlayouts/slider",
+    "version": "1.0.0",
+    "title": "Slider",
+    "category": "gutenlayouts",
+    "icon": "slides",
+    "description": "A customizable slider block for showcasing images or content.",
+    "example": {},
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "attributes": {
+        "status": {
+            "type": "boolean",
+            "default": false
+        },
+        "blockStyle": {
+            "type": "object"
+        },
+        "arrowsOutside": {
+            "type": "boolean",
+            "default": true
+        },
+        "height": {
+            "type": "number"
+        },
+        "autoplay": {
+            "type": "boolean",
+            "default": false
+        },
+        "delay": {
+            "type": "number",
+            "default": 3000
+        },
+        "loop": {
+            "type": "boolean",
+            "default": true
+        },
+        "showArrows": {
+            "type": "boolean",
+            "default": true
+        },
+        "showPagination": {
+            "type": "boolean",
+            "default": true
+        },
+        "bg": {
+            "type": "string"
+        },
+        "border": {
+            "type": "object",
+            "default": {
+                "width": "",
+                "style": "",
+                "color": ""
+            }
+        },
+        "radius": {
+            "type": "number"
+        },
+        "arrowColors": {
+            "type": "object",
+            "default": {
+                "normal": "",
+                "hover": ""
+            }
+        },
+        "arrowBgColors": {
+            "type": "object",
+            "default": {
+                "normal": "",
+                "hover": ""
+            }
+        },
+        "paginationColor": {
+            "type": "string"
+        }
+    },
+    "textdomain": "gutenlayouts",
+    "editorScript": ["file:./index.js", "gu-swiper-script"],
+    "editorStyle": ["file:./index.css", "gu-swiper-style"],
+    "style": ["file:./style-index.css", "gu-swiper-style"],
+    "viewScript": ["file:./view.js", "gu-swiper-script"]
+}

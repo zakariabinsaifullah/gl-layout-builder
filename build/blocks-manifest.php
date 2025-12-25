@@ -391,6 +391,110 @@ return array(
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css'
 	),
+	'slider' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'gutenlayouts/slider',
+		'version' => '1.0.0',
+		'title' => 'Slider',
+		'category' => 'gutenlayouts',
+		'icon' => 'slides',
+		'description' => 'A customizable slider block for showcasing images or content.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			)
+		),
+		'attributes' => array(
+			'status' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'blockStyle' => array(
+				'type' => 'object'
+			),
+			'arrowsOutside' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'height' => array(
+				'type' => 'number'
+			),
+			'autoplay' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'delay' => array(
+				'type' => 'number',
+				'default' => 3000
+			),
+			'loop' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showArrows' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showPagination' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'bg' => array(
+				'type' => 'string'
+			),
+			'border' => array(
+				'type' => 'object',
+				'default' => array(
+					'width' => '',
+					'style' => '',
+					'color' => ''
+				)
+			),
+			'radius' => array(
+				'type' => 'number'
+			),
+			'arrowColors' => array(
+				'type' => 'object',
+				'default' => array(
+					'normal' => '',
+					'hover' => ''
+				)
+			),
+			'arrowBgColors' => array(
+				'type' => 'object',
+				'default' => array(
+					'normal' => '',
+					'hover' => ''
+				)
+			),
+			'paginationColor' => array(
+				'type' => 'string'
+			)
+		),
+		'textdomain' => 'gutenlayouts',
+		'editorScript' => array(
+			'file:./index.js',
+			'gu-swiper-script'
+		),
+		'editorStyle' => array(
+			'file:./index.css',
+			'gu-swiper-style'
+		),
+		'style' => array(
+			'file:./style-index.css',
+			'gu-swiper-style'
+		),
+		'viewScript' => array(
+			'file:./view.js',
+			'gu-swiper-script'
+		)
+	),
 	'infinite-scroll' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
