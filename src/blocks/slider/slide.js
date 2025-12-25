@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 registerBlockType('gutenlayouts/slide', {
-    title: __('Slide', 'gb-slider'),
+    title: __('Slide', 'gutenlayouts'),
     icon: 'minus',
     category: 'text',
     parent: ['gutenlayouts/slider'],

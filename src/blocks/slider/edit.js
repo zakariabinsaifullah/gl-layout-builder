@@ -72,7 +72,7 @@ const Edit = props => {
                 <ToolbarGroup>
                     <ToolbarButton
                         icon="insert"
-                        label={__('Add Slide', 'gb-slider')}
+                        label={__('Add Slide', 'gutenlayouts')}
                         onClick={() => {
                             const innerBlocks = wp.data.select('core/block-editor').getBlocks(clientId);
                             const newBlock = wp.blocks.createBlock('gutenlayouts/slide');
@@ -89,7 +89,7 @@ const Edit = props => {
                     <div {...innerBlocksProps} />
                 </div>
                 <div className="gutenlayouts-editor-note">
-                    <p>{__('Preview: Slider will be displayed on the frontend', 'gb-slider')}</p>
+                    <p>{__('Preview: Slider will be displayed on the frontend', 'gutenlayouts')}</p>
                 </div>
             </div>
         </>

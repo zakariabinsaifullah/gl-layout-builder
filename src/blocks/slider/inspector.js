@@ -32,20 +32,20 @@ const Inspector = props => {
     return (
         <>
             <InspectorControls group="settings">
-                <PanelBody title={__('Slider Settings', 'gb-slider')}>
+                <PanelBody title={__('Slider Settings', 'gutenlayouts')}>
                     <NativeToggleControl
-                        label={__('Loop', 'gb-slider')}
+                        label={__('Loop', 'gutenlayouts')}
                         checked={loop}
                         onChange={value => setAttributes({ loop: value })}
                     />
                     <NativeToggleControl
-                        label={__('Autoplay', 'gb-slider')}
+                        label={__('Autoplay', 'gutenlayouts')}
                         checked={autoplay}
                         onChange={value => setAttributes({ autoplay: value })}
                     />
                     {autoplay && (
                         <NativeRangeControl
-                            label={__('Delay (ms)', 'gb-slider')}
+                            label={__('Delay (ms)', 'gutenlayouts')}
                             value={delay}
                             onChange={value => setAttributes({ delay: value })}
                             min={1000}
@@ -54,12 +54,12 @@ const Inspector = props => {
                         />
                     )}
                     <NativeToggleControl
-                        label={__('Show Arrows', 'gb-slider')}
+                        label={__('Show Arrows', 'gutenlayouts')}
                         checked={showArrows}
                         onChange={value => setAttributes({ showArrows: value })}
                     />
                     <NativeToggleControl
-                        label={__('Show Pagination', 'gb-slider')}
+                        label={__('Show Pagination', 'gutenlayouts')}
                         checked={showPagination}
                         onChange={value => setAttributes({ showPagination: value })}
                     />
