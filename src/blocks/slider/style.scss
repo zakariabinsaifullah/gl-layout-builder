@@ -1,0 +1,234 @@
+// Editor Styles - Horizontal Layout with Scroll
+.gutenlayouts-editor-wrapper {
+    margin-bottom: 16px;
+}
+
+.gutenlayouts-editor-slides {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 16px 0;
+    scroll-behavior: smooth;
+
+    // Scrollbar styling
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+}
+
+.gutenlayouts-editor-slide {
+    width: 100%;
+    flex: 0 0 auto;
+    padding: 16px;
+    height: var(--slide-height, px);
+
+    .slide-content {
+        height: 100%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+.wp-block-gutenlayouts-slider {
+    position: relative;
+
+    // Frontend styles
+    .gbs-slide-card {
+        display: flex;
+        height: var(--height);
+        border: var(--border, 1px solid #cfd8dc);
+        background: var(--bg);
+        border-radius: var(--radius, 8px);
+        overflow: hidden;
+        align-items: center;
+
+        &.right {
+            flex-direction: row-reverse;
+        }
+
+        &.top {
+            align-items: flex-start;
+        }
+
+        &.bottom {
+            align-items: flex-end;
+        }
+    }
+
+    .gbs-slide-card > div {
+        width: 100%;
+        min-width: 50%;
+    }
+
+    .slide-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .slide-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    // Swiper slide height control
+    .swiper-slide {
+        height: var(--slide-height, 400px);
+
+        .slide-content {
+            height: 100%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    // Slider container wrapper - flex to position arrows outside
+    .gbs-slider-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    // Swiper takes center space
+    .swiper {
+        flex: 1;
+    }
+
+    // Navigation arrows - outside slider on left and right
+    .swiper-navigation {
+        display: contents;
+    }
+
+    .swiper-custom-prev {
+        order: 0;
+    }
+
+    .swiper-custom-next {
+        order: 2;
+    }
+
+    .swiper {
+        order: 1;
+    }
+
+    // Slider footer wrapper - for pagination below
+    .gbs-slider-footer {
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .gbs-nav {
+        width: 48px;
+        height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--nav-color, #2b2e83);
+        color: var(--nav-color, #2b2e83);
+        background-color: var(--nav-bg, rgba(255, 255, 255, 0.9));
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        flex-shrink: 0;
+
+        &:hover {
+            background: var(--nav-bg-hover, #2b2e83);
+            color: #ffffff;
+            border-color: var(--nav-color-hover, #2b2e83);
+            transform: scale(1.1);
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(43, 46, 131, 0.3);
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    // Pagination - below slider, centered
+    .swiper-pagination {
+        position: relative !important;
+        bottom: auto !important;
+        display: flex !important;
+        justify-content: center;
+        gap: 6px;
+        width: 100% !important;
+    }
+
+    .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        background: var(--pagination-color, #2b2e83);
+        opacity: 0.5;
+        transition: all 0.3s ease;
+
+        &.swiper-pagination-bullet-active {
+            opacity: 1;
+            width: 24px;
+            border-radius: 5px;
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(43, 46, 131, 0.3);
+        }
+    }
+}
+
+// Mobile view
+@media (max-width: 768px) {
+    .wp-block-gutenlayouts-slider {
+        .gbs-slide-card {
+            flex-direction: column;
+            height: auto;
+
+            &.right {
+                flex-direction: column;
+            }
+        }
+
+        .gbs-slide-card > div {
+            width: 100%;
+            min-width: 100%;
+        }
+
+        .gbs-nav {
+            width: 40px;
+            height: 40px;
+
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        .gbs-slider-footer {
+            padding: 0 8px;
+        }
+
+        .swiper-slide {
+            height: var(--slide-height, 300px);
+        }
+    }
+}
