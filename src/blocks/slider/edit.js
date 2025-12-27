@@ -28,18 +28,23 @@ const Edit = props => {
         arrowColors,
         arrowBgColors,
         paginationColor,
-        delay,
-        status
+        paginationSize,
+        navColor,
+        navbgColor,
+        navSize
     } = attributes;
 
     // CSS Custom Properties
     const cssCustomProperties = {
         ...(height && { '--slide-height': `${height}px` }),
-        ...(bg && { '--slider-bg': bg }),
         ...(arrowColors && { '--arrow-color': arrowColors }),
         ...(arrowBgColors && { '--arrow-bg': arrowBgColors }),
         ...(paginationColor && { '--pagination-color': paginationColor }),
-        ...(radius && { '--slider-radius': `${radius}px` })
+        ...(paginationSize && { '--pagination-size': `${paginationSize}px` }),
+        ...(radius && { '--slider-radius': `${radius}px` }),
+        ...(navSize && { '--nav-size': `${navSize}px` }),
+        ...(navColor && { '--nav-color': navColor }),
+        ...(navbgColor && { '--nav-bg': navbgColor })
     };
 
     // Update block style when CSS properties change
@@ -47,7 +52,7 @@ const Edit = props => {
         setAttributes({
             blockStyle: cssCustomProperties
         });
-    }, [height, bg, arrowColors, arrowBgColors, paginationColor, radius]);
+    }, [height, bg, arrowColors, arrowBgColors, paginationColor, radius, paginationColor, paginationSize]);
 
     // Inner blocks configuration
     const innerBlocksProps = useInnerBlocksProps(

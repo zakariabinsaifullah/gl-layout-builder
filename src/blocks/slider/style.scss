@@ -1,7 +1,4 @@
 // Editor Styles - Horizontal Layout with Scroll
-.gutenlayouts-editor-wrapper {
-    margin-bottom: 16px;
-}
 
 .gutenlayouts-editor-slides {
     display: flex;
@@ -42,43 +39,16 @@
     position: relative;
 
     // Frontend styles
-    .gbs-slide-card {
+    .gu-slide-card {
         display: flex;
         height: var(--height);
-        border: var(--border, 1px solid #cfd8dc);
-        background: var(--bg);
-        border-radius: var(--radius, 8px);
         overflow: hidden;
         align-items: center;
-
-        &.right {
-            flex-direction: row-reverse;
-        }
-
-        &.top {
-            align-items: flex-start;
-        }
-
-        &.bottom {
-            align-items: flex-end;
-        }
     }
 
-    .gbs-slide-card > div {
+    .gu-slide-card > div {
         width: 100%;
         min-width: 50%;
-    }
-
-    .slide-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .slide-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
     }
 
     // Swiper slide height control
@@ -97,13 +67,13 @@
     }
 
     // Slider container wrapper - flex to position arrows outside
-    .gbs-slider-container {
+    .gu-slider-container {
         display: flex;
         align-items: center;
         gap: 8px;
     }
 
-    // Swiper takes center space
+    // Swiper takes center spaces
     .swiper {
         flex: 1;
     }
@@ -126,14 +96,14 @@
     }
 
     // Slider footer wrapper - for pagination below
-    .gbs-slider-footer {
+    .gu-slider-footer {
         margin-top: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .gbs-nav {
+    .gu-nav {
         width: 48px;
         height: 48px;
         display: inline-flex;
@@ -148,21 +118,9 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         flex-shrink: 0;
 
-        &:hover {
-            background: var(--nav-bg-hover, #2b2e83);
-            color: #ffffff;
-            border-color: var(--nav-color-hover, #2b2e83);
-            transform: scale(1.1);
-        }
-
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(43, 46, 131, 0.3);
-        }
-
         svg {
-            width: 20px;
-            height: 20px;
+            width: var(--nav-size, 20px);
+            height: var(--nav-size, 20px);
         }
     }
 
@@ -177,8 +135,8 @@
     }
 
     .swiper-pagination-bullet {
-        width: 10px;
-        height: 10px;
+        width: var(--pagination-size, 10px);
+        height: var(--pagination-size, 10px);
         background: var(--pagination-color, #2b2e83);
         opacity: 0.5;
         transition: all 0.3s ease;
@@ -199,7 +157,7 @@
 // Mobile view
 @media (max-width: 768px) {
     .wp-block-gutenlayouts-slider {
-        .gbs-slide-card {
+        .gu-slide-card {
             flex-direction: column;
             height: auto;
 
@@ -208,12 +166,12 @@
             }
         }
 
-        .gbs-slide-card > div {
+        .gu-slide-card > div {
             width: 100%;
             min-width: 100%;
         }
 
-        .gbs-nav {
+        .gu-nav {
             width: 40px;
             height: 40px;
 
@@ -223,7 +181,7 @@
             }
         }
 
-        .gbs-slider-footer {
+        .gu-slider-footer {
             padding: 0 8px;
         }
 
