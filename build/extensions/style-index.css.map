@@ -1,1 +1,0 @@
-{"version":3,"file":"extensions/style-index.css","mappings":";;;AAAA;EACI;AACJ,C","sources":["webpack://gutenlayouts/./src/extensions/style.scss"],"sourcesContent":[".selector {\r\n    color: red;\r\n}\r\n"],"names":[],"ignoreList":[],"sourceRoot":""}
