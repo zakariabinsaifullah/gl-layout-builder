@@ -9,7 +9,7 @@ export default function save({ attributes }) {
             data-autoplay={autoplay}
             {...(autoplay && { 'data-delay': delay })}
         >
-            <div className="gbs-slider-container">
+            <div className="gu-slider-container">
                 <div className="swiper">
                     <div className="swiper-wrapper">
                         <InnerBlocks.Content />
@@ -17,7 +17,7 @@ export default function save({ attributes }) {
                 </div>
                 {showArrows && (
                     <div className="swiper-navigation">
-                        <div className="swiper-custom-prev gbs-nav">
+                        <div className="swiper-custom-prev gu-nav">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path
                                     fill="currentColor"
@@ -25,7 +25,7 @@ export default function save({ attributes }) {
                                 ></path>
                             </svg>
                         </div>
-                        <div className="swiper-custom-next gbs-nav">
+                        <div className="swiper-custom-next gu-nav">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path
                                     fill="currentColor"
@@ -37,7 +37,7 @@ export default function save({ attributes }) {
                 )}
             </div>
             {showPagination && (
-                <div className="gbs-slider-footer">
+                <div className="gu-slider-footer">
                     <div className="swiper-pagination"></div>
                 </div>
             )}

@@ -445,36 +445,23 @@ return array(
 				'type' => 'boolean',
 				'default' => true
 			),
-			'bg' => array(
-				'type' => 'string'
-			),
-			'border' => array(
-				'type' => 'object',
-				'default' => array(
-					'width' => '',
-					'style' => '',
-					'color' => ''
-				)
-			),
 			'radius' => array(
 				'type' => 'number'
 			),
-			'arrowColors' => array(
-				'type' => 'object',
-				'default' => array(
-					'normal' => '',
-					'hover' => ''
-				)
-			),
-			'arrowBgColors' => array(
-				'type' => 'object',
-				'default' => array(
-					'normal' => '',
-					'hover' => ''
-				)
-			),
 			'paginationColor' => array(
 				'type' => 'string'
+			),
+			'paginationSize' => array(
+				'type' => 'number'
+			),
+			'navColor' => array(
+				'type' => 'string'
+			),
+			'navbgColor' => array(
+				'type' => 'string'
+			),
+			'navSize' => array(
+				'type' => 'number'
 			)
 		),
 		'textdomain' => 'gutenlayouts',

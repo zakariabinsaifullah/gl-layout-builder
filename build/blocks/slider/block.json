@@ -50,36 +50,23 @@
       "type": "boolean",
       "default": true
     },
-    "bg": {
-      "type": "string"
-    },
-    "border": {
-      "type": "object",
-      "default": {
-        "width": "",
-        "style": "",
-        "color": ""
-      }
-    },
     "radius": {
       "type": "number"
     },
-    "arrowColors": {
-      "type": "object",
-      "default": {
-        "normal": "",
-        "hover": ""
-      }
-    },
-    "arrowBgColors": {
-      "type": "object",
-      "default": {
-        "normal": "",
-        "hover": ""
-      }
-    },
     "paginationColor": {
       "type": "string"
+    },
+    "paginationSize": {
+      "type": "number"
+    },
+    "navColor": {
+      "type": "string"
+    },
+    "navbgColor": {
+      "type": "string"
+    },
+    "navSize": {
+      "type": "number"
     }
   },
   "textdomain": "gutenlayouts",

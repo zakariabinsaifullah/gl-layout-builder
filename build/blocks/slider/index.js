@@ -95,7 +95,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenlayouts/slider","version":"1.0.0","title":"Slider","category":"gutenlayouts","icon":"slides","description":"A customizable slider block for showcasing images or content.","example":{},"supports":{"html":false,"align":["wide","full"]},"attributes":{"status":{"type":"boolean","default":false},"blockStyle":{"type":"object"},"arrowsOutside":{"type":"boolean","default":true},"height":{"type":"number"},"autoplay":{"type":"boolean","default":false},"delay":{"type":"number","default":3000},"loop":{"type":"boolean","default":true},"showArrows":{"type":"boolean","default":true},"showPagination":{"type":"boolean","default":true},"bg":{"type":"string"},"border":{"type":"object","default":{"width":"","style":"","color":""}},"radius":{"type":"number"},"arrowColors":{"type":"object","default":{"normal":"","hover":""}},"arrowBgColors":{"type":"object","default":{"normal":"","hover":""}},"paginationColor":{"type":"string"}},"textdomain":"gutenlayouts","editorScript":["file:./index.js","gu-swiper-script"],"editorStyle":["file:./index.css","gu-swiper-style"],"style":["file:./style-index.css","gu-swiper-style"],"viewScript":["file:./view.js","gu-swiper-script"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"gutenlayouts/slider","version":"1.0.0","title":"Slider","category":"gutenlayouts","icon":"slides","description":"A customizable slider block for showcasing images or content.","example":{},"supports":{"html":false,"align":["wide","full"]},"attributes":{"status":{"type":"boolean","default":false},"blockStyle":{"type":"object"},"arrowsOutside":{"type":"boolean","default":true},"height":{"type":"number"},"autoplay":{"type":"boolean","default":false},"delay":{"type":"number","default":3000},"loop":{"type":"boolean","default":true},"showArrows":{"type":"boolean","default":true},"showPagination":{"type":"boolean","default":true},"radius":{"type":"number"},"paginationColor":{"type":"string"},"paginationSize":{"type":"number"},"navColor":{"type":"string"},"navbgColor":{"type":"string"},"navSize":{"type":"number"}},"textdomain":"gutenlayouts","editorScript":["file:./index.js","gu-swiper-script"],"editorStyle":["file:./index.css","gu-swiper-style"],"style":["file:./style-index.css","gu-swiper-style"],"viewScript":["file:./view.js","gu-swiper-script"]}');
 
 /***/ }),
 
@@ -159,17 +159,16 @@ const Edit = props => {
     arrowColors,
     arrowBgColors,
     paginationColor,
-    delay,
-    status
+    paginationSize,
+    navColor,
+    navbgColor,
+    navSize
   } = attributes;
 
   // CSS Custom Properties
   const cssCustomProperties = {
     ...(height && {
       '--slide-height': `${height}px`
-    }),
-    ...(bg && {
-      '--slider-bg': bg
     }),
     ...(arrowColors && {
       '--arrow-color': arrowColors
@@ -180,8 +179,20 @@ const Edit = props => {
     ...(paginationColor && {
       '--pagination-color': paginationColor
     }),
+    ...(paginationSize && {
+      '--pagination-size': `${paginationSize}px`
+    }),
     ...(radius && {
       '--slider-radius': `${radius}px`
+    }),
+    ...(navSize && {
+      '--nav-size': `${navSize}px`
+    }),
+    ...(navColor && {
+      '--nav-color': navColor
+    }),
+    ...(navbgColor && {
+      '--nav-bg': navbgColor
     })
   };
 
@@ -190,7 +201,7 @@ const Edit = props => {
     setAttributes({
       blockStyle: cssCustomProperties
     });
-  }, [height, bg, arrowColors, arrowBgColors, paginationColor, radius]);
+  }, [height, bg, arrowColors, arrowBgColors, paginationColor, radius, paginationColor, paginationSize]);
 
   // Inner blocks configuration
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useInnerBlocksProps)({
@@ -365,8 +376,13 @@ const Inspector = props => {
     loop,
     showArrows,
     showPagination,
+    paginationSize,
+    paginationColor,
     height,
-    delay
+    delay,
+    navColor,
+    navbgColor,
+    navSize
   } = attributes;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
@@ -408,9 +424,9 @@ const Inspector = props => {
           })
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       group: "styles",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanel, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanel, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Heights', 'gutenlayouts'),
         resetAll: () => setAttributes({
           height: undefined
@@ -435,7 +451,113 @@ const Inspector = props => {
             step: 1
           })
         })
-      })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanel, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Pagination', 'gutenlayouts'),
+        resetAll: () => setAttributes({
+          paginationSize: undefined,
+          paginationColor: undefined
+        }),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanelItem, {
+          hasValue: () => !!paginationSize,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Size', 'gutenlayouts'),
+          onDeselect: () => {
+            setAttributes({
+              paginationSize: undefined
+            });
+          },
+          onSelect: () => {},
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeRangeControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Rating Size', 'gutenlayouts'),
+            value: paginationSize,
+            onChange: value => setAttributes({
+              paginationSize: value
+            }),
+            min: 0,
+            max: 100,
+            step: 1
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanelItem, {
+          hasValue: () => !!paginationColor,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Color', 'gutenlayouts'),
+          onDeselect: () => {
+            setAttributes({
+              paginationColor: undefined
+            });
+          },
+          onSelect: () => {},
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.PanelColorControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Color', 'gutenlayouts'),
+            colorSettings: [{
+              value: paginationColor,
+              onChange: color => setAttributes({
+                paginationColor: color
+              })
+            }]
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanel, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Navigation', 'gutenlayouts'),
+        resetAll: () => setAttributes({
+          navbgColor: undefined,
+          navColor: undefined // duplicate navColor সরিয়ে navSize যোগ করলাম
+        }),
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanelItem, {
+          hasValue: () => !!navSize,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Size', 'gutenlayouts'),
+          onDeselect: () => {
+            setAttributes({
+              navSize: undefined
+            });
+          },
+          onSelect: () => {},
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.NativeRangeControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Navigation Size', 'gutenlayouts'),
+            value: navSize,
+            onChange: value => setAttributes({
+              navSize: value
+            }),
+            min: 0,
+            max: 100,
+            step: 1
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanelItem, {
+          hasValue: () => !!navColor,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Color', 'gutenlayouts'),
+          onDeselect: () => {
+            setAttributes({
+              navColor: undefined
+            });
+          },
+          onSelect: () => {},
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.PanelColorControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Navigation Color', 'gutenlayouts'),
+            colorSettings: [{
+              value: navColor,
+              onChange: color => setAttributes({
+                navColor: color
+              })
+            }]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalToolsPanelItem, {
+          hasValue: () => !!navbgColor,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Background Color', 'gutenlayouts'),
+          onDeselect: () => {
+            setAttributes({
+              navbgColor: undefined
+            });
+          },
+          onSelect: () => {},
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__.PanelColorControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Navigation Background Color', 'gutenlayouts'),
+            colorSettings: [{
+              value: navbgColor,
+              onChange: color => setAttributes({
+                navbgColor: color
+              })
+            }]
+          })
+        })]
+      })]
     })]
   });
 };
@@ -481,7 +603,7 @@ function save({
       'data-delay': delay
     }),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      className: "gbs-slider-container",
+      className: "gu-slider-container",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: "swiper",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -491,7 +613,7 @@ function save({
       }), showArrows && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "swiper-navigation",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "swiper-custom-prev gbs-nav",
+          className: "swiper-custom-prev gu-nav",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
             xmlns: "http://www.w3.org/2000/svg",
             viewBox: "0 0 512 512",
@@ -501,7 +623,7 @@ function save({
             })
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "swiper-custom-next gbs-nav",
+          className: "swiper-custom-next gu-nav",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
             xmlns: "http://www.w3.org/2000/svg",
             viewBox: "0 0 512 512",
@@ -513,7 +635,7 @@ function save({
         })]
       })]
     }), showPagination && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "gbs-slider-footer",
+      className: "gu-slider-footer",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: "swiper-pagination"
       })

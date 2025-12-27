@@ -1,12 +1,12 @@
 /*!******************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/slider/editor.scss ***!
   \******************************************************************************************************************************************************************************************************************************************************/
-.gbs-toggle-group-control {
+.gu-toggle-group-control {
   width: 100%;
   border: 1px solid #1e1e1e !important;
 }
-.gbs-toggle-group-control.gbs-valign .dashicons-align-pull-left,
-.gbs-toggle-group-control.gbs-valign .dashicons-align-pull-right {
+.gu-toggle-group-control.gu-valign .dashicons-align-pull-left,
+.gu-toggle-group-control.gu-valign .dashicons-align-pull-right {
   transform: rotate(-90deg);
 }
 .wp-block-gutenlayouts-slide {
@@ -24,7 +24,7 @@
   padding: 10px;
   box-sizing: border-box;
 }
-.gbs-note {
+.gu-note {
   font-style: italic;
   font-size: 12px;
   color: #555;
