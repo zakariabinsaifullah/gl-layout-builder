@@ -1,11 +1,11 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "gutenlayouts/gmap",
+    "name": "gutenlayouts/map",
     "version": "0.1.0",
     "title": "Google Map",
     "category": "gutenlayouts",
-    "description": "Add a customizable svg icon to your content.",
+    "description": "Embed a Google Map by specifying an address.",
     "supports": {
         "anchor": true,
         "html": false,
@@ -13,22 +13,47 @@
         "spacing": {
             "margin": true,
             "padding": true
+        },
+        "__experimentalBorder": {
+            "color": true,
+            "radius": true,
+            "style": true,
+            "width": true,
+            "__experimentalDefaultControls": {
+                "color": true,
+                "radius": true,
+                "style": true,
+                "width": true
+            }
         }
     },
     "attributes": {
         "blockStyle": {
             "type": "object"
         },
+        "resMode": {
+            "type": "string",
+            "default": "Desktop"
+        },
         "address": {
             "type": "string",
             "default": "New York"
         },
+        "type": {
+            "type": "string",
+            "default": "roadmap"
+        },
         "zoom": {
             "type": "number",
-            "default": "10"
+            "default": 10
         },
         "height": {
-            "type": "number"
+            "type": "object",
+            "default": {
+                "Desktop": 400,
+                "Tablet": 300,
+                "Mobile": 200
+            }
         },
         "mapBorder": {
             "type": "object",
