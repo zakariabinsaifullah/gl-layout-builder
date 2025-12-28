@@ -1,52 +1,28 @@
-/**
- * Registers a new block provided a unique name and an object defining its behavior.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
-import { registerBlockType } from "@wordpress/blocks";
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import "./style.scss";
+import { registerBlockType } from '@wordpress/blocks';
+import './style.scss';
 
 /**
  * Internal dependencies
  */
-import Edit from "./edit";
-import save from "./save";
-import metadata from "./block.json";
+import Edit from './edit';
+import save from './save';
+import metadata from './block.json';
 
 const inlineIcon = (
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		height="24px"
-		viewBox="0 -960 960 960"
-		width="24px"
-		fill="currentColor"
-	>
-		<path d="M480.07-100q-78.84 0-148.21-29.92t-120.68-81.21q-51.31-51.29-81.25-120.63Q100-401.1 100-479.93q0-78.84 29.92-148.21t81.21-120.68q51.29-51.31 120.63-81.25Q401.1-860 479.93-860q78.84 0 148.21 29.92t120.68 81.21q51.31 51.29 81.25 120.63Q860-558.9 860-480.07q0 78.84-29.92 148.21t-81.21 120.68q-51.29 51.31-120.63 81.25Q558.9-100 480.07-100Zm-.07-60q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Zm-14 50v146.23q0 13.31 12.5 16.04 12.5 2.73 18.19-8.96l99.46-226.62q3.85-9.23-1.45-17.96T579.69-530H500v-149.38q0-13.31-12.5-16.35-12.5-3.04-18.19 8.65L365.23-456.69q-3.84 9.84 1.08 18.27 4.92 8.42 14.77 8.42H466Z" />
-	</svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="60" height="60" aria-hidden="true" focusable="false">
+        <path d="M4 6.5h5a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4V16h5a.5.5 0 0 0 .5-.5v-7A.5.5 0 0 0 9 8H4V6.5Zm16 0h-5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h5V16h-5a.5.5 0 0 1-.5-.5v-7A.5.5 0 0 1 15 8h5V6.5Z"></path>
+    </svg>
 );
 
-/**
- * Every block starts by registering a new block type definition.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
- */
 registerBlockType(metadata.name, {
-	icon: inlineIcon,
-	/**
-	 * @see ./edit.js
-	 */
-	edit: Edit,
+    icon: inlineIcon,
+    /**
+     * @see ./edit.js
+     */
+    edit: Edit,
 
-	/**
-	 * @see ./save.js
-	 */
-	save,
+    /**
+     * @see ./save.js
+     */
+    save
 });

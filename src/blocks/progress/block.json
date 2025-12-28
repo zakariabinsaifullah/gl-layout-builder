@@ -1,11 +1,11 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "gutenlayouts/progressbars",
+    "name": "gutenlayouts/progress",
     "version": "0.1.0",
-    "title": "Progressbars",
+    "title": "Progress",
     "category": "gutenlayouts",
-    "description": "Add a customizable svg icon to your content.",
+    "description": "A customizable progress bar or circle block for your content.",
     "supports": {
         "anchor": true,
         "html": false,
@@ -19,30 +19,43 @@
         "blockStyle": {
             "type": "object"
         },
-        "rating": {
+        "progress": {
             "type": "number",
-            "default": 4.5
+            "default": 50
         },
         "label": {
             "type": "string",
             "default": "Progress Bar"
         },
-        "progress": {
-            "type": "number",
-            "default": 50
+        "layout": {
+            "type": "string",
+            "default": "line"
+        },
+        "paColor": {
+            "type": "string"
+        },
+        "pinColor": {
+            "type": "string"
+        },
+        "labelSize": {
+            "type": "number"
+        },
+        "labelColor": {
+            "type": "number"
+        },
+        "perceColor": {
+            "type": "string"
+        },
+        "perceSize": {
+            "type": "number"
         },
         "thickNess": {
             "type": "number"
         },
-        "layout": {
-            "type": "string",
-            "default": "line"
+        "progressSize": {
+            "type": "number"
         }
     },
-    "providesContext": {
-        "gutenlayouts/layout": "layout"
-    },
-
     "textdomain": "gutenlayouts",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",

@@ -36,13 +36,7 @@ export const Sidebar = ({ categories = [], category, setCategory, isCustomTab })
         <div className="gutenlayouts-modal__sidebar">
             {isCustomTab ? (
                 <>
-                    <h4
-                        style={{
-                            textTransform: 'uppercase'
-                        }}
-                    >
-                        {__('Resources', 'gutenlayouts')}
-                    </h4>
+                    <h4 className="icons-heading">{__('Resources', 'gutenlayouts')}</h4>
                     <p
                         style={{
                             fontSize: '12px',
@@ -69,13 +63,7 @@ export const Sidebar = ({ categories = [], category, setCategory, isCustomTab })
                 </>
             ) : (
                 <>
-                    <h4
-                        style={{
-                            textTransform: 'uppercase'
-                        }}
-                    >
-                        {__('Categories', 'gutenlayouts')}
-                    </h4>
+                    <h4 className="icons-heading">{__('Categories', 'gutenlayouts')}</h4>
                     <Scrollable className="gutenlayouts-modal__scrollable">
                         <div className="gutenlayouts-modal__sidebar-buttons">
                             {categories.map(cat => (

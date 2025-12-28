@@ -14,31 +14,37 @@ import {
     NativeRangeControl,
     NativeToggleControl,
     PanelColorControl,
-    NativeSelectControl
+    NativeSelectControl,
+    NativeTextControl
 } from '../../components';
 
 const Inspector = props => {
     const { attributes, setAttributes, clientId } = props;
-    const {
-        progress,
-        thickNess,
-
-        paColor,
-        labelSize,
-        pinColor,
-        labelColor,
-        perceColor,
-        perceSize,
-        progressSize,
-        layout
-    } = attributes;
+    const { label, progress, thickNess, paColor, labelSize, pinColor, labelColor, perceColor, perceSize, progressSize, layout } =
+        attributes;
 
     return (
         <>
             <InspectorControls group="settings">
-                <PanelBody title={__('Settings', 'gutenlayouts')} initialOpen={true}>
+                <PanelBody title={__('General', 'gutenlayouts')} initialOpen={true}>
+                    <NativeSelectControl
+                        label={__('Type', 'gutenlayouts')}
+                        value={layout}
+                        onChange={value => setAttributes({ layout: value })}
+                        options={[
+                            { label: __('Line', 'gutenlayouts'), value: 'line' },
+                            { label: __('Circle', 'gutenlayouts'), value: 'circle' }
+                        ]}
+                    />
+                </PanelBody>
+                <PanelBody title={__('Settings', 'gutenlayouts')} initialOpen={false}>
+                    <NativeTextControl
+                        label={__('Label', 'gutenlayouts')}
+                        value={label}
+                        onChange={value => setAttributes({ label: value })}
+                    />
                     <NativeRangeControl
-                        label={__('Progress', 'gutenlayout')}
+                        label={__('Value', 'gutenlayout')}
                         value={progress}
                         onChange={v =>
                             setAttributes({
@@ -48,23 +54,12 @@ const Inspector = props => {
                         min={0}
                         max={100}
                     />
-                </PanelBody>
-                <PanelBody title={__('Thickness', 'gutenlayouts')} initialOpen={false}>
                     <NativeRangeControl
                         label={__('Thickness', 'gutenlayouts')}
                         value={thickNess}
                         onChange={value => setAttributes({ thickNess: value })}
                         min={1}
                         max={100}
-                        step={1}
-                    />
-                </PanelBody>
-                <PanelBody title={__('Width', 'gutenlayouts')} initialOpen={false}>
-                    <NativeRangeControl
-                        value={progressSize}
-                        onChange={value => setAttributes({ progressSize: value })}
-                        min={1}
-                        max={2000}
                         step={1}
                     />
                 </PanelBody>

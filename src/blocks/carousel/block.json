@@ -1,12 +1,12 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "gutenlayouts/slider",
+    "name": "gutenlayouts/carousel",
     "version": "1.0.0",
-    "title": "Slider",
+    "title": "Carousel",
     "category": "gutenlayouts",
     "icon": "slides",
-    "description": "A customizable slider block for showcasing images or content.",
+    "description": "A customizable carousel block for showcasing images or content.",
     "example": {},
     "supports": {
         "html": false,

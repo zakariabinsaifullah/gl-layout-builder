@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const sliders = document.querySelectorAll('.wp-block-gutenlayouts-slider');
+    const sliders = document.querySelectorAll('.wp-block-gutenlayouts-carousel');
     sliders.forEach(function (slider) {
         const loop = slider.getAttribute('data-loop') === 'true';
         const autoplay = slider.getAttribute('data-autoplay') === 'true';

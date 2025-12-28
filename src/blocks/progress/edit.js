@@ -11,9 +11,9 @@ import { useEffect } from '@wordpress/element';
 import Inspector from './inspector';
 
 const Edit = props => {
-    const { attributes, setAttributes, isSelected, context } = props;
-    const { label, progress, labelSize, labelColor, pinColor, paColor, perceColor, perceSize, thickNess, progressSize } = attributes;
-    const layout = context['gutenlayouts/layout'] || 'line';
+    const { attributes, setAttributes, isSelected } = props;
+    const { layout, label, progress, labelSize, labelColor, pinColor, paColor, perceColor, perceSize, thickNess, progressSize } =
+        attributes;
 
     const cssCustomProperties = {
         ...(labelSize && { '--title-size': `${labelSize}px` }),
@@ -30,15 +30,8 @@ const Edit = props => {
             blockStyle: cssCustomProperties
         });
     }, [label, progress, labelSize, labelColor, pinColor, paColor, perceColor, perceSize, thickNess, progressSize]);
-    /**
-     * Block Props
-     */
-    useEffect(() => {
-        if (layout !== attributes.layout) {
-            setAttributes({ layout });
-        }
-    }, [layout]);
 
+    // block props
     const blockProps = useBlockProps({
         style: cssCustomProperties,
         className: `wp-block-gutenlayouts-progressbar layout-${layout}`
@@ -65,7 +58,6 @@ const Edit = props => {
                             />
                             <div className="gutenlayout-bar-percent">{progress}%</div>
                         </div>
-
                         <div className="progress-bar">
                             <div className="progress-bar-fill" style={{ width: `${progress}%` }}></div>
                         </div>

@@ -29,7 +29,7 @@ class Register_Blocks_Category {
      * @return array Modified block categories.
      */
     public function add_gutenlayouts_category( $categories, $post ) {
-        $categories[] = [
+        $categories[0] = [
             'slug'  => 'gutenlayouts',
             'title' => __( 'Gutenlayouts', 'gutenlayouts' ),
         ];

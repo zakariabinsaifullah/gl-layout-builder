@@ -1,10 +1,8 @@
-.wp-block-gutenlayouts-progressbar {
+.wp-block-gutenlayouts-progress {
     &.layout-line {
         display: flex;
         flex-direction: column;
         gap: 15px;
-        width: var(--bar-width, 100%);
-        max-width: 100%;
 
         .gutenlayout-bar-content {
             display: flex;
