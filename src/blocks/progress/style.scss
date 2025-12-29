@@ -2,7 +2,7 @@
     &.layout-line {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: var(--gap, 8px);
 
         .gutenlayout-bar-content {
             display: flex;
@@ -11,28 +11,25 @@
         }
 
         .gutenlayout-bar-title {
-            font-size: var(--title-size, 14px);
-            font-weight: 500;
-            color: var(--title-color, #000);
+            font-size: var(--title-size);
+            color: var(--title-color);
         }
 
         .gutenlayout-bar-percent {
-            font-weight: 700;
-            font-size: var(--percentange-size, 14px);
-            color: var(--percentange-color, #000);
+            font-size: var(--percentange-size);
+            color: var(--percentange-color);
         }
 
         .progress-bar {
             width: 100%;
             background-color: var(--inactive-color, #e2bcbc);
             height: calc(var(--thickness, 8) * 1px);
-            border-radius: 10px;
+            border-radius: var(--radius, 10px);
             overflow: hidden;
 
             .progress-bar-fill {
                 background-color: var(--active-color, #0073aa);
                 height: 100%;
-                border-radius: 10px;
                 transition: width 0.4s ease-in-out;
             }
         }
@@ -47,8 +44,8 @@
         .gutenlayout-circle-container {
             display: inline-block;
             position: relative;
-            width: var(--bar-width, 300px);
-            height: var(--bar-width, 300px);
+            width: var(--csize, 300px);
+            height: var(--csize, 300px);
         }
 
         .circle-svg-wrapper {
@@ -84,21 +81,21 @@
                 text-align: center;
                 width: 100%;
                 padding: 0 15%;
+                display: flex;
+                flex-direction: column;
+                gap: var(--gap, 8px);
 
                 .circle-percentage {
-                    font-size: var(--percentange-size, 14px);
-                    font-weight: 800;
-                    color: var(--percentange-color, #000);
+                    font-size: var(--percentange-size);
+                    color: var(--percentange-color);
                     line-height: 1;
                 }
 
                 .circle-label {
-                    font-size: var(--title-size, 14px);
-                    font-weight: 500;
-                    color: var(--title-color, #000);
-                    margin-top: 4px;
-                    line-height: 1.2;
+                    font-size: var(--title-size);
+                    color: var(--title-color);
                     word-wrap: break-word;
+                    line-height: 1;
                 }
             }
         }

@@ -4,20 +4,7 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 const Save = ({ attributes }) => {
-    const {
-        label,
-        progress,
-        labelSize,
-        labelColor,
-        pinColor,
-        paColor,
-        perceColor,
-        perceSize,
-        thickNess,
-        progressSize,
-        layout,
-        blockStyle
-    } = attributes;
+    const { showLabel, label, progress, thickNess, layout, blockStyle, innerEdge } = attributes;
 
     const blockProps = useBlockProps.save({
         style: blockStyle,
@@ -34,7 +21,7 @@ const Save = ({ attributes }) => {
             {layout === 'line' ? (
                 <>
                     <div className="gutenlayout-bar-content">
-                        <RichText.Content tagName="div" className="gutenlayout-bar-title" value={label} />
+                        {showLabel && <RichText.Content tagName="div" className="gutenlayout-bar-title" value={label} />}
                         <div className="gutenlayout-bar-percent">{progress}%</div>
                     </div>
 
@@ -56,13 +43,13 @@ const Save = ({ attributes }) => {
                                 strokeWidth={actualThickness}
                                 strokeDasharray={circumference}
                                 strokeDashoffset={offset}
-                                strokeLinecap="round"
+                                strokeLinecap={innerEdge}
                                 transform="rotate(-90 50 50)"
                             />
                         </svg>
                         <div className="circle-content">
                             <div className="circle-percentage">{progress}%</div>
-                            <RichText.Content tagName="div" className="circle-label" value={label} />
+                            {showLabel && label && <RichText.Content tagName="div" className="circle-label" value={label} />}
                         </div>
                     </div>
                 </div>

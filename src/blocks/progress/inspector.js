@@ -15,20 +15,36 @@ import {
     NativeToggleControl,
     PanelColorControl,
     NativeSelectControl,
-    NativeTextControl
+    NativeTextControl,
+    NativeUnitControl
 } from '../../components';
 
 const Inspector = props => {
-    const { attributes, setAttributes, clientId } = props;
-    const { label, progress, thickNess, paColor, labelSize, pinColor, labelColor, perceColor, perceSize, progressSize, layout } =
-        attributes;
+    const { attributes, setAttributes } = props;
+    const {
+        showLabel,
+        label,
+        progress,
+        thickNess,
+        paColor,
+        labelSize,
+        pinColor,
+        labelColor,
+        perceColor,
+        perceSize,
+        layout,
+        gap,
+        radius,
+        innerEdge,
+        width
+    } = attributes;
 
     return (
         <>
             <InspectorControls group="settings">
                 <PanelBody title={__('General', 'gutenlayouts')} initialOpen={true}>
-                    <NativeSelectControl
-                        label={__('Type', 'gutenlayouts')}
+                    <NativeToggleGroupControl
+                        label={__('Progress Type', 'gutenlayouts')}
                         value={layout}
                         onChange={value => setAttributes({ layout: value })}
                         options={[
@@ -36,15 +52,35 @@ const Inspector = props => {
                             { label: __('Circle', 'gutenlayouts'), value: 'circle' }
                         ]}
                     />
+
+                    {layout === 'circle' && (
+                        <NativeToggleGroupControl
+                            label={__('Inner Edge', 'gutenlayouts')}
+                            value={innerEdge}
+                            onChange={value => setAttributes({ innerEdge: value })}
+                            options={[
+                                { label: __('Sharp', 'gutenlayouts'), value: 'square' },
+                                { label: __('Rounded', 'gutenlayouts'), value: 'round' }
+                            ]}
+                        />
+                    )}
                 </PanelBody>
                 <PanelBody title={__('Settings', 'gutenlayouts')} initialOpen={false}>
-                    <NativeTextControl
-                        label={__('Label', 'gutenlayouts')}
-                        value={label}
-                        onChange={value => setAttributes({ label: value })}
+                    <NativeToggleControl
+                        label={__('Show Label', 'gutenlayouts')}
+                        checked={showLabel}
+                        onChange={value => setAttributes({ showLabel: value })}
                     />
+                    {showLabel && (
+                        <NativeTextControl
+                            label={__('Label', 'gutenlayouts')}
+                            value={label}
+                            onChange={value => setAttributes({ label: value })}
+                        />
+                    )}
+
                     <NativeRangeControl
-                        label={__('Value', 'gutenlayout')}
+                        label={__('Value', 'gutenlayouts')}
                         value={progress}
                         onChange={v =>
                             setAttributes({
@@ -59,14 +95,39 @@ const Inspector = props => {
                         value={thickNess}
                         onChange={value => setAttributes({ thickNess: value })}
                         min={1}
-                        max={100}
+                        max={50}
                         step={1}
                     />
                 </PanelBody>
             </InspectorControls>
             <InspectorControls group="styles">
                 <ToolsPanel
-                    label={__('label', 'gutenlayouts')}
+                    label={__('Gap', 'gutenlayouts')}
+                    resetAll={() =>
+                        setAttributes({
+                            gap: undefined
+                        })
+                    }
+                >
+                    <ToolsPanelItem
+                        hasValue={() => !!gap}
+                        label={__('Gap', 'gutenlayouts')}
+                        onDeselect={() => {
+                            setAttributes({
+                                gap: undefined
+                            });
+                        }}
+                        onSelect={() => {}}
+                    >
+                        <NativeUnitControl
+                            label={__('Label Gap', 'gutenlayouts')}
+                            value={gap}
+                            onChange={value => setAttributes({ gap: value })}
+                        />
+                    </ToolsPanelItem>
+                </ToolsPanel>
+                <ToolsPanel
+                    label={__('Label', 'gutenlayouts')}
                     resetAll={() =>
                         setAttributes({
                             labelSize: undefined,
@@ -76,7 +137,7 @@ const Inspector = props => {
                 >
                     <ToolsPanelItem
                         hasValue={() => !!labelSize}
-                        label={__('Size', 'gutenlayouts')}
+                        label={__('Font Size', 'gutenlayouts')}
                         onDeselect={() => {
                             setAttributes({
                                 labelSize: undefined
@@ -84,13 +145,10 @@ const Inspector = props => {
                         }}
                         onSelect={() => {}}
                     >
-                        <NativeRangeControl
+                        <NativeUnitControl
                             label={__('Font Size', 'gutenlayouts')}
                             value={labelSize}
                             onChange={value => setAttributes({ labelSize: value })}
-                            min={0}
-                            max={100}
-                            step={1}
                         />
                     </ToolsPanelItem>
                     <ToolsPanelItem
@@ -104,7 +162,7 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <PanelColorControl
-                            label={__('Label', 'gutenlayouts')}
+                            label={__('Color', 'gutenlayouts')}
                             colorSettings={[
                                 {
                                     value: labelColor,
@@ -117,7 +175,7 @@ const Inspector = props => {
                 </ToolsPanel>
 
                 <ToolsPanel
-                    label={__('Percentange', 'gutenlayouts')}
+                    label={__('Value', 'gutenlayouts')}
                     resetAll={() =>
                         setAttributes({
                             perceSize: undefined,
@@ -127,7 +185,7 @@ const Inspector = props => {
                 >
                     <ToolsPanelItem
                         hasValue={() => !!perceSize}
-                        label={__('Size', 'gutenlayouts')}
+                        label={__('Font Size', 'gutenlayouts')}
                         onDeselect={() => {
                             setAttributes({
                                 perceSize: undefined
@@ -135,13 +193,10 @@ const Inspector = props => {
                         }}
                         onSelect={() => {}}
                     >
-                        <NativeRangeControl
+                        <NativeUnitControl
                             label={__('Font Size', 'gutenlayouts')}
                             value={perceSize}
                             onChange={value => setAttributes({ perceSize: value })}
-                            min={0}
-                            max={100}
-                            step={1}
                         />
                     </ToolsPanelItem>
 
@@ -168,7 +223,7 @@ const Inspector = props => {
                     </ToolsPanelItem>
                 </ToolsPanel>
                 <ToolsPanel
-                    label={__('Progress Bar', 'gutenlayouts')}
+                    label={__('Progress', 'gutenlayouts')}
                     resetAll={() =>
                         setAttributes({
                             pinColor: undefined,
@@ -176,44 +231,67 @@ const Inspector = props => {
                         })
                     }
                 >
+                    {layout !== 'circle' && (
+                        <ToolsPanelItem
+                            hasValue={() => !!radius}
+                            label={__('Border Radius', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    radius: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <NativeUnitControl
+                                label={__('Border Radius', 'gutenlayouts')}
+                                value={radius}
+                                onChange={value => setAttributes({ radius: value })}
+                            />
+                        </ToolsPanelItem>
+                    )}
+
+                    {layout === 'circle' && (
+                        <ToolsPanelItem
+                            hasValue={() => !!width}
+                            label={__('Size', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    radius: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <NativeUnitControl
+                                label={__('Circle Size', 'gutenlayouts')}
+                                value={width}
+                                onChange={value => setAttributes({ width: value })}
+                            />
+                        </ToolsPanelItem>
+                    )}
+
                     <ToolsPanelItem
-                        hasValue={() => !!paColor}
-                        label={__('Active Color', 'gutenlayouts')}
+                        hasValue={() => !!paColor || !!pinColor}
+                        label={__('Colors', 'gutenlayouts')}
                         onDeselect={() => {
                             setAttributes({
-                                paColor: undefined
-                            });
-                        }}
-                        onSelect={() => {}}
-                    >
-                        <PanelColorControl
-                            label={__('Color', 'gutenlayouts')}
-                            colorSettings={[
-                                {
-                                    value: paColor,
-                                    onChange: color => setAttributes({ paColor: color }),
-                                    label: __('Color', 'gutenlayouts')
-                                }
-                            ]}
-                        />
-                    </ToolsPanelItem>
-                    <ToolsPanelItem
-                        hasValue={() => !!pinColor}
-                        label={__('In active Color', 'gutenlayouts')}
-                        onDeselect={() => {
-                            setAttributes({
+                                paColor: undefined,
                                 pinColor: undefined
                             });
                         }}
                         onSelect={() => {}}
                     >
                         <PanelColorControl
-                            label={__('Color', 'gutenlayouts')}
+                            label={__('Colors', 'gutenlayouts')}
                             colorSettings={[
                                 {
                                     value: pinColor,
                                     onChange: color => setAttributes({ pinColor: color }),
-                                    label: __('Color', 'gutenlayouts')
+                                    label: __('Normal Color', 'gutenlayouts')
+                                },
+                                {
+                                    value: paColor,
+                                    onChange: color => setAttributes({ paColor: color }),
+                                    label: __('Active Color', 'gutenlayouts')
                                 }
                             ]}
                         />

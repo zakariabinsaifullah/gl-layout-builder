@@ -68,8 +68,8 @@
         }
     },
     "textdomain": "gutenlayouts",
-    "editorScript": ["file:./index.js", "gu-swiper-script"],
-    "editorStyle": ["file:./index.css", "gu-swiper-style"],
-    "style": ["file:./style-index.css", "gu-swiper-style"],
-    "viewScript": ["file:./view.js", "gu-swiper-script"]
+    "editorScript": ["file:./index.js"],
+    "editorStyle": ["file:./index.css"],
+    "style": ["file:./style-index.css", "gutenlayouts-swiper-style"],
+    "viewScript": ["file:./view.js", "gutenlayouts-swiper-script"]
 }

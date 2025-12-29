@@ -12,7 +12,11 @@
         "align": ["wide", "full"],
         "spacing": {
             "margin": true,
-            "padding": true
+            "padding": true,
+            "__experimentalDefaultControls": {
+                "margin": false,
+                "padding": false
+            }
         }
     },
     "attributes": {
@@ -23,6 +27,10 @@
             "type": "number",
             "default": 50
         },
+        "showLabel": {
+            "type": "boolean",
+            "default": true
+        },
         "label": {
             "type": "string",
             "default": "Progress Bar"
@@ -31,6 +39,9 @@
             "type": "string",
             "default": "line"
         },
+        "gap": {
+            "type": "string"
+        },
         "paColor": {
             "type": "string"
         },
@@ -38,26 +49,32 @@
             "type": "string"
         },
         "labelSize": {
-            "type": "number"
+            "type": "string"
         },
         "labelColor": {
-            "type": "number"
+            "type": "string"
         },
         "perceColor": {
             "type": "string"
         },
         "perceSize": {
-            "type": "number"
+            "type": "string"
         },
         "thickNess": {
             "type": "number"
         },
-        "progressSize": {
-            "type": "number"
+        "radius": {
+            "type": "string"
+        },
+        "innerEdge": {
+            "type": "string",
+            "default": "square"
+        },
+        "width": {
+            "type": "string"
         }
     },
     "textdomain": "gutenlayouts",
     "editorScript": "file:./index.js",
-    "editorStyle": "file:./index.css",
     "style": "file:./style-index.css"
 }
