@@ -1,21 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     const sliders = document.querySelectorAll('.wp-block-gutenlayouts-carousel');
     sliders.forEach(function (slider) {
-        const loop = slider.getAttribute('data-loop') === 'true';
-        const autoplay = slider.getAttribute('data-autoplay') === 'true';
-        const delay = parseInt(slider.getAttribute('data-delay')) || 3000;
+        const options = JSON.parse(slider.getAttribute('data-options'));
+        const { loop, autoplay, columns, gaps } = options;
 
         const swiper = new Swiper(slider.querySelector('.swiper'), {
-            // Swiper options
             loop: loop,
-            autoplay: autoplay
-                ? {
-                      delay: delay,
-                      disableOnInteraction: false,
-                      pauseOnMouseEnter: true,
-                      enabled: autoplay
-                  }
-                : false,
+            autoplay: autoplay,
             navigation: {
                 nextEl: slider.querySelector('.swiper-custom-next'),
                 prevEl: slider.querySelector('.swiper-custom-prev')
@@ -32,7 +23,25 @@ document.addEventListener('DOMContentLoaded', function () {
             touchMoveStopPropagation: false,
             touchStartPreventDefault: false,
             touchStartForcePreventDefault: false,
-            touchReleaseOnEdges: true
+            touchReleaseOnEdges: true,
+            slidesPerView: columns?.Desktop || 1,
+            spaceBetween: gaps?.Desktop || 20,
+            breakpoints: {
+                // when window width is >= 480px
+                320: {
+                    slidesPerView: columns?.Mobile || 1,
+                    spaceBetween: gaps?.Mobile || 0
+                },
+                // when window width is >= 768px
+                768: {
+                    slidesPerView: columns?.Tablet || 2,
+                    spaceBetween: gaps?.Tablet || 15
+                },
+                1025: {
+                    slidesPerView: columns?.Desktop || 1,
+                    spaceBetween: gaps?.Desktop || 20
+                }
+            }
         });
     });
 });

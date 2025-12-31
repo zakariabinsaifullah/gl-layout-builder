@@ -10,41 +10,53 @@ import { useEffect } from '@wordpress/element';
  * Internal Dependencies
  */
 import './editor.scss';
-import './slide';
 import Inspector from './inspector';
+import classNames from 'classnames';
 
 // Block edit function
 const Edit = props => {
     const { attributes, setAttributes, clientId, isSelected } = props;
     const {
-        height,
-        autoplay,
-        loop,
+        heightType,
+        heights,
+        columns,
+        gaps,
+        resMode,
         showArrows,
-        showPagination,
-        border,
-        radius,
-        bg,
-        arrowColors,
-        arrowBgColors,
+        navType,
+        navRadius,
         paginationColor,
-        paginationSize,
+        pnSize,
+        paSize,
+        pRadius,
+        paRadius,
+        pgap,
         navColor,
         navbgColor,
-        navSize
+        navBorderColor,
+        navSize,
+        navIconSize,
+        navEdgeGap
     } = attributes;
 
     // CSS Custom Properties
     const cssCustomProperties = {
-        ...(height && { '--slide-height': `${height}px` }),
-        ...(arrowColors && { '--arrow-color': arrowColors }),
-        ...(arrowBgColors && { '--arrow-bg': arrowBgColors }),
+        ...(heightType === 'fixed' && heights?.Desktop && { '--dheight': `${heights['Desktop']}` }),
+        ...(heightType === 'fixed' && heights?.Tablet && { '--theight': `${heights['Tablet']}` }),
+        ...(heightType === 'fixed' && heights?.Mobile && { '--mheight': `${heights['Mobile']}` }),
         ...(paginationColor && { '--pagination-color': paginationColor }),
-        ...(paginationSize && { '--pagination-size': `${paginationSize}px` }),
-        ...(radius && { '--slider-radius': `${radius}px` }),
-        ...(navSize && { '--nav-size': `${navSize}px` }),
+        ...(pnSize && { '--psize': `${pnSize}` }),
+        ...(paSize && { '--pasize': `${paSize}` }),
+        ...(pRadius && { '--pradius': `${pRadius}` }),
+        ...(paRadius && { '--paradius': `${paRadius}` }),
+        ...(navRadius && { '--nav-radius': `${navRadius}` }),
+        ...(navSize && { '--nav-size': `${navSize}` }),
+        ...(navIconSize && { '--nicon-size': `${navIconSize}` }),
         ...(navColor && { '--nav-color': navColor }),
-        ...(navbgColor && { '--nav-bg': navbgColor })
+        ...(navbgColor && { '--nav-bg': navbgColor }),
+        ...(navBorderColor && { '--nborder-color': navBorderColor }),
+        ...(navEdgeGap && { '--nav-gap': `${navEdgeGap}` }),
+        ...(pgap && { '--pgap': `${pgap}` })
     };
 
     // Update block style when CSS properties change
@@ -52,12 +64,32 @@ const Edit = props => {
         setAttributes({
             blockStyle: cssCustomProperties
         });
-    }, [height, bg, arrowColors, arrowBgColors, paginationColor, radius, paginationColor, paginationSize]);
+    }, [
+        heightType,
+        heights,
+        navColor,
+        navbgColor,
+        paginationColor,
+        navRadius,
+        paginationColor,
+        pnSize,
+        paSize,
+        pRadius,
+        paRadius,
+        navBorderColor,
+        navSize,
+        navIconSize,
+        navEdgeGap,
+        pgap
+    ]);
 
     // Inner blocks configuration
     const innerBlocksProps = useInnerBlocksProps(
         {
-            className: 'gutenlayouts-editor-slides'
+            className: classNames('gutenlayouts-editor-slides', {
+                [`columns-${columns[resMode]}`]: columns[resMode],
+                [`gap-${gaps[resMode]}`]: gaps[resMode]
+            })
         },
         {
             allowedBlocks: ['gutenlayouts/slide'],
@@ -68,7 +100,11 @@ const Edit = props => {
 
     // Block Props
     const blockProps = useBlockProps({
-        style: cssCustomProperties
+        style: cssCustomProperties,
+        className: classNames({
+            fixed: heightType === 'fixed',
+            outside: navType === 'outside'
+        })
     });
 
     return (
@@ -90,12 +126,27 @@ const Edit = props => {
             {isSelected && <Inspector {...props} />}
 
             <div {...blockProps}>
-                <div className="gutenlayouts-editor-wrapper">
-                    <div {...innerBlocksProps} />
-                </div>
-                <div className="gutenlayouts-editor-note">
-                    <p>{__('Preview: Slider will be displayed on the frontend', 'gutenlayouts')}</p>
-                </div>
+                <div {...innerBlocksProps} />
+                {showArrows && (
+                    <div className="swiper-navigation">
+                        <div className="swiper-custom-prev gu-nav">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                    fill="currentColor"
+                                    d="M7 239c-9.4 9.4-9.4 24.6 0 33.9L175 441c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L81.9 280 488 280c13.3 0 24-10.7 24-24s-10.7-24-24-24L81.9 232 209 105c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L7 239z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div className="swiper-custom-next gu-nav">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path
+                                    fill="currentColor"
+                                    d="M505 273c9.4-9.4 9.4-24.6 0-33.9L337 71c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l127 127-406.1 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l406.1 0-127 127c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0L505 273z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     );

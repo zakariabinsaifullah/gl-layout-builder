@@ -19,14 +19,14 @@
             }
         },
         "__experimentalBorder": {
-            "__experimentalSkipSerialization": true,
+            "__experimentalSkipSerialization": false,
             "color": true,
             "radius": true,
             "style": true,
             "width": true
         },
         "shadow": {
-            "__experimentalSkipSerialization": true
+            "__experimentalSkipSerialization": false
         }
     },
     "attributes": {

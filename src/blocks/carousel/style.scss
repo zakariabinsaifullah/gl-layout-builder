@@ -1,67 +1,23 @@
-// Editor Styles - Horizontal Layout with Scroll
-
-.gutenlayouts-editor-slides {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    padding: 16px 0;
-    scroll-behavior: smooth;
-
-    // Scrollbar styling
-    &::-webkit-scrollbar {
-        height: 8px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 4px;
-    }
-}
-
-.gutenlayouts-editor-slide {
-    width: 100%;
-    flex: 0 0 auto;
-    padding: 16px;
-    height: var(--slide-height, px);
-
-    .slide-content {
-        height: 100%;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
-}
-
-.wp-block-gutenlayouts-slider {
+.wp-block-gutenlayouts-carousel {
     position: relative;
 
-    // Frontend styles
-    .gu-slide-card {
-        display: flex;
-        height: var(--height);
-        overflow: hidden;
-        align-items: center;
-    }
-
-    .gu-slide-card > div {
-        width: 100%;
-        min-width: 50%;
-    }
-
     // Swiper slide height control
-    .swiper-slide {
-        height: var(--slide-height, 400px);
+    &.fixed {
+        .wp-block-gutenlayouts-slide {
+            height: var(--mheight);
+        }
 
-        .slide-content {
-            height: 100%;
+        // tablet view
+        @media (max-width: 1024px) and (min-width: 768px) {
+            .wp-block-gutenlayouts-slide {
+                height: var(--theight);
+            }
+        }
 
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
+        // desktop
+        @media (min-width: 1025px) {
+            .wp-block-gutenlayouts-slide {
+                height: var(--dheight);
             }
         }
     }
@@ -73,120 +29,92 @@
         gap: 8px;
     }
 
-    // Swiper takes center spaces
-    .swiper {
-        flex: 1;
-    }
-
-    // Navigation arrows - outside slider on left and right
-    .swiper-navigation {
-        display: contents;
-    }
-
-    .swiper-custom-prev {
-        order: 0;
-    }
-
-    .swiper-custom-next {
-        order: 2;
-    }
-
-    .swiper {
-        order: 1;
-    }
-
-    // Slider footer wrapper - for pagination below
-    .gu-slider-footer {
-        margin-top: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
     .gu-nav {
-        width: 48px;
-        height: 48px;
+        width: var(--nav-size, 36px);
+        height: var(--nav-size, 36px);
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid var(--nav-color, #2b2e83);
+        border: 1px solid var(--nborder-color, #2b2e83);
         color: var(--nav-color, #2b2e83);
         background-color: var(--nav-bg, rgba(255, 255, 255, 0.9));
-        border-radius: 50%;
+        border-radius: var(--nav-radius, 0px);
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         flex-shrink: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
 
         svg {
-            width: var(--nav-size, 20px);
-            height: var(--nav-size, 20px);
+            width: 1em;
+            height: 1em;
+            font-size: var(--nicon-size, 16px);
         }
+    }
+
+    .swiper-custom-prev {
+        left: var(--nav-gap, 8px);
+    }
+
+    .swiper-custom-next {
+        right: var(--nav-gap, 8px);
     }
 
     // Pagination - below slider, centered
     .swiper-pagination {
+        align-items: center;
         position: relative !important;
         bottom: auto !important;
         display: flex !important;
         justify-content: center;
         gap: 6px;
         width: 100% !important;
+        margin-top: var(--pgap);
     }
 
     .swiper-pagination-bullet {
-        width: var(--pagination-size, 10px);
-        height: var(--pagination-size, 10px);
+        width: var(--psize, 10px);
+        min-width: var(--psize, 10px);
+        height: var(--psize, 10px);
+        border-radius: var(--pradius, 50%);
         background: var(--pagination-color, #2b2e83);
         opacity: 0.5;
         transition: all 0.3s ease;
+        margin: 0 !important;
 
         &.swiper-pagination-bullet-active {
             opacity: 1;
-            width: 24px;
-            border-radius: 5px;
+            width: var(--pasize, 10px);
+            min-width: var(--pasize, 10px);
+            height: var(--pasize, 10px);
+            border-radius: var(--paradius, 50%);
         }
 
         &:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(43, 46, 131, 0.3);
+            box-shadow: none;
         }
     }
-}
 
-// Mobile view
-@media (max-width: 768px) {
-    .wp-block-gutenlayouts-slider {
-        .gu-slide-card {
-            flex-direction: column;
-            height: auto;
+    // outside nav arrows
+    &.outside {
+        padding-left: calc(var(--nav-size, 36px) + var(--nav-gap, 8px));
+        padding-right: calc(var(--nav-size, 36px) + var(--nav-gap, 8px));
+        box-sizing: border-box;
 
-            &.right {
-                flex-direction: column;
-            }
+        .swiper-custom-prev {
+            left: 0;
         }
 
-        .gu-slide-card > div {
-            width: 100%;
-            min-width: 100%;
-        }
-
-        .gu-nav {
-            width: 40px;
-            height: 40px;
-
-            svg {
-                width: 16px;
-                height: 16px;
-            }
-        }
-
-        .gu-slider-footer {
-            padding: 0 8px;
-        }
-
-        .swiper-slide {
-            height: var(--slide-height, 300px);
+        .swiper-custom-next {
+            right: 0;
         }
     }
 }

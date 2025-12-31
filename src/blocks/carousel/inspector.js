@@ -14,18 +14,91 @@ import {
     NativeRangeControl,
     NativeToggleControl,
     PanelColorControl,
-    NativeSelectControl
+    NativeSelectControl,
+    NativeResponsiveControl,
+    NativeUnitControl
 } from '../../components';
 
 const Inspector = props => {
-    const { attributes, setAttributes, clientId } = props;
-    const { autoplay, loop, showArrows, showPagination, paginationSize, paginationColor, height, delay, navColor, navbgColor, navSize } =
-        attributes;
+    const { attributes, setAttributes } = props;
+    const {
+        resMode,
+        heightType,
+        heights,
+        columns,
+        gaps,
+        autoplay,
+        loop,
+        showArrows,
+        navType,
+        showPagination,
+        pnSize,
+        paSize,
+        pRadius,
+        paRadius,
+        pgap,
+        paginationColor,
+        delay,
+        navColor,
+        navbgColor,
+        navBorderColor,
+        navSize,
+        navIconSize,
+        navRadius,
+        navEdgeGap
+    } = attributes;
 
     return (
         <>
             <InspectorControls group="settings">
-                <PanelBody title={__('Slider Settings', 'gutenlayouts')}>
+                <PanelBody title={__('General', 'gutenlayouts')} initialOpen={true}>
+                    <NativeToggleGroupControl
+                        label={__('Height Type', 'gutenlayouts')}
+                        value={heightType}
+                        onChange={value => setAttributes({ heightType: value })}
+                        options={[
+                            { label: __('Adaptive', 'gutenlayouts'), value: 'adaptive' },
+                            { label: __('Fixed', 'gutenlayouts'), value: 'fixed' }
+                        ]}
+                    />
+                    {heightType === 'fixed' && (
+                        <NativeResponsiveControl label={__('Height', 'gutenlayouts')} props={props}>
+                            <NativeUnitControl
+                                label={__('Slider Height', 'gutenlayouts')}
+                                value={heights[resMode]}
+                                onChange={value => {
+                                    const newHeights = { ...heights, [resMode]: value };
+                                    setAttributes({ heights: newHeights });
+                                }}
+                            />
+                        </NativeResponsiveControl>
+                    )}
+                </PanelBody>
+                <PanelBody title={__('Slider Options', 'gutenlayouts')} initialOpen={false}>
+                    <NativeResponsiveControl label={__('Columns', 'gutenlayouts')} props={props}>
+                        <NativeRangeControl
+                            value={columns[resMode]}
+                            onChange={value => {
+                                const newColumns = { ...columns, [resMode]: value };
+                                setAttributes({ columns: newColumns });
+                            }}
+                            min={1}
+                            max={6}
+                            step={1}
+                        />
+                    </NativeResponsiveControl>
+                    <NativeResponsiveControl label={__('Gaps', 'gutenlayouts')} props={props}>
+                        <NativeRangeControl
+                            value={gaps[resMode]}
+                            onChange={value => {
+                                const newGaps = { ...gaps, [resMode]: value };
+                                setAttributes({ gaps: newGaps });
+                            }}
+                            min={0}
+                            max={100}
+                            step={1}
+                        />
+                    </NativeResponsiveControl>
                     <NativeToggleControl
                         label={__('Loop', 'gutenlayouts')}
                         checked={loop}
@@ -56,63 +129,92 @@ const Inspector = props => {
                         checked={showPagination}
                         onChange={value => setAttributes({ showPagination: value })}
                     />
+                    {showArrows && (
+                        <NativeToggleGroupControl
+                            label={__('Navigation Type', 'gutenlayouts')}
+                            value={navType}
+                            onChange={value => setAttributes({ navType: value })}
+                            options={[
+                                { label: __('Inside', 'gutenlayouts'), value: 'inside' },
+                                { label: __('Outside', 'gutenlayouts'), value: 'outside' }
+                            ]}
+                        />
+                    )}
                 </PanelBody>
             </InspectorControls>
             <InspectorControls group="styles">
                 <ToolsPanel
-                    label={__('Heights', 'gutenlayouts')}
-                    resetAll={() =>
-                        setAttributes({
-                            height: undefined
-                        })
-                    }
-                >
-                    <ToolsPanelItem
-                        hasValue={() => !!height}
-                        label={__('Height', 'gutenlayouts')}
-                        onDeselect={() => {
-                            setAttributes({
-                                height: undefined
-                            });
-                        }}
-                        onSelect={() => {}}
-                    >
-                        <NativeRangeControl
-                            label={__('Rating Size', 'gutenlayouts')}
-                            value={height}
-                            onChange={value => setAttributes({ height: value })}
-                            min={0}
-                            max={1000}
-                            step={1}
-                        />
-                    </ToolsPanelItem>
-                </ToolsPanel>
-                <ToolsPanel
                     label={__('Pagination', 'gutenlayouts')}
                     resetAll={() =>
                         setAttributes({
-                            paginationSize: undefined,
-                            paginationColor: undefined
+                            pnSize: undefined,
+                            paSize: undefined,
+                            pRadius: undefined,
+                            paRadius: undefined,
+                            paginationColor: undefined,
+                            pgap: undefined
                         })
                     }
                 >
                     <ToolsPanelItem
-                        hasValue={() => !!paginationSize}
-                        label={__('Size', 'gutenlayouts')}
+                        hasValue={() => !!pgap}
+                        label={__('Gap', 'gutenlayouts')}
                         onDeselect={() => {
                             setAttributes({
-                                paginationSize: undefined
+                                pgap: undefined
                             });
                         }}
                         onSelect={() => {}}
                     >
-                        <NativeRangeControl
-                            label={__('Rating Size', 'gutenlayouts')}
-                            value={paginationSize}
-                            onChange={value => setAttributes({ paginationSize: value })}
-                            min={0}
-                            max={100}
-                            step={1}
+                        <NativeUnitControl
+                            label={__('Vertical Gap', 'gutenlayouts')}
+                            value={pgap}
+                            onChange={value => setAttributes({ pgap: value })}
+                        />
+                    </ToolsPanelItem>
+                    <ToolsPanelItem
+                        hasValue={() => !!pnSize || !!paSize}
+                        label={__('Sizes', 'gutenlayouts')}
+                        onDeselect={() => {
+                            setAttributes({
+                                pnSize: undefined,
+                                paSize: undefined
+                            });
+                        }}
+                        onSelect={() => {}}
+                    >
+                        <NativeUnitControl
+                            label={__('Normal Size', 'gutenlayouts')}
+                            value={pnSize}
+                            onChange={value => setAttributes({ pnSize: value })}
+                        />
+                        <NativeUnitControl
+                            label={__('Active Size', 'gutenlayouts')}
+                            value={paSize}
+                            onChange={value => setAttributes({ paSize: value })}
+                        />
+                    </ToolsPanelItem>
+
+                    <ToolsPanelItem
+                        hasValue={() => !!pRadius || !!paRadius}
+                        label={__('Radius', 'gutenlayouts')}
+                        onDeselect={() => {
+                            setAttributes({
+                                pRadius: undefined,
+                                paRadius: undefined
+                            });
+                        }}
+                        onSelect={() => {}}
+                    >
+                        <NativeUnitControl
+                            label={__('Normal Radius', 'gutenlayouts')}
+                            value={pRadius}
+                            onChange={value => setAttributes({ pRadius: value })}
+                        />
+                        <NativeUnitControl
+                            label={__('Active Radius', 'gutenlayouts')}
+                            value={paRadius}
+                            onChange={value => setAttributes({ paRadius: value })}
                         />
                     </ToolsPanelItem>
 
@@ -137,77 +239,120 @@ const Inspector = props => {
                         />
                     </ToolsPanelItem>
                 </ToolsPanel>
-                <ToolsPanel
-                    label={__('Navigation', 'gutenlayouts')}
-                    resetAll={() =>
-                        setAttributes({
-                            navbgColor: undefined,
-                            navColor: undefined // duplicate navColor সরিয়ে navSize যোগ করলাম
-                        })
-                    }
-                >
-                    <ToolsPanelItem
-                        hasValue={() => !!navSize}
-                        label={__('Size', 'gutenlayouts')}
-                        onDeselect={() => {
+                {showArrows && (
+                    <ToolsPanel
+                        label={__('Navigation', 'gutenlayouts')}
+                        resetAll={() =>
                             setAttributes({
-                                navSize: undefined
-                            });
-                        }}
-                        onSelect={() => {}}
+                                navbgColor: undefined,
+                                navColor: undefined,
+                                navEdgeGap: undefined,
+                                navSize: undefined,
+                                navIconSize: undefined,
+                                navBorderColor: undefined,
+                                navRadius: undefined
+                            })
+                        }
                     >
-                        <NativeRangeControl
-                            label={__('Navigation Size', 'gutenlayouts')}
-                            value={navSize}
-                            onChange={value => setAttributes({ navSize: value })}
-                            min={0}
-                            max={100}
-                            step={1}
-                        />
-                    </ToolsPanelItem>
-
-                    <ToolsPanelItem
-                        hasValue={() => !!navColor}
-                        label={__('Color', 'gutenlayouts')}
-                        onDeselect={() => {
-                            setAttributes({
-                                navColor: undefined
-                            });
-                        }}
-                        onSelect={() => {}}
-                    >
-                        <PanelColorControl
-                            label={__('Navigation Color', 'gutenlayouts')}
-                            colorSettings={[
-                                {
-                                    value: navColor,
-                                    onChange: color => setAttributes({ navColor: color })
-                                }
-                            ]}
-                        />
-                    </ToolsPanelItem>
-
-                    <ToolsPanelItem
-                        hasValue={() => !!navbgColor}
-                        label={__('Background Color', 'gutenlayouts')}
-                        onDeselect={() => {
-                            setAttributes({
-                                navbgColor: undefined
-                            });
-                        }}
-                        onSelect={() => {}}
-                    >
-                        <PanelColorControl
-                            label={__('Navigation Background Color', 'gutenlayouts')}
-                            colorSettings={[
-                                {
-                                    value: navbgColor,
-                                    onChange: color => setAttributes({ navbgColor: color })
-                                }
-                            ]}
-                        />
-                    </ToolsPanelItem>
-                </ToolsPanel>
+                        <ToolsPanelItem
+                            hasValue={() => !!navEdgeGap}
+                            label={__('Edge Gap', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    navEdgeGap: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <NativeUnitControl
+                                label={__('Edge Gap', 'gutenlayouts')}
+                                value={navEdgeGap}
+                                onChange={value => setAttributes({ navEdgeGap: value })}
+                            />
+                        </ToolsPanelItem>
+                        <ToolsPanelItem
+                            hasValue={() => !!navSize}
+                            label={__('Size', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    navSize: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <NativeUnitControl
+                                label={__('Size', 'gutenlayouts')}
+                                value={navSize}
+                                onChange={value => setAttributes({ navSize: value })}
+                            />
+                        </ToolsPanelItem>
+                        <ToolsPanelItem
+                            hasValue={() => !!navIconSize}
+                            label={__('Icon Size', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    navIconSize: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <NativeUnitControl
+                                label={__('Icon Size', 'gutenlayouts')}
+                                value={navIconSize}
+                                onChange={value => setAttributes({ navIconSize: value })}
+                            />
+                        </ToolsPanelItem>
+                        <ToolsPanelItem
+                            hasValue={() => !!navRadius}
+                            label={__('Radius', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    navRadius: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <NativeUnitControl
+                                label={__('Radius', 'gutenlayouts')}
+                                value={navRadius}
+                                onChange={value => setAttributes({ navRadius: value })}
+                            />
+                        </ToolsPanelItem>
+                        <ToolsPanelItem
+                            hasValue={() => !!navColor || !!navbgColor || !!navBorderColor}
+                            label={__('Colors', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    navColor: undefined,
+                                    navbgColor: undefined,
+                                    navBorderColor: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <PanelColorControl
+                                label={__('Colors', 'gutenlayouts')}
+                                colorSettings={[
+                                    {
+                                        label: __('Color', 'gutenlayouts'),
+                                        value: navColor,
+                                        onChange: color => setAttributes({ navColor: color })
+                                    },
+                                    {
+                                        label: __('Background', 'gutenlayouts'),
+                                        value: navbgColor,
+                                        onChange: color => setAttributes({ navbgColor: color })
+                                    },
+                                    {
+                                        label: __('Border Color', 'gutenlayouts'),
+                                        value: navBorderColor,
+                                        onChange: color => setAttributes({ navBorderColor: color })
+                                    }
+                                ]}
+                            />
+                        </ToolsPanelItem>
+                    </ToolsPanel>
+                )}
             </InspectorControls>
         </>
     );
