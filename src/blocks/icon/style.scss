@@ -16,8 +16,9 @@
     }
 
     svg {
-        height: 100%;
-        width: 100%;
+        width: 1em;
+        height: 1em;
+        font-size: var(--msize, 32px);
     }
 
     &.is-fill svg {
@@ -26,5 +27,19 @@
 
     &.is-line svg path {
         stroke: currentColor;
+    }
+
+    // desktop view
+    @media (min-width: 1025px) {
+        svg {
+            font-size: var(--dsize, 60px);
+        }
+    }
+
+    // tablet view
+    @media (min-width: 768px) and (max-width: 1024px) {
+        svg {
+            font-size: var(--tsize, 48px);
+        }
     }
 }

@@ -1,6 +1,6 @@
 import { RangeControl } from '@wordpress/components';
 
-const NativeRangeControl = ({ label, value, onChange, min, max, step }) => {
+const NativeRangeControl = ({ label, value, onChange, min, max, step, resetFallbackValue }) => {
     return (
         <div className="native-control-wrapper">
             <RangeControl
@@ -10,6 +10,8 @@ const NativeRangeControl = ({ label, value, onChange, min, max, step }) => {
                 min={min}
                 max={max}
                 step={step}
+                allowReset={resetFallbackValue ? true : false}
+                resetFallbackValue={resetFallbackValue}
                 __next40pxDefaultSize
                 __nextHasNoMarginBottom
             />

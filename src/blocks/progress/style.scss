@@ -1,0 +1,103 @@
+.wp-block-gutenlayouts-progress {
+    &.layout-line {
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap, 8px);
+
+        .gutenlayout-bar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .gutenlayout-bar-title {
+            font-size: var(--title-size);
+            color: var(--title-color);
+        }
+
+        .gutenlayout-bar-percent {
+            font-size: var(--percentange-size);
+            color: var(--percentange-color);
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: var(--inactive-color, #e2bcbc);
+            height: calc(var(--thickness, 8) * 1px);
+            border-radius: var(--radius, 10px);
+            overflow: hidden;
+
+            .progress-bar-fill {
+                background-color: var(--active-color, #0073aa);
+                height: 100%;
+                transition: width 0.4s ease-in-out;
+            }
+        }
+    }
+
+    &.layout-circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        .gutenlayout-circle-container {
+            display: inline-block;
+            position: relative;
+            width: var(--csize, 300px);
+            height: var(--csize, 300px);
+        }
+
+        .circle-svg-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+
+            svg {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            .circle-bg {
+                stroke: var(--inactive-color, #e2bcbc);
+                stroke-width: var(--thickness, 8);
+            }
+
+            .circle-fill {
+                stroke: var(--active-color, #0073aa);
+                stroke-width: var(--thickness, 8);
+                transition: stroke-dashoffset 0.6s ease-in-out;
+            }
+
+            .circle-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                width: 100%;
+                padding: 0 15%;
+                display: flex;
+                flex-direction: column;
+                gap: var(--gap, 8px);
+
+                .circle-percentage {
+                    font-size: var(--percentange-size);
+                    color: var(--percentange-color);
+                    line-height: 1;
+                }
+
+                .circle-label {
+                    font-size: var(--title-size);
+                    color: var(--title-color);
+                    word-wrap: break-word;
+                    line-height: 1;
+                }
+            }
+        }
+    }
+}

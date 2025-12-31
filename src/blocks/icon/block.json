@@ -32,15 +32,21 @@
             "padding": true,
             "__experimentalDefaultControls": {
                 "margin": false,
-                "padding": true
+                "padding": false
             }
         },
-
         "shadow": {
             "__experimentalSkipSerialization": true
         }
     },
     "attributes": {
+        "resMode": {
+            "type": "string",
+            "default": "Desktop"
+        },
+        "blockStyle": {
+            "type": "object"
+        },
         "tagName": {
             "type": "string",
             "default": "div"
@@ -59,6 +65,14 @@
         "strokeWidth": {
             "type": "number",
             "default": 1.2
+        },
+        "sizes": {
+            "type": "object",
+            "default": {
+                "Desktop": 60,
+                "Tablet": 48,
+                "Mobile": 32
+            }
         },
         "iconSize": {
             "type": "number",

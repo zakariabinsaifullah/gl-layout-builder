@@ -25,6 +25,7 @@ import { useState } from '@wordpress/element';
 import Library from './components/library';
 import QuickInserter from './components/quick-inserter';
 import { icons, getIconByName, getIconType } from '../../utils/icons';
+import { NativeResponsiveControl } from '../../components';
 
 const folderOpen = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000000">
@@ -32,26 +33,16 @@ const folderOpen = (
     </svg>
 );
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
 import './editor.scss';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @return {WPElement} Element to render.
- */
-export default function Edit({ attributes, setAttributes, className }) {
-    const { iconName, iconSize, customSvgCode, iconType, strokeWidth, justifyContent, href, linkTarget, linkRel } = attributes;
+export default function Edit(props) {
+    const { attributes, setAttributes, className } = props;
+    const { iconName, iconSize, customSvgCode, iconType, strokeWidth, justifyContent, href, linkTarget, linkRel, sizes, resMode } =
+        attributes;
 
+    // states
     const [isEditingURL, setIsEditingURL] = useState(false);
     const [popoverAnchor, setPopoverAnchor] = useState(null);
-
     const [modalState, setModalState] = useState({
         isOpen: false,
         activeTab: 'library'
@@ -91,13 +82,7 @@ export default function Edit({ attributes, setAttributes, className }) {
     // Function to render the current icon
     const renderCurrentIcon = (size = '24') => {
         if (customSvgCode) {
-            return (
-                <div
-                    className="gutenlayouts-custom-svg-container"
-                    dangerouslySetInnerHTML={{ __html: customSvgCode }}
-                    style={{ width: `${size}px`, height: `${size}px` }}
-                />
-            );
+            return <div className="gutenlayouts-custom-svg-container" dangerouslySetInnerHTML={{ __html: customSvgCode }} />;
         }
 
         if (iconName) {
@@ -137,7 +122,6 @@ export default function Edit({ attributes, setAttributes, className }) {
                         })
                     }
                 />
-
                 <ToolbarButton
                     ref={setPopoverAnchor}
                     name="link"
@@ -239,15 +223,15 @@ export default function Edit({ attributes, setAttributes, className }) {
                             )}
                         />
                     </BaseControl>
-
-                    <RangeControl
-                        label={__('Icon Size (px)', 'gutenlayouts')}
-                        value={iconSize}
-                        onChange={value => setAttributes({ iconSize: value })}
-                        min={8}
-                        max={256}
-                        __next40pxDefaultSize
-                    />
+                    <NativeResponsiveControl label={__('Icon Size (px)', 'gutenlayouts')} props={props}>
+                        <RangeControl
+                            value={sizes[resMode]}
+                            onChange={value => setAttributes({ sizes: { ...sizes, [resMode]: value } })}
+                            min={8}
+                            max={256}
+                            __next40pxDefaultSize
+                        />
+                    </NativeResponsiveControl>
                 </PanelBody>
             </InspectorControls>
 
@@ -270,7 +254,10 @@ export default function Edit({ attributes, setAttributes, className }) {
                         ...borderProps.style,
                         ...colorProps.style,
                         ...spacingProps.style,
-                        ...shadowProps.style
+                        ...shadowProps.style,
+                        ...(sizes && sizes?.Desktop && sizes?.Desktop !== 60 && { '--dsize': `${sizes.Desktop}px` }),
+                        ...(sizes && sizes?.Tablet && sizes?.Tablet !== 48 && { '--tsize': `${sizes.Tablet}px` }),
+                        ...(sizes && sizes?.Mobile && sizes?.Mobile !== 32 && { '--msize': `${sizes.Mobile}px` })
                     }}
                 >
                     {renderCurrentIcon(iconSize)}

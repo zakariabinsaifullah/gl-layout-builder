@@ -20,7 +20,8 @@ const NativeUnitControl = ({
             label: 'rem',
             value: 'rem'
         }
-    ]
+    ],
+    disableUnits = false
 }) => {
     return (
         <div
@@ -39,6 +40,7 @@ const NativeUnitControl = ({
                 placeholder={placeholder}
                 __next40pxDefaultSize
                 units={units}
+                disableUnits={disableUnits}
             />
         </div>
     );

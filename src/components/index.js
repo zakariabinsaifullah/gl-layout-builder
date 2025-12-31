@@ -1,5 +1,6 @@
 import './editor.scss';
 
+export { default as NativeResponsiveControl } from './responsive-control';
 export { default as NativeProNotice } from './pro-notice';
 export { default as ColorControlDropdown } from './color-control';
 export { default as PanelColorControl } from './panel-color-control';

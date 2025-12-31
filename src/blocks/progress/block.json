@@ -1,0 +1,80 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "gutenlayouts/progress",
+    "version": "0.1.0",
+    "title": "Progress",
+    "category": "gutenlayouts",
+    "description": "A customizable progress bar or circle block for your content.",
+    "supports": {
+        "anchor": true,
+        "html": false,
+        "align": ["wide", "full"],
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "__experimentalDefaultControls": {
+                "margin": false,
+                "padding": false
+            }
+        }
+    },
+    "attributes": {
+        "blockStyle": {
+            "type": "object"
+        },
+        "progress": {
+            "type": "number",
+            "default": 50
+        },
+        "showLabel": {
+            "type": "boolean",
+            "default": true
+        },
+        "label": {
+            "type": "string",
+            "default": "Progress Bar"
+        },
+        "layout": {
+            "type": "string",
+            "default": "line"
+        },
+        "gap": {
+            "type": "string"
+        },
+        "paColor": {
+            "type": "string"
+        },
+        "pinColor": {
+            "type": "string"
+        },
+        "labelSize": {
+            "type": "string"
+        },
+        "labelColor": {
+            "type": "string"
+        },
+        "perceColor": {
+            "type": "string"
+        },
+        "perceSize": {
+            "type": "string"
+        },
+        "thickNess": {
+            "type": "number"
+        },
+        "radius": {
+            "type": "string"
+        },
+        "innerEdge": {
+            "type": "string",
+            "default": "square"
+        },
+        "width": {
+            "type": "string"
+        }
+    },
+    "textdomain": "gutenlayouts",
+    "editorScript": "file:./index.js",
+    "style": "file:./style-index.css"
+}
