@@ -40,6 +40,12 @@
         }
     },
     "attributes": {
+        "listTitle": {
+            "type": "string"
+        },
+        "listDesc": {
+            "type": "string"
+        },
         "resMode": {
             "type": "string",
             "default": "Desktop"
@@ -92,6 +98,38 @@
         },
         "linkRel": {
             "type": "string"
+        },
+        "heading": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "showListTitle": {
+            "type": "boolean"
+        },
+        "showTitle": {
+            "type": "boolean",
+            "default": "true"
+        },
+        "showDesc": {
+            "type": "boolean",
+            "default": "false"
+        },
+        "listGap": {
+            "type": "number"
+        },
+        "titleColor": {
+            "type": "string"
+        },
+        "titleSize": {
+            "type": "number"
+        },
+        "descColor": {
+            "type": "string"
+        },
+        "descSize": {
+            "type": "number"
         }
     },
     "textdomain": "gutenlayouts",

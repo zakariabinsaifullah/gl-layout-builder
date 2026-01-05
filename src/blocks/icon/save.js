@@ -3,7 +3,9 @@ import clsx from 'clsx';
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
 import {
+    RichText,
     useBlockProps,
     __experimentalGetBorderClassesAndStyles as getBorderClassesAndStyles,
     __experimentalGetColorClassesAndStyles as getColorClassesAndStyles,
@@ -37,7 +39,13 @@ export default function save({ attributes, className }) {
         href,
         linkTarget,
         linkRel,
-        sizes
+        sizes,
+        showDesc,
+        showTitle,
+        showListTitle,
+        heading,
+        description,
+        blockStyle
     } = attributes;
 
     // Get block support props
@@ -48,6 +56,7 @@ export default function save({ attributes, className }) {
 
     // Outer wrapper block props (only className for alignment or custom classes)
     const blockProps = useBlockProps.save({
+        style: blockStyle,
         className: clsx(className, {
             [`is-${iconType}`]: iconType,
             [`justify-${justifyContent}`]: justifyContent
@@ -87,8 +96,16 @@ export default function save({ attributes, className }) {
 
     return (
         <Tag {...blockProps} {...(href && { href, target: linkTarget, rel: linkRel })}>
-            <div className={iconClasses} style={iconStyle}>
-                <Icon icon={selectedIcon.icon} size={iconSize} />
+            <div className="gutenlayouts-icon-block-wrapper">
+                <div className={iconClasses} style={iconStyle}>
+                    <Icon icon={selectedIcon.icon} size={iconSize} />
+                </div>
+                {showListTitle && (
+                    <div className="icon-content">
+                        {showTitle && <RichText.Content tagName="h5" value={heading} className="icon-heading" />}
+                        {showDesc && <RichText.Content tagName="p" value={description} className="icon-description" />}
+                    </div>
+                )}
             </div>
         </Tag>
     );
