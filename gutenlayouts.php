@@ -46,7 +46,17 @@ function gu_slider_block_assets() {
         '12.0.3',
         true
     );
+
+    // Register fslightbox
+    wp_register_script(
+        'gutenlayouts-fslightbox-script',
+        GUTENLAYOUTS_PLUGIN_URL . 'assets/js/lightbox/fslightbox.js',
+        [],
+        '3.4.1',
+        true
+    );
 }
+
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\gu_slider_block_assets' );
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\gu_slider_block_assets' ); // for frontend
 
