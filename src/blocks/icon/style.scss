@@ -1,4 +1,28 @@
 .wp-block-gutenlayouts-icon {
+    /* Icon + text wrapper */
+    .gutenlayouts-icon-block-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--list-gap,);
+    }
+
+    /* Heading */
+    .icon-heading {
+        color: var(--title-color);
+        font-size: var(--title-size, 16px);
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    /* Description */
+    .icon-description {
+        font-size: var(--desc-size, 14px);
+        line-height: 1.6;
+        color: var(--desc-color, #666);
+        margin: 0 !important;
+    }
+
     display: flex;
 
     &.justify-center {
