@@ -32,8 +32,6 @@ require_once __DIR__ . '/inc/class-register.php';
 namespace Gutenlayouts;
 
 function gu_slider_block_assets() {
-
-    // Register Swiper
     wp_register_style(
         'gutenlayouts-swiper-style',
         GUTENLAYOUTS_PLUGIN_URL . 'assets/css/swiper-bundle.min.css',
@@ -57,10 +55,6 @@ function gu_slider_block_assets() {
         '3.4.1',
         true
     );
-    // Enqueue
-    wp_enqueue_style( 'gutenlayouts-swiper-style' );
-    wp_enqueue_script( 'gutenlayouts-view-script' );
-    wp_enqueue_script( 'gutenlayouts-fslightbox-script' );
 }
 
 add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\gu_slider_block_assets' );

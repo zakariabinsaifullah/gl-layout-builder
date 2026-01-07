@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { __ } from '@wordpress/i18n';
 
 import {
+    RichText,
     BlockControls,
     InspectorControls,
     useBlockProps,
@@ -13,11 +14,23 @@ import {
     __experimentalUseColorProps as useColorProps,
     __experimentalGetSpacingClassesAndStyles as useSpacingProps,
     __experimentalGetShadowClassesAndStyles as useShadowProps,
-    __experimentalLinkControl as LinkControl // eslint-disable-line
+    __experimentalLinkControl as LinkControl
 } from '@wordpress/block-editor';
+
 import { link, Icon } from '@wordpress/icons';
-import { PanelBody, RangeControl, Button, Dropdown, BaseControl, ToolbarButton, Popover } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import {
+    PanelBody,
+    RangeControl,
+    Button,
+    Dropdown,
+    BaseControl,
+    ToolbarButton,
+    Popover,
+    __experimentalToggleGroupControlOption as ToggleGroupControlOption,
+    __experimentalToolsPanel as ToolsPanel, // eslint-disable-line
+    __experimentalToolsPanelItem as ToolsPanelItem
+} from '@wordpress/components';
+import { useState, useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -25,6 +38,7 @@ import { useState } from '@wordpress/element';
 import Library from './components/library';
 import QuickInserter from './components/quick-inserter';
 import { icons, getIconByName, getIconType } from '../../utils/icons';
+import { NativeResponsiveControl, NativeToggleControl, NativeTextControl, NativeRangeControl, PanelColorControl } from '../../components';
 
 const folderOpen = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000000">
@@ -32,26 +46,50 @@ const folderOpen = (
     </svg>
 );
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
 import './editor.scss';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @return {WPElement} Element to render.
- */
-export default function Edit({ attributes, setAttributes, className }) {
-    const { iconName, iconSize, customSvgCode, iconType, strokeWidth, justifyContent, href, linkTarget, linkRel } = attributes;
+export default function Edit(props) {
+    const { attributes, setAttributes, className } = props;
+    const {
+        iconName,
+        iconSize,
+        customSvgCode,
+        iconType,
+        strokeWidth,
+        justifyContent,
+        href,
+        linkTarget,
+        linkRel,
+        sizes,
+        resMode,
+        heading,
+        description,
+        showListTitle,
+        showTitle,
+        showDesc,
+        listGap,
+        titleColor,
+        titleSize,
+        descColor,
+        descSize
+    } = attributes;
+    const cssCustomProperties = {
+        ...(listGap && { '--list-gap': `${listGap}px` }),
+        ...(titleColor && { '--title-color': titleColor }),
+        ...(titleSize && { '--title-size': `${titleSize}px` }),
+        ...(descColor && { '--desc-color': descColor }),
+        ...(descSize && { '--desc-size': `${descSize}px` })
+    };
 
+    useEffect(() => {
+        setAttributes({
+            blockStyle: cssCustomProperties
+        });
+    }, [listGap, titleColor, titleSize, descColor, descSize]);
+
+    // states
     const [isEditingURL, setIsEditingURL] = useState(false);
     const [popoverAnchor, setPopoverAnchor] = useState(null);
-
     const [modalState, setModalState] = useState({
         isOpen: false,
         activeTab: 'library'
@@ -91,13 +129,7 @@ export default function Edit({ attributes, setAttributes, className }) {
     // Function to render the current icon
     const renderCurrentIcon = (size = '24') => {
         if (customSvgCode) {
-            return (
-                <div
-                    className="gutenlayouts-custom-svg-container"
-                    dangerouslySetInnerHTML={{ __html: customSvgCode }}
-                    style={{ width: `${size}px`, height: `${size}px` }}
-                />
-            );
+            return <div className="gutenlayouts-custom-svg-container" dangerouslySetInnerHTML={{ __html: customSvgCode }} />;
         }
 
         if (iconName) {
@@ -116,6 +148,7 @@ export default function Edit({ attributes, setAttributes, className }) {
     const shadowProps = useShadowProps(attributes);
 
     const blockProps = useBlockProps({
+        style: cssCustomProperties,
         className: clsx(className, {
             [`is-${iconType}`]: iconType,
             [`justify-${justifyContent}`]: justifyContent
@@ -137,7 +170,6 @@ export default function Edit({ attributes, setAttributes, className }) {
                         })
                     }
                 />
-
                 <ToolbarButton
                     ref={setPopoverAnchor}
                     name="link"
@@ -183,6 +215,25 @@ export default function Edit({ attributes, setAttributes, className }) {
             </BlockControls>
             <InspectorControls>
                 <PanelBody title={__('Settings', 'gutenlayouts')}>
+                    <NativeToggleControl
+                        label={__('Show List', 'gutenlayouts')}
+                        checked={showListTitle}
+                        onChange={value => setAttributes({ showListTitle: value })}
+                    />
+                    {showListTitle && (
+                        <NativeToggleControl
+                            label={__('Show Title', 'gutenlayouts')}
+                            checked={showTitle}
+                            onChange={value => setAttributes({ showTitle: value })}
+                        />
+                    )}
+                    {showListTitle && (
+                        <NativeToggleControl
+                            label={__('Show Description', 'gutenlayouts')}
+                            checked={showDesc}
+                            onChange={value => setAttributes({ showDesc: value })}
+                        />
+                    )}
                     <BaseControl id="gutenlayouts-icon-settings" label={__('Icon', 'gutenlayouts')}>
                         <Dropdown
                             popoverProps={{
@@ -239,16 +290,151 @@ export default function Edit({ attributes, setAttributes, className }) {
                             )}
                         />
                     </BaseControl>
-
-                    <RangeControl
-                        label={__('Icon Size (px)', 'gutenlayouts')}
-                        value={iconSize}
-                        onChange={value => setAttributes({ iconSize: value })}
-                        min={8}
-                        max={256}
-                        __next40pxDefaultSize
-                    />
+                    <NativeResponsiveControl label={__('Icon Size (px)', 'gutenlayouts')} props={props}>
+                        <RangeControl
+                            value={sizes[resMode]}
+                            onChange={value => setAttributes({ sizes: { ...sizes, [resMode]: value } })}
+                            min={8}
+                            max={256}
+                            __next40pxDefaultSize
+                        />
+                    </NativeResponsiveControl>
                 </PanelBody>
+                {showListTitle && (
+                    <PanelBody title={__('List Content', 'gutenlayouts')} initialOpen={false}>
+                        <NativeRangeControl
+                            label={__('Gap ', 'gutenlayouts')}
+                            value={listGap}
+                            onChange={value => setAttributes({ listGap: value })}
+                            min={0}
+                            max={100}
+                        />
+                        {showTitle && (
+                            <NativeTextControl
+                                label={__('Heading', 'gutenlayouts')}
+                                value={heading}
+                                onChange={value => setAttributes({ heading: value })}
+                                placeholder={__('Add heading...', 'gutenlayouts')}
+                            />
+                        )}
+                        {showDesc && (
+                            <NativeTextControl
+                                label={__('Description', 'gutenlayouts')}
+                                value={description}
+                                onChange={value => setAttributes({ description: value })}
+                                placeholder={__('Add description...', 'gutenlayouts')}
+                            />
+                        )}
+                    </PanelBody>
+                )}
+            </InspectorControls>
+            <InspectorControls group="styles">
+                {showTitle && (
+                    <ToolsPanel
+                        label={__('Title', 'gutenlayouts')}
+                        resetAll={() =>
+                            setAttributes({
+                                titleSize: undefined,
+                                titleColor: undefined
+                            })
+                        }
+                    >
+                        <ToolsPanelItem
+                            hasValue={() => !!titleSize}
+                            label={__('Size', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    titleSize: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <NativeRangeControl
+                                label={__('Font Size', 'gutenlayouts')}
+                                value={titleSize}
+                                onChange={value => setAttributes({ titleSize: value })}
+                                min={0}
+                                max={100}
+                                step={1}
+                            />
+                        </ToolsPanelItem>
+
+                        <ToolsPanelItem
+                            hasValue={() => !!titleColor}
+                            label={__('Color', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    titleColor: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <PanelColorControl
+                                label={__('Text Color', 'gutenlayouts')}
+                                colorSettings={[
+                                    {
+                                        value: titleColor,
+                                        onChange: color => setAttributes({ titleColor: color }),
+                                        label: __('Color', 'gutenlayouts')
+                                    }
+                                ]}
+                            />
+                        </ToolsPanelItem>
+                    </ToolsPanel>
+                )}
+                {showDesc && (
+                    <ToolsPanel
+                        label={__('Description', 'gutenlayouts')}
+                        resetAll={() =>
+                            setAttributes({
+                                descSize: undefined,
+                                descColor: undefined
+                            })
+                        }
+                    >
+                        <ToolsPanelItem
+                            hasValue={() => !!descSize}
+                            label={__('Size', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    descSize: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <NativeRangeControl
+                                label={__('Font Size', 'gutenlayouts')}
+                                value={descSize}
+                                onChange={value => setAttributes({ descSize: value })}
+                                min={0}
+                                max={100}
+                                step={1}
+                            />
+                        </ToolsPanelItem>
+
+                        <ToolsPanelItem
+                            hasValue={() => !!descColor}
+                            label={__('Color', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    descColor: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <PanelColorControl
+                                label={__('Color', 'gutenlayouts')}
+                                colorSettings={[
+                                    {
+                                        value: descColor,
+                                        onChange: color => setAttributes({ descColor: color }),
+                                        label: __('Color', 'gutenlayouts')
+                                    }
+                                ]}
+                            />
+                        </ToolsPanelItem>
+                    </ToolsPanel>
+                )}
             </InspectorControls>
 
             <Library
@@ -264,16 +450,43 @@ export default function Edit({ attributes, setAttributes, className }) {
             />
 
             <div {...blockProps}>
-                <div
-                    className={clsx('icon-container', colorProps.className, borderProps.className)}
-                    style={{
-                        ...borderProps.style,
-                        ...colorProps.style,
-                        ...spacingProps.style,
-                        ...shadowProps.style
-                    }}
-                >
-                    {renderCurrentIcon(iconSize)}
+                <div className="gutenlayouts-icon-block-wrapper">
+                    <div
+                        className={clsx('icon-container', colorProps.className, borderProps.className)}
+                        style={{
+                            ...borderProps.style,
+                            ...colorProps.style,
+                            ...spacingProps.style,
+                            ...shadowProps.style,
+                            ...(sizes?.Desktop !== 60 && { '--dsize': `${sizes.Desktop}px` }),
+                            ...(sizes?.Tablet !== 48 && { '--tsize': `${sizes.Tablet}px` }),
+                            ...(sizes?.Mobile !== 32 && { '--msize': `${sizes.Mobile}px` })
+                        }}
+                    >
+                        {renderCurrentIcon(iconSize)}
+                    </div>
+                    {showListTitle && (
+                        <div className="icon-content">
+                            {showTitle && (
+                                <RichText
+                                    tagName="h5"
+                                    value={heading}
+                                    onChange={value => setAttributes({ heading: value })}
+                                    placeholder={__('Add heading...', 'gutenlayouts')}
+                                    className="icon-heading"
+                                />
+                            )}
+                            {showDesc && (
+                                <RichText
+                                    tagName="p"
+                                    value={description}
+                                    onChange={value => setAttributes({ description: value })}
+                                    placeholder={__('Add description...', 'gutenlayouts')}
+                                    className="icon-description"
+                                />
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </>

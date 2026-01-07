@@ -32,15 +32,27 @@
             "padding": true,
             "__experimentalDefaultControls": {
                 "margin": false,
-                "padding": true
+                "padding": false
             }
         },
-
         "shadow": {
             "__experimentalSkipSerialization": true
         }
     },
     "attributes": {
+        "listTitle": {
+            "type": "string"
+        },
+        "listDesc": {
+            "type": "string"
+        },
+        "resMode": {
+            "type": "string",
+            "default": "Desktop"
+        },
+        "blockStyle": {
+            "type": "object"
+        },
         "tagName": {
             "type": "string",
             "default": "div"
@@ -60,6 +72,14 @@
             "type": "number",
             "default": 1.2
         },
+        "sizes": {
+            "type": "object",
+            "default": {
+                "Desktop": 60,
+                "Tablet": 48,
+                "Mobile": 32
+            }
+        },
         "iconSize": {
             "type": "number",
             "default": 60
@@ -78,6 +98,38 @@
         },
         "linkRel": {
             "type": "string"
+        },
+        "heading": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "showListTitle": {
+            "type": "boolean"
+        },
+        "showTitle": {
+            "type": "boolean",
+            "default": "true"
+        },
+        "showDesc": {
+            "type": "boolean",
+            "default": "false"
+        },
+        "listGap": {
+            "type": "number"
+        },
+        "titleColor": {
+            "type": "string"
+        },
+        "titleSize": {
+            "type": "number"
+        },
+        "descColor": {
+            "type": "string"
+        },
+        "descSize": {
+            "type": "number"
         }
     },
     "textdomain": "gutenlayouts",

@@ -1,4 +1,28 @@
 .wp-block-gutenlayouts-icon {
+    /* Icon + text wrapper */
+    .gutenlayouts-icon-block-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--list-gap,);
+    }
+
+    /* Heading */
+    .icon-heading {
+        color: var(--title-color);
+        font-size: var(--title-size, 16px);
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    /* Description */
+    .icon-description {
+        font-size: var(--desc-size, 14px);
+        line-height: 1.6;
+        color: var(--desc-color, #666);
+        margin: 0 !important;
+    }
+
     display: flex;
 
     &.justify-center {
@@ -16,8 +40,9 @@
     }
 
     svg {
-        height: 100%;
-        width: 100%;
+        width: 1em;
+        height: 1em;
+        font-size: var(--msize, 32px);
     }
 
     &.is-fill svg {
@@ -26,5 +51,19 @@
 
     &.is-line svg path {
         stroke: currentColor;
+    }
+
+    // desktop view
+    @media (min-width: 1025px) {
+        svg {
+            font-size: var(--dsize, 60px);
+        }
+    }
+
+    // tablet view
+    @media (min-width: 768px) and (max-width: 1024px) {
+        svg {
+            font-size: var(--tsize, 48px);
+        }
     }
 }

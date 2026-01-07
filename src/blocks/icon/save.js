@@ -1,21 +1,23 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
 import {
-	useBlockProps,
-	__experimentalGetBorderClassesAndStyles as getBorderClassesAndStyles,
-	__experimentalGetColorClassesAndStyles as getColorClassesAndStyles,
-	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
-	__experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles,
-} from "@wordpress/block-editor";
-import { Icon } from "@wordpress/components";
+    RichText,
+    useBlockProps,
+    __experimentalGetBorderClassesAndStyles as getBorderClassesAndStyles,
+    __experimentalGetColorClassesAndStyles as getColorClassesAndStyles,
+    __experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
+    __experimentalGetShadowClassesAndStyles as getShadowClassesAndStyles
+} from '@wordpress/block-editor';
+import { Icon } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
-import { getIconType, getIconByName } from "../../utils/icons";
+import { getIconByName } from '../../utils/icons';
 
 /**
  * Save function for the block.
@@ -26,87 +28,85 @@ import { getIconType, getIconByName } from "../../utils/icons";
  * @return {WPElement} Element to render.
  */
 export default function save({ attributes, className }) {
-	const {
-		iconName,
-		iconSize,
-		customSvgCode,
-		iconType,
-		style,
-		justifyContent,
-		tagName: Tag,
-		href,
-		linkTarget,
-		linkRel,
-	} = attributes;
+    const {
+        iconName,
+        iconSize,
+        customSvgCode,
+        iconType,
+        style,
+        justifyContent,
+        tagName: Tag,
+        href,
+        linkTarget,
+        linkRel,
+        sizes,
+        showDesc,
+        showTitle,
+        showListTitle,
+        heading,
+        description,
+        blockStyle
+    } = attributes;
 
-	// Get block support props
-	const borderProps = getBorderClassesAndStyles(attributes);
-	const colorProps = getColorClassesAndStyles(attributes);
-	const spacingProps = getSpacingClassesAndStyles(attributes);
-	const shadowProps = getShadowClassesAndStyles(attributes);
+    // Get block support props
+    const borderProps = getBorderClassesAndStyles(attributes);
+    const colorProps = getColorClassesAndStyles(attributes);
+    const spacingProps = getSpacingClassesAndStyles(attributes);
+    const shadowProps = getShadowClassesAndStyles(attributes);
 
-	// Outer wrapper block props (only className for alignment or custom classes)
-	const blockProps = useBlockProps.save({
-		className: clsx(className, {
-			[`is-${iconType}`]: iconType,
-			[`justify-${justifyContent}`]: justifyContent,
-		}),
-	});
+    // Outer wrapper block props (only className for alignment or custom classes)
+    const blockProps = useBlockProps.save({
+        style: blockStyle,
+        className: clsx(className, {
+            [`is-${iconType}`]: iconType,
+            [`justify-${justifyContent}`]: justifyContent
+        })
+    });
 
-	// Inner icon container classes and styles
-	const iconClasses = clsx(
-		"icon-container",
-		colorProps.className,
-		borderProps.className,
-		spacingProps.className,
-		shadowProps.className,
-		{
-			"no-border-radius": style?.border?.radius === 0,
-			"has-padding":
-				style?.spacing?.padding &&
-				Object.keys(style.spacing.padding).length > 0,
-		},
-	);
+    // Inner icon container classes and styles
+    const iconClasses = clsx('icon-container', colorProps.className, borderProps.className, spacingProps.className, shadowProps.className, {
+        'no-border-radius': style?.border?.radius === 0,
+        'has-padding': style?.spacing?.padding && Object.keys(style.spacing.padding).length > 0
+    });
 
-	const iconStyle = {
-		...borderProps.style,
-		...colorProps.style,
-		...spacingProps.style,
-		...shadowProps.style,
-		width: `${iconSize}px`,
-		height: `${iconSize}px`,
-	};
+    const iconStyle = {
+        ...borderProps.style,
+        ...colorProps.style,
+        ...spacingProps.style,
+        ...shadowProps.style,
+        ...(sizes && sizes?.Desktop && sizes?.Desktop !== 60 && { '--dsize': `${sizes.Desktop}px` }),
+        ...(sizes && sizes?.Tablet && sizes?.Tablet !== 48 && { '--tsize': `${sizes.Tablet}px` }),
+        ...(sizes && sizes?.Mobile && sizes?.Mobile !== 32 && { '--msize': `${sizes.Mobile}px` })
+    };
 
-	// Render custom SVG if available
-	if (customSvgCode) {
-		return (
-			<Tag
-				{...blockProps}
-				{...(href && { href, target: linkTarget, rel: linkRel })}
-			>
-				<div
-					className={iconClasses}
-					style={iconStyle}
-					dangerouslySetInnerHTML={{ __html: customSvgCode }}
-				/>
-			</Tag>
-		);
-	}
+    // Render custom SVG if available
+    if (customSvgCode) {
+        return (
+            <Tag {...blockProps} {...(href && { href, target: linkTarget, rel: linkRel })}>
+                <div className={iconClasses} style={iconStyle} dangerouslySetInnerHTML={{ __html: customSvgCode }} />
+            </Tag>
+        );
+    }
 
-	// Fallback to default icon
-	const selectedIcon = getIconByName(iconName);
-	if (!selectedIcon) {
-		return null;
-	}
+    // Fallback to default icon
+    const selectedIcon = getIconByName(iconName);
+    if (!selectedIcon) {
+        return null;
+    }
 
-	return (
-		<Tag
-			{...blockProps}
-			{...(href && { href, target: linkTarget, rel: linkRel })}
-		>
-			<div className={iconClasses} style={iconStyle}>
-				<Icon icon={selectedIcon.icon} size={iconSize} />
-			</div>
-		</Tag>
-	);
+    return (
+        <Tag {...blockProps} {...(href && { href, target: linkTarget, rel: linkRel })}>
+            <div className="gutenlayouts-icon-block-wrapper">
+                <div className={iconClasses} style={iconStyle}>
+                    <Icon icon={selectedIcon.icon} size={iconSize} />
+                </div>
+                {showListTitle && (
+                    <div className="icon-content">
+                        {showTitle && <RichText.Content tagName="h5" value={heading} className="icon-heading" />}
+                        {showDesc && <RichText.Content tagName="p" value={description} className="icon-description" />}
+                    </div>
+                )}
+            </div>
+        </Tag>
+    );
 }
