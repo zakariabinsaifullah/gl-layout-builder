@@ -27,9 +27,10 @@ define( 'GUTENLAYOUTS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 
 // Include required files.
+require_once __DIR__ . '/inc/class-api.php';
+require_once __DIR__ . '/inc/class-rest-api.php';
 require_once __DIR__ . '/inc/class-category.php';
 require_once __DIR__ . '/inc/class-register.php';
-namespace Gutenlayouts;
 
 function gu_slider_block_assets() {
     wp_register_style(
@@ -46,18 +47,32 @@ function gu_slider_block_assets() {
         '12.0.3',
         true
     );
+}
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\gu_slider_block_assets' ); // for frontend
 
-    // Register fslightbox
-    wp_register_script(
-        'gutenlayouts-fslightbox-script',
-        GUTENLAYOUTS_PLUGIN_URL . 'assets/js/lightbox/fslightbox.js',
-        [],
-        '3.4.1',
-        true
-    );
+
+
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\gu_slider_block_editor_assets' );
+function gu_slider_block_editor_assets() {
+    $lib_dep_file = GUTENLAYOUTS_PLUGIN_DIR . 'build/library/index.asset.php';
+    if ( file_exists( $lib_dep_file ) ) {
+        $lib_asset = require_once $lib_dep_file;
+        wp_enqueue_script(
+            'gutenlayouts-library-script',
+            GUTENLAYOUTS_PLUGIN_URL . 'build/library/index.js',
+            $lib_asset['dependencies'],
+            $lib_asset['version'],
+            true
+        );
+
+        wp_enqueue_style(
+            'gutenlayouts-library-style',
+            GUTENLAYOUTS_PLUGIN_URL . 'build/library/index.css',
+            [],
+            $lib_asset['version']
+        );
+    }
 }
 
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\gu_slider_block_assets' );
-add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\gu_slider_block_assets' ); // for frontend
 
 

@@ -165,7 +165,6 @@ function ColorControlDropdown({ label, colorValue = {}, onChangeColor, hasHover 
                         value={colorValue.default || ''}
                         onChange={color => {
                             onChangeColor({ ...colorValue, default: color });
-                            console.log(color);
                         }}
                         {...colorGradientSettings}
                         enableAlpha

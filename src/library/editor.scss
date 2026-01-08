@@ -1,0 +1,202 @@
+.gutenlayouts-pattern-library__toolbar-button svg {
+    width: 18px;
+    height: 18px;
+}
+
+.gutenlayouts-modal {
+    img {
+        max-width: 100%;
+    }
+
+    .gutenlayouts-loading {
+        display: flex;
+        justify-content: center;
+        padding: 50px;
+        height: 100%;
+        min-height: 70vh;
+        .components-spinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 50px;
+        }
+    }
+
+    .gutenlayouts-pattern-card {
+        border: 1px solid #e4e4e4;
+        border-radius: 6px;
+        overflow: hidden;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+    }
+
+    .pattern-image {
+        background: #f8f8f8;
+        padding: 10px;
+        border-bottom: 1px solid #e4e4e4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .pattern-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        box-sizing: border-box;
+        gap: 4px;
+    }
+
+    h3.pattern-title {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: #1e1e1e;
+    }
+
+    button.components-button.pattern-import-button {
+        margin: 0;
+        padding: 8px 12px;
+        border: 1px solid #e4e4e4;
+        height: auto;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #1e1e1e;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        svg {
+            margin: 0;
+        }
+    }
+
+    button.components-button.pattern-import-button:hover {
+        color: #ffffff;
+        background: #503aa8;
+        border-color: #503aa8;
+    }
+
+    button.components-button.pattern-import-button[disabled] {
+        cursor: not-allowed;
+        opacity: 0.65;
+        pointer-events: none;
+        color: #ffffff;
+        background: #503aa8;
+        border-color: #503aa8;
+    }
+
+    .gutenlayouts-pagination {
+        margin-top: 50px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .gutenlayouts-pagination button {
+        border: 1px solid #503aa8;
+        padding: 8px 16px;
+        border-radius: 6px;
+        color: #503aa8;
+    }
+
+    .gutenlayouts-pagination button:hover {
+        color: #503aa8 !important;
+        border-color: #503aa8;
+    }
+
+    .gutenlayouts-pagination button[disabled] {
+        cursor: not-allowed;
+        opacity: 0.65;
+        pointer-events: none;
+        color: #1e1e1e;
+        border-color: #e4e4e4;
+    }
+
+    .gutenberlayouts-content-view {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .pattern-categories {
+        width: 200px;
+        min-width: 200px;
+        display: flex;
+        flex-direction: column;
+        height: 90vh;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    button.components-button.pattern-category {
+        background: #f0f0f0;
+        border-radius: 3px;
+        margin-bottom: 0;
+        border-bottom: 1px dashed #fff;
+        padding: 12px 12px;
+        height: auto;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1e1e1e;
+        transition: all 0.3s;
+    }
+
+    button.components-button.pattern-category:hover, button.components-button.pattern-category.active {
+        color: #fff;
+        background: #503aa8;
+    }
+
+    button.components-button.fetch-lastest-data {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 13px;
+        opacity: .5;
+        transition: opacity 0.2s;
+    }
+
+    button.components-button.fetch-lastest-data:hover {
+        opacity: 1;
+    }
+
+
+    // Responsive
+    .gutenlayouts-patterns-grid {
+        column-count: 4;
+        column-gap: 20px;
+    }
+
+    @media (min-width: 1400px) {
+        .gutenlayouts-patterns-grid {
+            column-count: 5;
+        }
+    }
+    @media (max-width: 1200px) {
+        .gutenlayouts-patterns-grid {
+            column-count: 3;
+        }
+        .pattern-info {
+            flex-direction: column;
+            gap: 4px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .gutenlayouts-patterns-grid {
+            column-count: 2;
+        }
+    }
+
+    @media (max-width: 425px) {
+        .gutenlayouts-patterns-grid {
+            column-count: 1;
+        }
+    }
+}

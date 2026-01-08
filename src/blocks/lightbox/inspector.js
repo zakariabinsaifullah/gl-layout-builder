@@ -58,7 +58,7 @@ const Inspector = props => {
                         ]}
                     />
                     <NativeSelectControl
-                        label={__('Content Type', 'gutenlayouts')}
+                        label={__('Content Source', 'gutenlayouts')}
                         value={contentType}
                         options={[
                             { label: __('YouTube', 'gutenlayouts'), value: 'youtube' },
