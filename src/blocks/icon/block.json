@@ -99,37 +99,25 @@
         "linkRel": {
             "type": "string"
         },
+        "showTitle": {
+            "type": "boolean",
+            "default": false
+        },
         "heading": {
             "type": "string"
         },
-        "description": {
-            "type": "string"
-        },
-        "showListTitle": {
-            "type": "boolean"
-        },
-        "showTitle": {
-            "type": "boolean",
-            "default": "true"
-        },
-        "showDesc": {
-            "type": "boolean",
-            "default": "false"
+        "headingTag": {
+            "type": "string",
+            "default": "p"
         },
         "listGap": {
-            "type": "number"
+            "type": "string"
         },
         "titleColor": {
             "type": "string"
         },
         "titleSize": {
-            "type": "number"
-        },
-        "descColor": {
             "type": "string"
-        },
-        "descSize": {
-            "type": "number"
         }
     },
     "textdomain": "gutenlayouts",

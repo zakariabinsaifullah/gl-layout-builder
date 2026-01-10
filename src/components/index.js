@@ -14,4 +14,6 @@ export { default as NativeRangeControl } from './range-control';
 export { default as NativeSelectControl } from './select-control';
 export { default as NativeUnitControl } from './unit-control';
 export { default as NativeTextControl } from './text-control';
+export { default as NativeTextareaControl } from './textarea-control';
 export { default as NativeBoxControl } from './box-control';
+export { default as NativeIconPicker } from './icon-picker';

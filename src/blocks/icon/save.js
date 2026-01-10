@@ -40,11 +40,9 @@ export default function save({ attributes, className }) {
         linkTarget,
         linkRel,
         sizes,
-        showDesc,
         showTitle,
-        showListTitle,
         heading,
-        description,
+        headingTag,
         blockStyle
     } = attributes;
 
@@ -100,10 +98,9 @@ export default function save({ attributes, className }) {
                 <div className={iconClasses} style={iconStyle}>
                     <Icon icon={selectedIcon.icon} size={iconSize} />
                 </div>
-                {showListTitle && (
+                {showTitle && (
                     <div className="icon-content">
-                        {showTitle && <RichText.Content tagName="h5" value={heading} className="icon-heading" />}
-                        {showDesc && <RichText.Content tagName="p" value={description} className="icon-description" />}
+                        <RichText.Content tagName={headingTag} value={heading} className="icon-heading" />
                     </div>
                 )}
             </div>

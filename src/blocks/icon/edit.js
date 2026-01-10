@@ -38,7 +38,15 @@ import { useState, useEffect } from '@wordpress/element';
 import Library from './components/library';
 import QuickInserter from './components/quick-inserter';
 import { icons, getIconByName, getIconType } from '../../utils/icons';
-import { NativeResponsiveControl, NativeToggleControl, NativeTextControl, NativeRangeControl, PanelColorControl } from '../../components';
+import {
+    NativeResponsiveControl,
+    NativeToggleControl,
+    NativeTextControl,
+    NativeRangeControl,
+    PanelColorControl,
+    NativeSelectControl,
+    NativeUnitControl
+} from '../../components';
 
 const folderOpen = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000000">
@@ -59,33 +67,27 @@ export default function Edit(props) {
         justifyContent,
         href,
         linkTarget,
-        linkRel,
         sizes,
         resMode,
         heading,
-        description,
-        showListTitle,
+        headingTag,
         showTitle,
-        showDesc,
         listGap,
         titleColor,
-        titleSize,
-        descColor,
-        descSize
+        titleSize
     } = attributes;
+
     const cssCustomProperties = {
-        ...(listGap && { '--list-gap': `${listGap}px` }),
+        ...(listGap && { '--list-gap': `${listGap}` }),
         ...(titleColor && { '--title-color': titleColor }),
-        ...(titleSize && { '--title-size': `${titleSize}px` }),
-        ...(descColor && { '--desc-color': descColor }),
-        ...(descSize && { '--desc-size': `${descSize}px` })
+        ...(titleSize && { '--title-size': `${titleSize}` })
     };
 
     useEffect(() => {
         setAttributes({
             blockStyle: cssCustomProperties
         });
-    }, [listGap, titleColor, titleSize, descColor, descSize]);
+    }, [listGap, titleColor, titleSize]);
 
     // states
     const [isEditingURL, setIsEditingURL] = useState(false);
@@ -216,24 +218,10 @@ export default function Edit(props) {
             <InspectorControls>
                 <PanelBody title={__('Settings', 'gutenlayouts')}>
                     <NativeToggleControl
-                        label={__('Show List', 'gutenlayouts')}
-                        checked={showListTitle}
-                        onChange={value => setAttributes({ showListTitle: value })}
+                        label={__('Add List Title', 'gutenlayouts')}
+                        checked={showTitle}
+                        onChange={value => setAttributes({ showTitle: value })}
                     />
-                    {showListTitle && (
-                        <NativeToggleControl
-                            label={__('Show Title', 'gutenlayouts')}
-                            checked={showTitle}
-                            onChange={value => setAttributes({ showTitle: value })}
-                        />
-                    )}
-                    {showListTitle && (
-                        <NativeToggleControl
-                            label={__('Show Description', 'gutenlayouts')}
-                            checked={showDesc}
-                            onChange={value => setAttributes({ showDesc: value })}
-                        />
-                    )}
                     <BaseControl id="gutenlayouts-icon-settings" label={__('Icon', 'gutenlayouts')}>
                         <Dropdown
                             popoverProps={{
@@ -300,30 +288,37 @@ export default function Edit(props) {
                         />
                     </NativeResponsiveControl>
                 </PanelBody>
-                {showListTitle && (
-                    <PanelBody title={__('List Content', 'gutenlayouts')} initialOpen={false}>
-                        <NativeRangeControl
+                {showTitle && (
+                    <PanelBody title={__('List Title', 'gutenlayouts')} initialOpen={false}>
+                        <NativeUnitControl
                             label={__('Gap ', 'gutenlayouts')}
                             value={listGap}
                             onChange={value => setAttributes({ listGap: value })}
-                            min={0}
-                            max={100}
                         />
                         {showTitle && (
-                            <NativeTextControl
-                                label={__('Heading', 'gutenlayouts')}
-                                value={heading}
-                                onChange={value => setAttributes({ heading: value })}
-                                placeholder={__('Add heading...', 'gutenlayouts')}
-                            />
-                        )}
-                        {showDesc && (
-                            <NativeTextControl
-                                label={__('Description', 'gutenlayouts')}
-                                value={description}
-                                onChange={value => setAttributes({ description: value })}
-                                placeholder={__('Add description...', 'gutenlayouts')}
-                            />
+                            <>
+                                <NativeSelectControl
+                                    label={__('Select Tag', 'gutenlayouts')}
+                                    value={headingTag}
+                                    onChange={value => setAttributes({ headingTag: value })}
+                                    options={[
+                                        { label: __('H1', 'gutenlayouts'), value: 'h1' },
+                                        { label: __('H2', 'gutenlayouts'), value: 'h2' },
+                                        { label: __('H3', 'gutenlayouts'), value: 'h3' },
+                                        { label: __('H4', 'gutenlayouts'), value: 'h4' },
+                                        { label: __('H5', 'gutenlayouts'), value: 'h5' },
+                                        { label: __('H6', 'gutenlayouts'), value: 'h6' },
+                                        { label: __('Paragraph', 'gutenlayouts'), value: 'p' },
+                                        { label: __('Div', 'gutenlayouts'), value: 'div' }
+                                    ]}
+                                />
+                                <NativeTextControl
+                                    label={__('Title Text', 'gutenlayouts')}
+                                    value={heading}
+                                    onChange={value => setAttributes({ heading: value })}
+                                    placeholder={__('List title...', 'gutenlayouts')}
+                                />
+                            </>
                         )}
                     </PanelBody>
                 )}
@@ -349,13 +344,10 @@ export default function Edit(props) {
                             }}
                             onSelect={() => {}}
                         >
-                            <NativeRangeControl
+                            <NativeUnitControl
                                 label={__('Font Size', 'gutenlayouts')}
                                 value={titleSize}
                                 onChange={value => setAttributes({ titleSize: value })}
-                                min={0}
-                                max={100}
-                                step={1}
                             />
                         </ToolsPanelItem>
 
@@ -370,64 +362,11 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <PanelColorControl
-                                label={__('Text Color', 'gutenlayouts')}
+                                label={__('Color', 'gutenlayouts')}
                                 colorSettings={[
                                     {
                                         value: titleColor,
                                         onChange: color => setAttributes({ titleColor: color }),
-                                        label: __('Color', 'gutenlayouts')
-                                    }
-                                ]}
-                            />
-                        </ToolsPanelItem>
-                    </ToolsPanel>
-                )}
-                {showDesc && (
-                    <ToolsPanel
-                        label={__('Description', 'gutenlayouts')}
-                        resetAll={() =>
-                            setAttributes({
-                                descSize: undefined,
-                                descColor: undefined
-                            })
-                        }
-                    >
-                        <ToolsPanelItem
-                            hasValue={() => !!descSize}
-                            label={__('Size', 'gutenlayouts')}
-                            onDeselect={() => {
-                                setAttributes({
-                                    descSize: undefined
-                                });
-                            }}
-                            onSelect={() => {}}
-                        >
-                            <NativeRangeControl
-                                label={__('Font Size', 'gutenlayouts')}
-                                value={descSize}
-                                onChange={value => setAttributes({ descSize: value })}
-                                min={0}
-                                max={100}
-                                step={1}
-                            />
-                        </ToolsPanelItem>
-
-                        <ToolsPanelItem
-                            hasValue={() => !!descColor}
-                            label={__('Color', 'gutenlayouts')}
-                            onDeselect={() => {
-                                setAttributes({
-                                    descColor: undefined
-                                });
-                            }}
-                            onSelect={() => {}}
-                        >
-                            <PanelColorControl
-                                label={__('Color', 'gutenlayouts')}
-                                colorSettings={[
-                                    {
-                                        value: descColor,
-                                        onChange: color => setAttributes({ descColor: color }),
                                         label: __('Color', 'gutenlayouts')
                                     }
                                 ]}
@@ -465,26 +404,15 @@ export default function Edit(props) {
                     >
                         {renderCurrentIcon(iconSize)}
                     </div>
-                    {showListTitle && (
+                    {showTitle && (
                         <div className="icon-content">
-                            {showTitle && (
-                                <RichText
-                                    tagName="h5"
-                                    value={heading}
-                                    onChange={value => setAttributes({ heading: value })}
-                                    placeholder={__('Add heading...', 'gutenlayouts')}
-                                    className="icon-heading"
-                                />
-                            )}
-                            {showDesc && (
-                                <RichText
-                                    tagName="p"
-                                    value={description}
-                                    onChange={value => setAttributes({ description: value })}
-                                    placeholder={__('Add description...', 'gutenlayouts')}
-                                    className="icon-description"
-                                />
-                            )}
+                            <RichText
+                                tagName={headingTag}
+                                value={heading}
+                                onChange={value => setAttributes({ heading: value })}
+                                placeholder={__('List title...', 'gutenlayouts')}
+                                className="icon-heading"
+                            />
                         </div>
                     )}
                 </div>

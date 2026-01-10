@@ -7,7 +7,9 @@ import {
     __experimentalToggleGroupControlOption as ToggleGroupControlOption,
     __experimentalToolsPanel as ToolsPanel, // eslint-disable-line
     __experimentalToolsPanelItem as ToolsPanelItem,
-    __experimentalDimensionControl as DimensionControl // eslint-disable-line
+    Dropdown,
+    Button,
+    BaseControl
 } from '@wordpress/components';
 
 import {
@@ -17,7 +19,8 @@ import {
     NativeTextControl,
     PanelColorControl,
     NativeRangeControl,
-    NativeBoxControl
+    NativeBoxControl,
+    NativeIconPicker
 } from '../../components';
 
 const Inspector = props => {
@@ -40,13 +43,30 @@ const Inspector = props => {
         icoHvBgColor,
         iconColor,
         titleColor,
-        titleSize
+        titleSize,
+        iconName,
+        iconSize,
+        customSvgCode,
+        iconType,
+        strokeWidth
     } = attributes;
 
     return (
         <>
             <InspectorControls group="settings">
                 <PanelBody title={__('Lightbox Settings', 'gutenlayouts')} initialOpen={true}>
+                    <NativeIconPicker
+                        onIconSelect={(iconName, iconType) => {
+                            setAttributes({ iconName, iconType });
+                        }}
+                        onCustomSvgInsert={({ customSvgCode, iconType, strokeWidth }) => {
+                            setAttributes({ customSvgCode, iconType, strokeWidth });
+                        }}
+                        iconName={iconName}
+                        customSvgCode={customSvgCode}
+                        iconSize={iconSize}
+                        strokeWidth={strokeWidth}
+                    />
                     <NativeToggleGroupControl
                         label={__('Alignment', 'gutenlayouts')}
                         value={alignment}

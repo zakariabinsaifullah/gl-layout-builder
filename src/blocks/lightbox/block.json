@@ -11,8 +11,13 @@
         "html": false,
         "align": ["left", "center", "right", "wide", "full"],
         "spacing": {
+            "__experimentalSkipSerialization": false,
             "margin": true,
-            "padding": true
+            "padding": true,
+            "__experimentalDefaultControls": {
+                "margin": false,
+                "padding": false
+            }
         }
     },
     "attributes": {
@@ -22,6 +27,21 @@
         },
         "blockStyle": {
             "type": "object"
+        },
+        "iconName": {
+            "type": "string",
+            "default": "wordpress"
+        },
+        "customSvgCode": {
+            "type": "string"
+        },
+        "iconType": {
+            "type": "string",
+            "default": "fill"
+        },
+        "strokeWidth": {
+            "type": "number",
+            "default": 1.2
         },
         "alignment": {
             "type": "string",
