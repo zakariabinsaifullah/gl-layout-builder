@@ -1,3 +1,4 @@
+
 .gutenlayouts-pattern-library__toolbar-button svg {
     width: 18px;
     height: 18px;
@@ -145,7 +146,6 @@
         font-size: 13px;
         font-weight: 500;
         color: #1e1e1e;
-        transition: all 0.3s;
     }
 
     button.components-button.pattern-category:hover, button.components-button.pattern-category.active {
@@ -165,7 +165,6 @@
     button.components-button.fetch-lastest-data:hover {
         opacity: 1;
     }
-
 
     // Responsive
     .gutenlayouts-patterns-grid {
@@ -198,5 +197,18 @@
         .gutenlayouts-patterns-grid {
             column-count: 1;
         }
+    }
+}
+
+.gutenlayouts-custom-svg-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        fill: currentColor;
     }
 }

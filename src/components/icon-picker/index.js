@@ -1,11 +1,11 @@
 import { __ } from '@wordpress/i18n';
 import { Dropdown, Button, BaseControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { Icon } from '@wordpress/icons';
 
 import Library from './library';
 import QuickInserter from './quick-inserter';
-import { icons, getIconByName, getIconType } from '../../utils/icons';
+import { getIconType } from '../../utils/icons';
+import { RenderIcon } from '../../helpers';
 
 const folderOpen = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#000000">
@@ -47,23 +47,7 @@ const NativeIconPicker = ({
     };
 
     const handleCustomSvgInsert = ({ customSvgCode, iconType, strokeWidth }) => {
-        onCustomSvgInsert(customSvgCode, iconType, strokeWidth);
-    };
-
-    // Function to render the current icon
-    const renderCurrentIcon = (size = '24') => {
-        if (customSvgCode) {
-            return <div className="gutenlayouts-custom-svg-container" dangerouslySetInnerHTML={{ __html: customSvgCode }} />;
-        }
-
-        if (iconName) {
-            const selectedIcon = getIconByName(iconName);
-            if (selectedIcon) {
-                return <Icon icon={selectedIcon.icon} size={size} />;
-            }
-        }
-
-        return <Icon icon={icons[0].icon} size={size} />;
+        onCustomSvgInsert({ customSvgCode, iconType, strokeWidth });
     };
 
     return (
@@ -98,7 +82,7 @@ const NativeIconPicker = ({
                             >
                                 {!!(iconName || customSvgCode) ? (
                                     <span className="gutenlayouts-icon-settings__indicator">
-                                        <Icon size={20} icon={renderCurrentIcon(20)} />
+                                        <RenderIcon customSvgCode={customSvgCode} iconName={iconName} size={20} />
                                     </span>
                                 ) : (
                                     <span className="gutenlayouts-icon-settings__indicator disabled"></span>

@@ -2,14 +2,8 @@ import { __ } from '@wordpress/i18n';
 import { InspectorControls, MediaUpload } from '@wordpress/block-editor';
 import {
     PanelBody,
-    __experimentalBorderBoxControl as BorderBoxControl,
-    __experimentalToggleGroupControl as ToggleGroupControl,
-    __experimentalToggleGroupControlOption as ToggleGroupControlOption,
     __experimentalToolsPanel as ToolsPanel, // eslint-disable-line
-    __experimentalToolsPanelItem as ToolsPanelItem,
-    Dropdown,
-    Button,
-    BaseControl
+    __experimentalToolsPanelItem as ToolsPanelItem
 } from '@wordpress/components';
 
 import {
@@ -57,7 +51,7 @@ const Inspector = props => {
                 <PanelBody title={__('Lightbox Settings', 'gutenlayouts')} initialOpen={true}>
                     <NativeIconPicker
                         onIconSelect={(iconName, iconType) => {
-                            setAttributes({ iconName, iconType });
+                            setAttributes({ iconName, iconType, customSvgCode: undefined });
                         }}
                         onCustomSvgInsert={({ customSvgCode, iconType, strokeWidth }) => {
                             setAttributes({ customSvgCode, iconType, strokeWidth });
@@ -133,6 +127,7 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <PanelColorControl
+                        
                             colorSettings={[
                                 {
                                     value: lighteffColor,
@@ -174,7 +169,7 @@ const Inspector = props => {
                     </ToolsPanelItem>
                     <ToolsPanelItem
                         hasValue={() => iconColor}
-                        label={__(' Icon Color', 'gutenlayouts')}
+                        label={__(' Colors', 'gutenlayouts')}
                         onDeselect={() => {
                             setAttributes({
                                 iconColor: undefined
@@ -183,36 +178,21 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <PanelColorControl
+                            label={__('Colors', 'gutenlayouts')}
                             colorSettings={[
                                 {
                                     value: iconColor,
                                     onChange: color => setAttributes({ iconColor: color }),
-                                    label: __('Icon Color', 'gutenlayouts')
-                                }
-                            ]}
-                        />
-                    </ToolsPanelItem>
-                    <ToolsPanelItem
-                        hasValue={() => icoHvBgColor}
-                        label={__(' Hover Bg Color', 'gutenlayouts')}
-                        onDeselect={() => {
-                            setAttributes({
-                                icoHvBgColor: undefined
-                            });
-                        }}
-                        onSelect={() => {}}
-                    >
-                        <PanelColorControl
-                            colorSettings={[
+                                    label: __('Color', 'gutenlayouts')
+                                },
                                 {
                                     value: icoHvBgColor,
                                     onChange: color => setAttributes({ icoHvBgColor: color }),
-                                    label: __('Hover Background Color', 'gutenlayouts')
+                                    label: __('Hover Background', 'gutenlayouts')
                                 }
                             ]}
                         />
                     </ToolsPanelItem>
-
                     <ToolsPanelItem
                         label={__('Icon Padding', 'gutenlayouts')}
                         hasValue={() => !!(iconPadding && (iconPadding.top || iconPadding.right || iconPadding.bottom || iconPadding.left))}

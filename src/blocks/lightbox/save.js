@@ -2,6 +2,7 @@
  * WordPress Dependencies
  */
 import { useBlockProps } from '@wordpress/block-editor';
+import { RenderIcon } from '../../helpers';
 
 // iframeUrl function
 const iframeUrl = props => {
@@ -47,6 +48,7 @@ const iframeUrl = props => {
 const Save = props => {
     const { attributes } = props;
     const {
+        blockStyle,
         lightboxType,
         contentCaption,
         enableSubHeading,
@@ -58,7 +60,9 @@ const Save = props => {
         imagePoster,
         imageSize,
         uniqueId,
-        blockStyle
+        customSvgCode,
+        iconName,
+        iconSize
     } = attributes;
 
     const actualUniqueId = uniqueId || 'lightbox-default';
@@ -85,7 +89,7 @@ const Save = props => {
                 )}
                 {showPosterIcon && (
                     <span className="gutenlayouts-btn-icon">
-                        <span dangerouslySetInnerHTML={{ __html: posterIcon }} />
+                        <RenderIcon customSvgCode={customSvgCode} iconName={iconName} size={iconSize} />
                     </span>
                 )}
             </a>
