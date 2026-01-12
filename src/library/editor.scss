@@ -1,252 +1,402 @@
+// Variables
+$primary: #6355ff;
+$primary-hover: #503aa8;
+$bg-app: #f7f9fc;
+$bg-card: #ffffff;
+$text-main: #1a1f36;
+$text-secondary: #4f566b;
+$border-light: #e3e8ee;
+$shadow-sm:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 5px 15px rgba(0, 0, 0, 0.02);
+$shadow-hover:
+    0 15px 35px rgba(50, 50, 93, 0.1),
+    0 5px 15px rgba(0, 0, 0, 0.07);
+$radius: 8px;
+
 .gutenlayouts-pattern-library__toolbar-button svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
 }
 
-.gutenlayouts-modal {
-    img {
-        max-width: 100%;
+// Scoped to the Modal to avoid leaks
+.gutenlayouts-library-modal {
+    // Reset WP Modal styles if needed
+    .components-modal__header {
+        border-bottom: 1px solid $border-light;
+        padding: 20px 30px;
+        background: #fff;
     }
 
+    .components-modal__content {
+        background: $bg-app;
+        padding: 0 !important; // Handle padding internally
+        display: flex;
+        flex-direction: column;
+    }
+
+    // Custom Header
     .gutenlayouts-modal-header {
         display: flex;
         align-items: center;
-        gap: 15px;
-    }
+        gap: 24px;
 
-    h2.gutenlayouts-modal-header-title {
-        font-size: 20px;
-    }
-
-    .gutenlayouts-loading {
-        display: flex;
-        justify-content: center;
-        padding: 50px;
-        height: 100%;
-        min-height: 70vh;
-        .components-spinner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            width: 50px;
-        }
-    }
-
-    .gutenlayouts-pattern-card {
-        border: 1px solid #e4e4e4;
-        border-radius: 6px;
-        overflow: hidden;
-        box-sizing: border-box;
-        margin-bottom: 20px;
-    }
-
-    .pattern-image {
-        background: #f8f8f8;
-        padding: 10px;
-        border-bottom: 1px solid #e4e4e4;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-    }
-
-    .pattern-info {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px;
-        box-sizing: border-box;
-        gap: 4px;
-    }
-
-    h3.pattern-title {
-        margin: 0;
-        padding: 0;
-        font-size: 16px;
-        font-weight: 600;
-        color: #1e1e1e;
-    }
-
-    button.components-button.pattern-import-button {
-        margin: 0;
-        padding: 8px 12px;
-        border: 1px solid #e4e4e4;
-        height: auto;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: 400;
-        color: #1e1e1e;
-        transition: all 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        svg {
+        h2.gutenlayouts-modal-header-title {
             margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: $text-main;
+            letter-spacing: -0.01em;
         }
     }
 
-    button.components-button.pattern-import-button:hover {
-        color: #ffffff;
-        background: #503aa8;
-        border-color: #503aa8;
-    }
-
-    button.components-button.pattern-import-button[disabled] {
-        cursor: not-allowed;
-        opacity: 0.65;
-        pointer-events: none;
-        color: #ffffff;
-        background: #503aa8;
-        border-color: #503aa8;
-    }
-
-    .gutenlayouts-pagination {
-        margin-top: 50px;
+    // Tabs
+    .gutenlayouts-modal-header-tabs {
         display: flex;
-        align-items: center;
-        gap: 15px;
-        justify-content: center;
+        background: #f0f2f5;
+        padding: 4px;
+        border-radius: 8px;
     }
 
-    .gutenlayouts-pagination button {
-        border: 1px solid #503aa8;
-        padding: 8px 16px;
+    button.components-button.gutenlayouts-tab-button {
+        font-size: 13px;
+        font-weight: 600;
+        color: $text-secondary;
+        background: transparent;
+        border: none;
+        padding: 6px 16px;
         border-radius: 6px;
-        color: #503aa8;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        height: 32px;
+        line-height: 1;
+
+        &.active {
+            background: #fff;
+            color: $primary;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        &:hover:not(.active) {
+            color: $text-main;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
     }
 
-    .gutenlayouts-pagination button:hover {
-        color: #503aa8 !important;
-        border-color: #503aa8;
+    // Fetch Button
+    button.components-button.fetch-lastest-data {
+        color: $text-secondary;
+        font-weight: 500;
+
+        &:hover {
+            color: $primary;
+        }
     }
 
-    .gutenlayouts-pagination button[disabled] {
-        cursor: not-allowed;
-        opacity: 0.65;
-        pointer-events: none;
-        color: #1e1e1e;
-        border-color: #e4e4e4;
+    // Layout Containers
+    .gutenlayouts-modal__container {
+        height: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; // Prevent outer scroll
+    }
+
+    .gutenlayouts-modal__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0; // Crucial for nested flex scrolling
+        height: 100%;
     }
 
     .gutenberlayouts-content-view {
         display: flex;
-        align-items: flex-start;
-        gap: 20px;
+        align-items: stretch;
+        flex: 1;
+        min-height: 0; // Crucial for nested flex scrolling
+        height: 100%;
+        overflow: hidden;
     }
 
+    // Sidebar
     .pattern-categories {
-        width: 200px;
-        min-width: 200px;
+        width: 240px;
+        min-width: 240px;
+        background: #fff;
+        border-right: 1px solid $border-light;
+        padding: 20px 10px;
+        overflow-y: auto; // Sidebar scrolls independently
         display: flex;
         flex-direction: column;
-        height: 90vh;
-        overflow-x: hidden;
-        overflow-y: scroll;
+        gap: 2px;
+        height: 100%;
+
+        /* Custom scrollbar */
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #ddd;
+            border-radius: 4px;
+        }
     }
 
     button.components-button.pattern-category {
-        background: #f0f0f0;
-        border-radius: 3px;
-        margin-bottom: 0;
-        border-bottom: 1px dashed #fff;
-        padding: 12px 12px;
-        height: auto;
-        font-size: 13px;
+        width: 100%;
+        text-align: left;
+        justify-content: flex-start;
+        padding: 10px 16px;
+        border: none;
+        background: transparent;
+        color: $text-secondary;
+        font-size: 14px;
         font-weight: 500;
-        color: #1e1e1e;
+        border-radius: 6px;
+        transition: all 0.15s ease;
+        height: auto;
+        flex-shrink: 0; // Prevent shrinking
+
+        &:hover {
+            color: $text-main;
+            background: #f7f9fc;
+        }
+
+        &.active {
+            color: $primary;
+            background: rgba(99, 85, 255, 0.08);
+            font-weight: 600;
+        }
+
+        &:focus {
+            box-shadow: none;
+        }
     }
 
-    button.components-button.pattern-category:hover,
-    button.components-button.pattern-category.active {
-        color: #fff;
-        background: #503aa8;
+    // Content Area
+    .pattern-content-view {
+        flex: 1;
+        padding: 30px 40px;
+        overflow-y: auto; // Content scrolls independently
+        background: $bg-app;
+        height: 100%;
     }
 
-    button.components-button.fetch-lastest-data {
+    // Grid
+    .gutenlayouts-patterns-grid {
+        column-count: 4;
+        column-gap: 24px;
+        margin-bottom: 40px;
+    }
+
+    // Card
+    .gutenlayouts-pattern-card {
+        background: $bg-card;
+        border-radius: 12px;
+        box-shadow: $shadow-sm;
+        margin-bottom: 24px;
+        break-inside: avoid;
+        transition:
+            transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+            box-shadow 0.3s ease;
+        border: 1px solid #e3e8ee;
+        overflow: hidden;
+        position: relative;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: $shadow-hover;
+            z-index: 10;
+        }
+
+        .pattern-image {
+            background: #f4f6f8;
+            padding: 0;
+            border-bottom: 1px solid $border-light;
+            position: relative;
+            overflow: hidden;
+
+            img {
+                display: block;
+                width: 100%;
+                height: auto;
+                transition: transform 0.5s ease;
+            }
+        }
+
+        &:hover .pattern-image img {
+            transform: scale(1.03);
+        }
+
+        .pattern-info {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h3.pattern-title {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: $text-main;
+            // white-space: nowrap;
+            overflow: hidden;
+            // text-overflow: ellipsis;
+            // max-width: 140px;
+        }
+
+        // Import Button
+        button.components-button.pattern-import-button {
+            height: 32px;
+            padding: 0 16px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 20px;
+            background: #fff;
+            color: $text-main;
+            border: 1px solid $border-light;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+
+            &:hover {
+                background: $text-main;
+                color: #fff;
+                border-color: $text-main;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            &[disabled] {
+                opacity: 0.7;
+                background: $border-light;
+                cursor: wait;
+            }
+
+            .dashicons {
+                margin-right: 4px;
+            }
+        }
+    }
+
+    // Pagination
+    .gutenlayouts-pagination {
+        margin-top: 20px;
+        padding-top: 20px;
         display: flex;
         align-items: center;
-        gap: 4px;
-        font-size: 13px;
-        opacity: 0.5;
-        transition: opacity 0.2s;
+        justify-content: center;
+        gap: 12px;
+        border-top: 1px solid $border-light;
+
+        span {
+            font-size: 13px;
+            color: $text-secondary;
+            font-variant-numeric: tabular-nums;
+        }
+
+        button {
+            border: 1px solid $border-light;
+            background: #fff;
+            color: $text-main;
+            font-weight: 500;
+            border-radius: 6px;
+            padding: 6px 14px;
+            transition: all 0.2s;
+
+            &:hover:not([disabled]) {
+                border-color: $primary;
+                color: $primary;
+            }
+
+            &[disabled] {
+                opacity: 0.5;
+                background: #f7f9fc;
+                border-color: $border-light;
+            }
+        }
     }
 
-    button.components-button.fetch-lastest-data:hover {
-        opacity: 1;
+    // Loading / Error
+    .gutenlayouts-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        min-height: 400px;
+        color: $primary;
+    }
+
+    .gutenlayouts-error {
+        margin: 40px;
+        text-align: center;
     }
 
     // Responsive
-    .gutenlayouts-patterns-grid {
-        column-count: 4;
-        column-gap: 20px;
-    }
-
-    @media (min-width: 1400px) {
+    @media (min-width: 1920px) {
         .gutenlayouts-patterns-grid {
             column-count: 5;
         }
     }
-    @media (max-width: 1200px) {
+
+    @media (max-width: 1440px) {
         .gutenlayouts-patterns-grid {
             column-count: 3;
         }
-        .pattern-info {
-            flex-direction: column;
-            gap: 4px;
-        }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1100px) {
         .gutenlayouts-patterns-grid {
             column-count: 2;
         }
     }
 
-    @media (max-width: 425px) {
+    @media (max-width: 782px) {
+        // Core WP sidebar collapse point is often 782px
+        .gutenberlayouts-content-view {
+            flex-direction: column;
+        }
+
+        // Sidebar becomes horizontal scrollable strip
+        .pattern-categories {
+            width: 100%;
+            min-width: auto;
+            height: auto;
+            min-height: auto;
+            max-height: auto;
+            flex-direction: row;
+            overflow-x: auto;
+            overflow-y: hidden;
+            border-right: none;
+            border-bottom: 1px solid $border-light;
+            padding: 10px;
+            flex-shrink: 0;
+        }
+
+        button.components-button.pattern-category {
+            pointer-events: auto;
+            white-space: nowrap;
+            width: auto;
+            margin-bottom: 0;
+            margin-right: 8px;
+        }
+
+        .pattern-content-view {
+            padding: 20px;
+        }
+
+        .gutenlayouts-patterns-grid {
+            column-count: 1;
+            display: block; // Reset grid if it was there, or keep multicolor 1
+        }
+    }
+
+    // Small phones
+    @media (max-width: 480px) {
         .gutenlayouts-patterns-grid {
             column-count: 1;
         }
-    }
-}
-
-.gutenlayouts-custom-svg-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-
-    svg {
-        width: 100%;
-        height: 100%;
-        fill: currentColor;
-    }
-}
-
-// Modal Tabs
-.gutenlayouts-modal-header-tabs {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-button.components-button.gutenlayouts-tab-button {
-    font-size: 14px;
-    font-weight: 500;
-    color: #646cff;
-    background: transparent;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s;
-
-    &.active {
-        background: #646cff;
-        color: #ffffff;
-    }
-
-    &:hover:not(.active) {
-        background: rgba(100, 108, 255, 0.1);
     }
 }
