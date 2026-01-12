@@ -1,4 +1,3 @@
-
 .gutenlayouts-pattern-library__toolbar-button svg {
     width: 18px;
     height: 18px;
@@ -7,6 +6,16 @@
 .gutenlayouts-modal {
     img {
         max-width: 100%;
+    }
+
+    .gutenlayouts-modal-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    h2.gutenlayouts-modal-header-title {
+        font-size: 20px;
     }
 
     .gutenlayouts-loading {
@@ -148,7 +157,8 @@
         color: #1e1e1e;
     }
 
-    button.components-button.pattern-category:hover, button.components-button.pattern-category.active {
+    button.components-button.pattern-category:hover,
+    button.components-button.pattern-category.active {
         color: #fff;
         background: #503aa8;
     }
@@ -158,7 +168,7 @@
         align-items: center;
         gap: 4px;
         font-size: 13px;
-        opacity: .5;
+        opacity: 0.5;
         transition: opacity 0.2s;
     }
 
@@ -210,5 +220,33 @@
         width: 100%;
         height: 100%;
         fill: currentColor;
+    }
+}
+
+// Modal Tabs
+.gutenlayouts-modal-header-tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button.components-button.gutenlayouts-tab-button {
+    font-size: 14px;
+    font-weight: 500;
+    color: #646cff;
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &.active {
+        background: #646cff;
+        color: #ffffff;
+    }
+
+    &:hover:not(.active) {
+        background: rgba(100, 108, 255, 0.1);
     }
 }

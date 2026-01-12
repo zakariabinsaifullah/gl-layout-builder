@@ -2,15 +2,21 @@
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import { Button, Spinner } from '@wordpress/components';
 import { Modal } from '@wordpress/components';
 import classnames from 'classnames';
 
+
+const libCategories = [
+    { slug: 'patterns', name: __('Patterns', 'gutenlayouts') },
+    { slug: 'templates', name: __('Templates', 'gutenlayouts') },
+];
+
 /*
  * Internal dependencies
  */
-import { usePatternsData, usePatternCategoriesData, usePageTemplatesData } from '../api';
+import { usePatternsData, usePatternCategoriesData, usePageTemplatesData, useTemplateCategoriesData } from '../api';
 
 const defaultApi = {
     importImage: async (imageUrl, title) => {
@@ -30,6 +36,7 @@ const defaultApi = {
 };
 
 export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
+    const [activeTab, setActiveTab] = useState('patterns');
     const [view, setView] = useState({
         type: 'list',
         page: 1,
@@ -38,19 +45,41 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
     });
 
     const [importingId, setImportingId] = useState(null);
-    // const { replaceBlocks, createBlock } = useSelect((select) => select('core/block-editor'), []);
-    // const { insertBlocks } = useSelect((select) => select('core/block-editor'), []);
+
+    // reset view on tab change
+    useEffect(() => {
+        setView({
+            type: 'list',
+            page: 1,
+            perPage: 20, 
+            category: '',
+        });
+    }, [activeTab]);
 
     // Data hooks
-    const { patterns, pagination, loading, error, refetch: refetchPatterns } = usePatternsData({
+    const { patterns, pagination: patternsPagination, loading: patternsLoading, error: patternsError, refetch: refetchPatterns } = usePatternsData({
         page: view.page,
         perPage: view.perPage,
         selectedCategory: view.category
     });
 
-    const { categories, refetch: refetchCategories } = usePatternCategoriesData();
+    const { pageTemplates, pagination: templatesPagination, loading: templatesLoading, error: templatesError, refetch: refetchTemplates } = usePageTemplatesData({
+        page: view.page,
+        perPage: view.perPage,
+        selectedCategory: view.category
+    });
 
-    const totalPages = pagination?.totalPages || 0;
+    const { categories: patternCategories, refetch: refetchPatternCategories } = usePatternCategoriesData();
+    const { categories: templateCategories, refetch: refetchTemplateCategories } = useTemplateCategoriesData();
+
+    // Determine current data based on active tab
+    const currentItems = activeTab === 'patterns' ? patterns : pageTemplates;
+    const currentPagination = activeTab === 'patterns' ? patternsPagination : templatesPagination;
+    const loading = activeTab === 'patterns' ? patternsLoading : templatesLoading;
+    const error = activeTab === 'patterns' ? patternsError : templatesError;
+    const currentCategories = activeTab === 'patterns' ? patternCategories : templateCategories;
+
+    const totalPages = currentPagination?.totalPages || 0;
     const hasNext = view.page < totalPages;
     const hasPrev = view.page > 1;
 
@@ -118,7 +147,7 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
             // 5. Replace URLs in blocks
             const replaceUrls = (blocks) => {
                 blocks.forEach(block => {
-                     if (block.attributes) {
+                    if (block.attributes) {
                         Object.keys(block.attributes).forEach(key => {
                             const value = block.attributes[key];
                              if (imageMap.has(value)) {
@@ -154,10 +183,12 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
     };
 
     const onFetchLatestData = async () => {
-        // Trigger refetch for both patterns and categories
+        // Trigger refetch for all data
         await Promise.all([
             refetchPatterns(),
-            refetchCategories()
+            refetchTemplates(),
+            refetchPatternCategories(),
+            refetchTemplateCategories()
         ]);
         setView({ ...view, page: 1 }); // Reset to page 1
     };
@@ -166,11 +197,27 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
         <Modal
             overlayClassName="gutenlayouts-modal__overlay"
             className="gutenlayouts-modal"
-            title={__('Patterns Library', 'gutenlayouts')}
+            title={
+                <div className='gutenlayouts-modal-header'>
+                    <h2 className='gutenlayouts-modal-header-title'>{__('Gutenlayouts', 'gutenlayouts')}</h2>
+                    <div className="gutenlayouts-modal-header-tabs">
+                        {libCategories.map(cat => (
+                            <Button 
+                                key={cat.slug} 
+                                className={classnames('gutenlayouts-tab-button', { 'active': activeTab === cat.slug })}
+                                onClick={() => setActiveTab(cat.slug)}
+                            >
+                                {cat.name}
+                            </Button>
+                        ))}
+                    </div>
+                </div>
+            }
             onRequestClose={onClose}
             isFullScreen={true}
             headerActions={
                 <>
+
                     <Button
                         className='fetch-lastest-data'
                         onClick={onFetchLatestData}
@@ -204,7 +251,7 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
                                 >
                                     {__('All', 'gutenlayouts')}
                                 </Button>
-                                {categories && categories.map((cat) => (
+                                {currentCategories && currentCategories.map((cat) => (
                                     <Button
                                         key={cat.id}
                                         className={ classnames('pattern-category', { 'active': view.category === cat.name })   }
@@ -216,26 +263,26 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
                             </div>
                             <div className="pattern-content-view">
                                 <div className="gutenlayouts-patterns-grid">
-                                    {patterns.map((pattern) => (
-                                        <div key={pattern.id} className="gutenlayouts-pattern-card">
+                                    {currentItems.map((item) => (
+                                        <div key={item.id} className="gutenlayouts-pattern-card">
                                             <div className='pattern-image'>
-                                                <img src={pattern.thumbnail} alt={pattern.title} />
+                                                <img src={item.thumbnail} alt={item.title} />
                                             </div>
                                             <div className="pattern-info">
-                                                <h3 className='pattern-title'>{pattern.title || __('Untitled', 'gutenlayouts')}</h3>
+                                                <h3 className='pattern-title'>{item.title || __('Untitled', 'gutenlayouts')}</h3>
                                                 <Button
                                                     className='pattern-import-button'
-                                                    disabled={importingId === pattern.id}
+                                                    disabled={importingId === item.id}
                                                     onClick={() => {
-                                                        if (pattern?.type === 'pro') {
-                                                            alert('This pattern is a pro pattern');
+                                                        if (item?.type === 'pro') {
+                                                            alert('This item is pro');
                                                         } else {
-                                                            importPattern(pattern);
+                                                            importPattern(item);
                                                         }
                                                     }}
                                                 >
                                                     {
-                                                        pattern?.type === 'pro' ? (
+                                                        item?.type === 'pro' ? (
                                                             <>
                                                                 <span className="dashicons dashicons-lock"></span>
                                                                 {__('Pro', 'gutenlayouts')}
@@ -243,7 +290,7 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
                                                         ) : (
                                                             <>
                                                             {
-                                                                importingId === pattern.id ? (
+                                                                importingId === item.id ? (
                                                                     <>
                                                                         <Spinner />
                                                                         {__('Importing...', 'gutenlayouts')}
@@ -260,7 +307,7 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
                                             </div>
                                             
                                         </div>))}
-                                    {patterns.length === 0 && <p>{__('No patterns found.', 'gutenlayouts')}</p>}
+                                    {currentItems.length === 0 && <p>{__('No items found.', 'gutenlayouts')}</p>}
                                 </div>
 
                                 <div className="gutenlayouts-pagination">

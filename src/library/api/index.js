@@ -145,12 +145,18 @@ export const usePatternsData = ({ page = 1, perPage = 10, selectedCategory = '' 
 /**
  * Custom hook to fetch pages data from External API
  */
-export const usePageTemplatesData = () => {
+export const usePageTemplatesData = ({ page = 1, perPage = 10, selectedCategory = '' } = {}) => {
+    const [allTemplates, setAllTemplates] = useState([]);
     const [pageTemplates, setPageTemplates] = useState([]);
+    const [pagination, setPagination] = useState({ totalItems: 0, totalPages: 0 });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [hasFetched, setHasFetched] = useState(false);
 
+    // Initial fetch of all templates
     const fetchPages = useCallback(async (shouldRefresh = false) => {
+        if (hasFetched && !shouldRefresh) return;
+
         setLoading(true);
         setError(null);
 
@@ -169,45 +175,82 @@ export const usePageTemplatesData = () => {
             }
 
             if (templatesList) {
-                const templatesWithBlocks = templatesList.map(page => {
-                    try {
-                        const parsedBlocks = page.content
-                            ? parse(page.content, {
-                                  __unstableSkipMigrationLogs: true
-                              })
-                            : [];
-
-                        return {
-                            ...page,
-                            parsedBlocks
-                        };
-                    } catch (parseError) {
-                        return {
-                            ...page,
-                            parsedBlocks: []
-                        };
-                    }
-                });
-
-                setPageTemplates(templatesWithBlocks);
+                setAllTemplates(templatesList);
+                setHasFetched(true);
+                // The below logic for parsing is now moved to pagination effect to be efficient
             } else {
                 setError("Couldn't load page templates. Invalid data format.");
-                setPageTemplates([]);
+                setAllTemplates([]);
             }
         } catch (err) {
             setError(err.message || 'Failed to fetch page templates');
-            setPageTemplates([]);
+            setAllTemplates([]);
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [hasFetched]);
 
     useEffect(() => {
         fetchPages();
     }, [fetchPages]);
 
+
+     // Handle pagination and parsing locally
+     useEffect(() => {
+        if (!allTemplates.length) {
+            setPageTemplates([]);
+            setPagination({ totalItems: 0, totalPages: 0 });
+            return;
+        }
+
+        let filteredTemplates = allTemplates;
+
+        // Filter by category if selected
+        if (selectedCategory) {
+            filteredTemplates = allTemplates.filter(template => 
+                template.categories && template.categories.includes(selectedCategory)
+            );
+        }
+
+        const totalItems = filteredTemplates.length;
+        const totalPages = Math.ceil(totalItems / perPage);
+        
+        const startIndex = (page - 1) * perPage;
+        const endIndex = startIndex + perPage;
+        const slicedTemplates = filteredTemplates.slice(startIndex, endIndex);
+
+        // Parse blocks only for the displayed patterns
+        const parsedTemplates = slicedTemplates.map(template => {
+            try {
+                // Check if already parsed
+                if (template.parsedBlocks) return template;
+
+                const parsedBlocks = template.content
+                    ? parse(template.content, {
+                          __unstableSkipMigrationLogs: true
+                      })
+                    : [];
+
+                return {
+                    ...template,
+                    parsedBlocks
+                };
+            } catch (parseError) {
+                return {
+                    ...template,
+                    parsedBlocks: []
+                };
+            }
+        });
+
+        setPageTemplates(parsedTemplates);
+        setPagination({ totalItems, totalPages });
+
+    }, [allTemplates, page, perPage, selectedCategory]);
+
     return {
         pageTemplates,
+        pagination,
         loading,
         error,
         refetch: () => fetchPages(true)
@@ -244,6 +287,52 @@ export const usePatternCategoriesData = ({ post_type = '' } = {}) => {
             console.warn('Error fetching categories (might be not available):', err);
             // setError(err.message || 'Failed to fetch categories'); 
             // Don't set error for categories to avoid blocking UI with error message if it's just 404
+            setCategories([]);
+        } finally {
+            setLoading(false);
+        }
+    }, [post_type]);
+
+    useEffect(() => {
+        fetchCategories();
+    }, [fetchCategories]);
+
+    return {
+        categories,
+        loading,
+        error,
+        refetch: () => fetchCategories(true)
+    };
+};
+
+/**
+ * Custom hook to fetch template categories from External API
+ */
+export const useTemplateCategoriesData = ({ post_type = '' } = {}) => {
+    const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchCategories = useCallback(async (shouldRefresh = false) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const params = {};
+            if (post_type) params.post_type = post_type;
+            if (shouldRefresh) params.refresh = 'true';
+
+            const data = await fetchFromApi('/template_categories', params);
+
+            if (Array.isArray(data)) {
+                setCategories(data);
+            } else if (data && data.categories) {
+                setCategories(data.categories);
+            } else {
+                 setCategories([]);
+            }
+        } catch (err) {
+            console.warn('Error fetching template categories:', err);
             setCategories([]);
         } finally {
             setLoading(false);
