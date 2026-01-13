@@ -1,0 +1,233 @@
+.wp-block-gutenlayouts-tabs {
+    .tab-title {
+        color: var(--titleColor);
+        margin: 0;
+        font-size: var(--titleSize, clamp(1.25rem, 1.5vw, 1.75rem));
+    }
+
+    .tabs-nav {
+        display: flex;
+        align-items: stretch;
+        gap: 10px;
+        justify-content: var(--alignment, flex-start);
+        margin-bottom: 10px;
+        &.max-content {
+            max-width: max-content;
+        }
+    }
+
+    .nav-item {
+        border: 1px solid rgb(153 153 153 / 33%);
+        padding: var(--contentPadding, 20px);
+        box-sizing: border-box;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-align: var(--contentAlign, left);
+        background: var(--tabContentBg, #e6e6e6);
+
+        &.active {
+            border-color: #999;
+        }
+
+        &:hover {
+            background: var(--tabContenthBg, #f5f5f5);
+        }
+
+        &:focus {
+            outline: 2px solid #0073aa;
+            outline-offset: 2px;
+        }
+    }
+
+    .nav-item-inner {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .tab-description {
+        margin: 0 !important;
+        color: var(--descColor);
+        font-size: var(--descSize, clamp(1rem, 1.5vw, 1.25rem));
+    }
+
+    .tabs-content {
+        position: relative;
+        overflow: hidden;
+        min-height: 200px;
+        display: flex;
+        align-items: var(--verticalAlign, flex-start);
+    }
+
+    .tab-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        transition:
+            opacity var(--gutenlayouts-tabs-transition, 0.5s) ease,
+            transform var(--gutenlayouts-tabs-transition, 0.5s) ease;
+        visibility: hidden;
+        z-index: -1;
+
+        &.slide-up {
+            transform: translateY(100%);
+        }
+
+        &.slide-down {
+            transform: translateY(-100%);
+        }
+
+        &.slide-left {
+            transform: translateX(-100%);
+        }
+
+        &.slide-right {
+            transform: translateX(100%);
+        }
+
+        &.zoom-in {
+            transform: scale(0);
+        }
+
+        &.zoom-out {
+            transform: scale(1.5);
+        }
+
+        &.flip-x {
+            transform: rotateX(180deg);
+        }
+
+        &.flip-y {
+            transform: rotateY(180deg);
+        }
+
+        &.rotate {
+            transform: rotate(180deg);
+        }
+
+        &.show {
+            position: relative;
+            z-index: 1;
+            opacity: 1;
+            visibility: visible;
+
+            &.slide-up {
+                transform: translateY(0);
+            }
+
+            &.slide-down {
+                transform: translateY(0);
+            }
+
+            &.slide-left {
+                transform: translateX(0);
+            }
+
+            &.slide-right {
+                transform: translateX(0);
+            }
+
+            &.zoom-in {
+                transform: scale(1);
+            }
+
+            &.zoom-out {
+                transform: scale(1);
+            }
+
+            &.flip-x {
+                transform: rotateX(0);
+            }
+
+            &.flip-y {
+                transform: rotateY(0);
+            }
+
+            &.rotate {
+                transform: rotate(0);
+            }
+
+            &.bounce {
+                animation: bounce var(--gutenlayouts-tabs-transition, 0.5s) linear;
+            }
+
+            &.flash {
+                animation: flash var(--gutenlayouts-tabs-transition, 0.5s) linear;
+            }
+
+            &.pulse {
+                animation: pulse var(--gutenlayouts-tabs-transition, 0.5s) linear;
+            }
+
+            &.shake {
+                animation: shake var(--gutenlayouts-tabs-transition, 0.5s) linear;
+            }
+
+            &.swing {
+                animation: swing var(--gutenlayouts-tabs-transition, 0.5s) linear;
+            }
+
+            &.tada {
+                animation: tada var(--gutenlayouts-tabs-transition, 0.5s) linear;
+            }
+
+            &.wobble {
+                animation: wobble var(--gutenlayouts-tabs-transition, 0.5s) linear;
+            }
+
+            &.jello {
+                animation: jello var(--gutenlayouts-tabs-transition, 0.5s) linear;
+            }
+        }
+    }
+
+    .tab-content {
+        width: 100%;
+    }
+
+    // layout
+    .tabs-wrapper {
+        &.nxt_vertical {
+            display: flex;
+            gap: 20px;
+            .tabs-nav {
+                flex-direction: column;
+                min-width: var(--tabverWidth, 25%);
+                margin-bottom: 0;
+            }
+            .tabs-content {
+                width: 100%;
+            }
+
+            &.va-top {
+                align-items: flex-start;
+            }
+            &.va-center {
+                align-items: center;
+            }
+            &.va-bottom {
+                align-items: flex-end;
+            }
+        }
+    }
+}
+
+// Mobile Device
+@media screen and (max-width: 768px) {
+    .wp-block-gutenlayouts-tabs {
+        .tabs-nav {
+            flex-direction: column;
+        }
+
+        // vertical layout
+        .tabs-wrapper.nxt_vertical {
+            flex-direction: column;
+            .tabs-nav {
+                width: 100%;
+            }
+        }
+    }
+}
