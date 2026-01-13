@@ -3,7 +3,7 @@
  * Plugin Name:       Gutenlayouts
  * Description:       Custom blocks, extensions, core blocks enhancement and pre-designed patterns and templates for Gutenberg editor.
  * Version:           1.0.0
- * Requires at least: 6.0
+ * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            Gutenlayouts
  * Author URI:        https://gutenlayouts.com/

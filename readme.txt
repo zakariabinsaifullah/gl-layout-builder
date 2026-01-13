@@ -1,7 +1,7 @@
 === Gutenlayouts ===
 Contributors: binsaifullah
 Tags: gutenberg design, blocks, patterns, templates, layout, 
-Requires at least: 6.0
+Requires at least: 6.7
 Tested up to: 6.9
 Stable tag: 1.0.0
 Requires PHP: 7.4
@@ -39,6 +39,10 @@ No, Gutenlayouts is designed to work with any WordPress theme that supports the 
 = Can I customize the patterns? =
 
 Yes, all patterns provided by Gutenlayouts are fully customizable using the standard Gutenberg block settings.
+
+
+== Third Party Resources ==
+*   Swiper (v12.0.3) - https://swiperjs.com - License: MIT. Source code: https://github.com/nolimits4web/swiper
 
 == Changelog ==
 
