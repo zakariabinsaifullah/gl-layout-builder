@@ -12,7 +12,11 @@
         "align": ["wide", "full"],
         "spacing": {
             "margin": true,
-            "padding": true
+            "padding": true,
+            "__experimentalDefaultControls": {
+                "margin": false,
+                "padding": false
+            }
         }
     },
     "attributes": {

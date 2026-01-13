@@ -108,7 +108,6 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
 
     const importPattern = async pattern => {
         setImportingId(pattern.id);
-
         try {
             // 1. Get parsed blocks
             let blocks = pattern.parsedBlocks;

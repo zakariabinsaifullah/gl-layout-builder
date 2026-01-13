@@ -83,6 +83,7 @@ $radius: 8px;
 
         &:focus {
             box-shadow: none;
+            outline: none;
         }
     }
 
@@ -173,6 +174,7 @@ $radius: 8px;
 
         &:focus {
             box-shadow: none;
+            outline: none;
         }
     }
 
@@ -273,6 +275,7 @@ $radius: 8px;
                 opacity: 0.7;
                 background: $border-light;
                 cursor: wait;
+                color: $text-secondary;
             }
 
             .dashicons {
@@ -325,8 +328,12 @@ $radius: 8px;
         align-items: center;
         justify-content: center;
         height: 100%;
-        min-height: 400px;
+        min-height: 200px;
         color: $primary;
+        svg {
+            height: 50px;
+            width: 50px;
+        }
     }
 
     .gutenlayouts-error {

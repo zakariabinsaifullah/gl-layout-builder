@@ -1,4 +1,9 @@
 <?php
+/**
+ * API Class.
+ *
+ * @package Gutenlayouts
+ */
 
 namespace Gutenlayouts;
 
@@ -6,29 +11,88 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class Gutenlayouts_Api {
+/**
+ * Handle API requests to the remote server.
+ */
+class Api {
 
-	private static $instance           = null;
+	/**
+	 * Instance of this class.
+	 *
+	 * @var Api
+	 */
+	private static $instance = null;
+
+	/**
+	 * API base URL.
+	 *
+	 * @var string
+	 */
 	private const GUTENLAYOUTS_API_URL = 'https://gutenlayouts.com/wp-json/gutenlayouts/v1';
 
+	/**
+	 * Return an instance of this class.
+	 *
+	 * @return Api A single instance of this class.
+	 */
+	public static function get_instance() {
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Get patterns from the API.
+	 *
+	 * @param array $args Optional arguments.
+	 * @return array|\WP_Error Response data or error.
+	 */
 	public function get_patterns( array $args = array() ) {
 		return $this->request( 'GET', self::GUTENLAYOUTS_API_URL . '/patterns', $args );
 	}
 
+	/**
+	 * Get page templates from the API.
+	 *
+	 * @param array $args Optional arguments.
+	 * @return array|\WP_Error Response data or error.
+	 */
 	public function get_page_templates( array $args = array() ) {
 		return $this->request( 'GET', self::GUTENLAYOUTS_API_URL . '/templates', $args );
 	}
 
+	/**
+	 * Get pattern categories from the API.
+	 *
+	 * @param array $args Optional arguments.
+	 * @return array|\WP_Error Response data or error.
+	 */
 	public function get_pattern_categories( array $args = array() ) {
 		return $this->request( 'GET', self::GUTENLAYOUTS_API_URL . '/patterns/categories', $args );
 	}
 
+	/**
+	 * Get template categories from the API.
+	 *
+	 * @param array $args Optional arguments.
+	 * @return array|\WP_Error Response data or error.
+	 */
 	public function get_template_categories( array $args = array() ) {
 		return $this->request( 'GET', self::GUTENLAYOUTS_API_URL . '/templates/categories', $args );
 	}
 
-	private function request( string $method, string $path, array $body ): array|\WP_Error {
-		if ( $method === 'GET' && ! empty( $body ) ) {
+	/**
+	 * Send a request to the API.
+	 *
+	 * @param string $method HTTP method (GET, POST, etc).
+	 * @param string $path   API endpoint path (full URL).
+	 * @param array  $body   Request body or query parameters.
+	 * @return array|\WP_Error Response data or error.
+	 */
+	private function request( string $method, string $path, array $body ) {
+		if ( 'GET' === $method && ! empty( $body ) ) {
 			$path .= '?' . http_build_query( $body );
 			$body  = null;
 		}
@@ -78,12 +142,5 @@ class Gutenlayouts_Api {
 		}
 
 		return $data;
-	}
-
-	public static function get_instance(): static {
-		if ( self::$instance === null ) {
-			self::$instance = new self();
-		}
-		return self::$instance;
 	}
 }
