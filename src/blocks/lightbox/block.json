@@ -25,6 +25,7 @@
             "type": "string",
             "default": ""
         },
+
         "blockStyle": {
             "type": "object"
         },
@@ -123,6 +124,17 @@
         },
         "iconColor": {
             "type": "string"
+        },
+        "enableAnimation": {
+            "type": "boolean",
+            "default": true
+        },
+        "iconBgColor": {
+            "type": "string"
+        },
+        "animationType": {
+            "type": "string",
+            "default": "pulse"
         }
     },
 

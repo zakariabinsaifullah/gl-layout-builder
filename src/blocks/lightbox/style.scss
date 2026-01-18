@@ -11,8 +11,9 @@
     text-decoration: none;
 
     svg {
-        width: var(--svg-size, 22px);
-        height: var(--svg-size, 22px);
+        width: var(--svg-size, 40px);
+        height: var(--svg-size, 40px);
+        fill: var(--icon-color, #5c08f7);
         display: block;
     }
 }
@@ -35,8 +36,9 @@
         padding: var(--icon-padding, 15px 15px 15px 15px);
         border: 1px solid #49494f;
         border-radius: 50%;
+        background-color: var(--ico-bg-color);
         transition: transform 0.4s cubic-bezier(0.1, 0, 0.3, 1);
-        animation: continuousHoverEffect 2s infinite;
+        animation: var(--lightbox-animation, continuousHoverEffect 2s infinite);
         overflow: hidden;
 
         &::before {
@@ -74,24 +76,76 @@
 // Continuous hover animation
 @keyframes continuousHoverEffect {
     0% {
-        transform: scale(1);
         box-shadow:
             0 0 0 0 var(--lighteff-color, rgba(38, 103, 255, 0.4)),
             0 0 0 0 var(--lighteff-color, rgba(38, 103, 255, 0.4));
     }
     50% {
-        transform: scale(1.1);
         box-shadow:
             0 0 0 15px rgba(38, 103, 255, 0),
             0 0 0 30px rgba(38, 103, 255, 0);
         opacity: 0.7;
     }
     100% {
-        transform: scale(1);
         box-shadow:
             0 0 0 0 rgba(38, 103, 255, 0),
             0 0 0 0 rgba(38, 103, 255, 0);
         opacity: 0.8;
+    }
+}
+
+// Radar / Sonar Effect
+@keyframes radarEffect {
+    0% {
+        box-shadow: 0 0 0 0 var(--lighteff-color, rgba(38, 103, 255, 0.4));
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(38, 103, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 20px rgba(38, 103, 255, 0);
+    }
+}
+
+// Heartbeat Effect
+@keyframes heartbeatEffect {
+    0% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.1);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.1);
+    }
+    70% {
+        transform: scale(1);
+    }
+}
+
+// Glow Effect (Neon Pulse)
+@keyframes glowEffect {
+    0% {
+        box-shadow: 0 0 5px var(--lighteff-color, rgba(38, 103, 255, 0.6));
+    }
+    50% {
+        box-shadow: 0 0 25px var(--lighteff-color, rgba(38, 103, 255, 0.8));
+    }
+    100% {
+        box-shadow: 0 0 5px var(--lighteff-color, rgba(38, 103, 255, 0.6));
+    }
+}
+
+// Rotate Effect
+@keyframes rotateEffect {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
 

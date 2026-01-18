@@ -1,7 +1,7 @@
 /**
  * WordPress Dependencies
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 import { RenderIcon } from '../../helpers';
 
 // iframeUrl function
@@ -62,7 +62,8 @@ const Save = props => {
         uniqueId,
         customSvgCode,
         iconName,
-        iconSize
+        iconSize,
+        contentType
     } = attributes;
 
     const actualUniqueId = uniqueId || 'lightbox-default';
@@ -81,26 +82,12 @@ const Save = props => {
                 data-fslightbox={actualUniqueId}
                 data-caption={contentCaption}
             >
-                {lightboxType !== 'poster' && (
-                    <span className="gutenlayouts-btn-text">
-                        <small>{enableSubHeading && buttonHeadingText}</small>
-                        {enableHeading && buttonText}
-                    </span>
-                )}
                 {showPosterIcon && (
                     <span className="gutenlayouts-btn-icon">
                         <RenderIcon customSvgCode={customSvgCode} iconName={iconName} size={iconSize} />
                     </span>
                 )}
             </a>
-            {lightboxType === 'poster' && imagePoster && (
-                <div className="gutenlayouts-poster-img">
-                    <img
-                        src={imagePoster.sizes && imagePoster.sizes[imageSize] ? imagePoster.sizes[imageSize].url : imagePoster.url}
-                        alt={imagePoster.alt}
-                    />
-                </div>
-            )}
             <div id={`${uniqueId}`} className="gutenlayouts-lightbox-content">
                 {VideoURL && (
                     <iframe
@@ -110,6 +97,7 @@ const Save = props => {
                         allow="autoplay; fullscreen"
                     />
                 )}
+                {contentType === 'content' && <InnerBlocks.Content />}
             </div>
         </div>
     );

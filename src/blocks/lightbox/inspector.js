@@ -3,7 +3,8 @@ import { InspectorControls, MediaUpload } from '@wordpress/block-editor';
 import {
     PanelBody,
     __experimentalToolsPanel as ToolsPanel, // eslint-disable-line
-    __experimentalToolsPanelItem as ToolsPanelItem
+    __experimentalToolsPanelItem as ToolsPanelItem,
+    Button
 } from '@wordpress/components';
 
 import {
@@ -18,31 +19,24 @@ import {
 } from '../../components';
 
 const Inspector = props => {
-    const { attributes, setAttributes } = props;
+    const { attributes, setAttributes, onOpenContentModal } = props;
     const {
-        lightboxType,
         contentType,
         youtubeUrl,
         vimeoUrl,
-        googleMapUrl,
-        buttonText,
-        enableHeading,
-        enableSubHeading,
-        buttonHeadingText,
-        showPosterIcon,
         alignment,
         lighteffColor,
         svgSize,
         iconPadding,
         icoHvBgColor,
         iconColor,
-        titleColor,
-        titleSize,
         iconName,
         iconSize,
         customSvgCode,
-        iconType,
-        strokeWidth
+        strokeWidth,
+        enableAnimation,
+        iconBgColor,
+        animationType
     } = attributes;
 
     return (
@@ -77,7 +71,7 @@ const Inspector = props => {
                         options={[
                             { label: __('YouTube', 'gutenlayouts'), value: 'youtube' },
                             { label: __('Vimeo', 'gutenlayouts'), value: 'vimeo' },
-                            { label: __('Google Map', 'gutenlayouts'), value: 'googleMap' }
+                            { label: __('Any Content', 'gutenlayouts'), value: 'content' }
                         ]}
                         onChange={value => setAttributes({ contentType: value })}
                     />
@@ -97,12 +91,30 @@ const Inspector = props => {
                             placeholder="https://vimeo.com/VIDEO_ID"
                         />
                     )}
-                    {contentType === 'googleMap' && (
-                        <NativeTextControl
-                            label={__('Google Map Embed URL', 'gutenlayouts')}
-                            value={googleMapUrl}
-                            onChange={value => setAttributes({ googleMapUrl: value })}
-                            placeholder="https://www.google.com/maps/embed?pb=..."
+                    {contentType === 'content' && (
+                        <Button variant="secondary" onClick={onOpenContentModal}>
+                            {__('Edit Popup Content', 'gutenlayouts')}
+                        </Button>
+                    )}
+                </PanelBody>
+                <PanelBody title={__('Lightbox Effect', 'gutenlayouts')} initialOpen={false}>
+                    <NativeToggleControl
+                        label={__('Animation Effect', 'gutenlayouts')}
+                        checked={enableAnimation}
+                        onChange={value => setAttributes({ enableAnimation: value })}
+                    />
+                    {enableAnimation && (
+                        <NativeSelectControl
+                            label={__('Animation Type', 'gutenlayouts')}
+                            value={animationType}
+                            options={[
+                                { label: __('Pulse (Default)', 'gutenlayouts'), value: 'pulse' },
+                                { label: __('Radar', 'gutenlayouts'), value: 'radar' },
+                                { label: __('Heartbeat', 'gutenlayouts'), value: 'heartbeat' },
+                                { label: __('Glow', 'gutenlayouts'), value: 'glow' },
+                                { label: __('Rotate', 'gutenlayouts'), value: 'rotate' }
+                            ]}
+                            onChange={value => setAttributes({ animationType: value })}
                         />
                     )}
                 </PanelBody>
@@ -127,7 +139,6 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <PanelColorControl
-                        
                             colorSettings={[
                                 {
                                     value: lighteffColor,
@@ -184,6 +195,11 @@ const Inspector = props => {
                                     value: iconColor,
                                     onChange: color => setAttributes({ iconColor: color }),
                                     label: __('Color', 'gutenlayouts')
+                                },
+                                {
+                                    value: iconBgColor,
+                                    onChange: color => setAttributes({ iconBgColor: color }),
+                                    label: __('Background', 'gutenlayouts')
                                 },
                                 {
                                     value: icoHvBgColor,

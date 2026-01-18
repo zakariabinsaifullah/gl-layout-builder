@@ -1,0 +1,107 @@
+.gutenlayouts-lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000; /* High enough to cover content but lower than WP Inserter/Admin UI */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.gutenlayouts-lightbox-popup {
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin; /* Firefox */
+
+    /* Custom Scrollbar for Chrome/Edge/Safari */
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 0 8px 8px 0;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #cdcdcd;
+        border-radius: 6px;
+        border: 3px solid #f0f0f0;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #a6a6a6;
+    }
+}
+
+/* Force WP interface elements (like the Inserter sidebar and Popovers) above our overlay */
+.edit-post-editor-regions__secondary-sidebar,
+.interface-interface-skeleton__secondary-sidebar,
+.components-popover {
+    z-index: 100000 !important;
+}
+
+.gutenlayouts-lightbox-header {
+    flex-shrink: 0; /* Header stays fixed size */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    background: #fff; /* Ensure opaque */
+
+    h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
+.gutenlayouts-lightbox-close {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background 0.1s;
+}
+
+.gutenlayouts-lightbox-content-area {
+    flex-grow: 1; /* Takes remaining space */
+    overflow-y: auto; /* Internal scroll */
+    padding: 20px;
+    min-height: 200px;
+    /* Custom scrollbar for webkit */
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
