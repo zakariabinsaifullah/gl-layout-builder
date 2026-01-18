@@ -1,4 +1,4 @@
-=== Gutenlayouts ===
+=== Bin Gutenlayouts ===
 Contributors: binsaifullah
 Tags: gutenberg design, blocks, patterns, templates, layout, 
 Requires at least: 6.7
@@ -46,5 +46,8 @@ Yes, all patterns provided by Gutenlayouts are fully customizable using the stan
 
 == Changelog ==
 
+= 1.0.1 =
+* Rename the Plugin's Display Name
+
 = 1.0.0 =
-*   Initial release.
+* Initial release.
