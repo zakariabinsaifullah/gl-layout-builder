@@ -47,14 +47,40 @@ class Blocks {
 	 * Registers blocks from the blocks-manifest.php file.
 	 */
 	public function register_blocks() {
+		// Get enabled blocks from settings; default to all only on first install.
+		$raw_settings    = get_option( 'gllb_settings', false );
+		$manifest_data   = require GLLB_PLUGIN_DIR . 'build/blocks-manifest.php';
+		$all_blocks      = array_keys( $manifest_data );
+		$enabled_blocks  = array();
+
+		if ( false === $raw_settings ) {
+			$enabled_blocks = $all_blocks; // First load: enable everything.
+		} else {
+			$enabled_blocks = isset( $raw_settings['blocks'] ) ? (array) $raw_settings['blocks'] : array();
+		}
+
+		// Register blocks using modern approach if available.
 		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
-			wp_register_block_types_from_metadata_collection( GLLB_PLUGIN_DIR . 'build/blocks', GLLB_PLUGIN_DIR . 'build/blocks-manifest.php' );
+			// Filter manifest to only include enabled blocks.
+			$filtered_manifest = array();
+			foreach ( $manifest_data as $block_type => $block_data ) {
+				if ( in_array( $block_type, $enabled_blocks, true ) ) {
+					$filtered_manifest[ $block_type ] = $block_data;
+				}
+			}
+
+			// Register enabled blocks.
+			foreach ( array_keys( $filtered_manifest ) as $block_type ) {
+				register_block_type( GLLB_PLUGIN_DIR . "build/blocks/{$block_type}" );
+			}
 			return;
 		}
 
-		$manifest_data = require GLLB_PLUGIN_DIR . 'build/blocks-manifest.php';
-		foreach ( array_keys( $manifest_data ) as $block_type ) {
-			register_block_type( GLLB_PLUGIN_DIR . "build/blocks/{$block_type}" );
+		// Fallback for older WordPress versions.
+		foreach ( $all_blocks as $block_type ) {
+			if ( in_array( $block_type, $enabled_blocks, true ) ) {
+				register_block_type( GLLB_PLUGIN_DIR . "build/blocks/{$block_type}" );
+			}
 		}
 	}
 }

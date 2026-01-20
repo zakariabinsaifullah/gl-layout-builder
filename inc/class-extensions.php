@@ -40,7 +40,30 @@ class Extensions {
 	 * Constructor.
 	 */
 	private function __construct() {
-		add_action( 'wp_head', array( $this, 'visibility_inline_styles' ) );
+		// Check if visibility extension is enabled.
+		if ( $this->is_extension_enabled( 'visibility' ) ) {
+			add_action( 'wp_head', array( $this, 'visibility_inline_styles' ) );
+		}
+	}
+
+	/**
+	 * Check if an extension is enabled.
+	 *
+	 * @param string $extension_id Extension ID to check.
+	 * @return bool True if enabled, false otherwise.
+	 */
+	private function is_extension_enabled( $extension_id ) {
+		$raw_settings       = get_option( 'gllb_settings', false );
+		$enabled_extensions = array();
+
+		// If no settings saved yet, enable all extensions by default.
+		if ( false === $raw_settings ) {
+			return true;
+		}
+
+		$enabled_extensions = isset( $raw_settings['extensions'] ) ? (array) $raw_settings['extensions'] : array();
+
+		return in_array( $extension_id, $enabled_extensions, true );
 	}
 
 	/**

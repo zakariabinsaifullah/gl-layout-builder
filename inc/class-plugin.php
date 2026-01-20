@@ -61,6 +61,9 @@ class Plugin {
 		// Initialize Rest API.
 		Rest_Api::get_instance()->init();
 
+		// Initialize Admin Page.
+		Admin::get_instance();
+
 		// Initialize Block Registration.
 		Blocks::get_instance();
 
