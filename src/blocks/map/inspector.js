@@ -10,35 +10,35 @@ const Inspector = props => {
     return (
         <>
             <InspectorControls group="settings">
-                <PanelBody title={__('Settings', 'gutenlayouts')} initialOpen={true}>
+                <PanelBody title={__('Settings', 'gl-layout-builder')} initialOpen={true}>
                     <NativeTextControl
-                        label={__('Enter a Location', 'gutenlayouts')}
+                        label={__('Enter a Location', 'gl-layout-builder')}
                         value={address}
                         onChange={v => setAttributes({ address: v })}
-                        placeholder={__('Enter a Location', 'gutenlayouts')}
+                        placeholder={__('Enter a Location', 'gl-layout-builder')}
                     />
                 </PanelBody>
-                <PanelBody title={__('Options', 'gutenlayouts')} initialOpen={false}>
+                <PanelBody title={__('Options', 'gl-layout-builder')} initialOpen={false}>
                     <NativeToggleGroupControl
-                        label={__('Map Type', 'gutenlayouts')}
+                        label={__('Map Type', 'gl-layout-builder')}
                         value={type}
                         onChange={type => {
                             setAttributes({ type });
                         }}
                         options={[
-                            { label: __('Roadmap', 'gutenlayouts'), value: 'roadmap' },
-                            { label: __('Satellite', 'gutenlayouts'), value: 'satellite' }
+                            { label: __('Roadmap', 'gl-layout-builder'), value: 'roadmap' },
+                            { label: __('Satellite', 'gl-layout-builder'), value: 'satellite' }
                         ]}
                     />
                     <NativeRangeControl
-                        label={__('Zoom', 'gutenlayouts')}
+                        label={__('Zoom', 'gl-layout-builder')}
                         value={zoom}
                         onChange={value => setAttributes({ zoom: value })}
                         min={1}
                         max={20}
                         step={1}
                     />
-                    <NativeResponsiveControl label={__('Height', 'gutenlayouts')} props={props}>
+                    <NativeResponsiveControl label={__('Height', 'gl-layout-builder')} props={props}>
                         <NativeRangeControl
                             value={height[resMode]}
                             onChange={value => setAttributes({ height: { ...height, [resMode]: value } })}

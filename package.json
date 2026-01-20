@@ -1,5 +1,5 @@
 {
-    "name": "gutenlayouts",
+    "name": "gl-layout-builder",
     "version": "0.1.0",
     "description": "Example block scaffolded with Create Block tool.",
     "author": "The WordPress Contributors",
@@ -33,11 +33,10 @@
         "rangeStart": 0
     },
     "devDependencies": {
-        "@wordpress/scripts": "^31.1.0"
+        "@wordpress/scripts": "^31.3.0"
     },
     "dependencies": {
-        "@wordpress/dataviews": "^11.1.0",
-        "@wordpress/icons": "^11.3.0",
+        "@wordpress/icons": "^11.5.0",
         "classnames": "^2.5.1"
     }
 }

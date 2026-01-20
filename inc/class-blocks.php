@@ -2,10 +2,10 @@
 /**
  * Block Registration Class.
  *
- * @package Gutenlayouts
+ * @package gl-layout-builder
  */
 
-namespace Gutenlayouts;
+namespace GLLayoutBuilder;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -48,13 +48,13 @@ class Blocks {
 	 */
 	public function register_blocks() {
 		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
-			wp_register_block_types_from_metadata_collection( GUTENLAYOUTS_PLUGIN_DIR . 'build/blocks', GUTENLAYOUTS_PLUGIN_DIR . 'build/blocks-manifest.php' );
+			wp_register_block_types_from_metadata_collection( GLLB_PLUGIN_DIR . 'build/blocks', GLLB_PLUGIN_DIR . 'build/blocks-manifest.php' );
 			return;
 		}
 
-		$manifest_data = require GUTENLAYOUTS_PLUGIN_DIR . 'build/blocks-manifest.php';
+		$manifest_data = require GLLB_PLUGIN_DIR . 'build/blocks-manifest.php';
 		foreach ( array_keys( $manifest_data ) as $block_type ) {
-			register_block_type( GUTENLAYOUTS_PLUGIN_DIR . "build/blocks/{$block_type}" );
+			register_block_type( GLLB_PLUGIN_DIR . "build/blocks/{$block_type}" );
 		}
 	}
 }

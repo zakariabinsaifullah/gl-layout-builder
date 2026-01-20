@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import classNames from 'classnames';
 
 /**
  * WordPress dependencies
@@ -55,17 +55,24 @@ export default function save({ attributes, className }) {
     // Outer wrapper block props (only className for alignment or custom classes)
     const blockProps = useBlockProps.save({
         style: blockStyle,
-        className: clsx(className, {
+        className: classNames(className, {
             [`is-${iconType}`]: iconType,
             [`justify-${justifyContent}`]: justifyContent
         })
     });
 
     // Inner icon container classes and styles
-    const iconClasses = clsx('icon-container', colorProps.className, borderProps.className, spacingProps.className, shadowProps.className, {
-        'no-border-radius': style?.border?.radius === 0,
-        'has-padding': style?.spacing?.padding && Object.keys(style.spacing.padding).length > 0
-    });
+    const iconClasses = classNames(
+        'icon-container',
+        colorProps.className,
+        borderProps.className,
+        spacingProps.className,
+        shadowProps.className,
+        {
+            'no-border-radius': style?.border?.radius === 0,
+            'has-padding': style?.spacing?.padding && Object.keys(style.spacing.padding).length > 0
+        }
+    );
 
     const iconStyle = {
         ...borderProps.style,

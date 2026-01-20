@@ -265,59 +265,59 @@ import {
 const categories = [
     {
         slug: 'all',
-        name: __('All Icons', 'gutenlayouts')
+        name: __('All Icons', 'gl-layout-builder')
     },
     {
         slug: 'arrows',
-        name: __('Arrows', 'gutenlayouts')
+        name: __('Arrows', 'gl-layout-builder')
     },
     {
         slug: 'editor',
-        name: __('Editor', 'gutenlayouts')
+        name: __('Editor', 'gl-layout-builder')
     },
     {
         slug: 'actions',
-        name: __('Actions', 'gutenlayouts')
+        name: __('Actions', 'gl-layout-builder')
     },
     {
         slug: 'devices',
-        name: __('Devices', 'gutenlayouts')
+        name: __('Devices', 'gl-layout-builder')
     },
     {
         slug: 'interface',
-        name: __('Interface', 'gutenlayouts')
+        name: __('Interface', 'gl-layout-builder')
     },
     {
         slug: 'media',
-        name: __('Media', 'gutenlayouts')
+        name: __('Media', 'gl-layout-builder')
     },
     {
         slug: 'format',
-        name: __('Formatting', 'gutenlayouts')
+        name: __('Formatting', 'gl-layout-builder')
     },
     {
         slug: 'layout',
-        name: __('Layout', 'gutenlayouts')
+        name: __('Layout', 'gl-layout-builder')
     },
     {
         slug: 'tables',
-        name: __('Tables', 'gutenlayouts')
+        name: __('Tables', 'gl-layout-builder')
     },
     {
         slug: 'posts',
-        name: __('Posts & Pages', 'gutenlayouts')
+        name: __('Posts & Pages', 'gl-layout-builder')
     },
     {
         slug: 'comments',
-        name: __('Comments', 'gutenlayouts')
+        name: __('Comments', 'gl-layout-builder')
     },
     {
         slug: 'ecommerce',
-        name: __('E-Commerce', 'gutenlayouts')
+        name: __('E-Commerce', 'gl-layout-builder')
     },
     {
         slug: 'misc',
-        name: __('Miscellaneous', 'gutenlayouts')
+        name: __('Miscellaneous', 'gl-layout-builder')
     }
 ];
 
@@ -328,209 +328,209 @@ const icons = [
     // Original icons
     {
         name: 'wordpress',
-        title: __('WordPress', 'gutenlayouts'),
+        title: __('WordPress', 'gl-layout-builder'),
         icon: wordpress,
         categories: ['misc'],
         isDefault: true
     },
     {
         name: 'paragraph',
-        title: __('Paragraph', 'gutenlayouts'),
+        title: __('Paragraph', 'gl-layout-builder'),
         icon: paragraph,
         categories: ['editor']
     },
     {
         name: 'share',
-        title: __('Share', 'gutenlayouts'),
+        title: __('Share', 'gl-layout-builder'),
         icon: share,
         categories: ['actions']
     },
     {
         name: 'star-filled',
-        title: __('Star Filled', 'gutenlayouts'),
+        title: __('Star Filled', 'gl-layout-builder'),
         icon: starFilled,
         categories: ['interface'],
         isDefault: true
     },
     {
         name: 'star-empty',
-        title: __('Star Empty', 'gutenlayouts'),
+        title: __('Star Empty', 'gl-layout-builder'),
         icon: starEmpty,
         categories: ['interface']
     },
     {
         name: 'check',
-        title: __('Check', 'gutenlayouts'),
+        title: __('Check', 'gl-layout-builder'),
         icon: check,
         categories: ['interface'],
         isDefault: true
     },
     {
         name: 'menu',
-        title: __('Menu', 'gutenlayouts'),
+        title: __('Menu', 'gl-layout-builder'),
         icon: menu,
         categories: ['interface']
     },
     {
         name: 'help',
-        title: __('Help', 'gutenlayouts'),
+        title: __('Help', 'gl-layout-builder'),
         icon: help,
         categories: ['interface']
     },
     {
         name: 'globe',
-        title: __('Globe', 'gutenlayouts'),
+        title: __('Globe', 'gl-layout-builder'),
         icon: globe,
         categories: ['misc']
     },
     {
         name: 'gallery',
-        title: __('Gallery', 'gutenlayouts'),
+        title: __('Gallery', 'gl-layout-builder'),
         icon: gallery,
         categories: ['editor', 'media']
     },
     // {
     //     name: 'edit',
-    //     title: __('Edit', 'gutenlayouts'),
+    //     title: __('Edit', 'gl-layout-builder'),
     //     icon: edit,
     //     categories: ['actions']
     // },
     {
         name: 'cloud',
-        title: __('Cloud', 'gutenlayouts'),
+        title: __('Cloud', 'gl-layout-builder'),
         icon: cloud,
         categories: ['misc']
     },
     {
         name: 'archive',
-        title: __('Archive', 'gutenlayouts'),
+        title: __('Archive', 'gl-layout-builder'),
         icon: archive,
         categories: ['misc']
     },
     {
         name: 'settings',
-        title: __('Settings', 'gutenlayouts'),
+        title: __('Settings', 'gl-layout-builder'),
         icon: settings,
         categories: ['interface']
     },
     {
         name: 'home',
-        title: __('Home', 'gutenlayouts'),
+        title: __('Home', 'gl-layout-builder'),
         icon: home,
         categories: ['misc']
     },
     // {
     //     name: 'warning',
-    //     title: __('Warning', 'gutenlayouts'),
+    //     title: __('Warning', 'gl-layout-builder'),
     //     icon: warning,
     //     categories: ['interface']
     // },
     {
         name: 'info',
-        title: __('Info', 'gutenlayouts'),
+        title: __('Info', 'gl-layout-builder'),
         icon: info,
         categories: ['interface']
     },
     {
         name: 'search',
-        title: __('Search', 'gutenlayouts'),
+        title: __('Search', 'gl-layout-builder'),
         icon: search,
         categories: ['actions']
     },
     {
         name: 'calendar',
-        title: __('Calendar', 'gutenlayouts'),
+        title: __('Calendar', 'gl-layout-builder'),
         icon: calendar,
         categories: ['misc']
     },
     {
         name: 'desktop',
-        title: __('Desktop', 'gutenlayouts'),
+        title: __('Desktop', 'gl-layout-builder'),
         icon: desktop,
         categories: ['devices']
     },
     {
         name: 'mobile',
-        title: __('Mobile', 'gutenlayouts'),
+        title: __('Mobile', 'gl-layout-builder'),
         icon: mobile,
         categories: ['devices']
     },
     {
         name: 'tablet',
-        title: __('Tablet', 'gutenlayouts'),
+        title: __('Tablet', 'gl-layout-builder'),
         icon: tablet,
         categories: ['devices']
     },
     {
         name: 'download',
-        title: __('Download', 'gutenlayouts'),
+        title: __('Download', 'gl-layout-builder'),
         icon: download,
         categories: ['actions'],
         isDefault: true
     },
     {
         name: 'pencil',
-        title: __('Pencil', 'gutenlayouts'),
+        title: __('Pencil', 'gl-layout-builder'),
         icon: pencil,
         categories: ['actions']
     },
     {
         name: 'external',
-        title: __('External', 'gutenlayouts'),
+        title: __('External', 'gl-layout-builder'),
         icon: external,
         categories: ['interface']
     },
     {
         name: 'trash',
-        title: __('Trash', 'gutenlayouts'),
+        title: __('Trash', 'gl-layout-builder'),
         icon: trash,
         categories: ['actions']
     },
     {
         name: 'upload',
-        title: __('Upload', 'gutenlayouts'),
+        title: __('Upload', 'gl-layout-builder'),
         icon: upload,
         categories: ['actions']
     },
     {
         name: 'plus',
-        title: __('Plus', 'gutenlayouts'),
+        title: __('Plus', 'gl-layout-builder'),
         icon: plus,
         categories: ['interface']
     },
     {
         name: 'close',
-        title: __('Close', 'gutenlayouts'),
+        title: __('Close', 'gl-layout-builder'),
         icon: close,
         categories: ['interface']
     },
     {
         name: 'update',
-        title: __('Update', 'gutenlayouts'),
+        title: __('Update', 'gl-layout-builder'),
         icon: update,
         categories: ['actions']
     },
     {
         name: 'arrow-up',
-        title: __('Arrow Up', 'gutenlayouts'),
+        title: __('Arrow Up', 'gl-layout-builder'),
         icon: arrowUp,
         categories: ['arrows']
     },
     {
         name: 'arrow-down',
-        title: __('Arrow Down', 'gutenlayouts'),
+        title: __('Arrow Down', 'gl-layout-builder'),
         icon: arrowDown,
         categories: ['arrows']
     },
     {
         name: 'arrow-left',
-        title: __('Arrow Left', 'gutenlayouts'),
+        title: __('Arrow Left', 'gl-layout-builder'),
         icon: arrowLeft,
         categories: ['arrows']
     },
     {
         name: 'arrow-right',
-        title: __('Arrow Right', 'gutenlayouts'),
+        title: __('Arrow Right', 'gl-layout-builder'),
         icon: arrowRight,
         categories: ['arrows'],
         isDefault: true
@@ -539,50 +539,50 @@ const icons = [
     // Additional icons - Arrows
     {
         name: 'chevron-down',
-        title: __('Chevron Down', 'gutenlayouts'),
+        title: __('Chevron Down', 'gl-layout-builder'),
         icon: chevronDown,
         categories: ['arrows']
     },
     {
         name: 'chevron-up',
-        title: __('Chevron Up', 'gutenlayouts'),
+        title: __('Chevron Up', 'gl-layout-builder'),
         icon: chevronUp,
         categories: ['arrows']
     },
     {
         name: 'chevron-left',
-        title: __('Chevron Left', 'gutenlayouts'),
+        title: __('Chevron Left', 'gl-layout-builder'),
         icon: chevronLeft,
         categories: ['arrows']
     },
     {
         name: 'chevron-right',
-        title: __('Chevron Right', 'gutenlayouts'),
+        title: __('Chevron Right', 'gl-layout-builder'),
         icon: chevronRight,
         categories: ['arrows'],
         isDefault: true
     },
     {
         name: 'chevron-right-small',
-        title: __('Chevron Right Small', 'gutenlayouts'),
+        title: __('Chevron Right Small', 'gl-layout-builder'),
         icon: chevronRightSmall,
         categories: ['arrows']
     },
     {
         name: 'chevron-up-down',
-        title: __('Chevron Up Down', 'gutenlayouts'),
+        title: __('Chevron Up Down', 'gl-layout-builder'),
         icon: chevronUpDown,
         categories: ['arrows']
     },
     {
         name: 'previous',
-        title: __('Previous', 'gutenlayouts'),
+        title: __('Previous', 'gl-layout-builder'),
         icon: previous,
         categories: ['arrows']
     },
     {
         name: 'next',
-        title: __('Next', 'gutenlayouts'),
+        title: __('Next', 'gl-layout-builder'),
         icon: next,
         categories: ['arrows']
     },
@@ -590,109 +590,109 @@ const icons = [
     // Editor
     {
         name: 'heading',
-        title: __('Heading', 'gutenlayouts'),
+        title: __('Heading', 'gl-layout-builder'),
         icon: heading,
         categories: ['editor']
     },
     {
         name: 'quote',
-        title: __('Quote', 'gutenlayouts'),
+        title: __('Quote', 'gl-layout-builder'),
         icon: quote,
         categories: ['editor']
     },
     {
         name: 'list',
-        title: __('List', 'gutenlayouts'),
+        title: __('List', 'gl-layout-builder'),
         icon: list,
         categories: ['editor']
     },
     {
         name: 'list-item',
-        title: __('List Item', 'gutenlayouts'),
+        title: __('List Item', 'gl-layout-builder'),
         icon: listItem,
         categories: ['editor']
     },
     {
         name: 'code',
-        title: __('Code', 'gutenlayouts'),
+        title: __('Code', 'gl-layout-builder'),
         icon: code,
         categories: ['editor']
     },
     {
         name: 'image',
-        title: __('Image', 'gutenlayouts'),
+        title: __('Image', 'gl-layout-builder'),
         icon: image,
         categories: ['editor', 'media']
     },
     {
         name: 'video',
-        title: __('Video', 'gutenlayouts'),
+        title: __('Video', 'gl-layout-builder'),
         icon: video,
         categories: ['editor', 'media']
     },
     {
         name: 'audio',
-        title: __('Audio', 'gutenlayouts'),
+        title: __('Audio', 'gl-layout-builder'),
         icon: audio,
         categories: ['editor', 'media']
     },
     {
         name: 'media',
-        title: __('Media', 'gutenlayouts'),
+        title: __('Media', 'gl-layout-builder'),
         icon: media,
         categories: ['editor', 'media']
     },
     {
         name: 'cover',
-        title: __('Cover', 'gutenlayouts'),
+        title: __('Cover', 'gl-layout-builder'),
         icon: cover,
         categories: ['editor']
     },
     {
         name: 'verse',
-        title: __('Verse', 'gutenlayouts'),
+        title: __('Verse', 'gl-layout-builder'),
         icon: verse,
         categories: ['editor']
     },
     {
         name: 'preformatted',
-        title: __('Preformatted', 'gutenlayouts'),
+        title: __('Preformatted', 'gl-layout-builder'),
         icon: preformatted,
         categories: ['editor']
     },
     {
         name: 'shortcode',
-        title: __('Shortcode', 'gutenlayouts'),
+        title: __('Shortcode', 'gl-layout-builder'),
         icon: shortcode,
         categories: ['editor']
     },
     {
         name: 'html',
-        title: __('HTML', 'gutenlayouts'),
+        title: __('HTML', 'gl-layout-builder'),
         icon: html,
         categories: ['editor']
     },
     {
         name: 'pullquote',
-        title: __('Pullquote', 'gutenlayouts'),
+        title: __('Pullquote', 'gl-layout-builder'),
         icon: pullquote,
         categories: ['editor']
     },
     {
         name: 'button',
-        title: __('Button', 'gutenlayouts'),
+        title: __('Button', 'gl-layout-builder'),
         icon: button,
         categories: ['editor']
     },
     {
         name: 'buttons',
-        title: __('Buttons', 'gutenlayouts'),
+        title: __('Buttons', 'gl-layout-builder'),
         icon: buttons,
         categories: ['editor']
     },
     {
         name: 'media-and-text',
-        title: __('Media & Text', 'gutenlayouts'),
+        title: __('Media & Text', 'gl-layout-builder'),
         icon: mediaAndText,
         categories: ['editor', 'layout']
     },
@@ -700,121 +700,121 @@ const icons = [
     // Format
     {
         name: 'format-bold',
-        title: __('Format Bold', 'gutenlayouts'),
+        title: __('Format Bold', 'gl-layout-builder'),
         icon: formatBold,
         categories: ['format']
     },
     {
         name: 'format-italic',
-        title: __('Format Italic', 'gutenlayouts'),
+        title: __('Format Italic', 'gl-layout-builder'),
         icon: formatItalic,
         categories: ['format']
     },
     {
         name: 'format-strikethrough',
-        title: __('Format Strikethrough', 'gutenlayouts'),
+        title: __('Format Strikethrough', 'gl-layout-builder'),
         icon: formatStrikethrough,
         categories: ['format']
     },
     {
         name: 'format-underline',
-        title: __('Format Underline', 'gutenlayouts'),
+        title: __('Format Underline', 'gl-layout-builder'),
         icon: formatUnderline,
         categories: ['format']
     },
     {
         name: 'format-capitalize',
-        title: __('Format Capitalize', 'gutenlayouts'),
+        title: __('Format Capitalize', 'gl-layout-builder'),
         icon: formatCapitalize,
         categories: ['format']
     },
     {
         name: 'format-uppercase',
-        title: __('Format Uppercase', 'gutenlayouts'),
+        title: __('Format Uppercase', 'gl-layout-builder'),
         icon: formatUppercase,
         categories: ['format']
     },
     {
         name: 'format-lowercase',
-        title: __('Format Lowercase', 'gutenlayouts'),
+        title: __('Format Lowercase', 'gl-layout-builder'),
         icon: formatLowercase,
         categories: ['format']
     },
     {
         name: 'format-ltr',
-        title: __('Format LTR', 'gutenlayouts'),
+        title: __('Format LTR', 'gl-layout-builder'),
         icon: formatLtr,
         categories: ['format']
     },
     // {
     //     name: 'format-rtl',
-    //     title: __('Format RTL', 'gutenlayouts'),
+    //     title: __('Format RTL', 'gl-layout-builder'),
     //     icon: formatRtl,
     //     categories: ['format']
     // },
     {
         name: 'format-indent',
-        title: __('Format Indent', 'gutenlayouts'),
+        title: __('Format Indent', 'gl-layout-builder'),
         icon: formatIndent,
         categories: ['format']
     },
     {
         name: 'format-indent-rtl',
-        title: __('Format Indent RTL', 'gutenlayouts'),
+        title: __('Format Indent RTL', 'gl-layout-builder'),
         icon: formatIndentRTL,
         categories: ['format']
     },
     {
         name: 'format-outdent',
-        title: __('Format Outdent', 'gutenlayouts'),
+        title: __('Format Outdent', 'gl-layout-builder'),
         icon: formatOutdent,
         categories: ['format']
     },
     {
         name: 'format-outdent-rtl',
-        title: __('Format Outdent RTL', 'gutenlayouts'),
+        title: __('Format Outdent RTL', 'gl-layout-builder'),
         icon: formatOutdentRTL,
         categories: ['format']
     },
     {
         name: 'format-list-bullets',
-        title: __('Format List Bullets', 'gutenlayouts'),
+        title: __('Format List Bullets', 'gl-layout-builder'),
         icon: formatListBullets,
         categories: ['format']
     },
     {
         name: 'format-list-bullets-rtl',
-        title: __('Format List Bullets RTL', 'gutenlayouts'),
+        title: __('Format List Bullets RTL', 'gl-layout-builder'),
         icon: formatListBulletsRTL,
         categories: ['format']
     },
     {
         name: 'format-list-numbered',
-        title: __('Format List Numbered', 'gutenlayouts'),
+        title: __('Format List Numbered', 'gl-layout-builder'),
         icon: formatListNumbered,
         categories: ['format']
     },
     {
         name: 'format-list-numbered-rtl',
-        title: __('Format List Numbered RTL', 'gutenlayouts'),
+        title: __('Format List Numbered RTL', 'gl-layout-builder'),
         icon: formatListNumberedRTL,
         categories: ['format']
     },
     {
         name: 'text-color',
-        title: __('Text Color', 'gutenlayouts'),
+        title: __('Text Color', 'gl-layout-builder'),
         icon: textColor,
         categories: ['format']
     },
     {
         name: 'subscript',
-        title: __('Subscript', 'gutenlayouts'),
+        title: __('Subscript', 'gl-layout-builder'),
         icon: subscript,
         categories: ['format']
     },
     {
         name: 'superscript',
-        title: __('Superscript', 'gutenlayouts'),
+        title: __('Superscript', 'gl-layout-builder'),
         icon: superscript,
         categories: ['format']
     },
@@ -822,7 +822,7 @@ const icons = [
     // Layout
     {
         name: 'layouts',
-        title: __('Layouts', 'gutenlayouts'),
+        title: __('Layouts', 'gl-layout-builder'),
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -843,145 +843,145 @@ const icons = [
     },
     {
         name: 'align-left',
-        title: __('Align Left', 'gutenlayouts'),
+        title: __('Align Left', 'gl-layout-builder'),
         icon: alignLeft,
         categories: ['layout']
     },
     {
         name: 'align-center',
-        title: __('Align Center', 'gutenlayouts'),
+        title: __('Align Center', 'gl-layout-builder'),
         icon: alignCenter,
         categories: ['layout']
     },
     {
         name: 'align-right',
-        title: __('Align Right', 'gutenlayouts'),
+        title: __('Align Right', 'gl-layout-builder'),
         icon: alignRight,
         categories: ['layout']
     },
     {
         name: 'align-justify',
-        title: __('Align Justify', 'gutenlayouts'),
+        title: __('Align Justify', 'gl-layout-builder'),
         icon: alignJustify,
         categories: ['layout']
     },
     {
         name: 'align-none',
-        title: __('Align None', 'gutenlayouts'),
+        title: __('Align None', 'gl-layout-builder'),
         icon: alignNone,
         categories: ['layout']
     },
     {
         name: 'columns',
-        title: __('Columns', 'gutenlayouts'),
+        title: __('Columns', 'gl-layout-builder'),
         icon: columns,
         categories: ['layout']
     },
     {
         name: 'column',
-        title: __('Column', 'gutenlayouts'),
+        title: __('Column', 'gl-layout-builder'),
         icon: column,
         categories: ['layout']
     },
     {
         name: 'row',
-        title: __('Row', 'gutenlayouts'),
+        title: __('Row', 'gl-layout-builder'),
         icon: row,
         categories: ['layout']
     },
     {
         name: 'group',
-        title: __('Group', 'gutenlayouts'),
+        title: __('Group', 'gl-layout-builder'),
         icon: group,
         categories: ['layout']
     },
     {
         name: 'ungroup',
-        title: __('Ungroup', 'gutenlayouts'),
+        title: __('Ungroup', 'gl-layout-builder'),
         icon: ungroup,
         categories: ['layout']
     },
     {
         name: 'stretch-wide',
-        title: __('Stretch Wide', 'gutenlayouts'),
+        title: __('Stretch Wide', 'gl-layout-builder'),
         icon: stretchWide,
         categories: ['layout']
     },
     {
         name: 'stretch-full-width',
-        title: __('Stretch Full Width', 'gutenlayouts'),
+        title: __('Stretch Full Width', 'gl-layout-builder'),
         icon: stretchFullWidth,
         categories: ['layout']
     },
     {
         name: 'position-left',
-        title: __('Position Left', 'gutenlayouts'),
+        title: __('Position Left', 'gl-layout-builder'),
         icon: positionLeft,
         categories: ['layout']
     },
     {
         name: 'position-center',
-        title: __('Position Center', 'gutenlayouts'),
+        title: __('Position Center', 'gl-layout-builder'),
         icon: positionCenter,
         categories: ['layout']
     },
     {
         name: 'position-right',
-        title: __('Position Right', 'gutenlayouts'),
+        title: __('Position Right', 'gl-layout-builder'),
         icon: positionRight,
         categories: ['layout']
     },
     {
         name: 'justify-left',
-        title: __('Justify Left', 'gutenlayouts'),
+        title: __('Justify Left', 'gl-layout-builder'),
         icon: justifyLeft,
         categories: ['layout']
     },
     {
         name: 'justify-center',
-        title: __('Justify Center', 'gutenlayouts'),
+        title: __('Justify Center', 'gl-layout-builder'),
         icon: justifyCenter,
         categories: ['layout']
     },
     {
         name: 'justify-right',
-        title: __('Justify Right', 'gutenlayouts'),
+        title: __('Justify Right', 'gl-layout-builder'),
         icon: justifyRight,
         categories: ['layout']
     },
     {
         name: 'justify-space-between',
-        title: __('Justify Space Between', 'gutenlayouts'),
+        title: __('Justify Space Between', 'gl-layout-builder'),
         icon: justifySpaceBetween,
         categories: ['layout']
     },
     {
         name: 'justify-stretch',
-        title: __('Justify Stretch', 'gutenlayouts'),
+        title: __('Justify Stretch', 'gl-layout-builder'),
         icon: justifyStretch,
         categories: ['layout']
     },
     {
         name: 'header',
-        title: __('Header', 'gutenlayouts'),
+        title: __('Header', 'gl-layout-builder'),
         icon: header,
         categories: ['layout']
     },
     {
         name: 'footer',
-        title: __('Footer', 'gutenlayouts'),
+        title: __('Footer', 'gl-layout-builder'),
         icon: footer,
         categories: ['layout']
     },
     {
         name: 'sidebar',
-        title: __('Sidebar', 'gutenlayouts'),
+        title: __('Sidebar', 'gl-layout-builder'),
         icon: sidebar,
         categories: ['layout']
     },
     {
         name: 'layout',
-        title: __('Layout', 'gutenlayouts'),
+        title: __('Layout', 'gl-layout-builder'),
         icon: layout,
         categories: ['layout']
     },
@@ -989,49 +989,49 @@ const icons = [
     // Tables
     {
         name: 'table',
-        title: __('Table', 'gutenlayouts'),
+        title: __('Table', 'gl-layout-builder'),
         icon: table,
         categories: ['tables']
     },
     {
         name: 'block-table',
-        title: __('Block Table', 'gutenlayouts'),
+        title: __('Block Table', 'gl-layout-builder'),
         icon: blockTable,
         categories: ['tables']
     },
     {
         name: 'table-column-after',
-        title: __('Table Column After', 'gutenlayouts'),
+        title: __('Table Column After', 'gl-layout-builder'),
         icon: tableColumnAfter,
         categories: ['tables']
     },
     {
         name: 'table-column-before',
-        title: __('Table Column Before', 'gutenlayouts'),
+        title: __('Table Column Before', 'gl-layout-builder'),
         icon: tableColumnBefore,
         categories: ['tables']
     },
     {
         name: 'table-column-delete',
-        title: __('Table Column Delete', 'gutenlayouts'),
+        title: __('Table Column Delete', 'gl-layout-builder'),
         icon: tableColumnDelete,
         categories: ['tables']
     },
     {
         name: 'table-row-after',
-        title: __('Table Row After', 'gutenlayouts'),
+        title: __('Table Row After', 'gl-layout-builder'),
         icon: tableRowAfter,
         categories: ['tables']
     },
     {
         name: 'table-row-before',
-        title: __('Table Row Before', 'gutenlayouts'),
+        title: __('Table Row Before', 'gl-layout-builder'),
         icon: tableRowBefore,
         categories: ['tables']
     },
     {
         name: 'table-row-delete',
-        title: __('Table Row Delete', 'gutenlayouts'),
+        title: __('Table Row Delete', 'gl-layout-builder'),
         icon: tableRowDelete,
         categories: ['tables']
     },
@@ -1039,98 +1039,98 @@ const icons = [
     // Actions
     {
         name: 'copy',
-        title: __('Copy', 'gutenlayouts'),
+        title: __('Copy', 'gl-layout-builder'),
         icon: copy,
         categories: ['actions']
     },
 
     {
         name: 'redo',
-        title: __('Redo', 'gutenlayouts'),
+        title: __('Redo', 'gl-layout-builder'),
         icon: redo,
         categories: ['actions']
     },
     {
         name: 'undo',
-        title: __('Undo', 'gutenlayouts'),
+        title: __('Undo', 'gl-layout-builder'),
         icon: undo,
         categories: ['actions']
     },
     {
         name: 'create',
-        title: __('Create', 'gutenlayouts'),
+        title: __('Create', 'gl-layout-builder'),
         icon: create,
         categories: ['actions']
     },
     {
         name: 'lock',
-        title: __('Lock', 'gutenlayouts'),
+        title: __('Lock', 'gl-layout-builder'),
         icon: lock,
         categories: ['actions']
     },
     {
         name: 'unlock',
-        title: __('Unlock', 'gutenlayouts'),
+        title: __('Unlock', 'gl-layout-builder'),
         icon: unlock,
         categories: ['actions']
     },
     {
         name: 'lock-outline',
-        title: __('Lock Outline', 'gutenlayouts'),
+        title: __('Lock Outline', 'gl-layout-builder'),
         icon: lockOutline,
         categories: ['actions']
     },
     {
         name: 'lock-small',
-        title: __('Lock Small', 'gutenlayouts'),
+        title: __('Lock Small', 'gl-layout-builder'),
         icon: lockSmall,
         categories: ['actions']
     },
     {
         name: 'login',
-        title: __('Login', 'gutenlayouts'),
+        title: __('Login', 'gl-layout-builder'),
         icon: login,
         categories: ['actions']
     },
     {
         name: 'reset',
-        title: __('Reset', 'gutenlayouts'),
+        title: __('Reset', 'gl-layout-builder'),
         icon: reset,
         categories: ['actions']
     },
     {
         name: 'rotate-left',
-        title: __('Rotate Left', 'gutenlayouts'),
+        title: __('Rotate Left', 'gl-layout-builder'),
         icon: rotateLeft,
         categories: ['actions']
     },
     {
         name: 'rotate-right',
-        title: __('Rotate Right', 'gutenlayouts'),
+        title: __('Rotate Right', 'gl-layout-builder'),
         icon: rotateRight,
         categories: ['actions']
     },
     {
         name: 'flip-horizontal',
-        title: __('Flip Horizontal', 'gutenlayouts'),
+        title: __('Flip Horizontal', 'gl-layout-builder'),
         icon: flipHorizontal,
         categories: ['actions']
     },
     {
         name: 'flip-vertical',
-        title: __('Flip Vertical', 'gutenlayouts'),
+        title: __('Flip Vertical', 'gl-layout-builder'),
         icon: flipVertical,
         categories: ['actions']
     },
     {
         name: 'replace',
-        title: __('Replace', 'gutenlayouts'),
+        title: __('Replace', 'gl-layout-builder'),
         icon: replace,
         categories: ['actions']
     },
     {
         name: 'fullscreen',
-        title: __('Fullscreen', 'gutenlayouts'),
+        title: __('Fullscreen', 'gl-layout-builder'),
         icon: fullscreen,
         categories: ['actions']
     },
@@ -1138,122 +1138,122 @@ const icons = [
     // Interface
     {
         name: 'close-small',
-        title: __('Close Small', 'gutenlayouts'),
+        title: __('Close Small', 'gl-layout-builder'),
         icon: closeSmall,
         categories: ['interface']
     },
     {
         name: 'more',
-        title: __('More', 'gutenlayouts'),
+        title: __('More', 'gl-layout-builder'),
         icon: more,
         categories: ['interface']
     },
     {
         name: 'more-horizontal',
-        title: __('More Horizontal', 'gutenlayouts'),
+        title: __('More Horizontal', 'gl-layout-builder'),
         icon: moreHorizontal,
         categories: ['interface']
     },
     {
         name: 'more-vertical',
-        title: __('More Vertical', 'gutenlayouts'),
+        title: __('More Vertical', 'gl-layout-builder'),
         icon: moreVertical,
         categories: ['interface']
     },
     {
         name: 'star-half',
-        title: __('Star Half', 'gutenlayouts'),
+        title: __('Star Half', 'gl-layout-builder'),
         icon: starHalf,
         categories: ['interface']
     },
     {
         name: 'help-filled',
-        title: __('Help Filled', 'gutenlayouts'),
+        title: __('Help Filled', 'gl-layout-builder'),
         icon: helpFilled,
         categories: ['interface']
     },
     {
         name: 'cog',
-        title: __('Cog', 'gutenlayouts'),
+        title: __('Cog', 'gl-layout-builder'),
         icon: cog,
         categories: ['interface'],
         isDefault: true
     },
     {
         name: 'plus-circle',
-        title: __('Plus Circle', 'gutenlayouts'),
+        title: __('Plus Circle', 'gl-layout-builder'),
         icon: plusCircle,
         categories: ['interface']
     },
     {
         name: 'plus-circle-filled',
-        title: __('Plus Circle Filled', 'gutenlayouts'),
+        title: __('Plus Circle Filled', 'gl-layout-builder'),
         icon: plusCircleFilled,
         categories: ['interface']
     },
     {
         name: 'cancel-circle-filled',
-        title: __('Cancel Circle Filled', 'gutenlayouts'),
+        title: __('Cancel Circle Filled', 'gl-layout-builder'),
         icon: cancelCircleFilled,
         categories: ['interface']
     },
     {
         name: 'plugins',
-        title: __('Plugins', 'gutenlayouts'),
+        title: __('Plugins', 'gl-layout-builder'),
         icon: plugins,
         categories: ['interface']
     },
     {
         name: 'filter',
-        title: __('Filter', 'gutenlayouts'),
+        title: __('Filter', 'gl-layout-builder'),
         icon: filter,
         categories: ['interface']
     },
     {
         name: 'list-view',
-        title: __('List View', 'gutenlayouts'),
+        title: __('List View', 'gl-layout-builder'),
         icon: listView,
         categories: ['interface']
     },
     {
         name: 'drag-handle',
-        title: __('Drag Handle', 'gutenlayouts'),
+        title: __('Drag Handle', 'gl-layout-builder'),
         icon: dragHandle,
         categories: ['interface']
     },
     {
         name: 'handle',
-        title: __('Handle', 'gutenlayouts'),
+        title: __('Handle', 'gl-layout-builder'),
         icon: handle,
         categories: ['interface']
     },
     {
         name: 'seen',
-        title: __('Seen', 'gutenlayouts'),
+        title: __('Seen', 'gl-layout-builder'),
         icon: seen,
         categories: ['interface']
     },
     {
         name: 'unseen',
-        title: __('Unseen', 'gutenlayouts'),
+        title: __('Unseen', 'gl-layout-builder'),
         icon: unseen,
         categories: ['interface']
     },
     {
         name: 'keyboard-close',
-        title: __('Keyboard Close', 'gutenlayouts'),
+        title: __('Keyboard Close', 'gl-layout-builder'),
         icon: keyboardClose,
         categories: ['interface']
     },
     {
         name: 'keyboard-return',
-        title: __('Keyboard Return', 'gutenlayouts'),
+        title: __('Keyboard Return', 'gl-layout-builder'),
         icon: keyboardReturn,
         categories: ['interface']
     },
     {
         name: 'styles',
-        title: __('Styles', 'gutenlayouts'),
+        title: __('Styles', 'gl-layout-builder'),
         icon: styles,
         categories: ['interface']
     },
@@ -1261,103 +1261,103 @@ const icons = [
     // Posts & Pages
     {
         name: 'page',
-        title: __('Page', 'gutenlayouts'),
+        title: __('Page', 'gl-layout-builder'),
         icon: page,
         categories: ['posts']
     },
     {
         name: 'pages',
-        title: __('Pages', 'gutenlayouts'),
+        title: __('Pages', 'gl-layout-builder'),
         icon: pages,
         categories: ['posts']
     },
     {
         name: 'post',
-        title: __('Post', 'gutenlayouts'),
+        title: __('Post', 'gl-layout-builder'),
         icon: post,
         categories: ['posts']
     },
     {
         name: 'post-author',
-        title: __('Post Author', 'gutenlayouts'),
+        title: __('Post Author', 'gl-layout-builder'),
         icon: postAuthor,
         categories: ['posts']
     },
     {
         name: 'post-categories',
-        title: __('Post Categories', 'gutenlayouts'),
+        title: __('Post Categories', 'gl-layout-builder'),
         icon: postCategories,
         categories: ['posts']
     },
     {
         name: 'post-content',
-        title: __('Post Content', 'gutenlayouts'),
+        title: __('Post Content', 'gl-layout-builder'),
         icon: postContent,
         categories: ['posts']
     },
     {
         name: 'post-date',
-        title: __('Post Date', 'gutenlayouts'),
+        title: __('Post Date', 'gl-layout-builder'),
         icon: postDate,
         categories: ['posts']
     },
     {
         name: 'post-excerpt',
-        title: __('Post Excerpt', 'gutenlayouts'),
+        title: __('Post Excerpt', 'gl-layout-builder'),
         icon: postExcerpt,
         categories: ['posts']
     },
     {
         name: 'post-featured-image',
-        title: __('Post Featured Image', 'gutenlayouts'),
+        title: __('Post Featured Image', 'gl-layout-builder'),
         icon: postFeaturedImage,
         categories: ['posts', 'media']
     },
     {
         name: 'post-list',
-        title: __('Post List', 'gutenlayouts'),
+        title: __('Post List', 'gl-layout-builder'),
         icon: postList,
         categories: ['posts']
     },
     {
         name: 'post-terms',
-        title: __('Post Terms', 'gutenlayouts'),
+        title: __('Post Terms', 'gl-layout-builder'),
         icon: postTerms,
         categories: ['posts']
     },
     {
         name: 'page-break',
-        title: __('Page Break', 'gutenlayouts'),
+        title: __('Page Break', 'gl-layout-builder'),
         icon: pageBreak,
         categories: ['posts', 'editor']
     },
     {
         name: 'custom-post-type',
-        title: __('Custom Post Type', 'gutenlayouts'),
+        title: __('Custom Post Type', 'gl-layout-builder'),
         icon: customPostType,
         categories: ['posts']
     },
     {
         name: 'term-description',
-        title: __('Term Description', 'gutenlayouts'),
+        title: __('Term Description', 'gl-layout-builder'),
         icon: termDescription,
         categories: ['posts']
     },
     {
         name: 'category',
-        title: __('Category', 'gutenlayouts'),
+        title: __('Category', 'gl-layout-builder'),
         icon: category,
         categories: ['posts']
     },
     {
         name: 'tag',
-        title: __('Tag', 'gutenlayouts'),
+        title: __('Tag', 'gl-layout-builder'),
         icon: tag,
         categories: ['posts']
     },
     {
         name: 'title',
-        title: __('Title', 'gutenlayouts'),
+        title: __('Title', 'gl-layout-builder'),
         icon: title,
         categories: ['posts', 'editor']
     },
@@ -1365,55 +1365,55 @@ const icons = [
     // Comments
     {
         name: 'comment',
-        title: __('Comment', 'gutenlayouts'),
+        title: __('Comment', 'gl-layout-builder'),
         icon: comment,
         categories: ['comments']
     },
     {
         name: 'post-comments',
-        title: __('Post Comments', 'gutenlayouts'),
+        title: __('Post Comments', 'gl-layout-builder'),
         icon: postComments,
         categories: ['comments', 'posts']
     },
     {
         name: 'post-comments-count',
-        title: __('Post Comments Count', 'gutenlayouts'),
+        title: __('Post Comments Count', 'gl-layout-builder'),
         icon: postCommentsCount,
         categories: ['comments', 'posts']
     },
     {
         name: 'post-comments-form',
-        title: __('Post Comments Form', 'gutenlayouts'),
+        title: __('Post Comments Form', 'gl-layout-builder'),
         icon: postCommentsForm,
         categories: ['comments', 'posts']
     },
     {
         name: 'comment-author-avatar',
-        title: __('Comment Author Avatar', 'gutenlayouts'),
+        title: __('Comment Author Avatar', 'gl-layout-builder'),
         icon: commentAuthorAvatar,
         categories: ['comments']
     },
     {
         name: 'comment-author-name',
-        title: __('Comment Author Name', 'gutenlayouts'),
+        title: __('Comment Author Name', 'gl-layout-builder'),
         icon: commentAuthorName,
         categories: ['comments']
     },
     {
         name: 'comment-content',
-        title: __('Comment Content', 'gutenlayouts'),
+        title: __('Comment Content', 'gl-layout-builder'),
         icon: commentContent,
         categories: ['comments']
     },
     {
         name: 'comment-edit-link',
-        title: __('Comment Edit Link', 'gutenlayouts'),
+        title: __('Comment Edit Link', 'gl-layout-builder'),
         icon: commentEditLink,
         categories: ['comments']
     },
     {
         name: 'comment-reply-link',
-        title: __('Comment Reply Link', 'gutenlayouts'),
+        title: __('Comment Reply Link', 'gl-layout-builder'),
         icon: commentReplyLink,
         categories: ['comments']
     },
@@ -1421,37 +1421,37 @@ const icons = [
     // Media
     {
         name: 'caption',
-        title: __('Caption', 'gutenlayouts'),
+        title: __('Caption', 'gl-layout-builder'),
         icon: caption,
         categories: ['media']
     },
     {
         name: 'capture-photo',
-        title: __('Capture Photo', 'gutenlayouts'),
+        title: __('Capture Photo', 'gl-layout-builder'),
         icon: capturePhoto,
         categories: ['media']
     },
     {
         name: 'capture-video',
-        title: __('Capture Video', 'gutenlayouts'),
+        title: __('Capture Video', 'gl-layout-builder'),
         icon: captureVideo,
         categories: ['media']
     },
     {
         name: 'aspect-ratio',
-        title: __('Aspect Ratio', 'gutenlayouts'),
+        title: __('Aspect Ratio', 'gl-layout-builder'),
         icon: aspectRatio,
         categories: ['media']
     },
     {
         name: 'crop',
-        title: __('Crop', 'gutenlayouts'),
+        title: __('Crop', 'gl-layout-builder'),
         icon: crop,
         categories: ['media', 'actions']
     },
     {
         name: 'file',
-        title: __('File', 'gutenlayouts'),
+        title: __('File', 'gl-layout-builder'),
         icon: file,
         categories: ['media']
     },
@@ -1459,68 +1459,68 @@ const icons = [
     // E-commerce
     {
         name: 'currency-dollar',
-        title: __('Currency Dollar', 'gutenlayouts'),
+        title: __('Currency Dollar', 'gl-layout-builder'),
         icon: currencyDollar,
         categories: ['ecommerce']
     },
     {
         name: 'currency-euro',
-        title: __('Currency Euro', 'gutenlayouts'),
+        title: __('Currency Euro', 'gl-layout-builder'),
         icon: currencyEuro,
         categories: ['ecommerce']
     },
     {
         name: 'currency-pound',
-        title: __('Currency Pound', 'gutenlayouts'),
+        title: __('Currency Pound', 'gl-layout-builder'),
         icon: currencyPound,
         categories: ['ecommerce']
     },
     {
         name: 'payment',
-        title: __('Payment', 'gutenlayouts'),
+        title: __('Payment', 'gl-layout-builder'),
         icon: payment,
         categories: ['ecommerce']
     },
     {
         name: 'percent',
-        title: __('Percent', 'gutenlayouts'),
+        title: __('Percent', 'gl-layout-builder'),
         icon: percent,
         categories: ['ecommerce']
     },
     {
         name: 'receipt',
-        title: __('Receipt', 'gutenlayouts'),
+        title: __('Receipt', 'gl-layout-builder'),
         icon: receipt,
         categories: ['ecommerce']
     },
     {
         name: 'shipping',
-        title: __('Shipping', 'gutenlayouts'),
+        title: __('Shipping', 'gl-layout-builder'),
         icon: shipping,
         categories: ['ecommerce'],
         isDefault: true
     },
     {
         name: 'store',
-        title: __('Store', 'gutenlayouts'),
+        title: __('Store', 'gl-layout-builder'),
         icon: store,
         categories: ['ecommerce']
     },
     {
         name: 'chart-bar',
-        title: __('Chart Bar', 'gutenlayouts'),
+        title: __('Chart Bar', 'gl-layout-builder'),
         icon: chartBar,
         categories: ['ecommerce']
     },
     {
         name: 'trending-down',
-        title: __('Trending Down', 'gutenlayouts'),
+        title: __('Trending Down', 'gl-layout-builder'),
         icon: trendingDown,
         categories: ['ecommerce']
     },
     {
         name: 'trending-up',
-        title: __('Trending Up', 'gutenlayouts'),
+        title: __('Trending Up', 'gl-layout-builder'),
         icon: trendingUp,
         categories: ['ecommerce']
     },
@@ -1528,355 +1528,355 @@ const icons = [
     // Miscellaneous
     {
         name: 'at-symbol',
-        title: __('At Symbol', 'gutenlayouts'),
+        title: __('At Symbol', 'gl-layout-builder'),
         icon: atSymbol,
         categories: ['misc']
     },
     {
         name: 'backup',
-        title: __('Backup', 'gutenlayouts'),
+        title: __('Backup', 'gl-layout-builder'),
         icon: backup,
         categories: ['misc']
     },
     {
         name: 'block-default',
-        title: __('Block Default', 'gutenlayouts'),
+        title: __('Block Default', 'gl-layout-builder'),
         icon: blockDefault,
         categories: ['misc']
     },
     {
         name: 'border',
-        title: __('Border', 'gutenlayouts'),
+        title: __('Border', 'gl-layout-builder'),
         icon: border,
         categories: ['misc']
     },
     {
         name: 'box',
-        title: __('Box', 'gutenlayouts'),
+        title: __('Box', 'gl-layout-builder'),
         icon: box,
         categories: ['misc']
     },
     {
         name: 'brush',
-        title: __('Brush', 'gutenlayouts'),
+        title: __('Brush', 'gl-layout-builder'),
         icon: brush,
         categories: ['misc']
     },
     {
         name: 'bug',
-        title: __('Bug', 'gutenlayouts'),
+        title: __('Bug', 'gl-layout-builder'),
         icon: bug,
         categories: ['misc']
     },
     {
         name: 'remove-bug',
-        title: __('Remove Bug', 'gutenlayouts'),
+        title: __('Remove Bug', 'gl-layout-builder'),
         icon: removeBug,
         categories: ['misc']
     },
     {
         name: 'classic',
-        title: __('Classic', 'gutenlayouts'),
+        title: __('Classic', 'gl-layout-builder'),
         icon: classic,
         categories: ['misc']
     },
     {
         name: 'cloud-upload',
-        title: __('Cloud Upload', 'gutenlayouts'),
+        title: __('Cloud Upload', 'gl-layout-builder'),
         icon: cloudUpload,
         categories: ['misc', 'actions']
     },
     {
         name: 'color',
-        title: __('Color', 'gutenlayouts'),
+        title: __('Color', 'gl-layout-builder'),
         icon: color,
         categories: ['misc']
     },
     {
         name: 'custom-link',
-        title: __('Custom Link', 'gutenlayouts'),
+        title: __('Custom Link', 'gl-layout-builder'),
         icon: customLink,
         categories: ['misc']
     },
     {
         name: 'drawer-left',
-        title: __('Drawer Left', 'gutenlayouts'),
+        title: __('Drawer Left', 'gl-layout-builder'),
         icon: drawerLeft,
         categories: ['misc']
     },
     {
         name: 'drawer-right',
-        title: __('Drawer Right', 'gutenlayouts'),
+        title: __('Drawer Right', 'gl-layout-builder'),
         icon: drawerRight,
         categories: ['misc']
     },
     {
         name: 'grid',
-        title: __('Grid', 'gutenlayouts'),
+        title: __('Grid', 'gl-layout-builder'),
         icon: grid,
         categories: ['misc', 'layout']
     },
     {
         name: 'inbox',
-        title: __('Inbox', 'gutenlayouts'),
+        title: __('Inbox', 'gl-layout-builder'),
         icon: inbox,
         categories: ['misc']
     },
     {
         name: 'institution',
-        title: __('Institution', 'gutenlayouts'),
+        title: __('Institution', 'gl-layout-builder'),
         icon: institution,
         categories: ['misc']
     },
     {
         name: 'insert-after',
-        title: __('Insert After', 'gutenlayouts'),
+        title: __('Insert After', 'gl-layout-builder'),
         icon: insertAfter,
         categories: ['misc', 'actions']
     },
     {
         name: 'insert-before',
-        title: __('Insert Before', 'gutenlayouts'),
+        title: __('Insert Before', 'gl-layout-builder'),
         icon: insertBefore,
         categories: ['misc', 'actions']
     },
     {
         name: 'key',
-        title: __('Key', 'gutenlayouts'),
+        title: __('Key', 'gl-layout-builder'),
         icon: key,
         categories: ['misc']
     },
     {
         name: 'lifesaver',
-        title: __('Lifesaver', 'gutenlayouts'),
+        title: __('Lifesaver', 'gl-layout-builder'),
         icon: lifesaver,
         categories: ['misc']
     },
     {
         name: 'line-dashed',
-        title: __('Line Dashed', 'gutenlayouts'),
+        title: __('Line Dashed', 'gl-layout-builder'),
         icon: lineDashed,
         categories: ['misc']
     },
     {
         name: 'line-dotted',
-        title: __('Line Dotted', 'gutenlayouts'),
+        title: __('Line Dotted', 'gl-layout-builder'),
         icon: lineDotted,
         categories: ['misc']
     },
     {
         name: 'line-solid',
-        title: __('Line Solid', 'gutenlayouts'),
+        title: __('Line Solid', 'gl-layout-builder'),
         icon: lineSolid,
         categories: ['misc']
     },
     {
         name: 'link',
-        title: __('Link', 'gutenlayouts'),
+        title: __('Link', 'gl-layout-builder'),
         icon: link,
         categories: ['misc']
     },
     {
         name: 'link-off',
-        title: __('Link Off', 'gutenlayouts'),
+        title: __('Link Off', 'gl-layout-builder'),
         icon: linkOff,
         categories: ['misc']
     },
     {
         name: 'loop',
-        title: __('Loop', 'gutenlayouts'),
+        title: __('Loop', 'gl-layout-builder'),
         icon: loop,
         categories: ['misc']
     },
     {
         name: 'map-marker',
-        title: __('Map Marker', 'gutenlayouts'),
+        title: __('Map Marker', 'gl-layout-builder'),
         icon: mapMarker,
         categories: ['misc']
     },
     {
         name: 'megaphone',
-        title: __('Megaphone', 'gutenlayouts'),
+        title: __('Megaphone', 'gl-layout-builder'),
         icon: megaphone,
         categories: ['misc']
     },
     {
         name: 'move-to',
-        title: __('Move To', 'gutenlayouts'),
+        title: __('Move To', 'gl-layout-builder'),
         icon: moveTo,
         categories: ['misc', 'actions']
     },
     {
         name: 'navigation',
-        title: __('Navigation', 'gutenlayouts'),
+        title: __('Navigation', 'gl-layout-builder'),
         icon: navigation,
         categories: ['misc']
     },
     {
         name: 'overlay-text',
-        title: __('Overlay Text', 'gutenlayouts'),
+        title: __('Overlay Text', 'gl-layout-builder'),
         icon: overlayText,
         categories: ['misc']
     },
     {
         name: 'people',
-        title: __('People', 'gutenlayouts'),
+        title: __('People', 'gl-layout-builder'),
         icon: people,
         categories: ['misc']
     },
     {
         name: 'pin',
-        title: __('Pin', 'gutenlayouts'),
+        title: __('Pin', 'gl-layout-builder'),
         icon: pin,
         categories: ['misc']
     },
     {
         name: 'pull-left',
-        title: __('Pull Left', 'gutenlayouts'),
+        title: __('Pull Left', 'gl-layout-builder'),
         icon: pullLeft,
         categories: ['misc', 'layout']
     },
     {
         name: 'pull-right',
-        title: __('Pull Right', 'gutenlayouts'),
+        title: __('Pull Right', 'gl-layout-builder'),
         icon: pullRight,
         categories: ['misc', 'layout']
     },
     {
         name: 'query-pagination',
-        title: __('Query Pagination', 'gutenlayouts'),
+        title: __('Query Pagination', 'gl-layout-builder'),
         icon: queryPagination,
         categories: ['misc']
     },
     {
         name: 'query-pagination-next',
-        title: __('Query Pagination Next', 'gutenlayouts'),
+        title: __('Query Pagination Next', 'gl-layout-builder'),
         icon: queryPaginationNext,
         categories: ['misc']
     },
     {
         name: 'query-pagination-numbers',
-        title: __('Query Pagination Numbers', 'gutenlayouts'),
+        title: __('Query Pagination Numbers', 'gl-layout-builder'),
         icon: queryPaginationNumbers,
         categories: ['misc']
     },
     {
         name: 'query-pagination-previous',
-        title: __('Query Pagination Previous', 'gutenlayouts'),
+        title: __('Query Pagination Previous', 'gl-layout-builder'),
         icon: queryPaginationPrevious,
         categories: ['misc']
     },
     {
         name: 'resize-corner-ne',
-        title: __('Resize Corner NE', 'gutenlayouts'),
+        title: __('Resize Corner NE', 'gl-layout-builder'),
         icon: resizeCornerNE,
         categories: ['misc']
     },
     {
         name: 'reusable-block',
-        title: __('Reusable Block', 'gutenlayouts'),
+        title: __('Reusable Block', 'gl-layout-builder'),
         icon: reusableBlock,
         categories: ['misc', 'editor']
     },
     {
         name: 'rss',
-        title: __('RSS', 'gutenlayouts'),
+        title: __('RSS', 'gl-layout-builder'),
         icon: rss,
         categories: ['misc']
     },
     {
         name: 'separator',
-        title: __('Separator', 'gutenlayouts'),
+        title: __('Separator', 'gl-layout-builder'),
         icon: separator,
         categories: ['misc', 'editor']
     },
     {
         name: 'shadow',
-        title: __('Shadow', 'gutenlayouts'),
+        title: __('Shadow', 'gl-layout-builder'),
         icon: shadow,
         categories: ['misc']
     },
     {
         name: 'shield',
-        title: __('Shield', 'gutenlayouts'),
+        title: __('Shield', 'gl-layout-builder'),
         icon: shield,
         categories: ['misc']
     },
     {
         name: 'shuffle',
-        title: __('Shuffle', 'gutenlayouts'),
+        title: __('Shuffle', 'gl-layout-builder'),
         icon: shuffle,
         categories: ['misc']
     },
     {
         name: 'site-logo',
-        title: __('Site Logo', 'gutenlayouts'),
+        title: __('Site Logo', 'gl-layout-builder'),
         icon: siteLogo,
         categories: ['misc']
     },
     {
         name: 'stack',
-        title: __('Stack', 'gutenlayouts'),
+        title: __('Stack', 'gl-layout-builder'),
         icon: stack,
         categories: ['misc']
     },
     {
         name: 'swatch',
-        title: __('Swatch', 'gutenlayouts'),
+        title: __('Swatch', 'gl-layout-builder'),
         icon: swatch,
         categories: ['misc']
     },
     {
         name: 'symbol',
-        title: __('Symbol', 'gutenlayouts'),
+        title: __('Symbol', 'gl-layout-builder'),
         icon: symbol,
         categories: ['misc']
     },
     {
         name: 'symbol-filled',
-        title: __('Symbol Filled', 'gutenlayouts'),
+        title: __('Symbol Filled', 'gl-layout-builder'),
         icon: symbolFilled,
         categories: ['misc']
     },
     {
         name: 'tip',
-        title: __('Tip', 'gutenlayouts'),
+        title: __('Tip', 'gl-layout-builder'),
         icon: tip,
         categories: ['misc']
     },
     {
         name: 'tool',
-        title: __('Tool', 'gutenlayouts'),
+        title: __('Tool', 'gl-layout-builder'),
         icon: tool,
         categories: ['misc']
     },
     {
         name: 'typography',
-        title: __('Typography', 'gutenlayouts'),
+        title: __('Typography', 'gl-layout-builder'),
         icon: typography,
         categories: ['misc', 'format']
     },
     {
         name: 'widget',
-        title: __('Widget', 'gutenlayouts'),
+        title: __('Widget', 'gl-layout-builder'),
         icon: widget,
         categories: ['misc']
     },
     {
         name: 'add-card',
-        title: __('Add Card', 'gutenlayouts'),
+        title: __('Add Card', 'gl-layout-builder'),
         icon: addCard,
         categories: ['actions']
     },
     {
         name: 'add-submenu',
-        title: __('Add Submenu', 'gutenlayouts'),
+        title: __('Add Submenu', 'gl-layout-builder'),
         icon: addSubmenu,
         categories: ['actions']
     },
     {
         name: 'remove-submenu',
-        title: __('Remove Submenu', 'gutenlayouts'),
+        title: __('Remove Submenu', 'gl-layout-builder'),
         icon: removeSubmenu,
         categories: ['actions']
     }

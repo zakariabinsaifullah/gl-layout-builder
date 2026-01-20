@@ -2,10 +2,10 @@
 /**
  * REST API Class.
  *
- * @package Gutenlayouts
+ * @package gl-layout-builder
  */
 
-namespace Gutenlayouts;
+namespace GLLayoutBuilder;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -28,7 +28,7 @@ class Rest_Api {
 	 *
 	 * @var string
 	 */
-	private $cache_prefix = 'gutenlayouts_';
+	private $cache_prefix = 'gllb_';
 
 	/**
 	 * Cache duration in seconds.
@@ -336,7 +336,7 @@ class Rest_Api {
 	 */
 	private function get_cached_data( string $cache_key ) {
 		// Try object cache first, then transients.
-		$data = wp_cache_get( $cache_key, 'gutenlayouts' );
+		$data = wp_cache_get( $cache_key, 'gl-layout-builder' );
 		if ( false !== $data ) {
 			return $data;
 		}

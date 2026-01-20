@@ -2,10 +2,10 @@
 /**
  * Main Plugin Class.
  *
- * @package Gutenlayouts
+ * @package gl-layout-builder
  */
 
-namespace Gutenlayouts;
+namespace GLLayoutBuilder;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

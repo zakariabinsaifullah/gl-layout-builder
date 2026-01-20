@@ -30,20 +30,20 @@ jobs:
             - name: Prepare Release Artifact
               run: |
                   # 1. Create a build directory
-                  mkdir gutenlayouts
+                  mkdir gl-layout-builder
 
                   # 2. Copy files to build dir
-                  rsync -rc --exclude-from='.distignore' --exclude 'gutenlayouts' . gutenlayouts/
+                  rsync -rc --exclude-from='.distignore' --exclude 'gl-layout-builder' . gl-layout-builder/
 
                   # 3. CLEANUP: Force remove any .DS_Store files that slipped through
-                  find gutenlayouts -name ".DS_Store" -type f -delete
+                  find gl-layout-builder -name ".DS_Store" -type f -delete
 
                   # 4. Zip the clean directory
-                  zip -r gutenlayouts.zip gutenlayouts
+                  zip -r gl-layout-builder.zip gl-layout-builder
             - name: Create Release
               uses: ncipollo/release-action@v1.14.0
               with:
-                  artifacts: 'gutenlayouts.zip'
+                  artifacts: 'gl-layout-builder.zip'
                   token: ${{ secrets.TOKEN }}
                   allowUpdates: true
                   makeLatest: true

@@ -2,10 +2,10 @@
 /**
  * Block Categories Class.
  *
- * @package Gutenlayouts
+ * @package gl-layout-builder
  */
 
-namespace Gutenlayouts;
+namespace GLLayoutBuilder;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -44,7 +44,7 @@ class Category {
 	}
 
 	/**
-	 * Adds a custom block category for Gutenlayouts.
+	 * Adds a custom block category for GutenLayout Blocks.
 	 *
 	 * @param array        $categories Existing block categories.
 	 * @param \WP_Post|null $post       The post being edited, or null.
@@ -53,7 +53,7 @@ class Category {
 	public function add_gutenlayouts_category( $categories, $post ) {
 		$categories[0] = array(
 			'slug'  => 'gutenlayouts',
-			'title' => __( 'Gutenlayouts', 'gutenlayouts' ),
+			'title' => __( 'GutenLayout Blocks', 'gl-layout-builder' ),
 		);
 		return $categories;
 	}

@@ -22,7 +22,7 @@ export const Library = ({ openPreferences }) => {
                 size="compact"
                 onClick={() => setIsModalOpen(true)}
                 icon={<GutenLayouts />}
-                label={__('Gutenlayouts Pattern Library', 'gutenlayouts')}
+                label={__('Gutenlayouts Pattern Library', 'gl-layout-builder')}
                 showTooltip={true}
                 style={{
                     backgroundColor: 'transparent'

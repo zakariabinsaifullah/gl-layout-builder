@@ -2,10 +2,10 @@
 /**
  * Extensions Class.
  *
- * @package Gutenlayouts
+ * @package gl-layout-builder
  */
 
-namespace Gutenlayouts;
+namespace GLLayoutBuilder;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -50,12 +50,12 @@ class Extensions {
 		// Only output visibility styles if the page uses visibility classes.
 		if ( $this->has_classes(
 			array(
-				'gutenlayouts-hide-desktop',
-				'gutenlayouts-hide-tablet',
-				'gutenlayouts-hide-mobile',
+				'gl-layout-builder-hide-desktop',
+				'gl-layout-builder-hide-tablet',
+				'gl-layout-builder-hide-mobile',
 			)
 		) ) {
-			echo '<style id="gutenlayouts-visibility-inline-css">@media (min-width:1025px){.gutenlayouts-hide-desktop{display:none!important}}@media (min-width:768px) and (max-width:1024px){.gutenlayouts-hide-tablet{display:none!important}}@media (max-width:767px){.gutenlayouts-hide-mobile{display:none!important}}</style>';
+			echo '<style id="gl-layout-builder-visibility-inline-css">@media (min-width:1025px){.gl-layout-builder-hide-desktop{display:none!important}}@media (min-width:768px) and (max-width:1024px){.gl-layout-builder-hide-tablet{display:none!important}}@media (max-width:767px){.gl-layout-builder-hide-mobile{display:none!important}}</style>';
 		}
 	}
 

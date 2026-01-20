@@ -2,9 +2,6 @@ import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import {
     PanelBody,
-    __experimentalBorderBoxControl as BorderBoxControl,
-    __experimentalToggleGroupControl as ToggleGroupControl,
-    __experimentalToggleGroupControlOption as ToggleGroupControlOption,
     __experimentalToolsPanel as ToolsPanel, // eslint-disable-line
     __experimentalToolsPanelItem as ToolsPanelItem // eslint-disable-line
 } from '@wordpress/components';
@@ -14,7 +11,6 @@ import {
     NativeRangeControl,
     NativeToggleControl,
     PanelColorControl,
-    NativeSelectControl,
     NativeTextControl,
     NativeUnitControl
 } from '../../components';
@@ -42,45 +38,45 @@ const Inspector = props => {
     return (
         <>
             <InspectorControls group="settings">
-                <PanelBody title={__('General', 'gutenlayouts')} initialOpen={true}>
+                <PanelBody title={__('General', 'gl-layout-builder')} initialOpen={true}>
                     <NativeToggleGroupControl
-                        label={__('Progress Type', 'gutenlayouts')}
+                        label={__('Progress Type', 'gl-layout-builder')}
                         value={layout}
                         onChange={value => setAttributes({ layout: value })}
                         options={[
-                            { label: __('Line', 'gutenlayouts'), value: 'line' },
-                            { label: __('Circle', 'gutenlayouts'), value: 'circle' }
+                            { label: __('Line', 'gl-layout-builder'), value: 'line' },
+                            { label: __('Circle', 'gl-layout-builder'), value: 'circle' }
                         ]}
                     />
 
                     {layout === 'circle' && (
                         <NativeToggleGroupControl
-                            label={__('Inner Edge', 'gutenlayouts')}
+                            label={__('Inner Edge', 'gl-layout-builder')}
                             value={innerEdge}
                             onChange={value => setAttributes({ innerEdge: value })}
                             options={[
-                                { label: __('Sharp', 'gutenlayouts'), value: 'square' },
-                                { label: __('Rounded', 'gutenlayouts'), value: 'round' }
+                                { label: __('Sharp', 'gl-layout-builder'), value: 'square' },
+                                { label: __('Rounded', 'gl-layout-builder'), value: 'round' }
                             ]}
                         />
                     )}
                 </PanelBody>
-                <PanelBody title={__('Settings', 'gutenlayouts')} initialOpen={false}>
+                <PanelBody title={__('Settings', 'gl-layout-builder')} initialOpen={false}>
                     <NativeToggleControl
-                        label={__('Show Label', 'gutenlayouts')}
+                        label={__('Show Label', 'gl-layout-builder')}
                         checked={showLabel}
                         onChange={value => setAttributes({ showLabel: value })}
                     />
                     {showLabel && (
                         <NativeTextControl
-                            label={__('Label', 'gutenlayouts')}
+                            label={__('Label', 'gl-layout-builder')}
                             value={label}
                             onChange={value => setAttributes({ label: value })}
                         />
                     )}
 
                     <NativeRangeControl
-                        label={__('Value', 'gutenlayouts')}
+                        label={__('Value', 'gl-layout-builder')}
                         value={progress}
                         onChange={v =>
                             setAttributes({
@@ -91,7 +87,7 @@ const Inspector = props => {
                         max={100}
                     />
                     <NativeRangeControl
-                        label={__('Thickness', 'gutenlayouts')}
+                        label={__('Thickness', 'gl-layout-builder')}
                         value={thickNess}
                         onChange={value => setAttributes({ thickNess: value })}
                         min={1}
@@ -102,7 +98,7 @@ const Inspector = props => {
             </InspectorControls>
             <InspectorControls group="styles">
                 <ToolsPanel
-                    label={__('Gap', 'gutenlayouts')}
+                    label={__('Gap', 'gl-layout-builder')}
                     resetAll={() =>
                         setAttributes({
                             gap: undefined
@@ -111,7 +107,7 @@ const Inspector = props => {
                 >
                     <ToolsPanelItem
                         hasValue={() => !!gap}
-                        label={__('Gap', 'gutenlayouts')}
+                        label={__('Gap', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 gap: undefined
@@ -120,14 +116,14 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <NativeUnitControl
-                            label={__('Label Gap', 'gutenlayouts')}
+                            label={__('Label Gap', 'gl-layout-builder')}
                             value={gap}
                             onChange={value => setAttributes({ gap: value })}
                         />
                     </ToolsPanelItem>
                 </ToolsPanel>
                 <ToolsPanel
-                    label={__('Label', 'gutenlayouts')}
+                    label={__('Label', 'gl-layout-builder')}
                     resetAll={() =>
                         setAttributes({
                             labelSize: undefined,
@@ -137,7 +133,7 @@ const Inspector = props => {
                 >
                     <ToolsPanelItem
                         hasValue={() => !!labelSize}
-                        label={__('Font Size', 'gutenlayouts')}
+                        label={__('Font Size', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 labelSize: undefined
@@ -146,14 +142,14 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <NativeUnitControl
-                            label={__('Font Size', 'gutenlayouts')}
+                            label={__('Font Size', 'gl-layout-builder')}
                             value={labelSize}
                             onChange={value => setAttributes({ labelSize: value })}
                         />
                     </ToolsPanelItem>
                     <ToolsPanelItem
                         hasValue={() => !!labelColor}
-                        label={__('Color', 'gutenlayouts')}
+                        label={__('Color', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 labelColor: undefined
@@ -162,12 +158,12 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <PanelColorControl
-                            label={__('Color', 'gutenlayouts')}
+                            label={__('Color', 'gl-layout-builder')}
                             colorSettings={[
                                 {
                                     value: labelColor,
                                     onChange: color => setAttributes({ labelColor: color }),
-                                    label: __('Color', 'gutenlayouts')
+                                    label: __('Color', 'gl-layout-builder')
                                 }
                             ]}
                         />
@@ -175,7 +171,7 @@ const Inspector = props => {
                 </ToolsPanel>
 
                 <ToolsPanel
-                    label={__('Value', 'gutenlayouts')}
+                    label={__('Value', 'gl-layout-builder')}
                     resetAll={() =>
                         setAttributes({
                             perceSize: undefined,
@@ -185,7 +181,7 @@ const Inspector = props => {
                 >
                     <ToolsPanelItem
                         hasValue={() => !!perceSize}
-                        label={__('Font Size', 'gutenlayouts')}
+                        label={__('Font Size', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 perceSize: undefined
@@ -194,7 +190,7 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <NativeUnitControl
-                            label={__('Font Size', 'gutenlayouts')}
+                            label={__('Font Size', 'gl-layout-builder')}
                             value={perceSize}
                             onChange={value => setAttributes({ perceSize: value })}
                         />
@@ -202,7 +198,7 @@ const Inspector = props => {
 
                     <ToolsPanelItem
                         hasValue={() => !!perceColor}
-                        label={__('Color', 'gutenlayouts')}
+                        label={__('Color', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 perceColor: undefined
@@ -211,19 +207,19 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <PanelColorControl
-                            label={__('Color', 'gutenlayouts')}
+                            label={__('Color', 'gl-layout-builder')}
                             colorSettings={[
                                 {
                                     value: perceColor,
                                     onChange: color => setAttributes({ perceColor: color }),
-                                    label: __('Color', 'gutenlayouts')
+                                    label: __('Color', 'gl-layout-builder')
                                 }
                             ]}
                         />
                     </ToolsPanelItem>
                 </ToolsPanel>
                 <ToolsPanel
-                    label={__('Progress', 'gutenlayouts')}
+                    label={__('Progress', 'gl-layout-builder')}
                     resetAll={() =>
                         setAttributes({
                             pinColor: undefined,
@@ -234,7 +230,7 @@ const Inspector = props => {
                     {layout !== 'circle' && (
                         <ToolsPanelItem
                             hasValue={() => !!radius}
-                            label={__('Border Radius', 'gutenlayouts')}
+                            label={__('Border Radius', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     radius: undefined
@@ -243,7 +239,7 @@ const Inspector = props => {
                             onSelect={() => {}}
                         >
                             <NativeUnitControl
-                                label={__('Border Radius', 'gutenlayouts')}
+                                label={__('Border Radius', 'gl-layout-builder')}
                                 value={radius}
                                 onChange={value => setAttributes({ radius: value })}
                             />
@@ -253,7 +249,7 @@ const Inspector = props => {
                     {layout === 'circle' && (
                         <ToolsPanelItem
                             hasValue={() => !!width}
-                            label={__('Size', 'gutenlayouts')}
+                            label={__('Size', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     radius: undefined
@@ -262,7 +258,7 @@ const Inspector = props => {
                             onSelect={() => {}}
                         >
                             <NativeUnitControl
-                                label={__('Circle Size', 'gutenlayouts')}
+                                label={__('Circle Size', 'gl-layout-builder')}
                                 value={width}
                                 onChange={value => setAttributes({ width: value })}
                             />
@@ -271,7 +267,7 @@ const Inspector = props => {
 
                     <ToolsPanelItem
                         hasValue={() => !!paColor || !!pinColor}
-                        label={__('Colors', 'gutenlayouts')}
+                        label={__('Colors', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 paColor: undefined,
@@ -281,17 +277,17 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <PanelColorControl
-                            label={__('Colors', 'gutenlayouts')}
+                            label={__('Colors', 'gl-layout-builder')}
                             colorSettings={[
                                 {
                                     value: pinColor,
                                     onChange: color => setAttributes({ pinColor: color }),
-                                    label: __('Normal Color', 'gutenlayouts')
+                                    label: __('Normal Color', 'gl-layout-builder')
                                 },
                                 {
                                     value: paColor,
                                     onChange: color => setAttributes({ paColor: color }),
-                                    label: __('Active Color', 'gutenlayouts')
+                                    label: __('Active Color', 'gl-layout-builder')
                                 }
                             ]}
                         />

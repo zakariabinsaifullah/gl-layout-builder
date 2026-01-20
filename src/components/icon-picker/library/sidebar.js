@@ -12,22 +12,22 @@ const iconResources = [
     {
         name: 'Heroicons',
         url: 'https://heroicons.com/',
-        description: __('Beautiful hand-crafted SVG icons by Tailwind CSS', 'gutenlayouts')
+        description: __('Beautiful hand-crafted SVG icons by Tailwind CSS', 'gl-layout-builder')
     },
     {
         name: 'Google Fonts Icons',
         url: 'https://fonts.google.com/icons',
-        description: __('Material icons and symbols', 'gutenlayouts')
+        description: __('Material icons and symbols', 'gl-layout-builder')
     },
     {
         name: 'Remix Icon',
         url: 'https://remixicon.com/',
-        description: __('Open-source icon library', 'gutenlayouts')
+        description: __('Open-source icon library', 'gl-layout-builder')
     },
     {
         name: 'Basicons',
         url: 'https://basicons.xyz/',
-        description: __('Basic icons for your projects', 'gutenlayouts')
+        description: __('Basic icons for your projects', 'gl-layout-builder')
     }
 ];
 
@@ -36,7 +36,7 @@ export const Sidebar = ({ categories = [], category, setCategory, isCustomTab })
         <div className="gutenlayouts-modal__sidebar">
             {isCustomTab ? (
                 <>
-                    <h4 className="icons-heading">{__('Resources', 'gutenlayouts')}</h4>
+                    <h4 className="icons-heading">{__('Resources', 'gl-layout-builder')}</h4>
                     <p
                         style={{
                             fontSize: '12px',
@@ -48,7 +48,7 @@ export const Sidebar = ({ categories = [], category, setCategory, isCustomTab })
                     >
                         {__(
                             'Want to try a different icon? Maybe find one from these resources, Copy the SVG code and paste it in the editor.',
-                            'gutenlayouts'
+                            'gl-layout-builder'
                         )}
                     </p>
                     <Scrollable className="gutenlayouts-modal__scrollable">
@@ -63,7 +63,7 @@ export const Sidebar = ({ categories = [], category, setCategory, isCustomTab })
                 </>
             ) : (
                 <>
-                    <h4 className="icons-heading">{__('Categories', 'gutenlayouts')}</h4>
+                    <h4 className="icons-heading">{__('Categories', 'gl-layout-builder')}</h4>
                     <Scrollable className="gutenlayouts-modal__scrollable">
                         <div className="gutenlayouts-modal__sidebar-buttons">
                             {categories.map(cat => (

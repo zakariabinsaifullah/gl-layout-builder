@@ -116,7 +116,7 @@ export default function Library({
         <Modal
             overlayClassName="gutenlayouts-modal__overlay"
             className={`gutenlayouts-modal is-${activeTab}`}
-            title={__('Icons Library', 'gutenlayouts')}
+            title={__('Icons Library', 'gl-layout-builder')}
             onRequestClose={onClose}
             isFullScreen={true}
             headerActions={<Header activeTab={activeTab} onTabChange={onTabChange} />}

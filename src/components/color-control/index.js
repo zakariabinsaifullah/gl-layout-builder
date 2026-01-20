@@ -136,15 +136,15 @@ function ColorControlDropdown({ label, colorValue = {}, onChangeColor, hasHover 
                         tabs={[
                             {
                                 name: 'default',
-                                title: __('Default', 'gutenlayouts')
+                                title: __('Default', 'gl-layout-builder')
                             },
                             {
                                 name: 'hover',
-                                title: __('Hover', 'gutenlayouts')
+                                title: __('Hover', 'gl-layout-builder')
                             },
                             {
                                 name: 'active',
-                                title: __('Active', 'gutenlayouts')
+                                title: __('Active', 'gl-layout-builder')
                             }
                         ]}
                     >
@@ -176,47 +176,3 @@ function ColorControlDropdown({ label, colorValue = {}, onChangeColor, hasHover 
 }
 
 export default ColorControlDropdown;
-
-// const colorControls = [
-//     {
-//         key: 'tableColor',
-//         state: tableColor,
-//         label: __('Table Color', 'gutenlayouts')
-//     },
-//     {
-//         key: 'tableBg',
-//         state: tableBg,
-//         label: __('Table Background', 'gutenlayouts')
-//     }
-// ];
-
-// {colorControls.map(({ key, state, label }) => {
-//     const value = state || {};
-//     const hasValue = [value.default, value.hover, value.active].some(Boolean);
-//     return (
-//         <ToolsPanelItem
-//             key={key}
-//             label={label}
-//             className="native-tools-panel-item"
-//             panelId={clientId}
-//             isShownByDefault
-//             hasValue={() => hasValue}
-//             onDeselect={() => {
-//                 setAttributes({ [key]: undefined });
-//             }}
-//             resetAllFilter={() => setAttributes({ [key]: undefined })}
-//         >
-//             <ColorControlDropdown
-//                 label={label}
-//                 colorValue={value}
-//                 onChangeColor={newColor =>
-//                     setAttributes({
-//                         [key]: { ...value, ...newColor }
-//                     })
-//                 }
-//                 hasHover={false}
-//                 hasActive={false}
-//             />
-//         </ToolsPanelItem>
-//     );
-// })}

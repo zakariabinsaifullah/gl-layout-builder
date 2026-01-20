@@ -14,7 +14,7 @@ const folderOpen = (
 );
 
 const NativeIconPicker = ({
-    label = __('Icon', 'gutenlayouts'),
+    label = __('Icon', 'gl-layout-builder'),
     onIconSelect,
     onCustomSvgInsert,
     iconName,
@@ -89,11 +89,11 @@ const NativeIconPicker = ({
                                 )}
 
                                 <span className="gutenlayouts-icon-settings__dropdown-label">
-                                    {__(iconName || (customSvgCode ? 'Custom SVG' : 'Select Icon', 'gutenlayouts'))}
+                                    {__(iconName || (customSvgCode ? 'Custom SVG' : 'Select Icon', 'gl-layout-builder'))}
                                 </span>
                             </Button>
                             <Button
-                                label={__('Browse library', 'gutenlayouts')}
+                                label={__('Browse library', 'gl-layout-builder')}
                                 onClick={() => {
                                     onClose();
                                     openModal('library');

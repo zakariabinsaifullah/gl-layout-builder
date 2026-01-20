@@ -72,7 +72,7 @@ const Edit = props => {
                                     className="gutenlayout-bar-title"
                                     value={label}
                                     onChange={value => setAttributes({ label: value })}
-                                    placeholder={__('Enter label...', 'gutenlayouts')}
+                                    placeholder={__('Enter label...', 'gl-layout-builder')}
                                 />
                             )}
                             <div className="gutenlayout-bar-percent">{progress}%</div>
@@ -114,7 +114,7 @@ const Edit = props => {
                                         className="circle-label"
                                         value={label}
                                         onChange={value => setAttributes({ label: value })}
-                                        placeholder={__('Enter label...', 'gutenlayouts')}
+                                        placeholder={__('Enter label...', 'gl-layout-builder')}
                                     />
                                 )}
                             </div>

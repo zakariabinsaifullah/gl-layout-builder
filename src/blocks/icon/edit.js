@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 /**
  * WordPress dependencies
  */
@@ -17,18 +16,18 @@ import {
     __experimentalLinkControl as LinkControl
 } from '@wordpress/block-editor';
 
-import { link, Icon } from '@wordpress/icons';
+import { link } from '@wordpress/icons';
 import {
     PanelBody,
     RangeControl,
-    Button,
     ToolbarButton,
     Popover,
-    __experimentalToggleGroupControlOption as ToggleGroupControlOption,
     __experimentalToolsPanel as ToolsPanel, // eslint-disable-line
     __experimentalToolsPanelItem as ToolsPanelItem
 } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
+
+import classNames from 'classnames';
 
 /**
  * Internal dependencies
@@ -91,7 +90,7 @@ export default function Edit(props) {
 
     const blockProps = useBlockProps({
         style: cssCustomProperties,
-        className: clsx(className, {
+        className: classNames(className, {
             [`is-${iconType}`]: iconType,
             [`justify-${justifyContent}`]: justifyContent
         })
@@ -113,7 +112,7 @@ export default function Edit(props) {
                     ref={setPopoverAnchor}
                     name="link"
                     icon={link}
-                    title={__('Link', 'gutenlayouts')}
+                    title={__('Link', 'gl-layout-builder')}
                     onClick={() => setIsEditingURL(true)}
                     isActive={!!href || isEditingURL}
                 />
@@ -153,9 +152,9 @@ export default function Edit(props) {
                 )}
             </BlockControls>
             <InspectorControls>
-                <PanelBody title={__('Settings', 'gutenlayouts')}>
+                <PanelBody title={__('Settings', 'gl-layout-builder')}>
                     <NativeToggleControl
-                        label={__('Add List Title', 'gutenlayouts')}
+                        label={__('Add List Title', 'gl-layout-builder')}
                         checked={showTitle}
                         onChange={value => setAttributes({ showTitle: value })}
                     />
@@ -172,7 +171,7 @@ export default function Edit(props) {
                         iconSize={iconSize}
                         strokeWidth={strokeWidth}
                     />
-                    <NativeResponsiveControl label={__('Icon Size (px)', 'gutenlayouts')} props={props}>
+                    <NativeResponsiveControl label={__('Icon Size (px)', 'gl-layout-builder')} props={props}>
                         <RangeControl
                             value={sizes[resMode]}
                             onChange={value => setAttributes({ sizes: { ...sizes, [resMode]: value } })}
@@ -183,34 +182,34 @@ export default function Edit(props) {
                     </NativeResponsiveControl>
                 </PanelBody>
                 {showTitle && (
-                    <PanelBody title={__('List Title', 'gutenlayouts')} initialOpen={false}>
+                    <PanelBody title={__('List Title', 'gl-layout-builder')} initialOpen={false}>
                         <NativeUnitControl
-                            label={__('Gap ', 'gutenlayouts')}
+                            label={__('Gap ', 'gl-layout-builder')}
                             value={listGap}
                             onChange={value => setAttributes({ listGap: value })}
                         />
                         {showTitle && (
                             <>
                                 <NativeSelectControl
-                                    label={__('Select Tag', 'gutenlayouts')}
+                                    label={__('Select Tag', 'gl-layout-builder')}
                                     value={headingTag}
                                     onChange={value => setAttributes({ headingTag: value })}
                                     options={[
-                                        { label: __('H1', 'gutenlayouts'), value: 'h1' },
-                                        { label: __('H2', 'gutenlayouts'), value: 'h2' },
-                                        { label: __('H3', 'gutenlayouts'), value: 'h3' },
-                                        { label: __('H4', 'gutenlayouts'), value: 'h4' },
-                                        { label: __('H5', 'gutenlayouts'), value: 'h5' },
-                                        { label: __('H6', 'gutenlayouts'), value: 'h6' },
-                                        { label: __('Paragraph', 'gutenlayouts'), value: 'p' },
-                                        { label: __('Div', 'gutenlayouts'), value: 'div' }
+                                        { label: __('H1', 'gl-layout-builder'), value: 'h1' },
+                                        { label: __('H2', 'gl-layout-builder'), value: 'h2' },
+                                        { label: __('H3', 'gl-layout-builder'), value: 'h3' },
+                                        { label: __('H4', 'gl-layout-builder'), value: 'h4' },
+                                        { label: __('H5', 'gl-layout-builder'), value: 'h5' },
+                                        { label: __('H6', 'gl-layout-builder'), value: 'h6' },
+                                        { label: __('Paragraph', 'gl-layout-builder'), value: 'p' },
+                                        { label: __('Div', 'gl-layout-builder'), value: 'div' }
                                     ]}
                                 />
                                 <NativeTextControl
-                                    label={__('Title Text', 'gutenlayouts')}
+                                    label={__('Title Text', 'gl-layout-builder')}
                                     value={heading}
                                     onChange={value => setAttributes({ heading: value })}
-                                    placeholder={__('List title...', 'gutenlayouts')}
+                                    placeholder={__('List title...', 'gl-layout-builder')}
                                 />
                             </>
                         )}
@@ -220,7 +219,7 @@ export default function Edit(props) {
             <InspectorControls group="styles">
                 {showTitle && (
                     <ToolsPanel
-                        label={__('Title', 'gutenlayouts')}
+                        label={__('Title', 'gl-layout-builder')}
                         resetAll={() =>
                             setAttributes({
                                 titleSize: undefined,
@@ -230,7 +229,7 @@ export default function Edit(props) {
                     >
                         <ToolsPanelItem
                             hasValue={() => !!titleSize}
-                            label={__('Size', 'gutenlayouts')}
+                            label={__('Size', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     titleSize: undefined
@@ -239,7 +238,7 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <NativeUnitControl
-                                label={__('Font Size', 'gutenlayouts')}
+                                label={__('Font Size', 'gl-layout-builder')}
                                 value={titleSize}
                                 onChange={value => setAttributes({ titleSize: value })}
                             />
@@ -247,7 +246,7 @@ export default function Edit(props) {
 
                         <ToolsPanelItem
                             hasValue={() => !!titleColor}
-                            label={__('Color', 'gutenlayouts')}
+                            label={__('Color', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     titleColor: undefined
@@ -256,12 +255,12 @@ export default function Edit(props) {
                             onSelect={() => {}}
                         >
                             <PanelColorControl
-                                label={__('Color', 'gutenlayouts')}
+                                label={__('Color', 'gl-layout-builder')}
                                 colorSettings={[
                                     {
                                         value: titleColor,
                                         onChange: color => setAttributes({ titleColor: color }),
-                                        label: __('Color', 'gutenlayouts')
+                                        label: __('Color', 'gl-layout-builder')
                                     }
                                 ]}
                             />
@@ -272,7 +271,7 @@ export default function Edit(props) {
             <div {...blockProps}>
                 <div className="gutenlayouts-icon-block-wrapper">
                     <div
-                        className={clsx('icon-container', colorProps.className, borderProps.className)}
+                        className={classNames('icon-container', colorProps.className, borderProps.className)}
                         style={{
                             ...borderProps.style,
                             ...colorProps.style,
@@ -291,7 +290,7 @@ export default function Edit(props) {
                                 tagName={headingTag}
                                 value={heading}
                                 onChange={value => setAttributes({ heading: value })}
-                                placeholder={__('List title...', 'gutenlayouts')}
+                                placeholder={__('List title...', 'gl-layout-builder')}
                                 className="icon-heading"
                             />
                         </div>

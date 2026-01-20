@@ -113,7 +113,7 @@ const Edit = props => {
                 <ToolbarGroup>
                     <ToolbarButton
                         icon="insert"
-                        label={__('Add Slide', 'gutenlayouts')}
+                        label={__('Add Slide', 'gl-layout-builder')}
                         onClick={() => {
                             const innerBlocks = wp.data.select('core/block-editor').getBlocks(clientId);
                             const newBlock = wp.blocks.createBlock('gutenlayouts/slide');

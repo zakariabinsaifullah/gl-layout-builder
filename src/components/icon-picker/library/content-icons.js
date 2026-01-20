@@ -16,8 +16,8 @@ export const ContentIcons = ({ searchTerm, setSearchTerm, filteredIcons, current
                     <SearchControl
                         value={searchTerm}
                         onChange={setSearchTerm}
-                        label={__('Search icons', 'gutenlayouts')}
-                        placeholder={__('Search...', 'gutenlayouts')}
+                        label={__('Search icons', 'gl-layout-builder')}
+                        placeholder={__('Search...', 'gl-layout-builder')}
                         className="gutenlayouts-modal__search"
                         size="compact"
                     />
@@ -25,7 +25,7 @@ export const ContentIcons = ({ searchTerm, setSearchTerm, filteredIcons, current
             </Flex>
 
             {filteredIcons.length === 0 ? (
-                <p>{__('No icons found!', 'gutenlayouts')}</p>
+                <p>{__('No icons found!', 'gl-layout-builder')}</p>
             ) : (
                 <div className="gutenlayouts-modal__icons">
                     {filteredIcons.map(iconData => (

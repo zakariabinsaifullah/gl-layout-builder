@@ -2,10 +2,10 @@
 /**
  * API Class.
  *
- * @package Gutenlayouts
+ * @package gl-layout-builder
  */
 
-namespace Gutenlayouts;
+namespace GLLayoutBuilder;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -28,7 +28,7 @@ class Api {
 	 *
 	 * @var string
 	 */
-	private const GUTENLAYOUTS_API_URL = 'https://gutenlayouts.com/wp-json/gutenlayouts/v1';
+	private const GLLB_API_URL = 'https://gutenlayouts.com/wp-json/gutenlayouts/v1';
 
 	/**
 	 * Return an instance of this class.
@@ -50,7 +50,7 @@ class Api {
 	 * @return array|\WP_Error Response data or error.
 	 */
 	public function get_patterns( array $args = array() ) {
-		return $this->request( 'GET', self::GUTENLAYOUTS_API_URL . '/patterns', $args );
+		return $this->request( 'GET', self::GLLB_API_URL . '/patterns', $args );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class Api {
 	 * @return array|\WP_Error Response data or error.
 	 */
 	public function get_page_templates( array $args = array() ) {
-		return $this->request( 'GET', self::GUTENLAYOUTS_API_URL . '/templates', $args );
+		return $this->request( 'GET', self::GLLB_API_URL . '/templates', $args );
 	}
 
 	/**
@@ -70,7 +70,7 @@ class Api {
 	 * @return array|\WP_Error Response data or error.
 	 */
 	public function get_pattern_categories( array $args = array() ) {
-		return $this->request( 'GET', self::GUTENLAYOUTS_API_URL . '/patterns/categories', $args );
+		return $this->request( 'GET', self::GLLB_API_URL . '/patterns/categories', $args );
 	}
 
 	/**
@@ -80,7 +80,7 @@ class Api {
 	 * @return array|\WP_Error Response data or error.
 	 */
 	public function get_template_categories( array $args = array() ) {
-		return $this->request( 'GET', self::GUTENLAYOUTS_API_URL . '/templates/categories', $args );
+		return $this->request( 'GET', self::GLLB_API_URL . '/templates/categories', $args );
 	}
 
 	/**
@@ -121,7 +121,7 @@ class Api {
 		if ( json_last_error() !== JSON_ERROR_NONE ) {
 			return new \WP_Error(
 				'api_json_error',
-				'Invalid JSON response from Gutenlayouts API',
+				'Invalid JSON response from GL Layout Builder API',
 				array( 'status' => $response_code )
 			);
 		}

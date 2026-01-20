@@ -53,24 +53,24 @@ const withVisibilityControls = createHigherOrderComponent(BlockEdit => {
                 <BlockEdit {...props} />
                 {isSelected && (
                     <InspectorControls>
-                        <PanelBody title={__('Responsive Visibility', 'gutenlayouts')} initialOpen={false}>
+                        <PanelBody title={__('Responsive Visibility', 'gl-layout-builder')} initialOpen={false}>
                             <ToggleControl
-                                label={__('Hide on Desktop', 'gutenlayouts')}
+                                label={__('Hide on Desktop', 'gl-layout-builder')}
                                 checked={!!hideOnDesktop}
                                 onChange={value => setAttributes({ hideOnDesktop: value })}
-                                help={__('Hide this block on desktop devices.', 'gutenlayouts')}
+                                help={__('Hide this block on desktop devices.', 'gl-layout-builder')}
                             />
                             <ToggleControl
-                                label={__('Hide on Tablet', 'gutenlayouts')}
+                                label={__('Hide on Tablet', 'gl-layout-builder')}
                                 checked={!!hideOnTablet}
                                 onChange={value => setAttributes({ hideOnTablet: value })}
-                                help={__('Hide this block on tablet devices.', 'gutenlayouts')}
+                                help={__('Hide this block on tablet devices.', 'gl-layout-builder')}
                             />
                             <ToggleControl
-                                label={__('Hide on Mobile', 'gutenlayouts')}
+                                label={__('Hide on Mobile', 'gl-layout-builder')}
                                 checked={!!hideOnMobile}
                                 onChange={value => setAttributes({ hideOnMobile: value })}
-                                help={__('Hide this block on mobile devices.', 'gutenlayouts')}
+                                help={__('Hide this block on mobile devices.', 'gl-layout-builder')}
                             />
                         </PanelBody>
                     </InspectorControls>

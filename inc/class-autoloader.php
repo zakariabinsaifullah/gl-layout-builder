@@ -1,11 +1,11 @@
 <?php
 /**
- * Autoloader for Gutenlayouts classes.
+ * Autoloader for GL Layout Builder classes.
  *
- * @package Gutenlayouts
+ * @package gl-layout-builder
  */
 
-namespace Gutenlayouts;
+namespace GLLayoutBuilder;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -31,7 +31,7 @@ class Autoloader {
 	 * @param string $class_name The name of the class to load.
 	 */
 	public static function autoload( $class_name ) {
-		if ( false === strpos( $class_name, 'Gutenlayouts\\' ) ) {
+		if ( false === strpos( $class_name, 'GLLayoutBuilder\\' ) ) {
 			return;
 		}
 
@@ -51,17 +51,17 @@ class Autoloader {
 		$filename = 'class-' . str_replace( '_', '-', strtolower( $current_class ) ) . '.php';
 
 		// Handle the base namespace mapping to 'inc' directory.
-		// Since our namespace is Gutenlayouts and files are in inc/,
-		// we need to remove 'Gutenlayouts' from the beginning if it exists in path structure
-		// but since we check only classes starting with Gutenlayouts\, the $file_parts will contain 'Gutenlayouts'.
+		// Since our namespace is GLLayoutBuilder and files are in inc/,
+		// we need to remove 'GLLayoutBuilder' from the beginning if it exists in path structure
+		// but since we check only classes starting with GLLayoutBuilder\, the $file_parts will contain 'GLLayoutBuilder'.
 		
 		// Let's refine the logic.
-		// Class Name: Gutenlayouts\Api -> inc/class-api.php
-		// Class Name: Gutenlayouts\Utils\Helper -> inc/utils/class-helper.php (if we had subdirs)
+		// Class Name: GLLayoutBuilder\Api -> inc/class-api.php
+		// Class Name: GLLayoutBuilder\Utils\Helper -> inc/utils/class-helper.php (if we had subdirs)
 
-		// Remove the root namespace 'Gutenlayouts'.
+		// Remove the root namespace 'GLLayoutBuilder'.
 		$file_parts_cleaned = array_filter( $file_parts, function( $part ) {
-			return $part !== 'Gutenlayouts';
+			return $part !== 'GLLayoutBuilder';
 		});
 
 		$path_parts = array_map( function( $part ) {

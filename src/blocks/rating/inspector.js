@@ -2,9 +2,6 @@ import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import {
     PanelBody,
-    __experimentalBorderBoxControl as BorderBoxControl,
-    __experimentalToggleGroupControl as ToggleGroupControl,
-    __experimentalToggleGroupControlOption as ToggleGroupControlOption,
     __experimentalToolsPanel as ToolsPanel, // eslint-disable-line
     __experimentalToolsPanelItem as ToolsPanelItem // eslint-disable-line
 } from '@wordpress/components';
@@ -18,45 +15,45 @@ import {
 } from '../../components';
 
 const Inspector = props => {
-    const { attributes, setAttributes, clientId } = props;
+    const { attributes, setAttributes } = props;
     const { enableRating, totalRating, rating, nrPos, ratingSize, ratingNsize, ratingColor, nuRatColor, alignment } = attributes;
 
     return (
         <>
             <InspectorControls group="settings">
-                <PanelBody title={__('Settings', 'gutenlayouts')} initialOpen={true}>
+                <PanelBody title={__('Settings', 'gl-layout-builder')} initialOpen={true}>
                     <NativeToggleControl
-                        label={__('Show Numeric Rating', 'gutenlayouts')}
+                        label={__('Show Numeric Rating', 'gl-layout-builder')}
                         checked={enableRating}
                         onChange={value => setAttributes({ enableRating: value })}
                     />
                     {enableRating && (
                         <NativeSelectControl
-                            label={__('Position', 'gutenlayouts')}
+                            label={__('Position', 'gl-layout-builder')}
                             value={nrPos}
                             options={[
-                                { label: __('Left', 'gutenlayouts'), value: 'nr_left' },
-                                { label: __('Right', 'gutenlayouts'), value: 'nr_right' },
-                                { label: __('Top', 'gutenlayouts'), value: 'nr_top' },
-                                { label: __('Bottom', 'gutenlayouts'), value: 'nr_bottom' }
+                                { label: __('Left', 'gl-layout-builder'), value: 'nr_left' },
+                                { label: __('Right', 'gl-layout-builder'), value: 'nr_right' },
+                                { label: __('Top', 'gl-layout-builder'), value: 'nr_top' },
+                                { label: __('Bottom', 'gl-layout-builder'), value: 'nr_bottom' }
                             ]}
                             onChange={value => setAttributes({ nrPos: value })}
                         />
                     )}
                     <NativeToggleGroupControl
-                        label={__('Alignment', 'gutenlayouts')}
+                        label={__('Alignment', 'gl-layout-builder')}
                         value={alignment}
                         onChange={value => setAttributes({ alignment: value })}
                         options={[
-                            { value: '', label: __('Left', 'gutenlayouts') },
-                            { value: 'center', label: __('Center', 'gutenlayouts') },
-                            { value: 'right', label: __('Right', 'gutenlayouts') }
+                            { value: '', label: __('Left', 'gl-layout-builder') },
+                            { value: 'center', label: __('Center', 'gl-layout-builder') },
+                            { value: 'right', label: __('Right', 'gl-layout-builder') }
                         ]}
                     />
                 </PanelBody>
-                <PanelBody title={__('Rating', 'gutenlayouts')} initialOpen={false}>
+                <PanelBody title={__('Rating', 'gl-layout-builder')} initialOpen={false}>
                     <NativeRangeControl
-                        label={__('Total Rating', 'gutenlayouts')}
+                        label={__('Total Rating', 'gl-layout-builder')}
                         value={totalRating}
                         onChange={value => setAttributes({ totalRating: value })}
                         min={1}
@@ -64,7 +61,7 @@ const Inspector = props => {
                         step={1}
                     />
                     <NativeRangeControl
-                        label={__('Rating Value', 'gutenlayouts')}
+                        label={__('Rating Value', 'gl-layout-builder')}
                         value={rating}
                         onChange={value => setAttributes({ rating: value })}
                         min={0}
@@ -75,7 +72,7 @@ const Inspector = props => {
             </InspectorControls>
             <InspectorControls group="styles">
                 <ToolsPanel
-                    label={__('Rating', 'gutenlayouts')}
+                    label={__('Rating', 'gl-layout-builder')}
                     resetAll={() =>
                         setAttributes({
                             ratingSize: undefined,
@@ -85,7 +82,7 @@ const Inspector = props => {
                 >
                     <ToolsPanelItem
                         hasValue={() => !!ratingSize}
-                        label={__('Size', 'gutenlayouts')}
+                        label={__('Size', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 ratingSize: undefined
@@ -94,7 +91,7 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <NativeRangeControl
-                            label={__('Rating Size', 'gutenlayouts')}
+                            label={__('Rating Size', 'gl-layout-builder')}
                             value={ratingSize}
                             onChange={value => setAttributes({ ratingSize: value })}
                             min={0}
@@ -105,7 +102,7 @@ const Inspector = props => {
 
                     <ToolsPanelItem
                         hasValue={() => !!ratingColor}
-                        label={__('Color', 'gutenlayouts')}
+                        label={__('Color', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 ratingColor: undefined
@@ -114,7 +111,7 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <PanelColorControl
-                            label={__('Star Color', 'gutenlayouts')}
+                            label={__('Star Color', 'gl-layout-builder')}
                             colorSettings={[
                                 {
                                     value: ratingColor,
@@ -126,7 +123,7 @@ const Inspector = props => {
                 </ToolsPanel>
                 {enableRating && (
                     <ToolsPanel
-                        label={__('Numeric Rating', 'gutenlayouts')}
+                        label={__('Numeric Rating', 'gl-layout-builder')}
                         resetAll={() =>
                             setAttributes({
                                 ratingNsize: undefined,
@@ -136,7 +133,7 @@ const Inspector = props => {
                     >
                         <ToolsPanelItem
                             hasValue={() => !!ratingNsize}
-                            label={__('Size', 'gutenlayouts')}
+                            label={__('Size', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     ratingNsize: undefined
@@ -145,7 +142,7 @@ const Inspector = props => {
                             onSelect={() => {}}
                         >
                             <NativeRangeControl
-                                label={__('Font Size', 'gutenlayouts')}
+                                label={__('Font Size', 'gl-layout-builder')}
                                 value={ratingNsize}
                                 onChange={value => setAttributes({ ratingNsize: value })}
                                 min={0}
@@ -156,7 +153,7 @@ const Inspector = props => {
 
                         <ToolsPanelItem
                             hasValue={() => !!nuRatColor}
-                            label={__('Color', 'gutenlayouts')}
+                            label={__('Color', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     nuRatColor: undefined
@@ -165,12 +162,12 @@ const Inspector = props => {
                             onSelect={() => {}}
                         >
                             <PanelColorControl
-                                label={__('Text Color', 'gutenlayouts')}
+                                label={__('Text Color', 'gl-layout-builder')}
                                 colorSettings={[
                                     {
                                         value: nuRatColor,
                                         onChange: color => setAttributes({ nuRatColor: color }),
-                                        label: __('Color', 'gutenlayouts')
+                                        label: __('Color', 'gl-layout-builder')
                                     }
                                 ]}
                             />

@@ -2,10 +2,10 @@
 /**
  * Assets Manager Class.
  *
- * @package Gutenlayouts
+ * @package gl-layout-builder
  */
 
-namespace Gutenlayouts;
+namespace GLLayoutBuilder;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -49,15 +49,15 @@ class Assets {
 	 */
 	public function enqueue_frontend_scripts() {
 		wp_register_style(
-			'gutenlayouts-swiper-style',
-			GUTENLAYOUTS_PLUGIN_URL . 'assets/css/swiper-bundle.min.css',
+			'gl-layout-builder-swiper-style',
+			GLLB_PLUGIN_URL . 'assets/css/swiper-bundle.min.css',
 			array(),
 			'12.0.3'
 		);
 
 		wp_register_script(
-			'gutenlayouts-swiper-script',
-			GUTENLAYOUTS_PLUGIN_URL . 'assets/js/swiper-bundle.min.js',
+			'gl-layout-builder-swiper-script',
+			GLLB_PLUGIN_URL . 'assets/js/swiper-bundle.min.js',
 			array(),
 			'12.0.3',
 			true
@@ -68,31 +68,31 @@ class Assets {
 	 * Enqueue block editor scripts and styles.
 	 */
 	public function enqueue_editor_scripts() {
-		$lib_dep_file = GUTENLAYOUTS_PLUGIN_DIR . 'build/library/index.asset.php';
+		$lib_dep_file = GLLB_PLUGIN_DIR . 'build/library/index.asset.php';
 		if ( file_exists( $lib_dep_file ) ) {
 			$lib_asset = require $lib_dep_file;
 			wp_enqueue_script(
-				'gutenlayouts-library-script',
-				GUTENLAYOUTS_PLUGIN_URL . 'build/library/index.js',
+				'gl-layout-builder-library-script',
+				GLLB_PLUGIN_URL . 'build/library/index.js',
 				$lib_asset['dependencies'],
 				$lib_asset['version'],
 				true
 			);
 
 			wp_enqueue_style(
-				'gutenlayouts-library-style',
-				GUTENLAYOUTS_PLUGIN_URL . 'build/library/index.css',
+				'gl-layout-builder-library-style',
+				GLLB_PLUGIN_URL . 'build/library/index.css',
 				array(),
 				$lib_asset['version']
 			);
 		}
 
-		$visibility_dep_file = GUTENLAYOUTS_PLUGIN_DIR . 'build/extensions/visibility/index.asset.php';
+		$visibility_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/visibility/index.asset.php';
 		if ( file_exists( $visibility_dep_file ) ) {
 			$visibility_asset = require $visibility_dep_file;
 			wp_enqueue_script(
-				'gutenlayouts-visibility-script',
-				GUTENLAYOUTS_PLUGIN_URL . 'build/extensions/visibility/index.js',
+				'gl-layout-builder-visibility-script',
+				GLLB_PLUGIN_URL . 'build/extensions/visibility/index.js',
 				$visibility_asset['dependencies'],
 				$visibility_asset['version'],
 				true

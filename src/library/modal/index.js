@@ -8,8 +8,8 @@ import { Modal } from '@wordpress/components';
 import classnames from 'classnames';
 
 const libCategories = [
-    { slug: 'patterns', name: __('Patterns', 'gutenlayouts') },
-    { slug: 'templates', name: __('Templates', 'gutenlayouts') }
+    { slug: 'patterns', name: __('Patterns', 'gl-layout-builder') },
+    { slug: 'templates', name: __('Templates', 'gl-layout-builder') }
 ];
 
 /*
@@ -206,7 +206,7 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
             className="gutenlayouts-library-modal"
             title={
                 <div className="gutenlayouts-modal-header">
-                    <h2 className="gutenlayouts-modal-header-title">{__('Gutenlayouts', 'gutenlayouts')}</h2>
+                    <h2 className="gutenlayouts-modal-header-title">{__('Gutenlayouts', 'gl-layout-builder')}</h2>
                     <div className="gutenlayouts-modal-header-tabs">
                         {libCategories.map(cat => (
                             <Button
@@ -225,7 +225,7 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
             headerActions={
                 <>
                     <Button className="fetch-lastest-data" onClick={onFetchLatestData}>
-                        <span className="dashicons dashicons-update"></span> {__('Fetch Latest Data', 'gutenlayouts')}
+                        <span className="dashicons dashicons-update"></span> {__('Fetch Latest Data', 'gl-layout-builder')}
                     </Button>
                 </>
             }
@@ -251,7 +251,7 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
                                     className={classnames('pattern-category', { active: view.category === '' })}
                                     onClick={() => onCategorySelect('')}
                                 >
-                                    {__('All', 'gutenlayouts')}
+                                    {__('All', 'gl-layout-builder')}
                                 </Button>
                                 {currentCategories &&
                                     currentCategories.map(cat => (
@@ -272,7 +272,7 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
                                                 <img src={item.thumbnail} alt={item.title} />
                                             </div>
                                             <div className="pattern-info">
-                                                <h3 className="pattern-title">{item.title || __('Untitled', 'gutenlayouts')}</h3>
+                                                <h3 className="pattern-title">{item.title || __('Untitled', 'gl-layout-builder')}</h3>
                                                 <Button
                                                     className="pattern-import-button"
                                                     disabled={importingId === item.id}
@@ -287,17 +287,17 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
                                                     {item?.type === 'pro' ? (
                                                         <>
                                                             <span className="dashicons dashicons-lock"></span>
-                                                            {__('Pro', 'gutenlayouts')}
+                                                            {__('Pro', 'gl-layout-builder')}
                                                         </>
                                                     ) : (
                                                         <>
                                                             {importingId === item.id ? (
                                                                 <>
                                                                     <Spinner />
-                                                                    {__('Importing...', 'gutenlayouts')}
+                                                                    {__('Importing...', 'gl-layout-builder')}
                                                                 </>
                                                             ) : (
-                                                                __('Import', 'gutenlayouts')
+                                                                __('Import', 'gl-layout-builder')
                                                             )}
                                                         </>
                                                     )}
@@ -305,18 +305,18 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
                                             </div>
                                         </div>
                                     ))}
-                                    {currentItems.length === 0 && <p>{__('No items found.', 'gutenlayouts')}</p>}
+                                    {currentItems.length === 0 && <p>{__('No items found.', 'gl-layout-builder')}</p>}
                                 </div>
 
                                 <div className="gutenlayouts-pagination">
                                     <Button disabled={!hasPrev} onClick={onPrev}>
-                                        {__('Previous', 'gutenlayouts')}
+                                        {__('Previous', 'gl-layout-builder')}
                                     </Button>
                                     <span style={{ fontSize: '13px' }}>
-                                        {sprintf(__('Page %d of %d', 'gutenlayouts'), view.page, Math.max(1, totalPages))}
+                                        {sprintf(__('Page %d of %d', 'gl-layout-builder'), view.page, Math.max(1, totalPages))}
                                     </span>
                                     <Button disabled={!hasNext} onClick={onNext}>
-                                        {__('Next', 'gutenlayouts')}
+                                        {__('Next', 'gl-layout-builder')}
                                     </Button>
                                 </div>
                             </div>

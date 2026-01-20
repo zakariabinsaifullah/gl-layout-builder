@@ -60,27 +60,27 @@ export const ContentCustom = ({
         <div className="gutenlayouts-modal__custom-svg">
             <div className="gutenlayouts-modal__custom-svg-editor">
                 <TextareaControl
-                    label={__('Custom SVG code', 'gutenlayouts')}
+                    label={__('Custom SVG code', 'gl-layout-builder')}
                     value={tempCustomSvgCode}
                     onChange={setTempCustomSvgCode}
-                    help={__('Paste your custom SVG code here. It will override the selected icon.', 'gutenlayouts')}
+                    help={__('Paste your custom SVG code here. It will override the selected icon.', 'gl-layout-builder')}
                     rows={15}
                 />
             </div>
 
             <div className="gutenlayouts-modal__custom-svg-preview">
-                <h3>{__('Preview', 'gutenlayouts')}</h3>
+                <h3>{__('Preview', 'gl-layout-builder')}</h3>
                 <div className="gutenlayouts-icon-preview-container">
                     {tempCustomSvgCode ? (
                         renderCurrentIcon(previewIconSize, tempCustomSvgCode, previewStrokeWidth)
                     ) : (
-                        <div className="gutenlayouts-empty-preview">{__('Enter SVG code to see preview', 'gutenlayouts')}</div>
+                        <div className="gutenlayouts-empty-preview">{__('Enter SVG code to see preview', 'gl-layout-builder')}</div>
                     )}
                 </div>
 
                 <div className="gutenlayouts-modal__custom-svg-controls">
                     <RangeControl
-                        label={__('Icon Size', 'gutenlayouts')}
+                        label={__('Icon Size', 'gl-layout-builder')}
                         value={previewIconSize}
                         onChange={setPreviewIconSize}
                         min={16}
@@ -90,7 +90,7 @@ export const ContentCustom = ({
 
                     {tempIconType === 'line' && (
                         <RangeControl
-                            label={__('Stroke Width', 'gutenlayouts')}
+                            label={__('Stroke Width', 'gl-layout-builder')}
                             value={previewStrokeWidth}
                             onChange={setPreviewStrokeWidth}
                             min={0.5}
@@ -109,7 +109,7 @@ export const ContentCustom = ({
                             isDestructive
                             style={{ flex: '1', justifyContent: 'center' }}
                         >
-                            {__('Clear', 'gutenlayouts')}
+                            {__('Clear', 'gl-layout-builder')}
                         </Button>
                         <Button
                             __next40pxDefaultSize
@@ -118,7 +118,7 @@ export const ContentCustom = ({
                             disabled={!tempCustomSvgCode}
                             style={{ flex: '1', justifyContent: 'center' }}
                         >
-                            {__('Insert Custom Icon', 'gutenlayouts')}
+                            {__('Insert Custom Icon', 'gl-layout-builder')}
                         </Button>
                     </Flex>
                 </div>

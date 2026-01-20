@@ -51,20 +51,20 @@ const Inspector = props => {
     return (
         <>
             <InspectorControls group="settings">
-                <PanelBody title={__('General', 'gutenlayouts')} initialOpen={true}>
+                <PanelBody title={__('General', 'gl-layout-builder')} initialOpen={true}>
                     <NativeToggleGroupControl
-                        label={__('Height Type', 'gutenlayouts')}
+                        label={__('Height Type', 'gl-layout-builder')}
                         value={heightType}
                         onChange={value => setAttributes({ heightType: value })}
                         options={[
-                            { label: __('Adaptive', 'gutenlayouts'), value: 'adaptive' },
-                            { label: __('Fixed', 'gutenlayouts'), value: 'fixed' }
+                            { label: __('Adaptive', 'gl-layout-builder'), value: 'adaptive' },
+                            { label: __('Fixed', 'gl-layout-builder'), value: 'fixed' }
                         ]}
                     />
                     {heightType === 'fixed' && (
-                        <NativeResponsiveControl label={__('Height', 'gutenlayouts')} props={props}>
+                        <NativeResponsiveControl label={__('Height', 'gl-layout-builder')} props={props}>
                             <NativeUnitControl
-                                label={__('Slider Height', 'gutenlayouts')}
+                                label={__('Slider Height', 'gl-layout-builder')}
                                 value={heights[resMode]}
                                 onChange={value => {
                                     const newHeights = { ...heights, [resMode]: value };
@@ -74,8 +74,8 @@ const Inspector = props => {
                         </NativeResponsiveControl>
                     )}
                 </PanelBody>
-                <PanelBody title={__('Slider Options', 'gutenlayouts')} initialOpen={false}>
-                    <NativeResponsiveControl label={__('Columns', 'gutenlayouts')} props={props}>
+                <PanelBody title={__('Slider Options', 'gl-layout-builder')} initialOpen={false}>
+                    <NativeResponsiveControl label={__('Columns', 'gl-layout-builder')} props={props}>
                         <NativeRangeControl
                             value={columns[resMode]}
                             onChange={value => {
@@ -87,7 +87,7 @@ const Inspector = props => {
                             step={1}
                         />
                     </NativeResponsiveControl>
-                    <NativeResponsiveControl label={__('Gaps', 'gutenlayouts')} props={props}>
+                    <NativeResponsiveControl label={__('Gaps', 'gl-layout-builder')} props={props}>
                         <NativeRangeControl
                             value={gaps[resMode]}
                             onChange={value => {
@@ -100,18 +100,18 @@ const Inspector = props => {
                         />
                     </NativeResponsiveControl>
                     <NativeToggleControl
-                        label={__('Loop', 'gutenlayouts')}
+                        label={__('Loop', 'gl-layout-builder')}
                         checked={loop}
                         onChange={value => setAttributes({ loop: value })}
                     />
                     <NativeToggleControl
-                        label={__('Autoplay', 'gutenlayouts')}
+                        label={__('Autoplay', 'gl-layout-builder')}
                         checked={autoplay}
                         onChange={value => setAttributes({ autoplay: value })}
                     />
                     {autoplay && (
                         <NativeRangeControl
-                            label={__('Delay (ms)', 'gutenlayouts')}
+                            label={__('Delay (ms)', 'gl-layout-builder')}
                             value={delay}
                             onChange={value => setAttributes({ delay: value })}
                             min={1000}
@@ -120,23 +120,23 @@ const Inspector = props => {
                         />
                     )}
                     <NativeToggleControl
-                        label={__('Show Arrows', 'gutenlayouts')}
+                        label={__('Show Arrows', 'gl-layout-builder')}
                         checked={showArrows}
                         onChange={value => setAttributes({ showArrows: value })}
                     />
                     <NativeToggleControl
-                        label={__('Show Pagination', 'gutenlayouts')}
+                        label={__('Show Pagination', 'gl-layout-builder')}
                         checked={showPagination}
                         onChange={value => setAttributes({ showPagination: value })}
                     />
                     {showArrows && (
                         <NativeToggleGroupControl
-                            label={__('Navigation Type', 'gutenlayouts')}
+                            label={__('Navigation Type', 'gl-layout-builder')}
                             value={navType}
                             onChange={value => setAttributes({ navType: value })}
                             options={[
-                                { label: __('Inside', 'gutenlayouts'), value: 'inside' },
-                                { label: __('Outside', 'gutenlayouts'), value: 'outside' }
+                                { label: __('Inside', 'gl-layout-builder'), value: 'inside' },
+                                { label: __('Outside', 'gl-layout-builder'), value: 'outside' }
                             ]}
                         />
                     )}
@@ -144,7 +144,7 @@ const Inspector = props => {
             </InspectorControls>
             <InspectorControls group="styles">
                 <ToolsPanel
-                    label={__('Pagination', 'gutenlayouts')}
+                    label={__('Pagination', 'gl-layout-builder')}
                     resetAll={() =>
                         setAttributes({
                             pnSize: undefined,
@@ -158,7 +158,7 @@ const Inspector = props => {
                 >
                     <ToolsPanelItem
                         hasValue={() => !!pgap}
-                        label={__('Gap', 'gutenlayouts')}
+                        label={__('Gap', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 pgap: undefined
@@ -167,14 +167,14 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <NativeUnitControl
-                            label={__('Vertical Gap', 'gutenlayouts')}
+                            label={__('Vertical Gap', 'gl-layout-builder')}
                             value={pgap}
                             onChange={value => setAttributes({ pgap: value })}
                         />
                     </ToolsPanelItem>
                     <ToolsPanelItem
                         hasValue={() => !!pnSize || !!paSize}
-                        label={__('Sizes', 'gutenlayouts')}
+                        label={__('Sizes', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 pnSize: undefined,
@@ -184,12 +184,12 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <NativeUnitControl
-                            label={__('Normal Size', 'gutenlayouts')}
+                            label={__('Normal Size', 'gl-layout-builder')}
                             value={pnSize}
                             onChange={value => setAttributes({ pnSize: value })}
                         />
                         <NativeUnitControl
-                            label={__('Active Size', 'gutenlayouts')}
+                            label={__('Active Size', 'gl-layout-builder')}
                             value={paSize}
                             onChange={value => setAttributes({ paSize: value })}
                         />
@@ -197,7 +197,7 @@ const Inspector = props => {
 
                     <ToolsPanelItem
                         hasValue={() => !!pRadius || !!paRadius}
-                        label={__('Radius', 'gutenlayouts')}
+                        label={__('Radius', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 pRadius: undefined,
@@ -207,12 +207,12 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <NativeUnitControl
-                            label={__('Normal Radius', 'gutenlayouts')}
+                            label={__('Normal Radius', 'gl-layout-builder')}
                             value={pRadius}
                             onChange={value => setAttributes({ pRadius: value })}
                         />
                         <NativeUnitControl
-                            label={__('Active Radius', 'gutenlayouts')}
+                            label={__('Active Radius', 'gl-layout-builder')}
                             value={paRadius}
                             onChange={value => setAttributes({ paRadius: value })}
                         />
@@ -220,7 +220,7 @@ const Inspector = props => {
 
                     <ToolsPanelItem
                         hasValue={() => !!paginationColor}
-                        label={__('Color', 'gutenlayouts')}
+                        label={__('Color', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 paginationColor: undefined
@@ -229,7 +229,7 @@ const Inspector = props => {
                         onSelect={() => {}}
                     >
                         <PanelColorControl
-                            label={__('Color', 'gutenlayouts')}
+                            label={__('Color', 'gl-layout-builder')}
                             colorSettings={[
                                 {
                                     value: paginationColor,
@@ -241,7 +241,7 @@ const Inspector = props => {
                 </ToolsPanel>
                 {showArrows && (
                     <ToolsPanel
-                        label={__('Navigation', 'gutenlayouts')}
+                        label={__('Navigation', 'gl-layout-builder')}
                         resetAll={() =>
                             setAttributes({
                                 navbgColor: undefined,
@@ -256,7 +256,7 @@ const Inspector = props => {
                     >
                         <ToolsPanelItem
                             hasValue={() => !!navEdgeGap}
-                            label={__('Edge Gap', 'gutenlayouts')}
+                            label={__('Edge Gap', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     navEdgeGap: undefined
@@ -265,14 +265,14 @@ const Inspector = props => {
                             onSelect={() => {}}
                         >
                             <NativeUnitControl
-                                label={__('Edge Gap', 'gutenlayouts')}
+                                label={__('Edge Gap', 'gl-layout-builder')}
                                 value={navEdgeGap}
                                 onChange={value => setAttributes({ navEdgeGap: value })}
                             />
                         </ToolsPanelItem>
                         <ToolsPanelItem
                             hasValue={() => !!navSize}
-                            label={__('Size', 'gutenlayouts')}
+                            label={__('Size', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     navSize: undefined
@@ -281,14 +281,14 @@ const Inspector = props => {
                             onSelect={() => {}}
                         >
                             <NativeUnitControl
-                                label={__('Size', 'gutenlayouts')}
+                                label={__('Size', 'gl-layout-builder')}
                                 value={navSize}
                                 onChange={value => setAttributes({ navSize: value })}
                             />
                         </ToolsPanelItem>
                         <ToolsPanelItem
                             hasValue={() => !!navIconSize}
-                            label={__('Icon Size', 'gutenlayouts')}
+                            label={__('Icon Size', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     navIconSize: undefined
@@ -297,14 +297,14 @@ const Inspector = props => {
                             onSelect={() => {}}
                         >
                             <NativeUnitControl
-                                label={__('Icon Size', 'gutenlayouts')}
+                                label={__('Icon Size', 'gl-layout-builder')}
                                 value={navIconSize}
                                 onChange={value => setAttributes({ navIconSize: value })}
                             />
                         </ToolsPanelItem>
                         <ToolsPanelItem
                             hasValue={() => !!navRadius}
-                            label={__('Radius', 'gutenlayouts')}
+                            label={__('Radius', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     navRadius: undefined
@@ -313,14 +313,14 @@ const Inspector = props => {
                             onSelect={() => {}}
                         >
                             <NativeUnitControl
-                                label={__('Radius', 'gutenlayouts')}
+                                label={__('Radius', 'gl-layout-builder')}
                                 value={navRadius}
                                 onChange={value => setAttributes({ navRadius: value })}
                             />
                         </ToolsPanelItem>
                         <ToolsPanelItem
                             hasValue={() => !!navColor || !!navbgColor || !!navBorderColor}
-                            label={__('Colors', 'gutenlayouts')}
+                            label={__('Colors', 'gl-layout-builder')}
                             onDeselect={() => {
                                 setAttributes({
                                     navColor: undefined,
@@ -331,20 +331,20 @@ const Inspector = props => {
                             onSelect={() => {}}
                         >
                             <PanelColorControl
-                                label={__('Colors', 'gutenlayouts')}
+                                label={__('Colors', 'gl-layout-builder')}
                                 colorSettings={[
                                     {
-                                        label: __('Color', 'gutenlayouts'),
+                                        label: __('Color', 'gl-layout-builder'),
                                         value: navColor,
                                         onChange: color => setAttributes({ navColor: color })
                                     },
                                     {
-                                        label: __('Background', 'gutenlayouts'),
+                                        label: __('Background', 'gl-layout-builder'),
                                         value: navbgColor,
                                         onChange: color => setAttributes({ navbgColor: color })
                                     },
                                     {
-                                        label: __('Border Color', 'gutenlayouts'),
+                                        label: __('Border Color', 'gl-layout-builder'),
                                         value: navBorderColor,
                                         onChange: color => setAttributes({ navBorderColor: color })
                                     }

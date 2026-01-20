@@ -38,6 +38,6 @@
             "__experimentalSkipSerialization": true
         }
     },
-    "textdomain": "gutenlayouts",
+    "textdomain": "gl-layout-builder",
     "editorScript": ["file:./index.js"]
 }
