@@ -193,11 +193,19 @@ class Rest_Api {
 	public function rest_get_page_templates( $request ) {
 		$params = $request->get_params();
 
+		$refresh = isset( $params['refresh'] ) && 'true' === $params['refresh'];
+		if ( $refresh ) {
+			unset( $params['refresh'] );
+		}
+
 		$cache_key = $this->get_cache_key( 'templates', $params );
 
-		$cached_data = $this->get_cached_data( $cache_key );
-		if ( false !== $cached_data ) {
-			return rest_ensure_response( $cached_data );
+		// Try to get from cache first if not refreshing.
+		if ( ! $refresh ) {
+			$cached_data = $this->get_cached_data( $cache_key );
+			if ( false !== $cached_data ) {
+				return rest_ensure_response( $cached_data );
+			}
 		}
 
 		$response = Api::get_instance()->get_page_templates( $params );
@@ -256,11 +264,20 @@ class Rest_Api {
 	public function rest_get_template_categories( $request ) {
 		$params = $request->get_params();
 
+		// Check for refresh param.
+		$refresh = isset( $params['refresh'] ) && 'true' === $params['refresh'];
+		if ( $refresh ) {
+			unset( $params['refresh'] );
+		}
+
 		$cache_key = $this->get_cache_key( 'template_categories', $params );
 
-		$cached_data = $this->get_cached_data( $cache_key );
-		if ( false !== $cached_data ) {
-			return rest_ensure_response( $cached_data );
+		// Try to get from cache first.
+		if ( ! $refresh ) {
+			$cached_data = $this->get_cached_data( $cache_key );
+			if ( false !== $cached_data ) {
+				return rest_ensure_response( $cached_data );
+			}
 		}
 
 		$response = Api::get_instance()->get_template_categories( $params );

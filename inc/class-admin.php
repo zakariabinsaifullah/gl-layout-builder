@@ -57,7 +57,7 @@ class Admin {
 			'gutenlayouts',
 			array( $this, 'render_admin_page' ),
 			GLLB_PLUGIN_URL . 'assets/images/gl-icon.svg',
-			30
+			'30.5'
 		);
 	}
 
