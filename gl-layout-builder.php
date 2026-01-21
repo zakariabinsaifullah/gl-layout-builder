@@ -25,6 +25,9 @@ define( 'GLLB_PLUGIN_FILE', __FILE__ );
 define( 'GLLB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'GLLB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
+// Helper functions.
+require_once __DIR__ . '/inc/helpers.php';
+
 // Require autoloader.
 require_once __DIR__ . '/inc/class-autoloader.php';
 

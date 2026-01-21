@@ -41,29 +41,9 @@ class Extensions {
 	 */
 	private function __construct() {
 		// Check if visibility extension is enabled.
-		if ( $this->is_extension_enabled( 'visibility' ) ) {
+		if ( Helpers::is_extension_enabled( 'visibility' ) ) {
 			add_action( 'wp_head', array( $this, 'visibility_inline_styles' ) );
 		}
-	}
-
-	/**
-	 * Check if an extension is enabled.
-	 *
-	 * @param string $extension_id Extension ID to check.
-	 * @return bool True if enabled, false otherwise.
-	 */
-	private function is_extension_enabled( $extension_id ) {
-		$raw_settings       = get_option( 'gllb_settings', false );
-		$enabled_extensions = array();
-
-		// If no settings saved yet, enable all extensions by default.
-		if ( false === $raw_settings ) {
-			return true;
-		}
-
-		$enabled_extensions = isset( $raw_settings['extensions'] ) ? (array) $raw_settings['extensions'] : array();
-
-		return in_array( $extension_id, $enabled_extensions, true );
 	}
 
 	/**
@@ -73,12 +53,12 @@ class Extensions {
 		// Only output visibility styles if the page uses visibility classes.
 		if ( $this->has_classes(
 			array(
-				'gl-layout-builder-hide-desktop',
-				'gl-layout-builder-hide-tablet',
-				'gl-layout-builder-hide-mobile',
+				'gutenlayouts-hide-desktop',
+				'gutenlayouts-hide-tablet',
+				'gutenlayouts-hide-mobile',
 			)
 		) ) {
-			echo '<style id="gl-layout-builder-visibility-inline-css">@media (min-width:1025px){.gl-layout-builder-hide-desktop{display:none!important}}@media (min-width:768px) and (max-width:1024px){.gl-layout-builder-hide-tablet{display:none!important}}@media (max-width:767px){.gl-layout-builder-hide-mobile{display:none!important}}</style>';
+			echo '<style id="gl-layout-builder-visibility-inline-css">@media (min-width:1025px){.gutenlayouts-hide-desktop{display:none!important}}@media (min-width:768px) and (max-width:1024px){.gutenlayouts-hide-tablet{display:none!important}}@media (max-width:767px){.gutenlayouts-hide-mobile{display:none!important}}</style>';
 		}
 	}
 
