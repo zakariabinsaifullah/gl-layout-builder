@@ -1,0 +1,83 @@
+.gutenlayouts-tooltip {
+    position: relative;
+    border-bottom: 1px dotted currentColor;
+    cursor: help;
+
+    &::before {
+        content: attr(data-content);
+        position: absolute;
+        bottom: calc(100% + 8px); // Account for triangle height
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #333;
+        color: #fff;
+        padding: 0.75em 1em;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        pointer-events: none;
+        border-radius: 6px;
+        white-space: nowrap;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 1000;
+        opacity: 0;
+        transform: translateX(-50%) translateY(-4px);
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        visibility: hidden;
+        // Ensure minimum width and better text handling
+        width: max-content;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.4;
+
+        // mobile view
+        @media (max-width: 767px) {
+            width: auto !important;
+        }
+    }
+
+    // Triangle pointing down (at bottom of tooltip)
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: calc(100% + 1px); // Position just below the tooltip
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1001; // Slightly higher than tooltip
+        opacity: 0;
+        transform: translateX(-50%) translateY(-4px);
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+        visibility: hidden;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid #333;
+        // Add a subtle filter for smoother edges
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    &:hover {
+        &::before,
+        &::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+
+    &[data-theme='light'] {
+        &::before {
+            background-color: #f0f0f0;
+            color: #333;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        &::after {
+            border-top-color: #f0f0f0;
+        }
+    }
+}

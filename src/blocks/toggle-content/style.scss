@@ -1,0 +1,16 @@
+/**
+ * Toggle Content Block Styles
+ */
+
+.wp-block-gutenlayouts-toggle-content {
+    // In editor, we handle visibility via JS context + inline styles
+    // In frontend, it's handled by view.js
+    
+    &.is-hidden {
+        display: none;
+    }
+
+    &.is-active {
+        display: block;
+    }
+}

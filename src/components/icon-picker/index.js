@@ -43,7 +43,7 @@ const NativeIconPicker = ({
     };
 
     const handleIconSelect = iconData => {
-        onIconSelect(iconData.name, getIconType(iconData.icon));
+        onIconSelect(iconData.name, getIconType(iconData.icon), iconData.icon);
     };
 
     const handleCustomSvgInsert = ({ customSvgCode, iconType, strokeWidth }) => {

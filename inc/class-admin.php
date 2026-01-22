@@ -151,6 +151,26 @@ class Admin {
 				'icon'  => 'dashicons-visibility',
 				'demo'  => 'https://gutenlayouts.com/demo/visibility',
 			),
+			'custom-css' => array(
+				'title' => __( 'Custom CSS', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-editor-code',
+				'demo'  => 'https://gutenlayouts.com/demo/custom-css',
+			),
+			'lightbox'   => array(
+				'title' => __( 'Lightbox', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-format-image',
+				'demo'  => 'https://gutenlayouts.com/demo/lightbox',
+			),
+			'tooltip'    => array(
+				'title' => __( 'Tooltip', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-editor-help',
+				'demo'  => 'https://gutenlayouts.com/demo/tooltip',
+			),
+			'iconic-button' => array(
+				'title' => __( 'Iconic Button', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-button',
+				'demo'  => 'https://gutenlayouts.com/demo/iconic-button',
+			),
 		);
 	}
 
