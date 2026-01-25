@@ -131,11 +131,12 @@ class Assets {
 			);
 		}
 
-		$visibility_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/visibility/index.asset.php';
-		if ( file_exists( $visibility_dep_file ) ) {
-			$visibility_asset = require $visibility_dep_file;
-			wp_enqueue_script(
-				'gl-layout-builder-visibility-script',
+		if ( Helpers::is_extension_enabled( 'visibility' ) ) {	
+			$visibility_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/visibility/index.asset.php';
+			if ( file_exists( $visibility_dep_file ) ) {
+				$visibility_asset = require $visibility_dep_file;
+				wp_enqueue_script(
+					'gl-layout-builder-visibility-script',
 				GLLB_PLUGIN_URL . 'build/extensions/visibility/index.js',
 				$visibility_asset['dependencies'],
 				$visibility_asset['version'],

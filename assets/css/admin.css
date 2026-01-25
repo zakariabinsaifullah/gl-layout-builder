@@ -27,6 +27,14 @@
     --gllb-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+a {
+    text-decoration: none !important;
+}
+
+#wpcontent {
+    margin-left: 0 !important;
+}
+
 body.toplevel_page_gutenlayouts {
     background: var(--gllb-bg);
 }
@@ -160,13 +168,13 @@ body.toplevel_page_gutenlayouts {
 /* DASHBOARD GRID */
 .gllb-dashboard-grid {
     display: grid;
-    grid-template-columns: 1fr 340px;
+    grid-template-columns: 1fr 360px;
     gap: 32px;
 }
 
 /* BANNER */
 .gllb-welcome-banner {
-    background: linear-gradient(135deg, #5a00cd 0%, #893bff 100%);
+    background: linear-gradient(135deg, #6666ff 0%, #6765ff 100%);
     border-radius: 12px;
     padding: 40px;
     color: #fff;
@@ -269,6 +277,10 @@ body.toplevel_page_gutenlayouts {
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.gllb-link-white:hover {
+    color: #fff !important;
 }
 
 .gllb-link-white .dashicons {
@@ -381,6 +393,12 @@ body.toplevel_page_gutenlayouts {
     display: grid;
     place-items: center;
     color: var(--gllb-primary);
+}
+
+.gllb-resource-icon img {
+    max-width: 100%;
+    width: 18px;
+    height: 18px;
 }
 
 .gllb-resource-info {
@@ -528,7 +546,7 @@ body.toplevel_page_gutenlayouts {
 /* CARDS GRID MODERN */
 .gllb-grid-modern {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 20px;
 }
 
@@ -566,7 +584,7 @@ body.toplevel_page_gutenlayouts {
     color: var(--gllb-text-main);
 }
 
-.gllb-icon-box .dashicons {
+.gllb-icon-box svg {
     font-size: 24px;
     width: 24px;
     height: 24px;
@@ -588,9 +606,24 @@ body.toplevel_page_gutenlayouts {
     color: var(--gllb-primary); /* Changed to primary from muted for better visibility */
     text-decoration: none;
     font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
+
 .gllb-link-subtle:hover {
     text-decoration: underline;
+}
+
+a.gllb-link-subtle .dashicons {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.desc {
+    margin: 5px 0 8px;
 }
 
 /* SWITCH */

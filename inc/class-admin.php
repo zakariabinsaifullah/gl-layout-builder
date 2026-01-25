@@ -56,8 +56,8 @@ class Admin {
 			'manage_options',
 			'gutenlayouts',
 			array( $this, 'render_admin_page' ),
-			'dashicons-layout',
-			30
+			GLLB_PLUGIN_URL . 'assets/images/gl-icon.svg',
+			'30.5'
 		);
 	}
 
@@ -232,8 +232,8 @@ class Admin {
 	 * Render admin page.
 	 */
 	public function render_admin_page() {
-		$blocks          = $this->get_available_blocks();
-		$extensions      = $this->get_available_extensions();
+		$blocks          = Helpers::get_available_blocks();
+		$extensions      = Helpers::get_available_extensions();
 		$saved_settings  = $this->get_saved_settings();
 		$enabled_blocks  = isset( $saved_settings['blocks'] ) ? $saved_settings['blocks'] : array();
 		$enabled_extensions = isset( $saved_settings['extensions'] ) ? $saved_settings['extensions'] : array();
@@ -253,7 +253,7 @@ class Admin {
 				<div class="gllb-container">
 					<div class="gllb-header-inner">
 						<div class="gllb-logo-area">
-							<span class="dashicons dashicons-layout"></span>
+							<img src="<?php echo esc_url( GLLB_PLUGIN_URL . 'assets/images/gl.svg' ); ?>" alt="gutenlayouts"/>
 							<h1><?php esc_html_e( 'Gutenlayouts', 'gl-layout-builder' ); ?></h1>
 							<div class="gllb-version-tag">v<?php echo esc_html( GLLB_VERSION ); ?></div>
 						</div>
@@ -274,7 +274,7 @@ class Admin {
 						</nav>
 
 						<div class="gllb-header-actions">
-							<a href="https://gutenlayouts.com/pricing" target="_blank" class="gllb-btn-upgrade">
+							<a href="https://gutenlayouts.com/#pricing" target="_blank" class="gllb-btn-upgrade">
 								<?php esc_html_e( 'Unlock Pro', 'gl-layout-builder' ); ?>
 								<span class="dashicons dashicons-external"></span>
 							</a>
@@ -295,7 +295,7 @@ class Admin {
 								<div class="gllb-welcome-banner">
 									<div class="gllb-banner-content">
 										<h2><?php esc_html_e( 'Welcome to Gutenlayouts', 'gl-layout-builder' ); ?></h2>
-										<p><?php esc_html_e( 'We designed Gutenlayouts to be intuitive. Check out our comprehensive documentation to get started.', 'gl-layout-builder' ); ?></p>
+										<p><?php esc_html_e( 'Build powerful layouts with blocks, extensions, patterns & templates. Check out our comprehensive documentation to get started.', 'gl-layout-builder' ); ?></p>
 										<div class="gllb-banner-actions">
 											<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=page' ) ); ?>" class="gllb-button gllb-button-primary" style="text-decoration:none">
 												<span class="dashicons dashicons-plus-alt2"></span>
@@ -317,41 +317,67 @@ class Admin {
 
 								<div class="gllb-video-tutorial">
 									<div class="gllb-video-wrapper">
-										<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+										<iframe src="https://www.youtube.com/embed/mzPZgtijw7Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 									</div>
 								</div>
 
 								<div class="gllb-section-title">
-									<h3><?php esc_html_e( 'What’s New in v', 'gl-layout-builder' ); ?><?php echo esc_html( GLLB_VERSION ); ?></h3>
-									<p><?php esc_html_e( 'Explore the latest blocks and features added in this release.', 'gl-layout-builder' ); ?></p>
+									<h3><?php esc_html_e( 'Available for Hiring', 'gl-layout-builder' ); ?></h3>
+									<p><?php esc_html_e( '10+ years of experience in web design & development. Available for hiring for your projects.', 'gl-layout-builder' ); ?></p>
 								</div>
 
 								<div class="gllb-info-card warning">
 									<span class="dashicons dashicons-info"></span>
-									<p><strong><?php esc_html_e( 'Important:', 'gl-layout-builder' ); ?></strong> <?php esc_html_e( 'Gutenlayouts v3 is strictly beta. Please do not use on live sites yet.', 'gl-layout-builder' ); ?></p>
+									<p><strong><?php esc_html_e( 'Portfolio:', 'gl-layout-builder' ); ?></strong> <?php esc_html_e( 'Feel free to explore the portfolio link to learn more', 'gl-layout-builder');?> <a href="https://devzakaria.com" target="_blank" rel="nofollow noopener">
+										<?php echo esc_html('Explore Portfolio', 'gl-layout-builder') ?>
+									</a></p>
 								</div>
 							</div>
 
 							<!-- Right Column -->
 							<aside class="gllb-dashboard-sidebar">
 								<div class="gllb-sidebar-card">
-									<h3><?php esc_html_e( 'Extend Your Website', 'gl-layout-builder' ); ?></h3>
+									<h3><?php esc_html_e( 'We Recommend', 'gl-layout-builder' ); ?></h3>
 									<ul class="gllb-resource-list">
 										<li>
-											<div class="gllb-resource-icon"><span class="dashicons dashicons-admin-appearance"></span></div>
-											<div class="gllb-resource-info">
-												<strong>Astra Theme</strong>
-												<span>Fast and customizable theme.</span>
+											<div class="gllb-resource-icon">
+												<img src="<?php echo esc_url(GLLB_PLUGIN_URL . 'assets/images/gutslider.svg');?>" alt="gutslider">
 											</div>
-											<button class="gllb-btn-xs"><?php esc_html_e( 'Install', 'gl-layout-builder' ); ?></button>
+											<div class="gllb-resource-info">
+												<strong><?php echo esc_html('GutSlider', 'gl-layout-builder') ?></strong>
+												<span><?php echo esc_html('All in One Block Slider.', 'gl-layout-builder') ?></span>
+											</div>
+											<a href="https://gutslider.com" target="_blank" class="gllb-btn-xs"><?php esc_html_e( 'Get Now', 'gl-layout-builder' ); ?></a>
 										</li>
 										<li>
-											<div class="gllb-resource-icon"><span class="dashicons dashicons-layout"></span></div>
-											<div class="gllb-resource-info">
-												<strong>Starter Templates</strong>
-												<span>Ready-made templates.</span>
+											<div class="gllb-resource-icon">
+												<img src="<?php echo esc_url(GLLB_PLUGIN_URL . 'assets/images/accordion.webp');?>" alt="accordion">
 											</div>
-											<button class="gllb-btn-xs"><?php esc_html_e( 'Install', 'gl-layout-builder' ); ?></button>
+											<div class="gllb-resource-info">
+												<strong><?php echo esc_html('Accordion Block', 'gl-layout-builder') ?></strong>
+												<span><?php echo esc_html('Modern Accordion Block.', 'gl-layout-builder') ?></span>
+											</div>
+											<a href="https://accordion.gutenbergkits.com" target="_blank" class="gllb-btn-xs"><?php esc_html_e( 'Get Now', 'gl-layout-builder' ); ?></a>
+										</li>
+										<li>
+											<div class="gllb-resource-icon">
+												<img src="<?php echo esc_url(GLLB_PLUGIN_URL . 'assets/images/gmap.svg');?>" alt="gmap block">
+											</div>
+											<div class="gllb-resource-info">
+												<strong><?php echo esc_html('Gmap', 'gl-layout-builder') ?></strong>
+												<span><?php echo esc_html('Modern Google Map Block.', 'gl-layout-builder') ?></span>
+											</div>
+											<a href="https://gmap.gutenbergkits.com" target="_blank" class="gllb-btn-xs"><?php esc_html_e( 'Get Now', 'gl-layout-builder' ); ?></a>
+										</li>
+										<li>
+											<div class="gllb-resource-icon">
+												<img src="<?php echo esc_url(GLLB_PLUGIN_URL . 'assets/images/table.webp');?>" alt="gmap block">
+											</div>
+											<div class="gllb-resource-info">
+												<strong><?php echo esc_html('Table Builder', 'gl-layout-builder') ?></strong>
+												<span><?php echo esc_html('Advanced table builder Block.', 'gl-layout-builder') ?></span>
+											</div>
+											<a href="https://wpnativeblocks.com/table-builder/" target="_blank" class="gllb-btn-xs"><?php esc_html_e( 'Get Now', 'gl-layout-builder' ); ?></a>
 										</li>
 									</ul>
 								</div>
@@ -359,7 +385,7 @@ class Admin {
 								<div class="gllb-sidebar-card">
 									<h3><?php esc_html_e( 'Quick Access', 'gl-layout-builder' ); ?></h3>
 									<ul class="gllb-quick-links">
-										<li><a href="#"><span class="dashicons dashicons-sos"></span> <?php esc_html_e( 'VIP Support', 'gl-layout-builder' ); ?> <span class="gllb-badge-pro">PRO</span></a></li>
+										<li><a href="https://support.gutenbergkits.com" target="_blank"><span class="dashicons dashicons-sos"></span> <?php esc_html_e( 'Get VIP Support', 'gl-layout-builder' ); ?></a></li>
 										<li><a href="#"><span class="dashicons dashicons-book"></span> <?php esc_html_e( 'Help Center', 'gl-layout-builder' ); ?></a></li>
 										<li><a href="#"><span class="dashicons dashicons-groups"></span> <?php esc_html_e( 'Join Community', 'gl-layout-builder' ); ?></a></li>
 										<li><a href="#"><span class="dashicons dashicons-star-filled"></span> <?php esc_html_e( 'Rate Us', 'gl-layout-builder' ); ?></a></li>
@@ -395,13 +421,19 @@ class Admin {
 								<div class="gllb-card-modern gllb-block-item" data-label="<?php echo esc_attr( strtolower( $block['title'] ) ); ?>">
 									<div class="gllb-card-header">
 										<div class="gllb-icon-box">
-											<span class="dashicons <?php echo esc_attr( $block['icon'] ); ?>"></span>
+											<?php echo $block['icon']; ?>
 										</div>
 										<span class="gllb-pro-badge" style="display:none">PRO</span>
 									</div>
 									<div class="gllb-card-body">
 										<h4><?php echo esc_html( $block['title'] ); ?></h4>
-										<a href="<?php echo esc_url( $block['demo'] ); ?>" target="_blank" class="gllb-link-subtle"><?php esc_html_e( 'Demo', 'gl-layout-builder' ); ?></a>
+										<div class="desc">
+											<?php echo esc_html( $block['desc'] ); ?>
+										</div>
+										<a href="<?php echo esc_url( $block['demo'] ); ?>" target="_blank" class="gllb-link-subtle">
+											<?php esc_html_e( 'Demo', 'gl-layout-builder' ); ?>
+											<span class="dashicons dashicons-external"></span>
+										</a>
 									</div>
 									<div class="gllb-card-footer">
 										<label class="gllb-switch">
