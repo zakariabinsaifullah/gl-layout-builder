@@ -1,0 +1,32 @@
+.gutenlayouts-format-popover.tooltip {
+    .components-popover__content {
+        width: 250px;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .gutenlayouts-popup-actions {
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .gutenlayouts-popup-actions button {
+        border: 1px solid #e43838;
+        width: 100%;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        border-radius: 3px;
+        font-size: 15px !important;
+    }
+
+    button.components-button.gutenlayouts-apply-format {
+        background: #007cba;
+        color: #fff;
+        border-color: #007cba;
+        &:hover {
+            color: #fff !important;
+        }
+    }
+}

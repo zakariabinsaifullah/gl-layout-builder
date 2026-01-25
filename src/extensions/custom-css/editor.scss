@@ -1,0 +1,33 @@
+p.gutenlayouts-help-note {
+    margin: 0;
+    padding-top: 15px;
+    font-size: 13px;
+    font-style: italic;
+    color: #848484;
+
+    &.top-note {
+        padding-top: 0;
+        padding-bottom: 15px;
+    }
+}
+
+.cm-theme {
+    border: 1px solid #dddddd;
+}
+
+button.gutenlayouts-apply-css {
+    padding: 10px;
+    border: none;
+    background: #007cba;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 3px;
+    text-align: center;
+    width: 100%;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.gutenlayouts-bottom-wrapper {
+    margin-top: 15px;
+}

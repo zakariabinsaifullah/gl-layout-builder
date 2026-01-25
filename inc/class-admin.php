@@ -100,6 +100,81 @@ class Admin {
 	}
 
 	/**
+	 * Get all available blocks.
+	 *
+	 * @return array
+	 */
+	private function get_available_blocks() {
+		return array(
+			'carousel' => array(
+				'title' => __( 'Carousel', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-slides',
+				'demo'  => 'https://gutenlayouts.com/demo/carousel',
+			),
+			'icon'     => array(
+				'title' => __( 'Icon', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-star-filled',
+				'demo'  => 'https://gutenlayouts.com/demo/icon',
+			),
+			'map'      => array(
+				'title' => __( 'Map', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-location',
+				'demo'  => 'https://gutenlayouts.com/demo/map',
+			),
+			'marque'   => array(
+				'title' => __( 'Marquee', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-move',
+				'demo'  => 'https://gutenlayouts.com/demo/marquee',
+			),
+			'progress' => array(
+				'title' => __( 'Progress', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-chart-bar',
+				'demo'  => 'https://gutenlayouts.com/demo/progress',
+			),
+			'rating'   => array(
+				'title' => __( 'Rating', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-star-half',
+				'demo'  => 'https://gutenlayouts.com/demo/rating',
+			),
+		);
+	}
+
+	/**
+	 * Get all available extensions.
+	 *
+	 * @return array
+	 */
+	private function get_available_extensions() {
+		return array(
+			'visibility' => array(
+				'title' => __( 'Visibility Control', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-visibility',
+				'demo'  => 'https://gutenlayouts.com/demo/visibility',
+			),
+			'custom-css' => array(
+				'title' => __( 'Custom CSS', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-editor-code',
+				'demo'  => 'https://gutenlayouts.com/demo/custom-css',
+			),
+			'lightbox'   => array(
+				'title' => __( 'Lightbox', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-format-image',
+				'demo'  => 'https://gutenlayouts.com/demo/lightbox',
+			),
+			'tooltip'    => array(
+				'title' => __( 'Tooltip', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-editor-help',
+				'demo'  => 'https://gutenlayouts.com/demo/tooltip',
+			),
+			'iconic-button' => array(
+				'title' => __( 'Iconic Button', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-button',
+				'demo'  => 'https://gutenlayouts.com/demo/iconic-button',
+			),
+		);
+	}
+
+	/**
 	 * Get saved settings.
 	 *
 	 * @return array

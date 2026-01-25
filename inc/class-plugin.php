@@ -70,7 +70,7 @@ class Plugin {
 		// Initialize Categories.
 		Category::get_instance();
 
-		// Initialize Extensions (Visibility, etc).
+		// Initialize Extensions (Visibility, Tooltip, Lightbox, Custom CSS).
 		Extensions::get_instance();
 	}
 }
