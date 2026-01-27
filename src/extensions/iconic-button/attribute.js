@@ -23,28 +23,35 @@ function gutenlayoutsBtnIconAttribute(settings, name) {
         ...settings,
         attributes: {
             ...settings.attributes,
-            gutenlayoutsBtnIconName: {
+            gllbEnableIconicBtn: {
+                type: 'boolean',
+                default: false
+            },
+            gllbBtnIconName: {
                 type: 'string',
                 default: ''
             },
-            gutenlayoutsBtnIconType: {
+            gllbBtnIcon: {
                 type: 'string',
                 default: ''
             },
-            gutenlayoutsBtnCustomSvg: {
+            gllbBtnIconType: {
                 type: 'string',
                 default: ''
             },
-            gutenlayoutsBtnIconPosition: {
+            gllbBtnCustomSvg: {
                 type: 'string',
                 default: ''
             },
-            gutenlayoutsBtnIconSize: {
-                type: 'number',
-                default: 1
+            gllbBtnIconPosition: {
+                type: 'string',
+                default: ''
             },
-            gutenlayoutsBtnIconGap: {
-                type: 'number'
+            gllbBtnIconSize: {
+                type: 'string'
+            },
+            gllbBtnIconGap: {
+                type: 'string'
             }
         }
     };

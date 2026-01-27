@@ -1,15 +1,24 @@
 .wp-block-button.gutenlayouts-btn-icon {
     .wp-block-button__link {
-        gap: var(--gutenlayouts-icon-gap);
+        display: flex;
+        align-items: center;
+        gap: var(--gutenlayouts-icon-gap, 8px);
         &:after {
             content: '';
-            width: var(--gutenlayouts-icon-size);
-            height: var(--gutenlayouts-icon-size);
+            width: var(--gutenlayouts-icon-size, 1em);
+            height: var(--gutenlayouts-icon-size, 1em);
             mask-image: var(--gutenlayouts-icon-url);
             mask-position: center;
             mask-size: contain;
             mask-repeat: no-repeat;
             background-color: currentColor;
+            display: inline-block;
+        }
+    }
+
+    &.gutenlayouts-icon-before {
+        .wp-block-button__link {
+            flex-direction: row-reverse;
         }
     }
 }

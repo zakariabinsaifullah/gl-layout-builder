@@ -28,6 +28,63 @@ class Helpers {
 		return in_array( $extension_id, $enabled_extensions, true );
 	}
 
+	/**
+	 * Check if the current page contains specific CSS classes.
+	 * Supports both traditional posts/pages and FSE block theme templates.
+	 *
+	 * @param array $strings Array of strings to search for.
+	 * @return bool True if any of the strings are found, false otherwise.
+	 */
+	public static function has_string( $strings = array() ) {
+		global $post, $_wp_current_template_content;
+
+		// Return false if no classes provided.
+		if ( empty( $strings ) || ! is_array( $strings ) ) {
+			return false;
+		}
+
+		// Check traditional post content (posts, pages, CPTs).
+		if ( $post && isset( $post->post_content ) ) {
+			foreach ( $strings as $string ) {
+				if ( false !== strpos( $post->post_content, $string ) ) {
+					return true;
+				}
+			}
+		}
+
+		// Only check block theme content if using a block theme.
+		if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
+			// Check FSE block theme template content.
+			if ( ! empty( $_wp_current_template_content ) ) {
+				foreach ( $strings as $string ) {
+					if ( false !== strpos( $_wp_current_template_content, $string ) ) {
+						return true;
+					}
+				}
+			}
+
+			// Check current template and template parts for block themes.
+			if ( function_exists( 'get_block_templates' ) ) {
+				// Get all templates and template parts.
+				$templates      = get_block_templates( array(), 'wp_template' );
+				$template_parts = get_block_templates( array(), 'wp_template_part' );
+				$all_templates  = array_merge( $templates, $template_parts );
+
+				foreach ( $all_templates as $template ) {
+					if ( ! empty( $template->content ) ) {
+						foreach ( $strings as $string ) {
+							if ( false !== strpos( $template->content, $string ) ) {
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
     /**
      * Get available blocks.
      *
@@ -86,6 +143,26 @@ class Helpers {
 				'title' => __( 'Responsive Visibility', 'gl-layout-builder' ),
 				'icon'  => 'dashicons-visibility',
 				'demo'  => 'https://gutenlayouts.com/extensions/#visibility',
+			),
+			'custom-css' => array(
+				'title' => __( 'Custom CSS', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-editor-code',
+				'demo'  => 'https://gutenlayouts.com/extensions/#custom-css',
+			),
+			'lightbox'   => array(
+				'title' => __( 'Gallery Lightbox', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-format-gallery',
+				'demo'  => 'https://gutenlayouts.com/extensions/#lightbox',
+			),
+			'tooltip'    => array(
+				'title' => __( 'RichText Tooltip', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-editor-help',
+				'demo'  => 'https://gutenlayouts.com/extensions/#tooltip',
+			),
+			'iconic-button' => array(
+				'title' => __( 'Iconic Button', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-button',
+				'demo'  => 'https://gutenlayouts.com/extensions/#iconic-button',
 			),
 		);
 	}

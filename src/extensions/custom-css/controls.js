@@ -22,7 +22,6 @@ const gutenlayoutsAddCustomPanel = createHigherOrderComponent(BlockEdit => {
     return props => {
         const { attributes, setAttributes, clientId } = props;
         const { gutenlayoutsCustomCSS } = attributes;
-        const [gutenlayoutsCSS, setGutenlayoutsCSS] = useState(gutenlayoutsCustomCSS);
 
         const defaultCSS = `/* selector {
     color: #f00; 
@@ -30,15 +29,22 @@ const gutenlayoutsAddCustomPanel = createHigherOrderComponent(BlockEdit => {
 
         const dynamicClass = `gutenlayouts-${clientId.slice(0, 8)}`;
 
+        // Handle CSS changes directly
+        const handleCSSChange = value => {
+            setAttributes({
+                gutenlayoutsCustomCSS: value,
+                gutenlayoutsDynamicClass: dynamicClass
+            });
+            initialOpen = true;
+        };
+
         return (
             <>
                 <BlockEdit key="edit" {...props} />
                 <InspectorControls>
                     <PanelBody title={__('Custom CSS', 'gl-layout-builder')} initialOpen={initialOpen}>
                         <p className="gutenlayouts-help-note top-note">
-                            {__('You must click on the ', 'gl-layout-builder')}
-                            <code>{__('Apply/Update CSS', 'gl-layout-builder')}</code>
-                            {__(' button to apply the CSS to the block.', 'gl-layout-builder')}
+                            {__('CSS changes are applied automatically as you type.', 'gl-layout-builder')}
                             <a href="https://www.youtube.com/watch?v=rP7wBUrLxH8" target="_blank">
                                 {__(' Watch Video', 'gl-layout-builder')}
                             </a>
@@ -49,19 +55,9 @@ const gutenlayoutsAddCustomPanel = createHigherOrderComponent(BlockEdit => {
                             theme={githubLight}
                             height="200px"
                             extensions={[css()]}
-                            onChange={value => setGutenlayoutsCSS(value)}
+                            onChange={handleCSSChange}
                         />
                         <div className="gutenlayouts-bottom-wrapper">
-                            <button
-                                className="gutenlayouts-apply-css"
-                                onClick={() => {
-                                    setAttributes({ gutenlayoutsCustomCSS: gutenlayoutsCSS });
-                                    setAttributes({ gutenlayoutsDynamicClass: dynamicClass });
-                                    initialOpen = true;
-                                }}
-                            >
-                                {gutenlayoutsCustomCSS ? __('Update CSS', 'gl-layout-builder') : __('Apply CSS', 'gl-layout-builder')}
-                            </button>
                             <p className="gutenlayouts-help-note">
                                 {__('Add ', 'gl-layout-builder')}
                                 <code>selector</code>

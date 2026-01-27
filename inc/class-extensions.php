@@ -46,45 +46,20 @@ class Extensions {
 		}
 
 		// Check if lightbox extension is enabled.
-		if ( $this->is_extension_enabled( 'lightbox' ) ) {
+		if ( Helpers::is_extension_enabled( 'lightbox' ) ) {
 			add_filter( 'render_block', array( $this, 'add_lightbox_class_to_gallery' ), 10, 2 );
 		}
 
 		// Check if custom CSS extension is enabled.
-		if ( $this->is_extension_enabled( 'custom-css' ) ) {
+		if ( Helpers::is_extension_enabled( 'custom-css' ) ) {
 			add_filter( 'render_block', array( $this, 'add_custom_css_to_block' ), 10, 2 );
 			add_action( 'wp_head', array( $this, 'output_custom_css' ) );
 		}
 
 		// Check if iconic button extension is enabled.
-		if ( $this->is_extension_enabled( 'iconic-button' ) ) {
+		if ( Helpers::is_extension_enabled( 'iconic-button' ) ) {
 			add_filter( 'render_block', array( $this, 'render_iconic_button' ), 10, 2 );
 		}
-	}
-
-	/**
-	 * Check if an extension is enabled.
-	 *
-	 * @param string $extension_id Extension ID to check.
-	 * @return bool True if enabled, false otherwise.
-	 */
-	private function is_extension_enabled( $extension_id ) {
-		$raw_settings       = get_option( 'gllb_settings', false );
-		$enabled_extensions = array();
-
-		// If no settings saved yet, enable all extensions by default.
-		if ( false === $raw_settings ) {
-			return true;
-		}
-
-		$enabled_extensions = isset( $raw_settings['extensions'] ) ? (array) $raw_settings['extensions'] : array();
-
-		// Force enable during development/debugging
-		if ( 'iconic-button' === $extension_id ) {
-			return true;
-		}
-
-		return in_array( $extension_id, $enabled_extensions, true );
 	}
 
 	/**
@@ -92,7 +67,7 @@ class Extensions {
 	 */
 	public function visibility_inline_styles() {
 		// Only output visibility styles if the page uses visibility classes.
-		if ( $this->has_classes(
+		if ( Helpers::has_string(
 			array(
 				'gutenlayouts-hide-desktop',
 				'gutenlayouts-hide-tablet',
@@ -101,63 +76,6 @@ class Extensions {
 		) ) {
 			echo '<style id="gl-layout-builder-visibility-inline-css">@media (min-width:1025px){.gutenlayouts-hide-desktop{display:none!important}}@media (min-width:768px) and (max-width:1024px){.gutenlayouts-hide-tablet{display:none!important}}@media (max-width:767px){.gutenlayouts-hide-mobile{display:none!important}}</style>';
 		}
-	}
-
-	/**
-	 * Check if the current page contains specific CSS classes.
-	 * Supports both traditional posts/pages and FSE block theme templates.
-	 *
-	 * @param array $classes Array of CSS class names to search for.
-	 * @return bool True if any of the classes are found, false otherwise.
-	 */
-	public function has_classes( $classes = array() ) {
-		global $post, $_wp_current_template_content;
-
-		// Return false if no classes provided.
-		if ( empty( $classes ) || ! is_array( $classes ) ) {
-			return false;
-		}
-
-		// Check traditional post content (posts, pages, CPTs).
-		if ( $post && isset( $post->post_content ) ) {
-			foreach ( $classes as $class ) {
-				if ( false !== strpos( $post->post_content, $class ) ) {
-					return true;
-				}
-			}
-		}
-
-		// Only check block theme content if using a block theme.
-		if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
-			// Check FSE block theme template content.
-			if ( ! empty( $_wp_current_template_content ) ) {
-				foreach ( $classes as $class ) {
-					if ( false !== strpos( $_wp_current_template_content, $class ) ) {
-						return true;
-					}
-				}
-			}
-
-			// Check current template and template parts for block themes.
-			if ( function_exists( 'get_block_templates' ) ) {
-				// Get all templates and template parts.
-				$templates      = get_block_templates( array(), 'wp_template' );
-				$template_parts = get_block_templates( array(), 'wp_template_part' );
-				$all_templates  = array_merge( $templates, $template_parts );
-
-				foreach ( $all_templates as $template ) {
-					if ( ! empty( $template->content ) ) {
-						foreach ( $classes as $class ) {
-							if ( false !== strpos( $template->content, $class ) ) {
-								return true;
-							}
-						}
-					}
-				}
-			}
-		}
-
-		return false;
 	}
 
 	/**
@@ -290,46 +208,77 @@ class Extensions {
 
 		$attrs = $block['attrs'];
 
-		$icon_svg = isset( $attrs['gutenlayoutsBtnCustomSvg'] ) ? $attrs['gutenlayoutsBtnCustomSvg'] : '';
-		
-		// Fallback to old attribute name if available
-		if ( empty( $icon_svg ) && isset( $attrs['gutenlayoutsBtnIcon'] ) ) {
-			$icon_svg = $attrs['gutenlayoutsBtnIcon'];
-		}
+		$enable_btn_icon = $attrs['gllbEnableIconicBtn'] ?? false;
 
-		if ( empty( $icon_svg ) && ! isset( $attrs['gutenlayoutsBtnIconName'] ) ) {
+		if( ! $enable_btn_icon ) {
 			return $block_content;
 		}
 
-		$position = isset( $attrs['gutenlayoutsBtnIconPosition'] ) ? $attrs['gutenlayoutsBtnIconPosition'] : '';
-		$size     = isset( $attrs['gutenlayoutsBtnIconSize'] ) ? $attrs['gutenlayoutsBtnIconSize'] : 1;
-		$gap      = isset( $attrs['gutenlayoutsBtnIconGap'] ) ? $attrs['gutenlayoutsBtnIconGap'] : 0;
+		$icon_type = $attrs['gllbBtnIconType'];
+		$custom_icon = $attrs['gllbBtnCustomSvg'];
+		$icon_svg = $attrs['gllbBtnIcon'];
 
-		// Generate a unique class based on attributes to avoid conflicts.
-		$unique_id    = substr( md5( serialize( $attrs ) ), 0, 8 );
-		$unique_class = 'gutenlayouts-btn-icon-' . $unique_id;
+		$icon = $icon_type === 'custom' ? $custom_icon : $icon_svg;
 
-		$classes = 'gutenlayouts-btn-icon ' . $unique_class;
-		if ( ! empty( $position ) ) {
-			$classes .= ' ' . $position;
+		if( empty( $icon ) ) {
+			return $block_content;
 		}
 
-		$block_content = str_replace( 'class="', 'class="' . esc_attr( $classes ) . ' ', $block_content );
 
-		$style = '';
-		if ( ! empty( $icon_svg ) ) {
-			$svg_base64 = 'data:image/svg+xml;base64,' . base64_encode( $icon_svg );
-			$style      = "
-				.gutenlayouts-btn-icon.{$unique_class} .wp-block-button__link{
-					--gutenlayouts-icon-gap: {$gap}px !important;
-				}
-				.gutenlayouts-btn-icon.{$unique_class} .wp-block-button__link::after{
-					--gutenlayouts-icon-url: url('{$svg_base64}') !important;
-					--gutenlayouts-icon-size: {$size}em !important;
-				}
-			";
-		}
+		$position = isset( $attrs['gllbBtnIconPosition'] ) ? $attrs['gllbBtnIconPosition'] : '';
+		$size     = isset( $attrs['gllbBtnIconSize'] ) ? $attrs['gllbBtnIconSize'] : '';
+		$gap      = isset( $attrs['gllbBtnIconGap'] ) ? $attrs['gllbBtnIconGap'] : '';
 
-		return ( ! empty( $style ) ? '<style>' . $this->minify_css( $style ) . '</style>' : '' ) . $block_content;
+		 // Build CSS custom properties
+        $css_vars = '';
+        if( ! empty( $size )) {
+            $css_vars .= '--gutenlayouts-icon-size: ' . esc_attr( $size ) . ';';
+        }
+        if( ! empty( $gap ) ) {
+            $css_vars .= '--gutenlayouts-icon-gap: ' . esc_attr( $gap ) . ';';
+        }
+
+        // Use WP_HTML_Tag_Processor to add styles to the wrapper div
+        $processor = new \WP_HTML_Tag_Processor( $block_content );
+        
+        if ( $processor->next_tag( array( 'tag_name' => 'div', 'class_name' => 'wp-block-button' ) ) ) {
+            // add class to button 
+            $processor->add_class( 'gutenlayouts-btn-icon' );
+            if( ! empty( $position ) ) {
+                $processor->add_class(esc_attr( $position ));
+            }
+            if ( ! empty( $css_vars ) ) {
+                $existing_style = $processor->get_attribute( 'style' ) ?? '';
+                $new_style = trim( $existing_style . ' ' . $css_vars );
+                $processor->set_attribute( 'style', $new_style );
+            }
+        }
+
+        $modified_content = $processor->get_updated_html();
+
+        // Now use regex to add the icon inside the button link
+        // Pattern to match the button link content
+        $pattern = '/(<a[^>]*class="[^"]*wp-block-button__link[^"]*"[^>]*>)(.*?)(<\/a>)/s';
+        
+        $modified_content = preg_replace_callback($pattern, function($matches) use ($icon, $position) {
+            $opening_tag = $matches[1];
+            $content = $matches[2];
+            $closing_tag = $matches[3];
+            
+            // Clean up the existing content (remove extra whitespace)
+            $content = trim($content);
+            
+            // Add icon based on position
+            if ($position === 'before') {
+                $new_content = $icon . $content;
+            } else {
+                $new_content = $content . $icon;
+            }
+            
+            return $opening_tag . $new_content . $closing_tag;
+        }, $modified_content);
+
+        return $modified_content;
+
 	}
 }

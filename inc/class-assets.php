@@ -97,14 +97,16 @@ class Assets {
 		}
 
 		// Enqueue iconic button frontend styles.
-		$iconic_button_style_file = GLLB_PLUGIN_DIR . 'build/extensions/iconic-button/style-index.css';
-		if ( file_exists( $iconic_button_style_file ) ) {
-			wp_enqueue_style(
-				'gl-layout-builder-iconic-button-frontend-style',
-				GLLB_PLUGIN_URL . 'build/extensions/iconic-button/style-index.css',
-				array(),
-				GLLB_VERSION
-			);
+		if( Helpers::is_extension_enabled( 'iconic-button' ) && Helpers::has_string( array( 'gllbEnableIconicBtn' ) ) ) {
+			$iconic_button_style_file = GLLB_PLUGIN_DIR . 'build/extensions/iconic-button/style-index.css';
+			if ( file_exists( $iconic_button_style_file ) ) {
+				wp_enqueue_style(
+					'gllb-iconic-btn',
+					GLLB_PLUGIN_URL . 'build/extensions/iconic-button/style-index.css',
+					array(),
+					GLLB_VERSION
+				);
+			}
 		}
 	}
 
@@ -131,17 +133,18 @@ class Assets {
 			);
 		}
 
-		if ( Helpers::is_extension_enabled( 'visibility' ) ) {	
+		if ( Helpers::is_extension_enabled( 'visibility' ) ) {
 			$visibility_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/visibility/index.asset.php';
 			if ( file_exists( $visibility_dep_file ) ) {
 				$visibility_asset = require $visibility_dep_file;
 				wp_enqueue_script(
 					'gl-layout-builder-visibility-script',
-				GLLB_PLUGIN_URL . 'build/extensions/visibility/index.js',
-				$visibility_asset['dependencies'],
-				$visibility_asset['version'],
-				true
-			);
+					GLLB_PLUGIN_URL . 'build/extensions/visibility/index.js',
+					$visibility_asset['dependencies'],
+					$visibility_asset['version'],
+					true
+				);
+			}
 		}
 
 		$tooltip_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/tooltip/index.asset.php';
@@ -201,23 +204,26 @@ class Assets {
 			);
 		}
 
-		$iconic_btn_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/iconic-button/index.asset.php';
-		if ( file_exists( $iconic_btn_dep_file ) ) {
-			$iconic_btn_asset = require $iconic_btn_dep_file;
-			wp_enqueue_script(
-				'gl-layout-builder-iconic-button-script',
-				GLLB_PLUGIN_URL . 'build/extensions/iconic-button/index.js',
-				$iconic_btn_asset['dependencies'],
-				$iconic_btn_asset['version'],
-				true
-			);
+		// Iconic button extension 
+		if( Helpers::is_extension_enabled( 'iconic-button' ) ) {
+			$iconic_btn_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/iconic-button/index.asset.php';
+			if ( file_exists( $iconic_btn_dep_file ) ) {
+				$iconic_btn_asset = require $iconic_btn_dep_file;
+				wp_enqueue_script(
+					'gl-layout-builder-iconic-button-script',
+					GLLB_PLUGIN_URL . 'build/extensions/iconic-button/index.js',
+					$iconic_btn_asset['dependencies'],
+					$iconic_btn_asset['version'],
+					true
+				);
 
-			wp_enqueue_style(
-				'gl-layout-builder-iconic-button-style',
-				GLLB_PLUGIN_URL . 'build/extensions/iconic-button/index.css',
-				array(),
-				$iconic_btn_asset['version']
-			);
+				wp_enqueue_style(
+					'gl-layout-builder-iconic-button-style',
+					GLLB_PLUGIN_URL . 'build/extensions/iconic-button/index.css',
+					array(),
+					$iconic_btn_asset['version']
+				);
+			}
 		}
 	}
 }
