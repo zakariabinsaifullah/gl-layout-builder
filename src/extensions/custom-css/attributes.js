@@ -11,10 +11,10 @@ function gutenlayoutsAddAttributes(settings) {
         ...settings,
         attributes: {
             ...settings.attributes,
-            gutenlayoutsDynamicClass: {
+            gllbDynamicClass: {
                 type: 'string'
             },
-            gutenlayoutsCustomCSS: {
+            gllbCustomCSS: {
                 type: 'string'
             }
         }

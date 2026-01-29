@@ -49,14 +49,14 @@ class Assets {
 	 */
 	public function enqueue_frontend_scripts() {
 		wp_register_style(
-			'gl-layout-builder-swiper-style',
+			'gllb-swiper-style',
 			GLLB_PLUGIN_URL . 'assets/css/swiper-bundle.min.css',
 			array(),
 			'12.0.3'
 		);
 
 		wp_register_script(
-			'gl-layout-builder-swiper-script',
+			'gllb-swiper-script',
 			GLLB_PLUGIN_URL . 'assets/js/swiper-bundle.min.js',
 			array(),
 			'12.0.3',
@@ -67,7 +67,7 @@ class Assets {
 		$tooltip_style_file = GLLB_PLUGIN_DIR . 'build/extensions/tooltip/style-index.css';
 		if ( file_exists( $tooltip_style_file ) ) {
 			wp_enqueue_style(
-				'gl-layout-builder-tooltip-frontend-style',
+				'gllb-tooltip-frontend-style',
 				GLLB_PLUGIN_URL . 'build/extensions/tooltip/style-index.css',
 				array(),
 				GLLB_VERSION
@@ -75,25 +75,27 @@ class Assets {
 		}
 
 		// Enqueue lightbox frontend assets.
-		$lightbox_view_file = GLLB_PLUGIN_DIR . 'build/extensions/lightbox/view.js';
-		if ( file_exists( $lightbox_view_file ) ) {
-			wp_enqueue_script(
-				'gl-layout-builder-lightbox-view-script',
-				GLLB_PLUGIN_URL . 'build/extensions/lightbox/view.js',
-				array(),
-				GLLB_VERSION,
-				true
-			);
-		}
-
-		$lightbox_style_file = GLLB_PLUGIN_DIR . 'build/extensions/lightbox/style-index.css';
-		if ( file_exists( $lightbox_style_file ) ) {
-			wp_enqueue_style(
-				'gl-layout-builder-lightbox-frontend-style',
-				GLLB_PLUGIN_URL . 'build/extensions/lightbox/style-index.css',
-				array(),
-				GLLB_VERSION
-			);
+		if( Helpers::is_extension_enabled( 'lightbox' ) && Helpers::has_string( array( 'gllbEnableLightbox' ) ) ) {
+			$lightbox_view_file = GLLB_PLUGIN_DIR . 'build/extensions/lightbox/view.js';
+			if ( file_exists( $lightbox_view_file ) ) {
+				wp_enqueue_script(
+					'gllb-lightbox-view-script',
+					GLLB_PLUGIN_URL . 'build/extensions/lightbox/view.js',
+					array(),
+					GLLB_VERSION,
+					true
+				);
+			}
+			
+			$lightbox_style_file = GLLB_PLUGIN_DIR . 'build/extensions/lightbox/style-index.css';
+			if ( file_exists( $lightbox_style_file ) ) {
+				wp_enqueue_style(
+					'gllb-lightbox-frontend-style',
+					GLLB_PLUGIN_URL . 'build/extensions/lightbox/style-index.css',
+					array(),
+					GLLB_VERSION
+				);
+			}
 		}
 
 		// Enqueue iconic button frontend styles.
@@ -118,7 +120,7 @@ class Assets {
 		if ( file_exists( $lib_dep_file ) ) {
 			$lib_asset = require $lib_dep_file;
 			wp_enqueue_script(
-				'gl-layout-builder-library-script',
+				'gllb-library-script',
 				GLLB_PLUGIN_URL . 'build/library/index.js',
 				$lib_asset['dependencies'],
 				$lib_asset['version'],
@@ -126,7 +128,7 @@ class Assets {
 			);
 
 			wp_enqueue_style(
-				'gl-layout-builder-library-style',
+				'gllb-library-style',
 				GLLB_PLUGIN_URL . 'build/library/index.css',
 				array(),
 				$lib_asset['version']
@@ -138,7 +140,7 @@ class Assets {
 			if ( file_exists( $visibility_dep_file ) ) {
 				$visibility_asset = require $visibility_dep_file;
 				wp_enqueue_script(
-					'gl-layout-builder-visibility-script',
+					'gllb-visibility-script',
 					GLLB_PLUGIN_URL . 'build/extensions/visibility/index.js',
 					$visibility_asset['dependencies'],
 					$visibility_asset['version'],
@@ -151,7 +153,7 @@ class Assets {
 		if ( file_exists( $tooltip_dep_file ) ) {
 			$tooltip_asset = require $tooltip_dep_file;
 			wp_enqueue_script(
-				'gl-layout-builder-tooltip-script',
+				'gllb-tooltip-script',
 				GLLB_PLUGIN_URL . 'build/extensions/tooltip/index.js',
 				$tooltip_asset['dependencies'],
 				$tooltip_asset['version'],
@@ -159,49 +161,55 @@ class Assets {
 			);
 
 			wp_enqueue_style(
-				'gl-layout-builder-tooltip-style',
+				'gllb-tooltip-style',
 				GLLB_PLUGIN_URL . 'build/extensions/tooltip/index.css',
 				array(),
 				$tooltip_asset['version']
 			);
 		}
 
-		$lightbox_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/lightbox/index.asset.php';
-		if ( file_exists( $lightbox_dep_file ) ) {
-			$lightbox_asset = require $lightbox_dep_file;
-			wp_enqueue_script(
-				'gl-layout-builder-lightbox-script',
-				GLLB_PLUGIN_URL . 'build/extensions/lightbox/index.js',
-				$lightbox_asset['dependencies'],
-				$lightbox_asset['version'],
-				true
-			);
+		// Lightbox extension
+		if( Helpers::is_extension_enabled( 'lightbox' ) ) {
+			$lightbox_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/lightbox/index.asset.php';
+			if ( file_exists( $lightbox_dep_file ) ) {
+				$lightbox_asset = require $lightbox_dep_file;
+				wp_enqueue_script(
+					'gllb-lightbox-script',
+					GLLB_PLUGIN_URL . 'build/extensions/lightbox/index.js',
+					$lightbox_asset['dependencies'],
+					$lightbox_asset['version'],
+					true
+				);
 
-			wp_enqueue_style(
-				'gl-layout-builder-lightbox-style',
-				GLLB_PLUGIN_URL . 'build/extensions/lightbox/index.css',
-				array(),
-				$lightbox_asset['version']
-			);
+				wp_enqueue_style(
+					'gllb-lightbox-style',
+					GLLB_PLUGIN_URL . 'build/extensions/lightbox/index.css',
+					array(),
+					$lightbox_asset['version']
+				);
+			}
 		}
 
-		$custom_css_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/custom-css/index.asset.php';
-		if ( file_exists( $custom_css_dep_file ) ) {
-			$custom_css_asset = require $custom_css_dep_file;
-			wp_enqueue_script(
-				'gl-layout-builder-custom-css-script',
-				GLLB_PLUGIN_URL . 'build/extensions/custom-css/index.js',
-				$custom_css_asset['dependencies'],
-				$custom_css_asset['version'],
-				true
-			);
+		// Custom CSS extension
+		if( Helpers::is_extension_enabled( 'custom-css' ) ) {
+			$custom_css_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/custom-css/index.asset.php';
+			if ( file_exists( $custom_css_dep_file ) ) {
+				$custom_css_asset = require $custom_css_dep_file;
+				wp_enqueue_script(
+					'gllb-custom-css-script',
+					GLLB_PLUGIN_URL . 'build/extensions/custom-css/index.js',
+					$custom_css_asset['dependencies'],
+					$custom_css_asset['version'],
+					true
+				);
 
-			wp_enqueue_style(
-				'gl-layout-builder-custom-css-style',
-				GLLB_PLUGIN_URL . 'build/extensions/custom-css/index.css',
-				array(),
-				$custom_css_asset['version']
-			);
+				wp_enqueue_style(
+					'gllb-custom-css-style',
+					GLLB_PLUGIN_URL . 'build/extensions/custom-css/index.css',
+					array(),
+					$custom_css_asset['version']
+				);
+			}
 		}
 
 		// Iconic button extension 
@@ -210,7 +218,7 @@ class Assets {
 			if ( file_exists( $iconic_btn_dep_file ) ) {
 				$iconic_btn_asset = require $iconic_btn_dep_file;
 				wp_enqueue_script(
-					'gl-layout-builder-iconic-button-script',
+					'gllb-iconic-button-script',
 					GLLB_PLUGIN_URL . 'build/extensions/iconic-button/index.js',
 					$iconic_btn_asset['dependencies'],
 					$iconic_btn_asset['version'],
@@ -218,7 +226,7 @@ class Assets {
 				);
 
 				wp_enqueue_style(
-					'gl-layout-builder-iconic-button-style',
+					'gllb-iconic-button-style',
 					GLLB_PLUGIN_URL . 'build/extensions/iconic-button/index.css',
 					array(),
 					$iconic_btn_asset['version']

@@ -7,9 +7,9 @@ import { addFilter } from '@wordpress/hooks';
 const withGutenlayoutsUniqueClass = createHigherOrderComponent(BlockListBlock => {
     return props => {
         const { attributes, clientId, className: existingClassName } = props;
-        const { gutenlayoutsCustomCSS } = attributes;
+        const { gllbCustomCSS } = attributes;
 
-        if (!gutenlayoutsCustomCSS) {
+        if (!gllbCustomCSS) {
             return <BlockListBlock {...props} />;
         }
 

@@ -92,7 +92,7 @@ class Extensions {
 		}
 
 		// Check if lightbox is enabled for this block.
-		if ( isset( $block['attrs']['gutenlayoutsEnableLightbox'] ) && $block['attrs']['gutenlayoutsEnableLightbox'] ) {
+		if ( isset( $block['attrs']['gllbEnableLightbox'] ) && $block['attrs']['gllbEnableLightbox'] ) {
 			// Add the lightbox class to the gallery.
 			$block_content = str_replace( 'class="', 'class="gutenlayouts-lightbox ', $block_content );
 		}
@@ -109,11 +109,11 @@ class Extensions {
 	 */
 	public function add_custom_css_to_block( $block_content, $block ) {
 		// Check if block has custom CSS.
-		if ( ! isset( $block['attrs']['gutenlayoutsDynamicClass'] ) || empty( $block['attrs']['gutenlayoutsDynamicClass'] ) ) {
+		if ( ! isset( $block['attrs']['gllbDynamicClass'] ) || empty( $block['attrs']['gllbDynamicClass'] ) ) {
 			return $block_content;
 		}
 
-		$dynamic_class = $block['attrs']['gutenlayoutsDynamicClass'];
+		$dynamic_class = $block['attrs']['gllbDynamicClass'];
 
 		// Add the dynamic class to the block.
 		$block_content = str_replace( 'class="', 'class="' . esc_attr( $dynamic_class ) . ' ', $block_content );
@@ -139,7 +139,7 @@ class Extensions {
 		$css = $this->collect_custom_css( $blocks );
 
 		if ( ! empty( $css ) ) {
-			echo '<style id="gutenlayouts-custom-css">' . $this->minify_css( $css ) . '</style>';
+			echo '<style id="gutenlayouts-custom-css">' . wp_strip_all_tags( $this->minify_css( $css ) ) . '</style>';
 		}
 	}
 
@@ -154,9 +154,9 @@ class Extensions {
 
 		foreach ( $blocks as $block ) {
 			// Check if block has custom CSS.
-			if ( isset( $block['attrs']['gutenlayoutsCustomCSS'] ) && ! empty( $block['attrs']['gutenlayoutsCustomCSS'] ) ) {
-				$custom_css    = $block['attrs']['gutenlayoutsCustomCSS'];
-				$dynamic_class = isset( $block['attrs']['gutenlayoutsDynamicClass'] ) ? $block['attrs']['gutenlayoutsDynamicClass'] : '';
+			if ( isset( $block['attrs']['gllbCustomCSS'] ) && ! empty( $block['attrs']['gllbCustomCSS'] ) ) {
+				$custom_css    = $block['attrs']['gllbCustomCSS'];
+				$dynamic_class = isset( $block['attrs']['gllbDynamicClass'] ) ? $block['attrs']['gllbDynamicClass'] : '';
 
 				if ( ! empty( $dynamic_class ) ) {
 					// Replace 'selector' with the dynamic class.

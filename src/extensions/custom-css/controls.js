@@ -4,7 +4,6 @@
 import { InspectorControls } from '@wordpress/blockEditor';
 import { PanelBody } from '@wordpress/components';
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { useState } from '@wordpress/element';
 import { addFilter } from '@wordpress/hooks';
 import { __ } from '@wordpress/i18n';
 
@@ -21,7 +20,7 @@ let initialOpen = false;
 const gutenlayoutsAddCustomPanel = createHigherOrderComponent(BlockEdit => {
     return props => {
         const { attributes, setAttributes, clientId } = props;
-        const { gutenlayoutsCustomCSS } = attributes;
+        const { gllbCustomCSS } = attributes;
 
         const defaultCSS = `/* selector {
     color: #f00; 
@@ -32,8 +31,8 @@ const gutenlayoutsAddCustomPanel = createHigherOrderComponent(BlockEdit => {
         // Handle CSS changes directly
         const handleCSSChange = value => {
             setAttributes({
-                gutenlayoutsCustomCSS: value,
-                gutenlayoutsDynamicClass: dynamicClass
+                gllbCustomCSS: value,
+                gllbDynamicClass: dynamicClass
             });
             initialOpen = true;
         };
@@ -51,7 +50,7 @@ const gutenlayoutsAddCustomPanel = createHigherOrderComponent(BlockEdit => {
                         </p>
                         <CodeMirror
                             className="gutenlayouts-codemirror"
-                            value={gutenlayoutsCustomCSS || defaultCSS}
+                            value={gllbCustomCSS || defaultCSS}
                             theme={githubLight}
                             height="200px"
                             extensions={[css()]}

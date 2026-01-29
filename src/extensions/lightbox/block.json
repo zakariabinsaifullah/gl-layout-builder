@@ -4,6 +4,5 @@
     "name": "gutenlayouts/lightbox-extension",
     "title": "Lightbox Extension",
     "editorScript": "file:./index.js",
-    "style": "file:./style.scss",
     "viewScript": "file:./view.js"
 }

@@ -11,16 +11,16 @@ const softMinifyCssStrings = (cssString = ' ') =>
 const gutenlayoutsAddCustomStyle = createHigherOrderComponent(BlockEdit => {
     return props => {
         const { attributes, clientId } = props;
-        const { gutenlayoutsCustomCSS } = attributes;
+        const { gllbCustomCSS } = attributes;
 
-        if (!gutenlayoutsCustomCSS) {
+        if (!gllbCustomCSS) {
             return <BlockEdit {...props} />;
         }
 
         const dynamicClass = `gutenlayouts-${clientId.slice(0, 8)}`;
 
         // replace selector with dynamicClass
-        const newCSS = gutenlayoutsCustomCSS.replace(/selector/g, `.${dynamicClass}`);
+        const newCSS = gllbCustomCSS.replace(/selector/g, `.${dynamicClass}`);
 
         const style = `${newCSS}`;
 

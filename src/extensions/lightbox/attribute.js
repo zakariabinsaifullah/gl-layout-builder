@@ -23,7 +23,7 @@ function gutenlayoutsLightboxAttribute(settings, name) {
         ...settings,
         attributes: {
             ...settings.attributes,
-            gutenlayoutsEnableLightbox: {
+            gllbEnableLightbox: {
                 type: 'boolean',
                 default: false
             }

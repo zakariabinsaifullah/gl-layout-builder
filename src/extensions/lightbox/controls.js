@@ -16,7 +16,7 @@ const gutenlayoutsLightboxPanel = createHigherOrderComponent(BlockEdit => {
         }
 
         const { attributes, setAttributes } = props;
-        const { gutenlayoutsEnableLightbox } = attributes;
+        const { gllbEnableLightbox } = attributes;
 
         return (
             <>
@@ -25,8 +25,8 @@ const gutenlayoutsLightboxPanel = createHigherOrderComponent(BlockEdit => {
                     <PanelBody title={__('Lightbox', 'gl-layout-builder')} initialOpen={false}>
                         <ToggleControl
                             label={__('Enable Lightbox', 'gl-layout-builder')}
-                            checked={gutenlayoutsEnableLightbox}
-                            onChange={() => setAttributes({ gutenlayoutsEnableLightbox: !gutenlayoutsEnableLightbox })}
+                            checked={gllbEnableLightbox}
+                            onChange={() => setAttributes({ gllbEnableLightbox: !gllbEnableLightbox })}
                             help={__('Lightbox works only in frontend.', 'gl-layout-builder')}
                         />
                     </PanelBody>
