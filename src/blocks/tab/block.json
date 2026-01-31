@@ -1,0 +1,54 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "gutenlayouts/tab",
+    "version": "0.1.0",
+    "title": "Tab",
+    "category": "gutenlayouts",
+    "parent": ["gutenlayouts/tabs"],
+    "description": "Single tab content.",
+    "supports": {
+        "anchor": true,
+        "html": false,
+        "align": ["wide", "full"],
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "__experimentalDefaultControls": {
+                "margin": false,
+                "padding": false
+            }
+        },
+        "__experimentalBorder": {
+            "__experimentalSkipSerialization": false,
+            "color": true,
+            "radius": true,
+            "style": true,
+            "width": true
+        },
+        "shadow": {
+            "__experimentalSkipSerialization": false
+        }
+    },
+    "attributes": {
+        "blockStyle": {
+            "type": "object"
+        },
+        "tabId": {
+            "type": "string"
+        },
+        "activeTab": {
+            "type": "string",
+            "default": "1"
+        },
+        "parentTabId": {
+            "type": "string"
+        },
+        "animation": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "textdomain": "gl-layout-builder",
+    "editorScript": "file:./index.js"
+}

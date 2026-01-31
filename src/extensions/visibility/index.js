@@ -6,7 +6,8 @@ import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, ToggleControl } from '@wordpress/components';
+import { PanelBody } from '@wordpress/components';
+import { NativeToggleControl } from '../../components';
 
 /**
  * Add visibility attributes to all blocks.
@@ -54,19 +55,19 @@ const withVisibilityControls = createHigherOrderComponent(BlockEdit => {
                 {isSelected && (
                     <InspectorControls>
                         <PanelBody title={__('Responsive Visibility', 'gl-layout-builder')} initialOpen={false}>
-                            <ToggleControl
+                            <NativeToggleControl
                                 label={__('Hide on Desktop', 'gl-layout-builder')}
                                 checked={!!hideOnDesktop}
                                 onChange={value => setAttributes({ hideOnDesktop: value })}
                                 help={__('Hide this block on desktop devices.', 'gl-layout-builder')}
                             />
-                            <ToggleControl
+                            <NativeToggleControl
                                 label={__('Hide on Tablet', 'gl-layout-builder')}
                                 checked={!!hideOnTablet}
                                 onChange={value => setAttributes({ hideOnTablet: value })}
                                 help={__('Hide this block on tablet devices.', 'gl-layout-builder')}
                             />
-                            <ToggleControl
+                            <NativeToggleControl
                                 label={__('Hide on Mobile', 'gl-layout-builder')}
                                 checked={!!hideOnMobile}
                                 onChange={value => setAttributes({ hideOnMobile: value })}

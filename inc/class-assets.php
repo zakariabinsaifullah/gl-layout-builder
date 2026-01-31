@@ -42,7 +42,7 @@ class Assets {
 	private function __construct() {
 		add_action( 'enqueue_block_assets', array( $this, 'enqueue_block_assets' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ) );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts' ) );
+		add_action( 'enqueue_block_assets', array( $this, 'enqueue_editor_scripts' ) );
 	}
 
 	/**
@@ -123,6 +123,11 @@ class Assets {
 	 * Enqueue block editor scripts and styles.
 	 */
 	public function enqueue_editor_scripts() {
+
+		if( ! is_admin() ) {
+			return;
+		}
+
 		$lib_dep_file = GLLB_PLUGIN_DIR . 'build/library/index.asset.php';
 		if ( file_exists( $lib_dep_file ) ) {
 			$lib_asset = require $lib_dep_file;
@@ -190,13 +195,6 @@ class Assets {
 					$lightbox_asset['dependencies'],
 					$lightbox_asset['version'],
 					true
-				);
-
-				wp_enqueue_style(
-					'gllb-lightbox-style',
-					GLLB_PLUGIN_URL . 'build/extensions/lightbox/index.css',
-					array(),
-					$lightbox_asset['version']
 				);
 			}
 		}

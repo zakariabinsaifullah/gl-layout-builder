@@ -110,6 +110,12 @@ class Helpers {
 				'demo'  => 'https://gutenlayouts.com/blocks/#rating',
 				'desc'  => __('SVG star rating system', 'gl-layout-builder')
 			),
+			'tabs'   => array(
+				'title' => __( 'Tabs', 'gl-layout-builder' ),
+				'icon'  => '',
+				'demo'  => 'https://gutenlayouts.com/blocks/#tabs',
+				'desc'  => __('Shows content in tabs', 'gl-layout-builder')
+			),
 		);
 	}
 

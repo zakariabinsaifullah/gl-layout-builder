@@ -64,7 +64,7 @@ class Blocks {
 			// Filter manifest to only include enabled blocks.
 			$filtered_manifest = array();
 			foreach ( $manifest_data as $block_type => $block_data ) {
-				if ( in_array( $block_type, $enabled_blocks, true ) ) {
+				if ( in_array( $block_type, $enabled_blocks, true ) || ( isset( $block_data['parent'] ) && ! empty( $block_data['parent'] ) ) ) {
 					$filtered_manifest[ $block_type ] = $block_data;
 				}
 			}
@@ -78,7 +78,8 @@ class Blocks {
 
 		// Fallback for older WordPress versions.
 		foreach ( $all_blocks as $block_type ) {
-			if ( in_array( $block_type, $enabled_blocks, true ) ) {
+			$block_data = isset( $manifest_data[ $block_type ] ) ? $manifest_data[ $block_type ] : array();
+			if ( in_array( $block_type, $enabled_blocks, true ) || ( isset( $block_data['parent'] ) && ! empty( $block_data['parent'] ) ) ) {
 				register_block_type( GLLB_PLUGIN_DIR . "build/blocks/{$block_type}" );
 			}
 		}
