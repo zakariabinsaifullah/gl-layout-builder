@@ -76,13 +76,7 @@ const GutenlayoutsTooltipButton = props => {
                     />
                 </ToolbarGroup>
                 {panel && (
-                    <Popover
-                        className="gutenlayouts-format-popover tooltip"
-                        offset={5}
-                        focusOnMount={false}
-                        // anchor={popoveranchor}
-                        placement="bottom"
-                    >
+                    <Popover className="gutenlayouts-format-popover tooltip" offset={5} focusOnMount={false} placement="bottom">
                         <TextareaControl
                             label={__('Tooltip Text', 'gl-layout-builder')}
                             onChange={v => {

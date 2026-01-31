@@ -62,24 +62,6 @@ class Helpers {
 					}
 				}
 			}
-
-			// Check current template and template parts for block themes.
-			if ( function_exists( 'get_block_templates' ) ) {
-				// Get all templates and template parts.
-				$templates      = get_block_templates( array(), 'wp_template' );
-				$template_parts = get_block_templates( array(), 'wp_template_part' );
-				$all_templates  = array_merge( $templates, $template_parts );
-
-				foreach ( $all_templates as $template ) {
-					if ( ! empty( $template->content ) ) {
-						foreach ( $strings as $string ) {
-							if ( false !== strpos( $template->content, $string ) ) {
-								return true;
-							}
-						}
-					}
-				}
-			}
 		}
 
 		return false;

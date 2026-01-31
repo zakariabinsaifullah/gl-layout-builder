@@ -40,8 +40,26 @@ class Assets {
 	 * Constructor.
 	 */
 	private function __construct() {
+		add_action( 'enqueue_block_assets', array( $this, 'enqueue_block_assets' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_editor_scripts' ) );
+	}
+
+	/**
+	 * Enqueue assets for both editor and frontend
+	 */
+	public function enqueue_block_assets() {
+		if( Helpers::is_extension_enabled( 'tooltip' ) && Helpers::has_string( array( 'gutenlayouts-tooltip' ) ) ) {
+			$tooltip_style_file = GLLB_PLUGIN_DIR . 'build/extensions/tooltip/style-index.css';
+			if ( file_exists( $tooltip_style_file ) ) {
+				wp_enqueue_style(
+					'gllb-tooltip',
+					GLLB_PLUGIN_URL . 'build/extensions/tooltip/style-index.css',
+					array(),
+					GLLB_VERSION
+				);
+			}
+		}
 	}
 
 	/**
@@ -62,17 +80,6 @@ class Assets {
 			'12.0.3',
 			true
 		);
-
-		// Enqueue tooltip frontend styles.
-		$tooltip_style_file = GLLB_PLUGIN_DIR . 'build/extensions/tooltip/style-index.css';
-		if ( file_exists( $tooltip_style_file ) ) {
-			wp_enqueue_style(
-				'gllb-tooltip-frontend-style',
-				GLLB_PLUGIN_URL . 'build/extensions/tooltip/style-index.css',
-				array(),
-				GLLB_VERSION
-			);
-		}
 
 		// Enqueue lightbox frontend assets.
 		if( Helpers::is_extension_enabled( 'lightbox' ) && Helpers::has_string( array( 'gllbEnableLightbox' ) ) ) {
@@ -135,6 +142,7 @@ class Assets {
 			);
 		}
 
+		// Visibility extension
 		if ( Helpers::is_extension_enabled( 'visibility' ) ) {
 			$visibility_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/visibility/index.asset.php';
 			if ( file_exists( $visibility_dep_file ) ) {
@@ -149,23 +157,26 @@ class Assets {
 			}
 		}
 
-		$tooltip_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/tooltip/index.asset.php';
-		if ( file_exists( $tooltip_dep_file ) ) {
-			$tooltip_asset = require $tooltip_dep_file;
-			wp_enqueue_script(
-				'gllb-tooltip-script',
-				GLLB_PLUGIN_URL . 'build/extensions/tooltip/index.js',
-				$tooltip_asset['dependencies'],
-				$tooltip_asset['version'],
-				true
-			);
+		// Tooltip extension
+		if(Helpers::is_extension_enabled( 'tooltip' )) {
+			$tooltip_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/tooltip/index.asset.php';
+			if ( file_exists( $tooltip_dep_file ) ) {
+				$tooltip_asset = require $tooltip_dep_file;
+				wp_enqueue_script(
+					'gllb-tooltip-script',
+					GLLB_PLUGIN_URL . 'build/extensions/tooltip/index.js',
+					$tooltip_asset['dependencies'],
+					$tooltip_asset['version'],
+					true
+				);
 
-			wp_enqueue_style(
-				'gllb-tooltip-style',
-				GLLB_PLUGIN_URL . 'build/extensions/tooltip/index.css',
-				array(),
-				$tooltip_asset['version']
-			);
+				wp_enqueue_style(
+					'gllb-tooltip-style',
+					GLLB_PLUGIN_URL . 'build/extensions/tooltip/index.css',
+					array(),
+					$tooltip_asset['version']
+				);
+			}
 		}
 
 		// Lightbox extension
