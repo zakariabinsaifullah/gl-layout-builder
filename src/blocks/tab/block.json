@@ -28,6 +28,12 @@
         },
         "shadow": {
             "__experimentalSkipSerialization": false
+        },
+        "color": {
+            "__experimentalSkipSerialization": false,
+            "background": true,
+            "text": true,
+            "gradients": true
         }
     },
     "attributes": {

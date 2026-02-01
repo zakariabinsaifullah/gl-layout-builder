@@ -11,8 +11,8 @@
         "html": false,
         "align": ["wide", "full"],
         "spacing": {
-            "margin": true,
-            "padding": true,
+            "margin": false,
+            "padding": false,
             "__experimentalDefaultControls": {
                 "margin": false,
                 "padding": false
@@ -20,13 +20,10 @@
         },
         "__experimentalBorder": {
             "__experimentalSkipSerialization": false,
-            "color": true,
-            "radius": true,
-            "style": true,
-            "width": true
-        },
-        "shadow": {
-            "__experimentalSkipSerialization": false
+            "color": false,
+            "radius": false,
+            "style": false,
+            "width": false
         }
     },
     "attributes": {
@@ -54,7 +51,7 @@
         },
         "tabTitleTag": {
             "type": "string",
-            "default": "h3"
+            "default": "p"
         },
         "layout": {
             "type": "string",
@@ -66,15 +63,18 @@
         "verticalAlign": {
             "type": "string"
         },
-        "tabsWidth": {
-            "type": "number"
-        },
-        "sctaHeight": {
-            "type": "number"
-        },
         "contentAlign": {
             "type": "string",
             "default": "left"
+        },
+        "tabNavPadding": {
+            "type": "object",
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
         },
         "titleColor": {
             "type": "string"

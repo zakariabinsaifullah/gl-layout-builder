@@ -45,8 +45,11 @@ const Edit = props => {
         tabContentColor,
         tabContentBg,
         verticalAlign,
-        contentPadding
+        contentPadding,
+        // tab nav
+        tabNavPadding
     } = attributes;
+
     const cssCustomProperties = {
         ...(alignMent && { '--alignment': alignMent }),
         ...(contentAlign && { '--contentAlign': contentAlign }),
@@ -58,7 +61,7 @@ const Edit = props => {
         ...(tabContentColor && { '--tabContentBg': tabContentColor }),
         ...(tabContentBg && { '--tabContenthBg': tabContentBg }),
         ...(verticalAlign && { '--verticalAlign': verticalAlign }),
-        ...(contentPadding && { '--contentPadding': generateBoxStyles(contentPadding) })
+        ...(tabNavPadding && { '--tabNavPadding': generateBoxStyles(tabNavPadding) })
     };
     /**
      * Handle Block Unique Id
@@ -79,7 +82,8 @@ const Edit = props => {
         tabContentColor,
         tabContentBg,
         verticalAlign,
-        contentPadding
+        contentPadding,
+        tabNavPadding
     ]);
 
     /**
@@ -274,7 +278,9 @@ const Edit = props => {
                                     <div className="tab-content">
                                         <RichText
                                             tagName={tabTitleTag}
-                                            className="tab-title"
+                                            className={classnames('tab-title', {
+                                                'has-size': titleSize
+                                            })}
                                             value={tab.title}
                                             onChange={value => {
                                                 const newTabs = [...tabTitles];

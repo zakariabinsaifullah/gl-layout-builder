@@ -355,10 +355,12 @@ class Admin {
 										<div class="desc">
 											<?php echo esc_html( $block['desc'] ); ?>
 										</div>
+										<?php if ( isset( $block['demo'] ) ) : ?>
 										<a href="<?php echo esc_url( $block['demo'] ); ?>" target="_blank" class="gllb-link-subtle">
 											<?php esc_html_e( 'Demo', 'gl-layout-builder' ); ?>
 											<span class="dashicons dashicons-external"></span>
 										</a>
+										<?php endif; ?>
 									</div>
 									<div class="gllb-card-footer">
 										<label class="gllb-switch">

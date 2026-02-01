@@ -8,17 +8,17 @@ import {
     NativeTextControl,
     PanelColorControl,
     NativeUnitControl,
-    NativeBoxControl
+    NativeBoxControl,
+    NativeSelectControl
 } from '../../components';
 
 const Inspector = props => {
     const { attributes, setAttributes } = props;
     const {
-        tabTitles,
+        tabTitleTag,
         showTabDesc,
         layout,
         alignMent,
-        tabsWidth,
         titleColor,
         titleSize,
         descColor,
@@ -27,13 +27,41 @@ const Inspector = props => {
         tabContentColor,
         tabContentBg,
         verticalAlign,
-        contentPadding
+        contentPadding,
+
+        // tab nav
+        tabNavPadding
     } = attributes;
 
     return (
         <>
             <InspectorControls group="settings">
                 <PanelBody title={__('Settings', 'gutenlayouts')} initialOpen={true}>
+                    <NativeSelectControl
+                        label={__('Tab Title Tag', 'gutenlayouts')}
+                        value={tabTitleTag}
+                        onChange={v => {
+                            setAttributes({
+                                tabTitleTag: v
+                            });
+                        }}
+                        options={[
+                            { label: __('H1', 'gutenlayouts'), value: 'h1' },
+                            { label: __('H2', 'gutenlayouts'), value: 'h2' },
+                            { label: __('H3', 'gutenlayouts'), value: 'h3' },
+                            { label: __('H4', 'gutenlayouts'), value: 'h4' },
+                            { label: __('H5', 'gutenlayouts'), value: 'h5' },
+                            { label: __('H6', 'gutenlayouts'), value: 'h6' },
+                            { label: __('P', 'gutenlayouts'), value: 'p' },
+                            { label: __('Span', 'gutenlayouts'), value: 'span' },
+                            { label: __('Div', 'gutenlayouts'), value: 'div' }
+                        ]}
+                    />
+                    <NativeToggleControl
+                        label={__('Show Tab Description', 'gutenlayout')}
+                        checked={showTabDesc}
+                        onChange={() => setAttributes({ showTabDesc: !showTabDesc })}
+                    />
                     <NativeToggleGroupControl
                         label={__('Layout', 'gutenlayouts')}
                         value={layout}
@@ -96,66 +124,37 @@ const Inspector = props => {
                         />
                     )}
                 </PanelBody>
-                <PanelBody title={__('Tabs', 'gutenlayout')} initialOpen={false}>
-                    {layout === 'nxt_vertical' && (
-                        <>
-                            <NativeRangeControl
-                                label={__('Tabs Width', 'gutenlayout')}
-                                value={tabsWidth}
-                                onChange={v =>
-                                    setAttributes({
-                                        tabsWidth: v
-                                    })
-                                }
-                                onClickReset={() =>
-                                    setAttributes({
-                                        tabsWidth: 25
-                                    })
-                                }
-                            />
-                        </>
-                    )}
-
-                    <NativeToggleControl
-                        label={__('Show Tab Description', 'gutenlayout')}
-                        checked={showTabDesc}
-                        onChange={() => setAttributes({ showTabDesc: !showTabDesc })}
-                    />
-                    {tabTitles &&
-                        tabTitles.length > 0 &&
-                        tabTitles.map((item, index) => {
-                            return (
-                                <div key={index}>
-                                    <NativeTextControl
-                                        label={__('Title', 'gutenlayout')}
-                                        value={item?.title}
-                                        onChange={v => {
-                                            const newItems = [...tabTitles];
-                                            newItems[index].title = v;
-                                            setAttributes({
-                                                tabTitles: newItems
-                                            });
-                                        }}
-                                    />
-                                    {showTabDesc && (
-                                        <NativeTextControl
-                                            label={__('Description', 'gutenlayout')}
-                                            value={item?.description}
-                                            onChange={v => {
-                                                const newItems = [...tabTitles];
-                                                newItems[index].description = v;
-                                                setAttributes({
-                                                    tabTitles: newItems
-                                                });
-                                            }}
-                                        />
-                                    )}
-                                </div>
-                            );
-                        })}
-                </PanelBody>
             </InspectorControls>
             <InspectorControls group="styles">
+                <ToolsPanel
+                    label={__('Tab Nav', 'gutenlayouts')}
+                    resetAll={() =>
+                        setAttributes({
+                            tabNavPadding: undefined
+                        })
+                    }
+                >
+                    <ToolsPanelItem
+                        hasValue={() => !!tabNavPadding && Object.values(tabNavPadding).some(v => v !== '')}
+                        label={__('Padding', 'gutenlayouts')}
+                        onDeselect={() => {
+                            setAttributes({
+                                tabNavPadding: undefined
+                            });
+                        }}
+                        onSelect={() => {}}
+                    >
+                        <NativeBoxControl
+                            label={__('Padding', 'gl-layout-builder')}
+                            value={tabNavPadding}
+                            onChange={v => {
+                                setAttributes({
+                                    tabNavPadding: v
+                                });
+                            }}
+                        />
+                    </ToolsPanelItem>
+                </ToolsPanel>
                 <ToolsPanel
                     label={__('Tab Content', 'gutenlayouts')}
                     resetAll={() =>

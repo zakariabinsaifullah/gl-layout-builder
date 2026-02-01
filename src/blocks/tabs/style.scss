@@ -2,23 +2,25 @@
     .tab-title {
         color: var(--titleColor);
         margin: 0;
-        font-size: var(--titleSize, clamp(1.25rem, 1.5vw, 1.75rem));
+        &.has-size {
+            font-size: var(--titleSize);
+        }
     }
 
     .tabs-nav {
         display: flex;
         align-items: stretch;
-        gap: 10px;
-        justify-content: var(--alignment, flex-start);
-        margin-bottom: 10px;
+        gap: var(--navGap, 10px);
+        justify-content: var(--alignment);
+        margin-bottom: var(--navMarginBottom, 10px);
         &.max-content {
             max-width: max-content;
         }
     }
 
     .nav-item {
-        border: 1px solid rgb(153 153 153 / 33%);
-        padding: var(--contentPadding, 20px);
+        border: var(--navBorder, 1px solid rgb(153 153 153 / 33%));
+        padding: var(--tabNavPadding, 10px 20px);
         box-sizing: border-box;
         border-radius: 5px;
         cursor: pointer;
@@ -27,7 +29,7 @@
         background: var(--tabContentBg, #e6e6e6);
 
         &.active {
-            border-color: #999;
+            border-color: var(--activeNavBorder, #999);
         }
 
         &:hover {
@@ -48,7 +50,7 @@
     .tab-description {
         margin: 0 !important;
         color: var(--descColor);
-        font-size: var(--descSize, clamp(1rem, 1.5vw, 1.25rem));
+        font-size: var(--descSize);
     }
 
     .tabs-content {

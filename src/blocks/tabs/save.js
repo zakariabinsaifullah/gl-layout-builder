@@ -13,8 +13,18 @@ import classnames from 'classnames';
 // block save function
 const Save = props => {
     const { attributes } = props;
-    const { uniqueId, tabTitles, enableScrollTab, blockStyle, layout, horizontalAlign, showTabDesc, tabTitleTag, verticalAlign } =
-        attributes;
+    const {
+        uniqueId,
+        tabTitles,
+        enableScrollTab,
+        blockStyle,
+        layout,
+        horizontalAlign,
+        showTabDesc,
+        tabTitleTag,
+        verticalAlign,
+        titleSize
+    } = attributes;
 
     /**
      * Block Props
@@ -59,7 +69,13 @@ const Save = props => {
                                 >
                                     <div className={classnames('nav-item-inner')}>
                                         <div className="tab-content">
-                                            <RichText.Content tagName={tabTitleTag} className="tab-title" value={tab?.title} />
+                                            <RichText.Content
+                                                tagName={tabTitleTag}
+                                                className={classnames('tab-title', {
+                                                    'has-size': titleSize
+                                                })}
+                                                value={tab?.title}
+                                            />
                                             {showTabDesc && tab?.description && (
                                                 <RichText.Content tagName="p" className="tab-description" value={tab?.description} />
                                             )}
