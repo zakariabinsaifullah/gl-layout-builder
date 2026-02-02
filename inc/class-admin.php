@@ -157,19 +157,19 @@ class Admin {
 	 * Render admin page.
 	 */
 	public function render_admin_page() {
-		$blocks          = Helpers::get_available_blocks();
-		$extensions      = Helpers::get_available_extensions();
-		$saved_settings  = $this->get_saved_settings();
-		$enabled_blocks  = isset( $saved_settings['blocks'] ) ? $saved_settings['blocks'] : array();
-		$enabled_extensions = isset( $saved_settings['extensions'] ) ? $saved_settings['extensions'] : array();
-		$raw_settings    = get_option( 'gllb_settings', false );
-		$is_first_save   = ( false === $raw_settings );
-		$enabled_blocks_effective = ( $is_first_save && empty( $enabled_blocks ) ) ? array_keys( $blocks ) : $enabled_blocks;
+		$blocks                       = Helpers::get_available_blocks();
+		$extensions                   = Helpers::get_available_extensions();
+		$saved_settings               = $this->get_saved_settings();
+		$enabled_blocks               = isset( $saved_settings['blocks'] ) ? $saved_settings['blocks'] : array();
+		$enabled_extensions           = isset( $saved_settings['extensions'] ) ? $saved_settings['extensions'] : array();
+		$raw_settings                 = get_option( 'gllb_settings', false );
+		$is_first_save                = ( false === $raw_settings );
+		$enabled_blocks_effective     = ( $is_first_save && empty( $enabled_blocks ) ) ? array_keys( $blocks ) : $enabled_blocks;
 		$enabled_extensions_effective = ( $is_first_save && empty( $enabled_extensions ) ) ? array_keys( $extensions ) : $enabled_extensions;
-		$blocks_total    = count( $blocks );
-		$extensions_total = count( $extensions );
-		$blocks_active   = count( $enabled_blocks_effective );
-		$extensions_active = count( $enabled_extensions_effective );
+		$blocks_total                 = count( $blocks );
+		$extensions_total             = count( $extensions );
+		$blocks_active                = count( $enabled_blocks_effective );
+		$extensions_active            = count( $enabled_extensions_effective );
 
 		?>
 		<div class="gllb-admin-wrapper">
@@ -261,6 +261,40 @@ class Admin {
 
 							<!-- Right Column -->
 							<aside class="gllb-dashboard-sidebar">
+								<?php
+								$license_data   = License::get_license_data();
+								$is_active      = 'valid' === $license_data['status'];
+								$masked_key     = ! empty( $license_data['license_key'] ) ? Helpers::mask_license_key( $license_data['license_key'] ) : '';
+								?>
+								<div class="gllb-sidebar-card gllb-license-card" data-status="<?php echo esc_attr( $license_data['status'] ); ?>">
+									<h3><?php esc_html_e( 'License', 'gl-layout-builder' ); ?></h3>
+									
+									<?php if ( $is_active ) : ?>
+										<div class="gllb-license-active">
+											<span class="gllb-license-badge valid"><?php esc_html_e( 'Active', 'gl-layout-builder' ); ?></span>
+											<p class="gllb-license-info">
+												<strong><?php esc_html_e( 'Key:', 'gl-layout-builder' ); ?></strong> <?php echo esc_html( $masked_key ); ?>
+											</p>
+											<p class="gllb-license-info">
+												<strong><?php esc_html_e( 'Expire On:', 'gl-layout-builder' ); ?></strong> 
+												<?php 
+												if ( ! empty( $license_data['expires_at'] ) ) {
+													echo esc_html( date_i18n( get_option( 'date_format' ), strtotime( $license_data['expires_at'] ) ) );
+												} else {
+													esc_html_e( 'Lifetime', 'gl-layout-builder' );
+												}
+												?>
+											</p>
+											<button class="gllb-license-deactivate"><?php esc_html_e( 'Deactivate', 'gl-layout-builder' ); ?></button>
+										</div>
+									<?php else : ?>
+										<p><?php esc_html_e( 'Enter your license key to get access to all features.', 'gl-layout-builder' ); ?></p>
+										<input type="text" class="gllb-license-key" placeholder="<?php esc_attr_e( 'Enter your license key', 'gl-layout-builder' ); ?>">
+										<button class="gllb-license-activate"><?php esc_html_e( 'Activate', 'gl-layout-builder' ); ?></button>
+									<?php endif; ?>
+									
+									<div class="gllb-license-message"></div>
+								</div>
 								<div class="gllb-sidebar-card">
 									<h3><?php esc_html_e( 'We Recommend', 'gl-layout-builder' ); ?></h3>
 									<ul class="gllb-resource-list">

@@ -12,28 +12,34 @@
         align-items: stretch;
         gap: var(--navGap, 10px);
         justify-content: var(--alignment);
-        margin-bottom: var(--navMarginBottom, 10px);
+        margin: var(--navMargin, 0 0 10px 0);
         &.max-content {
             max-width: max-content;
         }
     }
 
     .nav-item {
-        border: var(--navBorder, 1px solid rgb(153 153 153 / 33%));
+        border-width: var(--tabNavBorderWidth, 1px);
+        border-style: var(--tabNavBorderStyle, solid);
+        border-color: var(--tabNavBorderColor, #999);
         padding: var(--tabNavPadding, 10px 20px);
         box-sizing: border-box;
-        border-radius: 5px;
+        border-radius: var(--tabNavBorderRadius, 5px);
         cursor: pointer;
         transition: all 0.3s;
-        text-align: var(--contentAlign, left);
-        background: var(--tabContentBg, #e6e6e6);
+        text-align: var(--contentAlign);
+        background: var(--tabNavBg);
 
         &.active {
-            border-color: var(--activeNavBorder, #999);
-        }
+            border-color: var(--activeNavBorder);
+            background: var(--activeNavBg);
 
-        &:hover {
-            background: var(--tabContenthBg, #f5f5f5);
+            .tab-title {
+                color: var(--activeTitleColor);
+            }
+            .tab-description {
+                color: var(--activeDescColor);
+            }
         }
 
         &:focus {
@@ -192,10 +198,10 @@
     .tabs-wrapper {
         &.nxt_vertical {
             display: flex;
-            gap: 20px;
+            gap: var(--verticalGap, 20px);
             .tabs-nav {
                 flex-direction: column;
-                min-width: var(--tabverWidth, 25%);
+                min-width: var(--verticalTabWidth, 25%);
                 margin-bottom: 0;
             }
             .tabs-content {

@@ -72,5 +72,8 @@ class Plugin {
 
 		// Initialize Extensions (Visibility, Tooltip, Lightbox, Custom CSS).
 		Extensions::get_instance();
+
+		// Initialize License.
+		License::get_instance();
 	}
 }

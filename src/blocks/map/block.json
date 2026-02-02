@@ -56,18 +56,6 @@
                 "Tablet": 300,
                 "Mobile": 200
             }
-        },
-        "mapBorder": {
-            "type": "object",
-            "default": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            }
-        },
-        "mapRadius": {
-            "type": "number"
         }
     },
     "textdomain": "gl-layout-builder",

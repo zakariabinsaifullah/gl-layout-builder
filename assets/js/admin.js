@@ -205,11 +205,104 @@
             setTimeout(function () {
                 $notification.removeClass('show');
             }, 4000);
+        },
+
+        /**
+         * Handle license activation
+         */
+        handleLicenseActivate: function (e) {
+            e.preventDefault();
+
+            const $button = $(this);
+            const $card = $button.closest('.gllb-license-card');
+            const $input = $card.find('.gllb-license-key');
+            const $message = $card.find('.gllb-license-message');
+            const licenseKey = $input.val().trim();
+
+            if (!licenseKey) {
+                $message.removeClass('success').addClass('error').text('Please enter a license key.');
+                return;
+            }
+
+            $button.prop('disabled', true).text('Activating...');
+            $message.removeClass('success error').text('');
+
+            $.ajax({
+                url: gllbAdmin.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: 'gllb_activate_license',
+                    nonce: gllbAdmin.nonce,
+                    license_key: licenseKey
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $message.removeClass('error').addClass('success').text(response.data.message);
+                        // Reload page to show updated UI
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        $message.removeClass('success').addClass('error').text(response.data.message);
+                        $button.prop('disabled', false).text('Activate');
+                    }
+                },
+                error: function () {
+                    $message.removeClass('success').addClass('error').text('Connection error. Please try again.');
+                    $button.prop('disabled', false).text('Activate');
+                }
+            });
+        },
+
+        /**
+         * Handle license deactivation
+         */
+        handleLicenseDeactivate: function (e) {
+            e.preventDefault();
+
+            if (!confirm('Are you sure you want to deactivate this license?')) {
+                return;
+            }
+
+            const $button = $(this);
+            const $card = $button.closest('.gllb-license-card');
+            const $message = $card.find('.gllb-license-message');
+
+            $button.prop('disabled', true).text('Deactivating...');
+
+            $.ajax({
+                url: gllbAdmin.ajaxUrl,
+                type: 'POST',
+                data: {
+                    action: 'gllb_deactivate_license',
+                    nonce: gllbAdmin.nonce
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $message.removeClass('error').addClass('success').text(response.data.message);
+                        // Reload page to show updated UI
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        $message.removeClass('success').addClass('error').text(response.data.message);
+                        $button.prop('disabled', false).text('Deactivate');
+                    }
+                },
+                error: function () {
+                    $message.removeClass('success').addClass('error').text('Connection error. Please try again.');
+                    $button.prop('disabled', false).text('Deactivate');
+                }
+            });
         }
     };
 
     // Initialize when document is ready
     $(document).ready(function () {
         GllbAdmin.init();
+
+        // License handlers (using delegation for dynamic content)
+        $(document).on('click', '.gllb-license-activate', GllbAdmin.handleLicenseActivate);
+        $(document).on('click', '.gllb-license-deactivate', GllbAdmin.handleLicenseDeactivate);
     });
 })(jQuery);

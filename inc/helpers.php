@@ -67,6 +67,18 @@ class Helpers {
 		return false;
 	}
 
+	/**
+	 * Mask license key.
+	 *
+	 * @param string $license_key License key to mask.
+	 * @return string Masked license key.
+	 */
+	public static function mask_license_key( $license_key ) {
+		$visible_part = substr( $license_key, 0, 8 );
+		$masked_part = preg_replace( '/[^-]/', 'X', substr( $license_key, 8 ) );
+		return $visible_part . $masked_part;
+	}
+
     /**
      * Get available blocks.
      *

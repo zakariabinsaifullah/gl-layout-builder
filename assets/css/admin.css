@@ -837,3 +837,137 @@ input:checked + .gllb-slider:before {
     width: 14px;
     height: 14px;
 }
+
+/* LICENSE CARD */
+.gllb-license-card input.gllb-license-key {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--gllb-border);
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.gllb-license-card input.gllb-license-key:focus {
+    border-color: var(--gllb-primary);
+    box-shadow: 0 0 0 1px var(--gllb-primary);
+}
+
+.gllb-license-card .gllb-license-activate,
+.gllb-license-card .gllb-license-deactivate {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--gllb-transition);
+}
+
+.gllb-license-card .gllb-license-activate {
+    background: var(--gllb-primary);
+    color: #fff;
+}
+
+.gllb-license-card .gllb-license-activate:hover {
+    background: var(--gllb-primary-dark);
+}
+
+.gllb-license-card .gllb-license-activate:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.gllb-license-card .gllb-license-deactivate {
+    background: transparent;
+    color: var(--gllb-danger);
+    border: 1px solid var(--gllb-danger);
+}
+
+.gllb-license-card .gllb-license-deactivate:hover {
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.gllb-license-card .gllb-license-deactivate:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.gllb-license-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 99px;
+    margin-bottom: 12px;
+}
+
+.gllb-license-badge.valid {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--gllb-success);
+}
+
+.gllb-license-badge.invalid {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--gllb-danger);
+}
+
+.gllb-license-active {
+    text-align: left;
+}
+
+.gllb-license-info {
+    font-size: 13px;
+    color: var(--gllb-text-muted);
+    margin: 0 0 8px;
+}
+
+.gllb-license-info strong {
+    color: var(--gllb-text-main);
+}
+
+.gllb-license-message {
+    margin-top: 12px;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.gllb-license-message:empty {
+    display: none;
+}
+
+.gllb-license-message.success {
+    color: var(--gllb-success);
+}
+
+.gllb-license-message.error {
+    color: var(--gllb-danger);
+}
+
+.gllb-license-card p {
+    font-size: 14px;
+    color: var(--gllb-text-muted);
+    margin: 0 0 16px;
+}
+
+p.gllb-license-info {
+    margin-bottom: 8px;
+}
+
+p.gllb-license-info {
+    font-size: 12px;
+}
+
+p.gllb-license-info strong {
+    font-size: 14px;
+}
+
+.gllb-sidebar-card button {
+    margin-top: 10px;
+}

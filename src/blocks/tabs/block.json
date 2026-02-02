@@ -76,26 +76,63 @@
                 "left": ""
             }
         },
-        "titleColor": {
-            "type": "string"
+        "tabNavBorder": {
+            "type": "object",
+            "default": {
+                "color": "",
+                "style": "",
+                "width": ""
+            }
+        },
+        "tabNavBorderRadius": {
+            "type": "object",
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
+        },
+        "tabNavColors": {
+            "type": "object",
+            "default": {
+                "bg": "",
+                "title": "",
+                "description": ""
+            }
+        },
+        "tabNavActiveColors": {
+            "type": "object",
+            "default": {
+                "bg": "",
+                "title": "",
+                "description": "",
+                "border": ""
+            }
         },
         "titleSize": {
-            "type": "number"
-        },
-        "descColor": {
             "type": "string"
         },
         "descSize": {
-            "type": "number"
-        },
-        "tabContentColor ": {
             "type": "string"
         },
-        "tabContentBg": {
+        "gap": {
             "type": "string"
         },
-        "contentPadding": {
-            "type": "object"
+        "margin": {
+            "type": "object",
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
+        },
+        "verticalGap": {
+            "type": "string"
+        },
+        "verticalTabWidth": {
+            "type": "string"
         }
     },
     "textdomain": "gl-layout-builder",

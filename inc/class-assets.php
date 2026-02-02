@@ -145,6 +145,12 @@ class Assets {
 				array(),
 				$lib_asset['version']
 			);
+
+			wp_localize_script( 'gllb-library-script', 'gllb_library_data', array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( 'gllb_library_nonce' ),
+				'status'   => get_option( 'gllb_license_status' ),
+			) );
 		}
 
 		// Visibility extension

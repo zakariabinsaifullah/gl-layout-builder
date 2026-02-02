@@ -1,6 +1,6 @@
 // generate border-width value
 export const generateBorderWidth = borderData => {
-    if (borderData.top && borderData.right && borderData.bottom && borderData.left) {
+    if (borderData?.top && borderData?.right && borderData?.bottom && borderData?.left) {
         const topWidth = borderData.top.width || '0';
         const rightWidth = borderData.right.width || '0';
         const bottomWidth = borderData.bottom.width || '0';
@@ -14,12 +14,12 @@ export const generateBorderWidth = borderData => {
         // Otherwise return 4 values
         return `${topWidth} ${rightWidth} ${bottomWidth} ${leftWidth}`;
     }
-    return borderData.width;
+    return borderData?.width;
 };
 
 // generate border-style value
 export const generateBorderStyle = borderData => {
-    if (borderData.top && borderData.right && borderData.bottom && borderData.left) {
+    if (borderData?.top && borderData?.right && borderData?.bottom && borderData?.left) {
         const topStyle = borderData.top.style || 'solid';
         const rightStyle = borderData.right.style || 'solid';
         const bottomStyle = borderData.bottom.style || 'solid';
@@ -33,12 +33,12 @@ export const generateBorderStyle = borderData => {
         // Otherwise return 4 values
         return `${topStyle} ${rightStyle} ${bottomStyle} ${leftStyle}`;
     }
-    return borderData.style;
+    return borderData?.style;
 };
 
 // generate border-color value
 export const generateBorderColor = borderData => {
-    if (borderData.top && borderData.right && borderData.bottom && borderData.left) {
+    if (borderData?.top && borderData?.right && borderData?.bottom && borderData?.left) {
         const topColor = borderData.top.color || 'transparent';
         const rightColor = borderData.right.color || 'transparent';
         const bottomColor = borderData.bottom.color || 'transparent';
@@ -52,5 +52,5 @@ export const generateBorderColor = borderData => {
         // Otherwise return 4 values
         return `${topColor} ${rightColor} ${bottomColor} ${leftColor}`;
     }
-    return borderData.color;
+    return borderData?.color;
 };

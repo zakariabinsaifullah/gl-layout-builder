@@ -200,6 +200,8 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
         setView({ ...view, page: 1 }); // Reset to page 1
     };
 
+    // console.log(gllb_library_data);
+
     return (
         <Modal
             overlayClassName="gutenlayouts-library-modal__overlay"
@@ -284,7 +286,7 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
                                                         }
                                                     }}
                                                 >
-                                                    {item?.type === 'pro' ? (
+                                                    {item?.type === 'pro' && gllb_library_data?.status !== 'valid' ? (
                                                         <>
                                                             <span className="dashicons dashicons-lock"></span>
                                                             {__('Pro', 'gl-layout-builder')}

@@ -10,7 +10,7 @@ import { Fragment, useEffect, useRef, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { dispatch, select, useSelect, useDispatch } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
-import { generateBoxStyles } from '../../styles';
+import { generateBoxStyles, generateBorderWidth, generateBorderStyle, generateBorderColor } from '../../styles';
 
 /**
  * External Dependencies
@@ -38,31 +38,54 @@ const Edit = props => {
         alignMent,
         tabsWidth,
         contentAlign,
-        titleColor,
-        titleSize,
-        descColor,
-        descSize,
-        tabContentColor,
-        tabContentBg,
         verticalAlign,
-        contentPadding,
         // tab nav
-        tabNavPadding
+        titleSize,
+        descSize,
+        tabNavPadding,
+        tabNavBorder,
+        tabNavBorderRadius,
+        tabNavColors,
+        tabNavActiveColors,
+        gap,
+        margin,
+        verticalGap,
+        verticalTabWidth
     } = attributes;
+
+    // tab nav
+    const tabNavPaddingStyles = generateBoxStyles(tabNavPadding);
+    const tabNavBorderWidth = generateBorderWidth(tabNavBorder);
+    const tabNavBorderStyle = generateBorderStyle(tabNavBorder);
+    const tabNavBorderColor = generateBorderColor(tabNavBorder);
+    const tabNavBorderRadiusStyle = generateBoxStyles(tabNavBorderRadius);
+    const marginStyles = generateBoxStyles(margin);
 
     const cssCustomProperties = {
         ...(alignMent && { '--alignment': alignMent }),
         ...(contentAlign && { '--contentAlign': contentAlign }),
         ...(tabsWidth && { '--tabverWidth': `${tabsWidth}%` }),
-        ...(titleColor && { '--titleColor': titleColor }),
         ...(titleSize && { '--titleSize': titleSize }),
-        ...(descColor && { '--descColor': descColor }),
         ...(descSize && { '--descSize': descSize }),
-        ...(tabContentColor && { '--tabContentBg': tabContentColor }),
-        ...(tabContentBg && { '--tabContenthBg': tabContentBg }),
         ...(verticalAlign && { '--verticalAlign': verticalAlign }),
-        ...(tabNavPadding && { '--tabNavPadding': generateBoxStyles(tabNavPadding) })
+        ...(tabNavPaddingStyles && { '--tabNavPadding': tabNavPaddingStyles }),
+        ...(tabNavBorderWidth && { '--tabNavBorderWidth': tabNavBorderWidth }),
+        ...(tabNavBorderStyle && { '--tabNavBorderStyle': tabNavBorderStyle }),
+        ...(tabNavBorderColor && { '--tabNavBorderColor': tabNavBorderColor }),
+        ...(tabNavBorderRadiusStyle && { '--tabNavBorderRadius': tabNavBorderRadiusStyle }),
+        ...(tabNavColors?.title && { '--titleColor': tabNavColors?.title }),
+        ...(tabNavColors?.description && { '--descColor': tabNavColors?.description }),
+        ...(tabNavColors?.bg && { '--tabNavBg': tabNavColors?.bg }),
+        ...(tabNavActiveColors?.title && { '--activeTitleColor': tabNavActiveColors?.title }),
+        ...(tabNavActiveColors?.description && { '--activeDescColor': tabNavActiveColors?.description }),
+        ...(tabNavActiveColors?.border && { '--activeNavBorder': tabNavActiveColors?.border }),
+        ...(tabNavActiveColors?.bg && { '--activeNavBg': tabNavActiveColors?.bg }),
+        ...(gap && { '--navGap': gap }),
+        ...(marginStyles && { '--navMargin': marginStyles }),
+        ...(verticalGap && { '--verticalGap': verticalGap }),
+        ...(verticalTabWidth && { '--verticalTabWidth': verticalTabWidth })
     };
+
     /**
      * Handle Block Unique Id
      */
@@ -75,15 +98,20 @@ const Edit = props => {
         alignMent,
         contentAlign,
         tabsWidth,
-        titleColor,
         titleSize,
-        descColor,
         descSize,
-        tabContentColor,
-        tabContentBg,
         verticalAlign,
-        contentPadding,
-        tabNavPadding
+        tabNavPadding,
+        tabNavBorderWidth,
+        tabNavBorderStyle,
+        tabNavBorderColor,
+        tabNavBorderRadiusStyle,
+        tabNavColors,
+        tabNavActiveColors,
+        gap,
+        marginStyles,
+        verticalGap,
+        verticalTabWidth
     ]);
 
     /**
