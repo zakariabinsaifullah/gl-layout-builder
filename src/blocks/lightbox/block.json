@@ -107,21 +107,35 @@
             "type": "string"
         },
         "svgSize": {
-            "type": "number"
+            "type": "string"
+        },
+        "iconBorder": {
+            "type": "object",
+            "default": {
+                "width": "",
+                "style": "",
+                "color": ""
+            }
         },
         "iconPadding": {
             "type": "object",
             "default": {
-                "top": "15px",
-                "right": "15px",
-                "bottom": "15px",
-                "left": "15px"
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
             }
         },
         "icoHvBgColor": {
             "type": "string"
         },
         "iconColor": {
+            "type": "string"
+        },
+        "iconHvColor": {
+            "type": "string"
+        },
+        "iconHBColor": {
             "type": "string"
         },
         "enableAnimation": {
@@ -137,6 +151,39 @@
         },
         "animationDuration": {
             "type": "number"
+        },
+        "overlayColor": {
+            "type": "string"
+        },
+        "lightboxMaxWidth": {
+            "type": "string"
+        },
+        "lightboxMaxHeight": {
+            "type": "string"
+        },
+        "lightboxPadding": {
+            "type": "object",
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
+        },
+        "lightboxBgColor": {
+            "type": "string"
+        },
+        "lightboxBorderRadius": {
+            "type": "object",
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
+        },
+        "closeIconColor": {
+            "type": "string"
         }
     },
 

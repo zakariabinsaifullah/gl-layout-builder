@@ -14,7 +14,9 @@ import {
     PanelColorControl,
     NativeRangeControl,
     NativeBoxControl,
-    NativeIconPicker
+    NativeIconPicker,
+    NativeUnitControl,
+    NativeBorderBoxControl
 } from '../../components';
 
 const Inspector = props => {
@@ -26,16 +28,26 @@ const Inspector = props => {
         alignment,
         lighteffColor,
         svgSize,
+        iconBorder,
         iconPadding,
         icoHvBgColor,
         iconColor,
+        iconHvColor,
+        iconHBColor,
         iconName,
         iconSize,
         customSvgCode,
         strokeWidth,
         iconBgColor,
         animationType,
-        animationDuration
+        animationDuration,
+        overlayColor,
+        lightboxMaxWidth,
+        lightboxMaxHeight,
+        lightboxPadding,
+        lightboxBgColor,
+        lightboxBorderRadius,
+        closeIconColor
     } = attributes;
 
     return (
@@ -91,7 +103,11 @@ const Inspector = props => {
                         />
                     )}
                     {contentType === 'content' && (
-                        <Button variant="secondary" onClick={onOpenContentModal}>
+                        <Button
+                            variant="secondary"
+                            onClick={onOpenContentModal}
+                            style={{ width: '100%', marginBottom: '16px', justifyContent: 'center' }}
+                        >
                             {__('Add Popup Content', 'gl-layout-builder')}
                         </Button>
                     )}
@@ -121,35 +137,37 @@ const Inspector = props => {
                 </PanelBody>
             </InspectorControls>
             <InspectorControls group="styles">
-                <ToolsPanel
-                    label={__('Effect Color', 'gl-layout-builder')}
-                    resetAll={() =>
-                        setAttributes({
-                            lighteffColor: undefined
-                        })
-                    }
-                >
-                    <ToolsPanelItem
-                        hasValue={() => !!lighteffColor}
-                        label={__('Color', 'gutenlayouts')}
-                        onDeselect={() => {
+                {animationType !== '' && (
+                    <ToolsPanel
+                        label={__('Effect Color', 'gl-layout-builder')}
+                        resetAll={() =>
                             setAttributes({
                                 lighteffColor: undefined
-                            });
-                        }}
-                        onSelect={() => {}}
+                            })
+                        }
                     >
-                        <PanelColorControl
-                            colorSettings={[
-                                {
-                                    value: lighteffColor,
-                                    onChange: color => setAttributes({ lighteffColor: color }),
-                                    label: __('Color', 'gl-layout-builder')
-                                }
-                            ]}
-                        />
-                    </ToolsPanelItem>
-                </ToolsPanel>
+                        <ToolsPanelItem
+                            hasValue={() => !!lighteffColor}
+                            label={__('Color', 'gutenlayouts')}
+                            onDeselect={() => {
+                                setAttributes({
+                                    lighteffColor: undefined
+                                });
+                            }}
+                            onSelect={() => {}}
+                        >
+                            <PanelColorControl
+                                colorSettings={[
+                                    {
+                                        value: lighteffColor,
+                                        onChange: color => setAttributes({ lighteffColor: color }),
+                                        label: __('Color', 'gl-layout-builder')
+                                    }
+                                ]}
+                            />
+                        </ToolsPanelItem>
+                    </ToolsPanel>
+                )}
                 <ToolsPanel
                     label={__('Icon', 'gl-layout-builder')}
                     resetAll={() =>
@@ -157,13 +175,17 @@ const Inspector = props => {
                             svgSize: undefined,
                             icoHvBgColor: undefined,
                             iconColor: undefined,
-                            iconPadding: undefined
+                            iconPadding: undefined,
+                            iconHBColor: undefined,
+                            iconHvColor: undefined,
+                            iconBgColor: undefined,
+                            iconBorder: undefined
                         })
                     }
                 >
                     <ToolsPanelItem
                         hasValue={() => !!svgSize}
-                        label={__('Svg Size', 'gl-layout-builder')}
+                        label={__('Size', 'gl-layout-builder')}
                         onDeselect={() => {
                             setAttributes({
                                 svgSize: undefined
@@ -171,12 +193,42 @@ const Inspector = props => {
                         }}
                         onSelect={() => {}}
                     >
-                        <NativeRangeControl
+                        <NativeUnitControl
+                            label={__('Size', 'gl-layout-builder')}
                             value={svgSize}
                             onChange={value => setAttributes({ svgSize: value })}
-                            min={10}
-                            max={200}
-                            step={1}
+                        />
+                    </ToolsPanelItem>
+                    <ToolsPanelItem
+                        label={__('Border', 'gl-layout-builder')}
+                        hasValue={() => !!iconBorder && (iconBorder?.width || iconBorder?.style || iconBorder?.color)}
+                        onDeselect={() =>
+                            setAttributes({
+                                iconBorder: undefined
+                            })
+                        }
+                    >
+                        <NativeBorderBoxControl
+                            label={__('Border', 'gl-layout-builder')}
+                            value={iconBorder}
+                            onChange={value => setAttributes({ iconBorder: value })}
+                        />
+                    </ToolsPanelItem>
+                    <ToolsPanelItem
+                        label={__('Padding', 'gl-layout-builder')}
+                        hasValue={() =>
+                            !!iconPadding && (iconPadding?.top || iconPadding?.right || iconPadding?.bottom || iconPadding?.left)
+                        }
+                        onDeselect={() =>
+                            setAttributes({
+                                iconPadding: undefined
+                            })
+                        }
+                    >
+                        <NativeBoxControl
+                            label={__('Padding', 'gl-layout-builder')}
+                            value={iconPadding}
+                            onChange={value => setAttributes({ iconPadding: value })}
                         />
                     </ToolsPanelItem>
                     <ToolsPanelItem
@@ -198,6 +250,16 @@ const Inspector = props => {
                                     label: __('Color', 'gl-layout-builder')
                                 },
                                 {
+                                    value: iconHvColor,
+                                    onChange: color => setAttributes({ iconHvColor: color }),
+                                    label: __('Hover Color', 'gl-layout-builder')
+                                },
+                                {
+                                    value: iconHBColor,
+                                    onChange: color => setAttributes({ iconHBColor: color }),
+                                    label: __('Hover Border Color', 'gl-layout-builder')
+                                },
+                                {
                                     value: iconBgColor,
                                     onChange: color => setAttributes({ iconBgColor: color }),
                                     label: __('Background', 'gl-layout-builder')
@@ -210,25 +272,122 @@ const Inspector = props => {
                             ]}
                         />
                     </ToolsPanelItem>
+                </ToolsPanel>
+                <ToolsPanel
+                    label={__('Lightbox', 'gl-layout-builder')}
+                    resetAll={() =>
+                        setAttributes({
+                            overlayColor: undefined,
+                            lightboxMaxWidth: undefined,
+                            lightboxMaxHeight: undefined,
+                            lightboxPadding: undefined,
+                            lightboxBgColor: undefined,
+                            lightboxBorderRadius: undefined
+                        })
+                    }
+                >
                     <ToolsPanelItem
-                        label={__('Icon Padding', 'gl-layout-builder')}
-                        hasValue={() => !!(iconPadding && (iconPadding.top || iconPadding.right || iconPadding.bottom || iconPadding.left))}
+                        hasValue={() => !!lightboxMaxWidth}
+                        label={__('Max Width', 'gl-layout-builder')}
                         onDeselect={() =>
                             setAttributes({
-                                iconPadding: {
-                                    top: undefined,
-                                    right: undefined,
-                                    bottom: undefined,
-                                    left: undefined
+                                lightboxMaxWidth: undefined
+                            })
+                        }
+                        onSelect={() => {}}
+                    >
+                        <NativeUnitControl
+                            label={__('Max Width', 'gl-layout-builder')}
+                            value={lightboxMaxWidth}
+                            onChange={value => setAttributes({ lightboxMaxWidth: value })}
+                        />
+                    </ToolsPanelItem>
+                    <ToolsPanelItem
+                        hasValue={() => !!lightboxMaxHeight}
+                        label={__('Max Height', 'gl-layout-builder')}
+                        onDeselect={() =>
+                            setAttributes({
+                                lightboxMaxHeight: undefined
+                            })
+                        }
+                        onSelect={() => {}}
+                    >
+                        <NativeUnitControl
+                            label={__('Max Height', 'gl-layout-builder')}
+                            value={lightboxMaxHeight}
+                            onChange={value => setAttributes({ lightboxMaxHeight: value })}
+                        />
+                    </ToolsPanelItem>
+                    <ToolsPanelItem
+                        hasValue={() => !!lightboxBgColor || !!overlayColor || !!closeIconColor}
+                        label={__('Colors', 'gl-layout-builder')}
+                        onDeselect={() =>
+                            setAttributes({
+                                lightboxBgColor: undefined,
+                                overlayColor: undefined,
+                                closeIconColor: undefined
+                            })
+                        }
+                        onSelect={() => {}}
+                    >
+                        <PanelColorControl
+                            label={__('Colors', 'gl-layout-builder')}
+                            colorSettings={[
+                                {
+                                    value: overlayColor,
+                                    onChange: color => setAttributes({ overlayColor: color }),
+                                    label: __('Overlay', 'gl-layout-builder')
+                                },
+                                {
+                                    value: closeIconColor,
+                                    onChange: color => setAttributes({ closeIconColor: color }),
+                                    label: __('Close Icon', 'gl-layout-builder')
+                                },
+                                {
+                                    value: lightboxBgColor,
+                                    onChange: color => setAttributes({ lightboxBgColor: color }),
+                                    label: __('Background', 'gl-layout-builder')
                                 }
+                            ]}
+                        />
+                    </ToolsPanelItem>
+                    <ToolsPanelItem
+                        label={__('Radius', 'gl-layout-builder')}
+                        hasValue={() =>
+                            !!lightboxBorderRadius &&
+                            (lightboxBorderRadius?.top ||
+                                lightboxBorderRadius?.right ||
+                                lightboxBorderRadius?.bottom ||
+                                lightboxBorderRadius?.left)
+                        }
+                        onDeselect={() =>
+                            setAttributes({
+                                lightboxBorderRadius: undefined
                             })
                         }
                     >
                         <NativeBoxControl
-                            label={__('Icon Padding', 'gl-layout-builder')}
-                            value={iconPadding}
-                            onChange={value => setAttributes({ iconPadding: value })}
-                            allowReset={true}
+                            label={__('Radius', 'gl-layout-builder')}
+                            value={lightboxBorderRadius}
+                            onChange={value => setAttributes({ lightboxBorderRadius: value })}
+                        />
+                    </ToolsPanelItem>
+                    <ToolsPanelItem
+                        label={__('Padding', 'gl-layout-builder')}
+                        hasValue={() =>
+                            !!lightboxPadding &&
+                            (lightboxPadding?.top || lightboxPadding?.right || lightboxPadding?.bottom || lightboxPadding?.left)
+                        }
+                        onDeselect={() =>
+                            setAttributes({
+                                lightboxPadding: undefined
+                            })
+                        }
+                    >
+                        <NativeBoxControl
+                            label={__('Padding', 'gl-layout-builder')}
+                            value={lightboxPadding}
+                            onChange={value => setAttributes({ lightboxPadding: value })}
                         />
                     </ToolsPanelItem>
                 </ToolsPanel>

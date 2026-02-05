@@ -59,12 +59,7 @@ const Save = props => {
 
     return (
         <div {...blockProps}>
-            <a
-                href={`#${actualUniqueId}`}
-                className="gutenlayouts-play-btn gutenlayouts-lightbox-btn-1"
-                data-fslightbox={actualUniqueId}
-                data-caption={contentCaption}
-            >
+            <a href={`#${actualUniqueId}`} className="gutenlayouts-play-btn" data-fslightbox={actualUniqueId} data-caption={contentCaption}>
                 {showPosterIcon && (
                     <span className="gutenlayouts-btn-icon">
                         <RenderIcon customSvgCode={customSvgCode} iconName={iconName} size={iconSize} />
@@ -72,15 +67,22 @@ const Save = props => {
                 )}
             </a>
             <div id={`${uniqueId}`} className="gutenlayouts-lightbox-content">
-                {VideoURL && (
-                    <iframe
-                        className={`${uniqueId} gutenlayouts-content-iframe`}
-                        src={VideoURL}
-                        allowFullScreen={true}
-                        allow="autoplay; fullscreen"
-                    />
-                )}
-                {contentType === 'content' && <InnerBlocks.Content />}
+                <button className="gutenlayouts-lightbox-close" aria-label="Close Lightbox">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+                        <path d="M13 11.8l6.1-6.3-1-1-6.1 6.2-6.1-6.2-1 1 6.1 6.3-6.5 6.7 1 1 6.5-6.6 6.5 6.6 1-1z"></path>
+                    </svg>
+                </button>
+                <div className="lightbox-content">
+                    {VideoURL && (
+                        <iframe
+                            className={`${uniqueId} gutenlayouts-content-iframe`}
+                            src={VideoURL}
+                            allowFullScreen={true}
+                            allow="autoplay; fullscreen"
+                        />
+                    )}
+                    {contentType === 'content' && <InnerBlocks.Content />}
+                </div>
             </div>
         </div>
     );

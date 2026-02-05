@@ -12,6 +12,7 @@ import './editor.scss';
  * Internal Dependencies
  */
 import { RenderIcon } from '../../helpers';
+import { generateBoxStyles, generateBorderWidth, generateBorderStyle, generateBorderColor } from '../../styles';
 
 // block edit function
 const Edit = props => {
@@ -23,45 +24,59 @@ const Edit = props => {
         alignment,
         lighteffColor,
         svgSize,
+        iconBorder,
         iconPadding,
         icoHvBgColor,
         iconColor,
+        iconHvColor,
+        iconHBColor,
         iconName,
         iconSize,
         customSvgCode,
         iconBgColor,
         animationType,
-        animationDuration
+        animationDuration,
+        overlayColor,
+        lightboxMaxWidth,
+        lightboxMaxHeight,
+        lightboxPadding,
+        lightboxBgColor,
+        lightboxBorderRadius,
+        closeIconColor
     } = attributes;
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // const getAnimationString = type => {
-    //     switch (type) {
-    //         case 'radar':
-    //             return 'radarEffect 2s infinite';
-    //         case 'heartbeat':
-    //             return 'heartbeatEffect 1.5s infinite';
-    //         case 'glow':
-    //             return 'glowEffect 2s infinite';
-    //         case 'rotate':
-    //             return 'rotateEffect 5s linear infinite'; // Slow rotation for elegance
-    //         case 'pulse':
-    //         default:
-    //             return 'continuousHoverEffect 2s infinite';
-    //     }
-    // };
+    // style
+    const iconPaddingStyle = generateBoxStyles(iconPadding);
+    const iconBorderWidth = generateBorderWidth(iconBorder);
+    const iconBorderStyle = generateBorderStyle(iconBorder);
+    const iconBorderColor = generateBorderColor(iconBorder);
+    const lightboxPaddingStyle = generateBoxStyles(lightboxPadding);
+    const lightboxBorderRadiusStyle = generateBoxStyles(lightboxBorderRadius);
 
     const cssCustomProperties = {
         ...(alignment && { '--alignment': alignment }),
         ...(lighteffColor && { '--lighteff-color': lighteffColor }),
-        ...(svgSize && { '--svg-size': svgSize + 'px' }),
-        ...(iconPadding && { '--icon-padding': `${iconPadding.top} ${iconPadding.right} ${iconPadding.bottom} ${iconPadding.left}` }),
-        ...(icoHvBgColor && { '--ico-hv-bg-color': icoHvBgColor }),
+        ...(svgSize && { '--svg-size': svgSize }),
+        ...(iconPaddingStyle && { '--padding': iconPaddingStyle }),
         ...(iconColor && { '--icon-color': iconColor }),
+        ...(iconBgColor && { '--bg-color': iconBgColor }),
+        ...(iconHvColor && { '--hicon-color': iconHvColor }),
+        ...(icoHvBgColor && { '--hbg-color': icoHvBgColor }),
+        ...(iconBorderWidth && { '--border-width': iconBorderWidth }),
+        ...(iconBorderStyle && { '--border-style': iconBorderStyle }),
+        ...(iconBorderColor && { '--border-color': iconBorderColor }),
+        ...(iconHBColor && { '--iconhb-color': iconHBColor }),
         ...(animationType !== '' && { '--lightbox-animation': animationType }),
         ...(animationDuration && { '--animation-duration': animationDuration + 's' }),
-        ...(iconBgColor && { '--ico-bg-color': iconBgColor })
+        ...(overlayColor && { '--overlay-color': overlayColor }),
+        ...(lightboxMaxWidth && { '--lightbox-max-width': lightboxMaxWidth }),
+        ...(lightboxMaxHeight && { '--lightbox-max-height': lightboxMaxHeight }),
+        ...(lightboxPaddingStyle && { '--lightbox-padding': lightboxPaddingStyle }),
+        ...(lightboxBgColor && { '--lightbox-bg-color': lightboxBgColor }),
+        ...(lightboxBorderRadiusStyle && { '--lightbox-border-radius': lightboxBorderRadiusStyle }),
+        ...(closeIconColor && { '--close-icon-color': closeIconColor })
     };
     useEffect(() => {
         setAttributes({
@@ -76,9 +91,21 @@ const Edit = props => {
         iconPadding,
         icoHvBgColor,
         iconColor,
+        iconHvColor,
         iconBgColor,
+        iconBorderWidth,
+        iconBorderStyle,
+        iconBorderColor,
+        iconHBColor,
         animationType,
-        animationDuration
+        animationDuration,
+        overlayColor,
+        lightboxMaxWidth,
+        lightboxMaxHeight,
+        lightboxPadding,
+        lightboxBgColor,
+        lightboxBorderRadius,
+        closeIconColor
     ]);
 
     const blockProps = useBlockProps({
@@ -98,7 +125,7 @@ const Edit = props => {
         <>
             {isSelected && <Inspector {...props} onOpenContentModal={openModal} />}
             <div {...blockProps}>
-                <a className="gutenlayouts-play-btn gutenlayouts-lightbox-btn-1">
+                <a className="gutenlayouts-play-btn">
                     {showPosterIcon && (
                         <span className="gutenlayouts-btn-icon">
                             <RenderIcon customSvgCode={customSvgCode} iconName={iconName} size={iconSize} />
