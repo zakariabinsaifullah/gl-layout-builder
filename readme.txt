@@ -3,7 +3,7 @@ Contributors: binsaifullah
 Tags: gutenberg design, blocks, patterns, templates, layout, 
 Requires at least: 6.7
 Tested up to: 6.9
-Stable tag: 1.0.0
+Stable tag: 2.0.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -45,6 +45,12 @@ Yes, all patterns provided by GL Layout Builder are fully customizable using the
 *   Swiper (v12.0.3) - https://swiperjs.com - License: MIT. Source code: https://github.com/nolimits4web/swiper
 
 == Changelog ==
+
+= 2.0.1 =
+* Update system is built
+
+= 2.0.0 =
+* Lightbox block is added
 
 = 1.0.0 =
 * Initial release.
