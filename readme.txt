@@ -46,6 +46,9 @@ Yes, all patterns provided by GL Layout Builder are fully customizable using the
 
 == Changelog ==
 
+= 2.0.2 =
+* API issue is fixed
+
 = 2.0.1 =
 * Update system is built
 

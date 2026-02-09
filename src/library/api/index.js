@@ -4,7 +4,9 @@
 import { useState, useEffect, useCallback } from '@wordpress/element';
 import { parse } from '@wordpress/blocks';
 
-const API_BASE = window.wpApiSettings?.root ? `${window.wpApiSettings.root}gutenlayouts/v1` : '/wp-json/gutenlayouts/v1';
+const API_BASE = window.wpApiSettings?.root ? `${window.wpApiSettings.root}gllb/v1` : '/wp-json/gllb/v1';
+
+console.log(API_BASE);
 
 /**
  * Helper to fetch from external API
@@ -14,10 +16,10 @@ const fetchFromApi = async (endpoint, params = {}) => {
     const response = await fetch(`${API_BASE}${endpoint}${queryString}`, {
         headers: {
             'X-WP-Nonce': window.wpApiSettings?.nonce || '',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         }
     });
-    
+
     if (!response.ok) {
         throw new Error(`API request failed with status ${response.status}`);
     }
@@ -37,41 +39,44 @@ export const usePatternsData = ({ page = 1, perPage = 10, selectedCategory = '' 
     const [hasFetched, setHasFetched] = useState(false);
 
     // Initial fetch of all patterns
-    const fetchAllPatterns = useCallback(async (shouldRefresh = false) => {
-        if (hasFetched && !shouldRefresh) return; // Prevent re-fetching unless forced
+    const fetchAllPatterns = useCallback(
+        async (shouldRefresh = false) => {
+            if (hasFetched && !shouldRefresh) return; // Prevent re-fetching unless forced
 
-        setLoading(true);
-        setError(null);
+            setLoading(true);
+            setError(null);
 
-        try {
-            // Fetch all patterns without pagination params to get everything
-            const params = {};
-            if (shouldRefresh) {
-                params.refresh = 'true';
-            }
-            const data = await fetchFromApi('/patterns', params);
+            try {
+                // Fetch all patterns without pagination params to get everything
+                const params = {};
+                if (shouldRefresh) {
+                    params.refresh = 'true';
+                }
+                const data = await fetchFromApi('/patterns', params);
 
-            let patternsList = [];
-            if (Array.isArray(data)) {
-                patternsList = data;
-            } else if (data && data.patterns) {
-                patternsList = data.patterns;
-            }
+                let patternsList = [];
+                if (Array.isArray(data)) {
+                    patternsList = data;
+                } else if (data && data.patterns) {
+                    patternsList = data.patterns;
+                }
 
-            if (patternsList) {
-                setAllPatterns(patternsList);
-                setHasFetched(true);
-            } else {
-                setError("Couldn't load patterns. Invalid data format.");
+                if (patternsList) {
+                    setAllPatterns(patternsList);
+                    setHasFetched(true);
+                } else {
+                    setError("Couldn't load patterns. Invalid data format.");
+                    setAllPatterns([]);
+                }
+            } catch (err) {
+                setError(err.message || 'Failed to fetch patterns');
                 setAllPatterns([]);
+            } finally {
+                setLoading(false);
             }
-        } catch (err) {
-            setError(err.message || 'Failed to fetch patterns');
-            setAllPatterns([]);
-        } finally {
-            setLoading(false);
-        }
-    }, [hasFetched]);
+        },
+        [hasFetched]
+    );
 
     useEffect(() => {
         fetchAllPatterns();
@@ -89,14 +94,12 @@ export const usePatternsData = ({ page = 1, perPage = 10, selectedCategory = '' 
 
         // Filter by category if selected
         if (selectedCategory) {
-            filteredPatterns = allPatterns.filter(pattern => 
-                pattern.categories && pattern.categories.includes(selectedCategory)
-            );
+            filteredPatterns = allPatterns.filter(pattern => pattern.categories && pattern.categories.includes(selectedCategory));
         }
 
         const totalItems = filteredPatterns.length;
         const totalPages = Math.ceil(totalItems / perPage);
-        
+
         const startIndex = (page - 1) * perPage;
         const endIndex = startIndex + perPage;
         const slicedPatterns = filteredPatterns.slice(startIndex, endIndex);
@@ -127,7 +130,6 @@ export const usePatternsData = ({ page = 1, perPage = 10, selectedCategory = '' 
 
         setPatterns(parsedPatterns);
         setPagination({ totalItems, totalPages });
-
     }, [allPatterns, page, perPage, selectedCategory]);
 
     return {
@@ -154,49 +156,51 @@ export const usePageTemplatesData = ({ page = 1, perPage = 10, selectedCategory 
     const [hasFetched, setHasFetched] = useState(false);
 
     // Initial fetch of all templates
-    const fetchPages = useCallback(async (shouldRefresh = false) => {
-        if (hasFetched && !shouldRefresh) return;
+    const fetchPages = useCallback(
+        async (shouldRefresh = false) => {
+            if (hasFetched && !shouldRefresh) return;
 
-        setLoading(true);
-        setError(null);
+            setLoading(true);
+            setError(null);
 
-        try {
-            const params = {};
-            if (shouldRefresh) {
-                params.refresh = 'true';
-            }
-            const data = await fetchFromApi('/templates', params);
-            
-            let templatesList = [];
-            if (Array.isArray(data)) {
-                templatesList = data;
-            } else if (data && data.pages) {
-                templatesList = data.pages;
-            }
+            try {
+                const params = {};
+                if (shouldRefresh) {
+                    params.refresh = 'true';
+                }
+                const data = await fetchFromApi('/templates', params);
 
-            if (templatesList) {
-                setAllTemplates(templatesList);
-                setHasFetched(true);
-                // The below logic for parsing is now moved to pagination effect to be efficient
-            } else {
-                setError("Couldn't load page templates. Invalid data format.");
+                let templatesList = [];
+                if (Array.isArray(data)) {
+                    templatesList = data;
+                } else if (data && data.pages) {
+                    templatesList = data.pages;
+                }
+
+                if (templatesList) {
+                    setAllTemplates(templatesList);
+                    setHasFetched(true);
+                    // The below logic for parsing is now moved to pagination effect to be efficient
+                } else {
+                    setError("Couldn't load page templates. Invalid data format.");
+                    setAllTemplates([]);
+                }
+            } catch (err) {
+                setError(err.message || 'Failed to fetch page templates');
                 setAllTemplates([]);
+            } finally {
+                setLoading(false);
             }
-        } catch (err) {
-            setError(err.message || 'Failed to fetch page templates');
-            setAllTemplates([]);
-        } finally {
-            setLoading(false);
-        }
-    }, [hasFetched]);
+        },
+        [hasFetched]
+    );
 
     useEffect(() => {
         fetchPages();
     }, [fetchPages]);
 
-
-     // Handle pagination and parsing locally
-     useEffect(() => {
+    // Handle pagination and parsing locally
+    useEffect(() => {
         if (!allTemplates.length) {
             setPageTemplates([]);
             setPagination({ totalItems: 0, totalPages: 0 });
@@ -207,14 +211,12 @@ export const usePageTemplatesData = ({ page = 1, perPage = 10, selectedCategory 
 
         // Filter by category if selected
         if (selectedCategory) {
-            filteredTemplates = allTemplates.filter(template => 
-                template.categories && template.categories.includes(selectedCategory)
-            );
+            filteredTemplates = allTemplates.filter(template => template.categories && template.categories.includes(selectedCategory));
         }
 
         const totalItems = filteredTemplates.length;
         const totalPages = Math.ceil(totalItems / perPage);
-        
+
         const startIndex = (page - 1) * perPage;
         const endIndex = startIndex + perPage;
         const slicedTemplates = filteredTemplates.slice(startIndex, endIndex);
@@ -245,7 +247,6 @@ export const usePageTemplatesData = ({ page = 1, perPage = 10, selectedCategory 
 
         setPageTemplates(parsedTemplates);
         setPagination({ totalItems, totalPages });
-
     }, [allTemplates, page, perPage, selectedCategory]);
 
     return {
@@ -265,33 +266,36 @@ export const usePatternCategoriesData = ({ post_type = '' } = {}) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const fetchCategories = useCallback(async (shouldRefresh = false) => {
-        setLoading(true);
-        setError(null);
+    const fetchCategories = useCallback(
+        async (shouldRefresh = false) => {
+            setLoading(true);
+            setError(null);
 
-        try {
-            const params = {};
-            if (post_type) params.post_type = post_type;
-            if (shouldRefresh) params.refresh = 'true';
+            try {
+                const params = {};
+                if (post_type) params.post_type = post_type;
+                if (shouldRefresh) params.refresh = 'true';
 
-            const data = await fetchFromApi('/pattern_categories', params);
+                const data = await fetchFromApi('/pattern_categories', params);
 
-            if (Array.isArray(data)) {
-                setCategories(data);
-            } else if (data && data.categories) {
-                setCategories(data.categories);
-            } else {
-                 setCategories([]);
+                if (Array.isArray(data)) {
+                    setCategories(data);
+                } else if (data && data.categories) {
+                    setCategories(data.categories);
+                } else {
+                    setCategories([]);
+                }
+            } catch (err) {
+                console.warn('Error fetching categories (might be not available):', err);
+                // setError(err.message || 'Failed to fetch categories');
+                // Don't set error for categories to avoid blocking UI with error message if it's just 404
+                setCategories([]);
+            } finally {
+                setLoading(false);
             }
-        } catch (err) {
-            console.warn('Error fetching categories (might be not available):', err);
-            // setError(err.message || 'Failed to fetch categories'); 
-            // Don't set error for categories to avoid blocking UI with error message if it's just 404
-            setCategories([]);
-        } finally {
-            setLoading(false);
-        }
-    }, [post_type]);
+        },
+        [post_type]
+    );
 
     useEffect(() => {
         fetchCategories();
@@ -313,31 +317,34 @@ export const useTemplateCategoriesData = ({ post_type = '' } = {}) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const fetchCategories = useCallback(async (shouldRefresh = false) => {
-        setLoading(true);
-        setError(null);
+    const fetchCategories = useCallback(
+        async (shouldRefresh = false) => {
+            setLoading(true);
+            setError(null);
 
-        try {
-            const params = {};
-            if (post_type) params.post_type = post_type;
-            if (shouldRefresh) params.refresh = 'true';
+            try {
+                const params = {};
+                if (post_type) params.post_type = post_type;
+                if (shouldRefresh) params.refresh = 'true';
 
-            const data = await fetchFromApi('/template_categories', params);
+                const data = await fetchFromApi('/template_categories', params);
 
-            if (Array.isArray(data)) {
-                setCategories(data);
-            } else if (data && data.categories) {
-                setCategories(data.categories);
-            } else {
-                 setCategories([]);
+                if (Array.isArray(data)) {
+                    setCategories(data);
+                } else if (data && data.categories) {
+                    setCategories(data.categories);
+                } else {
+                    setCategories([]);
+                }
+            } catch (err) {
+                console.warn('Error fetching template categories:', err);
+                setCategories([]);
+            } finally {
+                setLoading(false);
             }
-        } catch (err) {
-            console.warn('Error fetching template categories:', err);
-            setCategories([]);
-        } finally {
-            setLoading(false);
-        }
-    }, [post_type]);
+        },
+        [post_type]
+    );
 
     useEffect(() => {
         fetchCategories();

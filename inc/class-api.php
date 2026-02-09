@@ -28,7 +28,7 @@ class Api {
 	 *
 	 * @var string
 	 */
-	private const GLLB_API_URL = 'https://gutenlayouts.com/wp-json/gutenlayouts/v1';
+	private const GLLB_API_URL = 'https://gutenlayouts.com/wp-json/gutenlayouts-core/v1';
 
 	/**
 	 * Return an instance of this class.

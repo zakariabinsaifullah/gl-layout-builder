@@ -63,7 +63,7 @@ class Rest_Api {
 	public function register_rest_routes() {
 		// Patterns.
 		register_rest_route(
-			'gutenlayouts/v1',
+			'gllb/v1',
 			'/patterns',
 			array(
 				'methods'             => 'GET',
@@ -73,7 +73,7 @@ class Rest_Api {
 		);
 
 		register_rest_route(
-			'gutenlayouts/v1',
+			'gllb/v1',
 			'/templates',
 			array(
 				'methods'             => 'GET',
@@ -83,7 +83,7 @@ class Rest_Api {
 		);
 
 		register_rest_route(
-			'gutenlayouts/v1',
+			'gllb/v1',
 			'/pattern_categories',
 			array(
 				'methods'             => 'GET',
@@ -99,7 +99,7 @@ class Rest_Api {
 		);
 
 		register_rest_route(
-			'gutenlayouts/v1',
+			'gllb/v1',
 			'/template_categories',
 			array(
 				'methods'             => 'GET',
@@ -115,7 +115,7 @@ class Rest_Api {
 		);
 
 		register_rest_route(
-			'gutenlayouts/v1',
+			'gllb/v1',
 			'/import_image',
 			array(
 				'methods'             => 'POST',
