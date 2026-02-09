@@ -503,11 +503,6 @@ class Admin {
             GLLB_PLUGIN_FILE,
             'gl-layout-builder'
         );
-    
-        // access token
-        if ( defined( 'GLLB_GITHUB_TOKEN' ) ) {
-            $gmapProUpdateCheck->setAuthentication( GLLB_GITHUB_TOKEN );
-        }
 
         // release asset
         $gmapProUpdateCheck->getVcsApi()->enableReleaseAssets();
