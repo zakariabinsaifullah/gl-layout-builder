@@ -505,7 +505,6 @@ class Admin {
         );
     
         // access token
-		// $gmapProUpdateCheck->setAuthentication( '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' );
         if ( defined( 'GLLB_GITHUB_TOKEN' ) ) {
             $gmapProUpdateCheck->setAuthentication( GLLB_GITHUB_TOKEN );
         }
