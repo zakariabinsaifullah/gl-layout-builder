@@ -106,6 +106,9 @@ export const PatternLibraryModal = ({ isOpen, onClose, openPreferences }) => {
         setView({ ...view, category: categorySlug, page: 1 });
     };
 
+    /**
+     * Import Pattern
+     */
     const importPattern = async pattern => {
         setImportingId(pattern.id);
         try {

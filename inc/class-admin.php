@@ -7,6 +7,9 @@
 
 namespace GLLayoutBuilder;
 
+require_once GLLB_PLUGIN_DIR . '/update/update.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -44,6 +47,7 @@ class Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
 		add_action( 'wp_ajax_gllb_save_settings', array( $this, 'save_settings' ) );
 		add_action( 'wp_ajax_gllb_get_settings', array( $this, 'get_settings' ) );
+		add_action( 'plugins_loaded', [ $this, 'plugin_update_checker' ] );
 	}
 
 	/**
@@ -376,13 +380,19 @@ class Admin {
 						</div>
 
 						<div class="gllb-grid-modern" id="blocks-grid">
-							<?php foreach ( $blocks as $block_id => $block ) : ?>
+							<?php 
+							$is_license_active = License::is_valid();
+							foreach ( $blocks as $block_id => $block ) : 
+								$is_pro = isset( $block['is_pro'] ) && $block['is_pro'];
+							?>
 								<div class="gllb-card-modern gllb-block-item" data-label="<?php echo esc_attr( strtolower( $block['title'] ) ); ?>">
+									<?php if ( $is_pro ) : ?>
+										<span class="gllb-pro-badge">PRO</span>
+									<?php endif; ?>
 									<div class="gllb-card-header">
 										<div class="gllb-icon-box">
 											<?php echo $block['icon']; ?>
 										</div>
-										<span class="gllb-pro-badge" style="display:none">PRO</span>
 									</div>
 									<div class="gllb-card-body">
 										<h4><?php echo esc_html( $block['title'] ); ?></h4>
@@ -397,12 +407,13 @@ class Admin {
 										<?php endif; ?>
 									</div>
 									<div class="gllb-card-footer">
-										<label class="gllb-switch">
+										<label class="gllb-switch <?php echo ($is_pro && ! $is_license_active) ? esc_attr( 'pro' ) : ''; ?>">
 											<input 
 												type="checkbox" 
 												name="blocks[]" 
 												value="<?php echo esc_attr( $block_id ); ?>"
 												<?php checked( in_array( $block_id, $enabled_blocks, true ) || ( $is_first_save && empty( $enabled_blocks ) ) ); ?>
+												<?php disabled( $is_pro && ! $is_license_active ); ?>
 											/>
 											<span class="gllb-slider"></span>
 										</label>
@@ -481,5 +492,25 @@ class Admin {
 			<div class="gllb-notification" id="gllb-notification"></div>
 		</div>
 		<?php
+	}
+
+	/**
+	 * Plugin Update Checker
+	 */
+	public function plugin_update_checker() {
+		$gmapProUpdateCheck = PucFactory::buildUpdateChecker(
+            'https://github.com/zakariabinsaifullah/gl-layout-builder',
+            GLLB_PLUGIN_FILE,
+            'gl-layout-builder'
+        );
+    
+        // access token
+		// $gmapProUpdateCheck->setAuthentication( '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' );
+        if ( defined( 'GLLB_GITHUB_TOKEN' ) ) {
+            $gmapProUpdateCheck->setAuthentication( GLLB_GITHUB_TOKEN );
+        }
+
+        // release asset
+        $gmapProUpdateCheck->getVcsApi()->enableReleaseAssets();
 	}
 }

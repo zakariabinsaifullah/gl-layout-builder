@@ -63,7 +63,15 @@ class Blocks {
 		if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
 			// Filter manifest to only include enabled blocks.
 			$filtered_manifest = array();
+			$available_blocks = Helpers::get_available_blocks();
+			$is_license_valid = License::is_valid();
+
 			foreach ( $manifest_data as $block_type => $block_data ) {
+				$is_pro = isset( $available_blocks[ $block_type ]['is_pro'] ) && $available_blocks[ $block_type ]['is_pro'];
+				if ( $is_pro && ! $is_license_valid ) {
+					continue;
+				}
+
 				if ( in_array( $block_type, $enabled_blocks, true ) || ( isset( $block_data['parent'] ) && ! empty( $block_data['parent'] ) ) ) {
 					$filtered_manifest[ $block_type ] = $block_data;
 				}
@@ -77,7 +85,15 @@ class Blocks {
 		}
 
 		// Fallback for older WordPress versions.
+		$available_blocks = Helpers::get_available_blocks();
+		$is_license_valid = License::is_valid();
+
 		foreach ( $all_blocks as $block_type ) {
+			$is_pro = isset( $available_blocks[ $block_type ]['is_pro'] ) && $available_blocks[ $block_type ]['is_pro'];
+			if ( $is_pro && ! $is_license_valid ) {
+				continue;
+			}
+			
 			$block_data = isset( $manifest_data[ $block_type ] ) ? $manifest_data[ $block_type ] : array();
 			if ( in_array( $block_type, $enabled_blocks, true ) || ( isset( $block_data['parent'] ) && ! empty( $block_data['parent'] ) ) ) {
 				register_block_type( GLLB_PLUGIN_DIR . "build/blocks/{$block_type}" );

@@ -560,6 +560,7 @@ body.toplevel_page_gutenlayouts {
     gap: 16px;
     transition: var(--gllb-transition);
     box-shadow: var(--gllb-shadow-card);
+    position: relative;
 }
 
 .gllb-card-modern:hover {
@@ -632,6 +633,10 @@ a.gllb-link-subtle .dashicons {
     position: relative;
     width: 44px;
     height: 24px;
+}
+
+.gllb-switch.pro {
+    opacity: 0.2;
 }
 
 .gllb-switch input {
@@ -970,4 +975,16 @@ p.gllb-license-info strong {
 
 .gllb-sidebar-card button {
     margin-top: 10px;
+}
+
+.gllb-pro-badge {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    padding: 5px 6px;
+    line-height: 1;
+    border-radius: 5px;
 }
