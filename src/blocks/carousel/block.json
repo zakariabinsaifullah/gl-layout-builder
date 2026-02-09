@@ -119,6 +119,6 @@
     "textdomain": "gl-layout-builder",
     "editorScript": ["file:./index.js"],
     "editorStyle": ["file:./index.css"],
-    "style": ["file:./style-index.css", "gl-layout-builder-swiper-style"],
-    "viewScript": ["file:./view.js", "gl-layout-builder-swiper-script"]
+    "style": ["file:./style-index.css", "gllb-swiper-style"],
+    "viewScript": ["file:./view.js", "gllb-swiper-script"]
 }

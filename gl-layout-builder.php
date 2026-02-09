@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       GL Layout Builder
  * Description:       Build powerful layouts with blocks, patterns & templates using GL Layout Builder.
- * Version:           2.0.2
+ * Version:           2.0.3
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            Binsaifullah
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define constants.
-define( 'GLLB_VERSION', '2.0.2' );
+define( 'GLLB_VERSION', '2.0.3' );
 define( 'GLLB_PLUGIN_FILE', __FILE__ );
 define( 'GLLB_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'GLLB_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
