@@ -25,6 +25,11 @@ class Helpers {
 
 		$enabled_extensions = isset( $raw_settings['extensions'] ) ? (array) $raw_settings['extensions'] : array();
 
+		// Temporary fix for existing users to enable new extension by default
+		if ( 'entrance-animation' === $extension_id && ! in_array( $extension_id, $enabled_extensions, true ) ) {
+			return true;
+		}
+
 		return in_array( $extension_id, $enabled_extensions, true );
 	}
 
@@ -164,6 +169,11 @@ class Helpers {
 				'title' => __( 'Iconic Button', 'gl-layout-builder' ),
 				'icon'  => 'dashicons-button',
 				'demo'  => 'https://gutenlayouts.com/extensions/#iconic-button',
+			),
+			'entrance-animation' => array(
+				'title' => __( 'Entrance Animation', 'gl-layout-builder' ),
+				'icon'  => 'dashicons-controls-play',
+				'demo'  => '#',
 			),
 		);
 	}

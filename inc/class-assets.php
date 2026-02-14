@@ -116,6 +116,30 @@ class Assets {
 					GLLB_VERSION
 				);
 			}
+			}
+
+		// Enqueue entrance animation frontend assets.
+		if( Helpers::is_extension_enabled( 'entrance-animation' ) && Helpers::has_string( array( 'gllb-entrance-animation' ) ) ) {
+			$entrance_animation_view_file = GLLB_PLUGIN_DIR . 'build/extensions/entrance-animation/view.js';
+			if ( file_exists( $entrance_animation_view_file ) ) {
+				wp_enqueue_script(
+					'gllb-entrance-animation-view-script',
+					GLLB_PLUGIN_URL . 'build/extensions/entrance-animation/view.js',
+					array(),
+					GLLB_VERSION,
+					true
+				);
+			}
+
+			$entrance_animation_style_file = GLLB_PLUGIN_DIR . 'build/extensions/entrance-animation/view.css';
+			if ( file_exists( $entrance_animation_style_file ) ) {
+				wp_enqueue_style(
+					'gllb-entrance-animation-frontend-style',
+					GLLB_PLUGIN_URL . 'build/extensions/entrance-animation/view.css',
+					array(),
+					GLLB_VERSION
+				);
+			}
 		}
 	}
 
@@ -246,6 +270,31 @@ class Assets {
 					array(),
 					$iconic_btn_asset['version']
 				);
+			}
+		}
+
+		// Enceance Animation extension
+		if( Helpers::is_extension_enabled( 'entrance-animation' ) ) {
+			$entrance_animation_dep_file = GLLB_PLUGIN_DIR . 'build/extensions/entrance-animation/index.asset.php';
+			if ( file_exists( $entrance_animation_dep_file ) ) {
+				$entrance_animation_asset = require $entrance_animation_dep_file;
+				wp_enqueue_script(
+					'gllb-entrance-animation-script',
+					GLLB_PLUGIN_URL . 'build/extensions/entrance-animation/index.js',
+					$entrance_animation_asset['dependencies'],
+					$entrance_animation_asset['version'],
+					true
+				);
+
+				$entrance_animation_style_file = GLLB_PLUGIN_DIR . 'build/extensions/entrance-animation/index.css';
+				if( file_exists( $entrance_animation_style_file ) ) {
+					wp_enqueue_style(
+						'gllb-entrance-animation-editor-style',
+						GLLB_PLUGIN_URL . 'build/extensions/entrance-animation/index.css',
+						array(),
+						$entrance_animation_asset['version']
+					);
+				}
 			}
 		}
 	}
