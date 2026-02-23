@@ -1,0 +1,186 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "gutenlayouts/counter",
+    "version": "0.1.0",
+    "title": "Counter",
+    "category": "gutenlayouts",
+    "description": "Counter block to show numbers with animation.",
+    "supports": {
+        "anchor": true,
+        "html": false,
+        "align": ["wide", "full"],
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "__experimentalDefaultControls": {
+                "margin": false,
+                "padding": false
+            }
+        }
+    },
+    "attributes": {
+        "uniqueId": {
+            "type": "string"
+        },
+        "startNumber": {
+            "type": "number",
+            "default": 0
+        },
+        "endNumber": {
+            "type": "number",
+            "default": 1000
+        },
+        "counterSuffix": {
+            "type": "string"
+           
+        },
+        "titleText": {
+            "type": "string",
+            "default": "Projects Completed"
+        },
+        "titleTag": {
+            "type": "string",
+            "default": "h4"
+        },
+        "hideIcon": {
+            "type": "boolean",
+            "default": true
+        },
+        "hideTitle": {
+            "type": "boolean",
+            "default": true
+        },
+        "hideCounter": {
+            "type": "boolean",
+            "default": true
+        },
+        "hideSuffix": {
+            "type": "boolean",
+            "default": false
+        },
+        "iconType": {
+            "type": "string",
+            "default": "icon"
+        },
+        "counterIcon": {
+            "type": "string"
+        },
+        "iconTypeImage": {
+            "type": "object"
+        },
+        "imageRes": {
+            "type": "string",
+            "default": "full"
+        },
+        "counterDirection": {
+            "type": "string",
+            "default": "column"
+        },
+        "duration": {
+            "type": "number",
+            "default": 3.2
+        },
+        "alignment": {
+            "type": "string",
+            "default": "center"
+        },
+        "blockStyle": {
+            "type": "object"
+        },
+        "counterSize": {
+            "type": "number"
+        },
+        "counterColor": {
+            "type": "string"
+        },
+        "counterTsize": {
+            "type": "number"
+        },
+        "counterTcolor": {
+            "type": "string"
+        },
+        "iconSize":{
+            "type":"number"
+        },
+        "iconColor":{
+            "type":"string"
+        },
+        "itemGap": {
+            "type": "number"
+        },
+        "contentGap": {
+            "type": "number"
+        },
+        "suffixSize": {
+            "type": "number"
+        },
+        "suffixColor": {
+            "type": "string"
+        },
+        "counterPrefix": {
+            "type": "string",
+            "default": ""
+        },
+        "hidePrefix": {
+            "type": "boolean",
+            "default": false
+        },
+        "prefixSize": {
+            "type": "number"
+        },
+        "prefixColor": {
+            "type": "string"
+        },
+        "useSeparator": {
+            "type": "boolean",
+            "default": true
+        },
+        "separatorType": {
+            "type": "string",
+            "default": ","
+        },
+        "isIndianSystem": {
+            "type": "boolean",
+            "default": false
+        },
+        "decimalPlaces": {
+            "type": "number",
+            "default": 0
+        },
+        "iconBg": {
+            "type": "string"
+        },
+        "iconPadding": {
+            "type": "object",
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
+        },
+        "iconBorderRadius": {
+            "type": "object",
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
+        },
+        "iconBorder": {
+            "type": "object",
+            "default": {
+                "color": "",
+                "style": "",
+                "width": ""
+            }
+        }
+    },
+    "textdomain": "gl-layout-builder",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css",
+    "viewScript": ["file:./view.js"]
+}
