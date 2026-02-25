@@ -13,6 +13,8 @@ import classnames from 'classnames';
 import Inspector from './inspector';
 import { RenderIcon } from '../../helpers';
 import './editor.scss';
+import {generateBoxStyles, generateBorderWidth, generateBorderStyle, generateBorderColor } from '../../styles';
+
 
 const Edit = props => {
     const { attributes, setAttributes, isSelected, clientId } = props;
@@ -52,67 +54,17 @@ const Edit = props => {
         iconPadding,
         iconBorderRadius,
         iconBorder,
-        useSeparator,
-        separatorType,
-        isIndianSystem,
-        decimalPlaces
     } = attributes;
 
-    const formatNumberPreview = num => {
-        let n = parseFloat(num) || 0;
-        let decimals = parseInt(decimalPlaces) || 0;
-        let res = n.toFixed(decimals);
-
-        if (useSeparator && separatorType) {
-            let parts = res.split('.');
-            let x1 = parts[0];
-            let x2 = parts.length > 1 ? '.' + parts[1] : '';
-
-            if (isIndianSystem) {
-                let lastThree = x1.substring(x1.length - 3);
-                let otherNumbers = x1.substring(0, x1.length - 3);
-                if (otherNumbers !== '') {
-                    lastThree = separatorType + lastThree;
-                }
-                x1 = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, separatorType) + lastThree;
-            } else {
-                x1 = x1.replace(/\B(?=(\d{3})+(?!\d))/g, separatorType);
-            }
-            res = x1 + x2;
-        }
-        return res;
-    };
-
-    const alignmentMap = {
-        left: 'flex-start',
-        center: 'center',
-        right: 'flex-end'
-    };
-
-    const getBoxStyles = (box, type = 'padding') => {
-        if (!box) return {};
-        const styles = {};
-        if (type === 'padding') {
-            styles['--icon-padding'] = `${box.top || '0px'} ${box.right || '0px'} ${box.bottom || '0px'} ${box.left || '0px'}`;
-        } else if (type === 'radius') {
-            styles['--icon-radius'] = `${box.top || '0px'} ${box.right || '0px'} ${box.bottom || '0px'} ${box.left || '0px'}`;
-        }
-        return styles;
-    };
-
-    const getBorderStyles = border => {
-        if (!border) return {};
-        return {
-            '--icon-border-width': border.width || '0px',
-            '--icon-border-style': border.style || 'solid',
-            '--icon-border-color': border.color || 'transparent'
-        };
-    };
+   const iconPaddingStyles = generateBoxStyles(iconPadding);
+    const iconBorderWidth = generateBorderWidth(iconBorder);
+    const iconBorderStyle = generateBorderStyle(iconBorder);
+    const iconBorderColor = generateBorderColor(iconBorder);
+    const iconBorderRadiusStyle = generateBoxStyles(iconBorderRadius);
 
     const cssCustomProperties = {
-        '--alignment': alignmentMap[alignment] || 'center',
-        '--text-align': alignment || 'center',
-        '--direction': counterDirection || 'column',
+        ...(alignment && { '--alignment': alignment }),
+        ...(counterDirection && { '--direction': counterDirection }),
         ...(counterSize && { '--counter-size': `${counterSize}px` }),
         ...(counterTsize && { '--title-size': `${counterTsize}px` }),
         ...(counterColor && { '--counter-color': counterColor }),
@@ -126,9 +78,13 @@ const Edit = props => {
         ...(suffixSize && { '--suffix-size': `${suffixSize}px` }),
         ...(suffixColor && { '--suffix-color': suffixColor }),
         ...(iconBg && { '--icon-bg': iconBg }),
-        ...getBoxStyles(iconPadding, 'padding'),
-        ...getBoxStyles(iconBorderRadius, 'radius'),
-        ...getBorderStyles(iconBorder)
+         ...(iconPaddingStyles && { '--icon-padding': iconPaddingStyles }),
+        ...(iconBorderWidth && { '--icon-border-width': iconBorderWidth }),
+        ...(iconBorderStyle && { '--icon-border-style': iconBorderStyle }),
+        ...(iconBorderColor && { '--icon-border-color': iconBorderColor }),
+        ...(iconBorderRadiusStyle && { '--icon-radius': iconBorderRadiusStyle }),
+
+       
     };
 
     useEffect(() => {
@@ -216,7 +172,7 @@ const Edit = props => {
                             {hideCounter && (
                                 <div className="gl-counter-number-wrap">
                                     {hidePrefix && <span className="gl-counter-prefix">{counterPrefix}</span>}
-                                    <span className="gl-counter-number">{formatNumberPreview(endNumber)}</span>
+                                    <span className="gl-counter-number">{endNumber}</span>
                                     {hideSuffix && <span className="gl-counter-suffix">{counterSuffix}</span>}
                                 </div>
                             )}

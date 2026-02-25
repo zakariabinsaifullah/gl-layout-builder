@@ -160,11 +160,6 @@ const Inspector = props => {
                                         ]}
                                         onChange={value => setAttributes({ separatorType: value })}
                                     />
-                                    <NativeToggleControl
-                                        label={__('Indian Format', 'gl-layout-builder')}
-                                        checked={isIndianSystem}
-                                        onChange={value => setAttributes({ isIndianSystem: value })}
-                                    />
                                 </>
                             )}
 
