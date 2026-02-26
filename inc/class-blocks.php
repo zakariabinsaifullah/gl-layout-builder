@@ -49,7 +49,11 @@ class Blocks {
 	public function register_blocks() {
 		// Get enabled blocks from settings; default to all only on first install.
 		$raw_settings    = get_option( 'gllb_settings', false );
-		$manifest_data   = require GLLB_PLUGIN_DIR . 'build/blocks-manifest.php';
+		$manifest_file = GLLB_PLUGIN_DIR . 'build/blocks-manifest.php';
+		if ( ! file_exists( $manifest_file ) ) {
+			return;
+		}
+		$manifest_data = require $manifest_file;
 		$all_blocks      = array_keys( $manifest_data );
 		$enabled_blocks  = array();
 
