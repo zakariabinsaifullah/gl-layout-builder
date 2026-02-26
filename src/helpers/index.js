@@ -8,8 +8,6 @@ export const RenderIcon = ({ customSvgCode, iconName, size = '24' }) => {
                 <div
                     className="gutenlayouts-custom-svg-container"
                     style={{
-                        width: size + 'px',
-                        height: size + 'px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center'

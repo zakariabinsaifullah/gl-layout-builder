@@ -88,7 +88,14 @@ export default function save({ attributes, className }) {
     if (customSvgCode) {
         return (
             <Tag {...blockProps} {...(href && { href, target: linkTarget, rel: linkRel })}>
-                <div className={iconClasses} style={iconStyle} dangerouslySetInnerHTML={{ __html: customSvgCode }} />
+                <div className="gutenlayouts-icon-block-wrapper">
+                    <div className={iconClasses} style={iconStyle} dangerouslySetInnerHTML={{ __html: customSvgCode }} />
+                    {showTitle && (
+                        <div className="icon-content">
+                            <RichText.Content tagName={headingTag} value={heading} className="icon-heading" />
+                        </div>
+                    )}
+                </div>
             </Tag>
         );
     }
