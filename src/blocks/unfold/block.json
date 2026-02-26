@@ -1,0 +1,85 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "gutenlayouts/unfold",
+    "version": "0.1.0",
+    "title": "Unfold",
+    "category": "gutenlayouts",
+    "description": "Create a collapsible content section with a Read More toggle.",
+    "supports": {
+        "anchor": true,
+        "html": false,
+        "align": ["wide", "full"],
+        "spacing": {
+            "margin": true,
+            "padding": true,
+            "__experimentalDefaultControls": {
+                "margin": false,
+                "padding": false
+            }
+        }
+    },
+    "attributes": {
+        "collapsedHeight": {
+            "type": "number",
+            "default": 150
+        },
+        "buttonText": {
+            "type": "string",
+            "default": "Read More"
+        },
+        "buttonTextActive": {
+            "type": "string",
+            "default": "Show Less"
+        },
+        "alignment": {
+            "type": "string",
+            "default": "center"
+        },
+        "transitionDuration": {
+            "type": "number",
+            "default": 0.5
+        },
+        "btnColor": {
+            "type": "string"
+        },
+        "btnBg": {
+            "type": "string"
+        },
+        "btnHoverBg": {
+            "type": "string"
+        },
+        "btnHoverColor": {
+            "type": "string"
+        },
+        "btnBorder": {
+            "type": "object",
+            "default": {
+                "width": "",
+                "style": "",
+                "color": ""
+            }
+        },
+        "btnPadding": {
+            "type": "object",
+            "default": {
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": ""
+            }
+        },
+        "unfOverlayColor": {
+            "type": "string"
+        },
+        "blockStyle": {
+            "type": "object",
+            "default": {}
+        }
+    },
+    "textdomain": "gl-layout-builder",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css",
+    "viewScript": "file:./view.js"
+}

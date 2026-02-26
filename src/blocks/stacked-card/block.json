@@ -1,0 +1,40 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "gutenlayouts/stacked-card",
+    "version": "0.1.0",
+    "title": "Stacked Cards",
+    "category": "gutenlayouts",
+    "description": "Create stunning scroll-based stacked card sections using any Gutenberg blocks.",
+    "supports": {
+        "anchor": true,
+        "html": false,
+        "align": ["wide", "full"],
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "attributes": {
+        "effectStyle": {
+            "type": "string",
+            "default": "stack"
+        },
+        "blurStrength": {
+            "type": "number",
+            "default": 5
+        },
+        "scaleStrength": {
+            "type": "number",
+            "default": 0.05
+        },
+        "blockStyle": {
+            "type": "object"
+        }
+    },
+    "textdomain": "gl-layout-builder",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css",
+    "viewScript": "file:./view.js"
+}

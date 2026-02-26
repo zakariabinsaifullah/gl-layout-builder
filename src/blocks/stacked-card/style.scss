@@ -1,0 +1,47 @@
+/**
+ * Stacked Cards Block Styles
+ */
+
+.wp-block-gutenlayouts-stacked-card {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+
+    .sc-stack-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--scb-card-gap, 10px);
+        position: relative;
+
+        > * {
+            position: sticky;
+            top: 80px;
+            overflow: hidden;
+
+            transition:
+                transform 0.4s ease,
+                filter 0.4s ease,
+                opacity 0.4s ease;
+            z-index: 1;
+        }
+    }
+
+    // Effect specific transform origins
+    &.has-effect-fan {
+        .sc-stack-wrapper > * {
+            transform-origin: bottom center;
+        }
+    }
+
+    &.has-effect-scale-blur {
+        .sc-stack-wrapper > * {
+            transform-origin: top center;
+        }
+    }
+
+    &.has-effect-stack {
+        .sc-stack-wrapper > * {
+            transform-origin: top center;
+        }
+    }
+}

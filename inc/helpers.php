@@ -129,6 +129,30 @@ class Helpers {
 				'desc'  => __('Showcase your content in a lightbox', 'gl-layout-builder'),
 				'is_pro' => true,
 			),
+			'stacked-card' => array(
+				'title' => __( 'Stacked Cards', 'gl-layout-builder' ),
+				'icon'  => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="60" height="60" aria-hidden="true" focusable="false"><rect x="2" y="13" width="20" height="5" rx="2" fill="currentColor" opacity="0.4"/><rect x="2" y="9" width="20" height="5" rx="2" fill="currentColor" opacity="0.65"/><rect x="2" y="5" width="20" height="5" rx="2" fill="currentColor"/></svg>',
+				'desc'  => __('Create scroll-based stacked card sections with InnerBlocks.', 'gl-layout-builder'),
+				'is_pro' => false,
+			),
+			'unfold' => array(
+				'title' => __( 'Unfold', 'gl-layout-builder' ),
+				'icon'  => '<svg
+				width="24px"
+				height="24px"
+				viewBox="0 0 24 24"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				>
+				<path
+					d="M2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12H2Z"
+					fill="black"
+				/>
+				</svg>
+						',
+				'desc'  => __('Create a collapsible content section with a Read More toggle.', 'gl-layout-builder'),
+				'is_pro' => false,
+			),
 		);
 	}
 
